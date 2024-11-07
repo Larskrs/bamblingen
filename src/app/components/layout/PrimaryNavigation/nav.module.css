@@ -1,0 +1,21 @@
+.nav {
+    display: flex;
+    gap: 32px;
+}
+.nav .logo {
+    display: flex;
+    font-size: 30px;
+    align-items: center;
+    gap: 16px;
+    background-color: var(--secondary-100);
+    padding: 8px 16px;
+}
+.nav .links {
+    font-size: 20px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+.nav .links a:hover {
+    color: var(--primary-500);
+}

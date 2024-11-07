@@ -1,11 +1,24 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  --secondary-900: rgb(179, 222, 240);
+  --secondary-800: rgb(128, 199, 232);
+  --secondary-700: rgb(77, 176, 224);
+  --secondary-600: rgb(38, 156, 214);
+  --secondary-500: rgb(0, 136, 204);
+  --secondary-400: rgb(0, 122, 183); /* Slightly darker */
+  --secondary-300: rgb(0, 108, 163); /* Darker */
+  --secondary-200: rgb(0, 44, 66);  /* Deep dark */
+  --secondary-100: rgb(0, 36, 54);  /* Very deep dark */
+  --secondary-50: rgb(0, 23, 34);  /* Very deep dark */
+
+  --primary-500: rgb(253, 224, 0);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: var(--secondary-50);
     --foreground: #ededed;
   }
 }
@@ -14,6 +27,9 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 body {
@@ -34,6 +50,11 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+h1, h2, h3 {
+    font-family: var(--font-domine);
+}
+
 
 @media (prefers-color-scheme: dark) {
   html {
