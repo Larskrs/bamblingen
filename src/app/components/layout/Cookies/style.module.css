@@ -1,0 +1,147 @@
+.container {
+    min-height: 150px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    color: var(--primary-500);
+    background: var(--secondary-100);
+    /* background: white; */
+    opacity: 1;
+    backdrop-filter: blur(50px);
+    display: flex;
+    flex-direction: row;
+    pointer-events:fill;
+    gap: 16px;
+    transition: all 200ms cubic-bezier(.35,.17,.3,.86);
+    box-shadow: 0px 0px 20px var(--primary-25);
+    animation: slideUp 1s var(--curve-1);
+}
+@keyframes slideUp {
+    0% {
+        translate: 0px 100%;
+    }
+}
+
+.holder {
+    max-width: 1000px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+    row-gap: 32px;
+    column-gap: 16px;
+}
+.holder p {
+    max-width: 400px;
+    line-height: 1.75rem;
+    color: white;
+    text-align: start;
+}
+.holder h3 {
+    font-size: 1.75rem;
+    margin-bottom: .5rem;
+}
+.row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    font-weight: 700;
+    width: 240px;
+}
+.row a, .row .button{
+    border-radius: 4px;
+    font-size: 18px;
+    padding: 16px 16px;
+    width: 100%;
+    font-weight: 700;
+}
+.button:hover {
+    border: none;
+}
+.row a {
+    color: #cdcdcd;
+}
+.notice {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+.button {
+    font-size: 16px;
+    display: inline;
+    border: none;
+    padding: 5px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--primary-500);;
+    background-color: transparent;
+    border: 2px solid var(--primary-500);
+    transition: all var(--curve-1) 250ms;
+    font-family: var(--font-domine);
+    font-weight: 700;
+}
+.button:hover {
+    background-color: var(--primary-500);
+    border: 2px solid var(--primary-500);
+    color: var(--secondary-100);
+}
+.accepted {
+    animation: slideDown 1s cubic-bezier(.35,.17,.3,.86) forwards;
+}
+.notice b {
+    font-family: var(--font-domine);
+    color: var(--primary-500);
+    font-weight: 400;
+}
+.version {
+    color: var(--primary-500) !important;
+    font-family: var(--font-domine);
+    position: absolute;
+    right: 8px;
+    bottom: 4px;
+}
+@keyframes slideDown {
+    0% {
+        opacity: 1;
+        translate: 0px 0px;
+    }
+    100% {
+        translate: 0px 100%;
+        opacity: 0;
+    }
+}
+
+
+@media only screen and (max-width: 700px) {
+    .container {
+        z-index: 1000;
+        /* background: white; */
+    }
+    .holder {
+        width: 100%;
+        flex-direction: column;
+    }
+    .row {
+        width: 100%;
+    }
+    .notice {
+        max-width: 100%;
+        text-align: center;
+        align-items: center;
+    }
+    .notice p {
+        text-align: center;
+    }
+}

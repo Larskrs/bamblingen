@@ -4,11 +4,14 @@
 }
 .nav .logo {
     display: flex;
-    font-size: 30px;
+    font-size: 3rem !important;
     align-items: center;
     gap: 16px;
     background-color: var(--secondary-100);
     padding: 8px 16px;
+}
+.nav h3 {
+    font-size: 2rem;
 }
 .nav .links {
     font-size: 20px;

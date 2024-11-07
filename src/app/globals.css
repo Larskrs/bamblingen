@@ -1,7 +1,4 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-
   --secondary-900: rgb(179, 222, 240);
   --secondary-800: rgb(128, 199, 232);
   --secondary-700: rgb(77, 176, 224);
@@ -12,15 +9,27 @@
   --secondary-200: rgb(0, 44, 66);  /* Deep dark */
   --secondary-100: rgb(0, 36, 54);  /* Very deep dark */
   --secondary-50: rgb(0, 23, 34);  /* Very deep dark */
+  --secondary-25: rgb(0, 16, 23);  /* Very deep dark */
 
-  --primary-500: rgb(253, 224, 0);
-}
+  --primary-900: rgb(255, 239, 128); /* Very light */
+  --primary-800: rgb(255, 235, 77);  /* Light */
+  --primary-700: rgb(255, 230, 26);  /* Lighter */
+  --primary-600: rgb(229, 202, 0);   /* Slightly lighter */
+  --primary-500: rgb(253, 224, 0);   /* Base color */
+  --primary-400: rgb(228, 202, 0);   /* Slightly darker */
+  --primary-300: rgb(203, 180, 0);   /* Darker */
+  --primary-200: rgb(153, 135, 0);   /* Deeper dark */
+  --primary-100: rgb(115, 101, 0);   /* Very deep dark */
+  --primary-50: rgb(76, 67, 0);      /* Very deep dark */
+  --primary-25: rgb(51, 44, 0);      /* Very deep dark */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: var(--secondary-50);
-    --foreground: #ededed;
-  }
+  --curve-1: cubic-bezier(0.075, 0.82, 0.165, 1);
+  
+
+  --background: var(--secondary-50);
+  --foreground: #ededed;
+
+  font-size: 16px;
 }
 
 html,
@@ -54,6 +63,21 @@ a {
 h1, h2, h3 {
     font-family: var(--font-domine);
 }
+h1 {
+  font-size: 3rem;
+}
+h2 {
+  font-size: 1.75rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+@media only screen and (max-width: 900px) {
+  :root {
+    font-size: 12px;
+  }
+}
+
 
 
 @media (prefers-color-scheme: dark) {
@@ -61,3 +85,39 @@ h1, h2, h3 {
     color-scheme: dark;
   }
 }
+
+
+.gap-8 {
+  gap: 8px;
+}
+.gap-16 {
+  gap: 16px;
+}
+.G-1 {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.G-1-1-1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.G-1-2 {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+.G-2-1 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+@media only screen and (max-width: 700px) {
+  .G-1
+  .G-1-1-1,
+  .G-1-2,
+  .G-2-1
+    {
+        display: grid;
+        flex-direction: column;
+    }
+}
+  
