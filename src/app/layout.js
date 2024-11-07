@@ -18,7 +18,7 @@ const domine = localFont({
 })
 
 export const metadata = {
-  title: "Bamblingen",
+  title: "Bamblingen.no - nyheter fra Bamble når du trenger dem.",
   description: "Folkeblad for Bamble",
 };
 

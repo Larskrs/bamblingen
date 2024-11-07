@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image";
 import styles from "./page.module.css";
 
@@ -16,11 +18,17 @@ export default function Main () {
                 <div className={`G-2-1 gap-8`}>
                     <section className={styles.section}>
                         <Image alt="Image" src={"http://aktuelt.tv/api/files?fileId=672c88f91d55014bbbb5dcee"} className={styles.img} width={700} height={250} />
+                        <p>Aktuelt Studio: </p>
                         <h2>Trompeten skal spilles ved kroning av Kong Nils.</h2>
                     </section>
-                    <section className={styles.section}>
+                    <section className={styles.videoSection}>
                         <Image alt="Image" src={"http://aktuelt.tv/api/files?fileId=672c88fa1d55014bbbb5dcef"} className={styles.img} width={700} height={250} />
-                        <h2>DBL blir en av verdens værste filmer...</h2>
+                        <div className={styles.details}>
+                            <p>Aktuelt Studio:</p>
+                            <h2>DBL blir en</h2>
+                            <h2>av verdens</h2>
+                            <h2>værste filmer...</h2>
+                        </div>
                     </section>
                 </div>
                 <div className={`G-1-2 gap-8`}>

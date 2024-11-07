@@ -109,14 +109,17 @@ h3 {
   display: grid;
   grid-template-columns: 2fr 1fr;
 }
-
+.G-3-2-1 {
+  display: grid;
+  grid-template-columns: 3fr 2fr 1fr;
+}
 @media only screen and (max-width: 700px) {
   .G-1
   .G-1-1-1,
   .G-1-2,
   .G-2-1
     {
-        display: grid;
+        display: flex;
         flex-direction: column;
     }
 }

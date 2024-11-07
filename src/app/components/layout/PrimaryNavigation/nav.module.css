@@ -1,14 +1,18 @@
 .nav {
     display: flex;
     gap: 32px;
+    border-bottom: 1px solid var(--secondary-100);
 }
 .nav .logo {
     display: flex;
     font-size: 3rem !important;
     align-items: center;
     gap: 16px;
-    background-color: var(--secondary-100);
+    background-color: var(--secondary-200);
     padding: 8px 16px;
+}
+.nav .logo img {
+    animation: logoRotate 50s linear infinite;
 }
 .nav h3 {
     font-size: 2rem;
@@ -21,4 +25,19 @@
 }
 .nav .links a:hover {
     color: var(--primary-500);
+}
+.active {
+    color: var(--primary-500);
+}
+.inactive {
+    color: white;
+}
+
+@keyframes logoRotate {
+    0% {
+        rotate: 0deg;
+    }
+    100% {
+        rotate: 360deg;
+    }
 }

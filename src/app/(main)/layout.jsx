@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link";
 import styles from "./layout.module.css"
 import Image from "next/image";
@@ -8,7 +10,7 @@ export default function MainLayout ({children}) {
     return (
         <>
             <Navigation />
-            <Cookies policyId={"0.0.9"} />
+            <Cookies policyId={"0.0.1"} />
             {children}
         </>
     );
