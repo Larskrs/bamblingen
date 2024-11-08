@@ -1,5 +1,5 @@
 "use client"
-import Navigation from "./components/layout/PrimaryNavigation/nav";
+import Navigation from "@/components/layout/PrimaryNavigation/nav";
 
 export default function FourOFour() {
     return (

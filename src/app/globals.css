@@ -23,6 +23,19 @@
   --primary-50: rgb(76, 67, 0);      /* Very deep dark */
   --primary-25: rgb(51, 44, 0);      /* Very deep dark */
 
+  --white-900: rgb(255, 255, 255);   /* Pure white */
+  --white-800: rgb(245, 245, 245);   /* Very light white */
+  --white-700: rgb(235, 235, 235);   /* Light white */
+  --white-600: rgb(220, 220, 220);   /* Slightly light */
+  --white-500: rgb(200, 200, 200);   /* Medium light */
+  --white-400: rgb(180, 180, 180);   /* Slightly darker */
+  --white-300: rgb(160, 160, 160);   /* Darker */
+  --white-200: rgb(130, 130, 130);   /* Deeper dark */
+  --white-100: rgb(100, 100, 100);   /* Very deep dark */
+  --white-50: rgb(70, 70, 70);       /* Very deep gray */
+  --white-25: rgb(50, 50, 50);       /* Almost black */
+
+
   --curve-1: cubic-bezier(0.075, 0.82, 0.165, 1);
   
 
@@ -44,9 +57,7 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-inter);
 }
 
 * {
@@ -74,10 +85,14 @@ h3 {
 }
 @media only screen and (max-width: 900px) {
   :root {
+    font-size: 14px;
+  }
+}
+@media only screen and (max-width: 500px) {
+  :root {
     font-size: 12px;
   }
 }
-
 
 
 @media (prefers-color-scheme: dark) {

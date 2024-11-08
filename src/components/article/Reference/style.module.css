@@ -1,0 +1,61 @@
+/* Parent container */
+.c {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--secondary-100);
+    width: 100%;
+    align-items: stretch; /* Stretch children to match parent's height */
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: .5rem;
+    position: relative; /* Ensure positioning context for children */
+    margin-bottom: 2rem;
+}
+.c:hover .text p {
+    text-decoration: underline;
+}
+
+/* Small text styling */
+.c small {
+    color: var(--secondary-500);
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+/* Text container */
+.text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 1rem;
+    line-height: 1.25rem;
+}
+
+/* Title styling */
+.title {
+    font-size: 1.1rem;
+    font-family: var(--font-domine);
+}
+
+/* Image styling */
+.img {
+    width: 40vw;
+    max-width: 200px;         /* Fixed width for image column */
+    height: auto;            /* Let the container height determine image height */
+    object-fit: cover;       /* Crops and centers the image within its container */
+    flex-shrink: 0;          /* Prevent image from shrinking */
+    position: relative;
+}
+.img::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -20px; /* Slightly overlaps with the main container */
+    width: 0;
+    height: 0;
+    border-top: 60px solid transparent; /* Adjust height to match image height */
+    border-bottom: 60px solid transparent;
+    border-left: 20px solid var(--secondary-100); /* Match background color */
+    z-index: 90;
+}

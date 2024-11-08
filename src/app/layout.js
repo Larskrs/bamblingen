@@ -1,4 +1,6 @@
 import localFont from "next/font/local";
+import googleFont from "next/font/google"
+import { Inter } from "next/font/google";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -16,6 +18,11 @@ const domine = localFont({
   variable: "--font-domine",
   weight: "400 500 600 700" 
 })
+const inter = Inter({
+  variable: "--font-inter",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  subsets: ['latin']
+})
 
 export const metadata = {
   title: "Bamblingen.no - nyheter fra Bamble når du trenger dem.",
@@ -25,7 +32,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${domine.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${domine.variable} ${inter.variable}`}>
         {children}
       </body>
     </html>
