@@ -71,7 +71,10 @@
 
 
 
-
+.row h1 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+}
 .section:hover {
     text-decoration: underline;
 }

@@ -10,6 +10,7 @@ export default function Navigation () {
     const links = [
         { href: "/nyheter", display: "Nyheter"},
         { href: "/meninger", display: "Meninger"},
+        { href: "/satire", display: "Satire"},
         { href: "/tips", display: "Tips oss"},
         { href: "/calendar", display: "Kalender"},
     ]
