@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import styles from "./page.module.css";
+import Pulse from "@/components/details/pulse";
 
 export default function Main () {
     return (
@@ -16,7 +17,10 @@ export default function Main () {
                 </div>
 
                 <div className={`${styles.row} priority gap-16`}>
-                    <h1>Grupperte saker eksempel</h1>
+                    <h1 className="row gap-16">
+                        <Pulse />
+                        Grupperte saker eksempel
+                    </h1>
                     <div className="G-2-1 gap-16">
                         <section className={styles.section}>
                             <Image alt="Image" src={"http://aktuelt.tv/api/files?fileId=66e9c1faef8d9b0b1bc8b513"} className={styles.img} width={700} height={250} />
