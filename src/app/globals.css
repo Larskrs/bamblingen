@@ -7,7 +7,8 @@
   --secondary-400: rgb(0, 122, 183); /* Slightly darker */
   --secondary-300: rgb(0, 108, 163); /* Darker */
   --secondary-200: rgb(0, 44, 66);  /* Deep dark */
-  --secondary-100: rgb(0, 36, 54);  /* Very deep dark */
+  --secondary-100: rgb(0, 36, 56);  /* Very deep dark */
+  --secondary-75: rgb(0, 28, 43);  /* Very deep dark */
   --secondary-50: rgb(0, 23, 34);  /* Very deep dark */
   --secondary-25: rgb(0, 16, 23);  /* Very deep dark */
 
@@ -128,6 +129,17 @@ h3 {
   display: grid;
   grid-template-columns: 3fr 2fr 1fr;
 }
+.priority {
+  background-color: var(--secondary-25);
+  padding: 1.5rem 1.5rem 3rem 1.5rem;
+  border-radius: .5rem;
+}
+.normal {
+  margin: 1.5rem;
+  padding: 1rem;
+  border-radius: .5rem;
+  background-color: var(--secondary-75);
+}
 @media only screen and (max-width: 700px) {
   .G-1
   .G-1-1-1,
@@ -138,4 +150,3 @@ h3 {
         flex-direction: column;
     }
 }
-  
