@@ -25,7 +25,7 @@ const inter = Inter({
 })
 
 export const metadata = {
-  title: "Bamblingen.no - nyheter fra Bamble når du trenger dem.",
+  title: "Bamblingen.no - nyheter fra Bamble",
   description: "Folkeblad for Bamble",
 };
 
