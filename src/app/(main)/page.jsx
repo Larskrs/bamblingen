@@ -11,7 +11,7 @@ export default function Main () {
                     <section className={styles.section}>
                         <Image alt="Image" src={"http://aktuelt.tv/api/files?fileId=6719fd33a042dc159a45b910"} className={styles.img} width={1000} height={500} />
                         <p>Aktuelt Studio: </p>
-                        <h1>DBL blir en av verdens værste filmer...</h1>
+                        <h1>DBL filming blir ikke ferdig på kortest mulig tid.</h1>
                     </section>
                 </div>
 
@@ -22,7 +22,7 @@ export default function Main () {
                         <h2>Trompeten skal spilles ved kroning av Kong Nils.</h2>
                     </section>
                     <section className={styles.videoSection}>
-                        <Image alt="Image" src={"http://aktuelt.tv/api/files?fileId=672c88fa1d55014bbbb5dcef"} className={styles.img} width={700} height={250} />
+                        <video alt="Image" src={"http://aktuelt.tv/api/files?fileId=673252e01d55014bbbb5dcf1#t=0.1"} className={styles.img} width={700} height={250} />
                         <div className={styles.details}>
                             <p>Aktuelt Studio:</p>
                             <h2>DBL blir en</h2>
