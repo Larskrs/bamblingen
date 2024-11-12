@@ -11,7 +11,7 @@ export default function Main () {
                     <section className={styles.section}>
                         <Image alt="Image" src={"http://aktuelt.tv/api/files?fileId=67335d341d55014bbbb5dcf3"} className={styles.img} width={1000} height={500} />
                         <p>Elever på Rønholt Skole: </p>
-                        <h1>Flere gruer seg til å ta buss til Bamble Ungdomsskole "Blir for langt" -</h1>
+                        <h1>{`Flere gruer seg til å ta buss til Bamble Ungdomsskole "Blir for langt" -`}</h1>
                     </section>
                 </div>
 
