@@ -68,7 +68,17 @@
     gap: 4px;
     border-radius: 4px;
 }
-
+.priority {
+    background-color: var(--secondary-25);
+    padding: 1.5rem 2rem 3rem 2rem;
+    border-radius: .5rem;
+}
+.normal {
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: .5rem;
+    background-color: var(--secondary-75);
+}
 
 
 .row h1 {
