@@ -10,9 +10,9 @@ export default function Main () {
             <main className={styles.m}>
                 <div className={`${styles.full} G-1 gap-8 ${styles.priority}`}>
                     <section className={styles.section}>
-                        <Image alt="Image" src={"http://aktuelt.tv/api/files?fileId=67335d341d55014bbbb5dcf3"} className={styles.img} width={1000} height={500} />
-                        <p>Bamble Ungdomskole: </p>
-                        <h1>{`Husk at alle artikler på denne sida er bare falske nå. Følg med på når vi lanserer`}</h1>
+                        <Image alt="Image" src={"http://aktuelt.tv/api/files?fileId=673469eb1d55014bbbb5dcf6"} className={styles.img} width={1000} height={500} />
+                        <p>Hjalmar Johansen VGS: </p>
+                        <h1>{`"HJEÆÆEELP, slipp oss fri" - 3MEA elev`}</h1>
                     </section>
                 </div>
 
@@ -64,6 +64,23 @@ export default function Main () {
                         <h2>{`"Hvorfor tror de at vi ikke trenger bier?"`}</h2>
                     </section>
                 </section>
+                <div className={`G-1-1-1 gap-8 ${styles.priority}`}>
+                    <section className={styles.section}>
+                        <Image alt="Image" src={"http://aktuelt.tv/api/files?fileId=66b27e1c9ea5f48553e84ca7"} className={styles.img} width={700} height={300} />
+                        <p>Rønholt birøkterlag:</p>
+                        <h2>{`"Hvorfor tror de at vi ikke trenger bier?"`}</h2>
+                    </section>
+                    <section className={styles.section}>
+                        <Image alt="Image" src={"http://aktuelt.tv/api/files?fileId=6719fd33a042dc159a45b910"} className={styles.img} width={700} height={300} />
+                        <p>Sentrumsgården:</p>
+                        <h2>Revy på sentrumsgården</h2>
+                    </section>
+                    <section className={styles.section}>
+                        <Image alt="Image" src={"http://aktuelt.tv/api/files?fileId=6719fd33a042dc159a45b910"} className={styles.img} width={700} height={300} />
+                        <p>Sentrumsgården:</p>
+                        <h2>Revy på sentrumsgården</h2>
+                    </section>
+                </div>
             </main>
         </div>
     )
