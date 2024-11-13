@@ -33,6 +33,14 @@
     color: white;
 }
 
+@media only screen and (max-width: 700px) {
+
+    .nav h3 {
+        display: none;
+    }
+
+}
+
 @keyframes logoRotate {
     0% {
         rotate: 0deg;
