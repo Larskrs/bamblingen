@@ -11,8 +11,8 @@ export default function Main () {
                 <div className={`${styles.full} G-1 gap-8 ${styles.priority}`}>
                     <section className={styles.section}>
                         <Image alt="Image" src={"http://aktuelt.tv/api/files?fileId=673469eb1d55014bbbb5dcf6"} className={styles.img} width={1000} height={500} />
-                        <p>Hjalmar Johansen VGS: </p>
-                        <h1>{`"HJEÆÆEELP, slipp oss fri" - 3MEA elev`}</h1>
+                        <p>Skjærkøyveien, Ragn-Sells</p>
+                        <h1>{`Enda en fakkel lyser opp himmelen`}</h1>
                     </section>
                 </div>
 

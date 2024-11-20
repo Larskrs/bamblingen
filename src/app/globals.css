@@ -37,7 +37,7 @@
   --white-25: rgb(50, 50, 50);       /* Almost black */
 
 
-  --curve-1: cubic-bezier(0.075, 0.82, 0.165, 1);
+  --curve-1: cubic-bezier(.35,.17,.3,.86);
   
 
   --background: var(--secondary-50);
