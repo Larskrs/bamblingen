@@ -1,5 +1,4 @@
 .section {
-    border-radius: 8px;
     cursor: pointer;
 }
 .full .img {
@@ -8,17 +7,21 @@
 .priority {
     background-color: var(--secondary-25);
     padding: 1.5rem 1.5rem 1.5rem 1.5rem;
-    border-radius: .5rem;
 }
 .normal {
-    margin: 1rem;
-    padding: 1rem;
-    border-radius: .5rem;
     background-color: var(--secondary-75);
+    margin: 1rem;
 }
 .row h1 {
     margin-bottom: 1rem;
     font-size: 2rem;
+}
+.details {
+    padding: 1rem 1rem 1rem 1rem;
+}
+.section {
+    gap: 0px;
+    display: grid;
 }
 .section:hover {
     text-decoration: underline;
@@ -28,9 +31,6 @@
     height: 16rem;
     object-fit: cover;
     overflow: hidden;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    box-shadow: 0px 0px 20px var(--secondary-25);
 }
 .section p {
     letter-spacing: 1px;

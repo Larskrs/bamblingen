@@ -1,7 +1,8 @@
 .c {
-    width: 2rem;
-    height: 2rem;
+    width: 1em;
+    height: 1em;
     position: relative;
+    display: inline-block;
 }
 .p {
     position: absolute;

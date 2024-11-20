@@ -1,0 +1,28 @@
+.group {
+    padding: 1rem;
+}
+.title {
+    padding: 1rem 0rem 1rem 1rem;
+    font-size: 2rem;
+}
+.priority {
+    background-color: var(--secondary-25);
+    padding: 1rem;
+}
+.normal {
+    padding: 1rem;
+    background-color: var(--secondary-75);
+}
+
+
+.latest {
+    color: var(--primary-500);
+}
+.latest {
+    display: inline-block;
+}
+.latest > * {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 0.3rem; /* Optional spacing between elements */
+}

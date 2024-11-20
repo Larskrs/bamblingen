@@ -21,7 +21,7 @@ export default function FrontPageRow ({rows}) {
 
                 // Render the component with the remaining props
                 if (group) {
-                    return <GroupedRow {...group}><Row key={i} {...props} /></GroupedRow>
+                    return <GroupedRow {...group} {...props}><Row key={i} {...props} group={group} /></GroupedRow>
                 }
 
                 return <Row key={i} {...props} />;
@@ -32,11 +32,15 @@ export default function FrontPageRow ({rows}) {
 
 
 
-    function GroupedRow ({title, children}) {
+    function GroupedRow ({title, priority, children}) {
         return (
             <>
-                <div className={`${styles.row} ${styles.priority} gap-16`}>
-                    <h1 className="row gap-16">
+                <div className={`${styles.group} ${styles[priority]}`}>
+                    <h1 className={styles.title}>
+                        { priority == "priority" && <span className={styles.latest}>
+                            <Pulse />
+                            <span>SISTE:</span>
+                        </span> }
                         {title}
                     </h1>
                     {children}

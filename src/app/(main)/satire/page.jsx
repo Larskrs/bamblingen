@@ -11,9 +11,10 @@ export default function TestArticle () {
                 <FrontPageContent rows={[
                     {
                         type: "full",
-                        priority: "priority",
-                        articles: [ 
+                        priority: "normal",
+                        articles: [
                             {
+                                priority: "normal",
                                 location: "Skjærkøyveien, Ragn-Sells",
                                 title: "Enda en fakkel lyser opp himmelen",
                                 image: {
@@ -21,7 +22,6 @@ export default function TestArticle () {
                                 }
                             }
                         ],
-                        
                     },
                     {
                         type: "double",
@@ -29,14 +29,29 @@ export default function TestArticle () {
                         group: {
                             title: "Tester gruppe system",
                         },
-                        articles: [ 
+                        articles: [
                             {
+                                priority: "normal",
                                 location: "Skjærkøyveien, Ragn-Sells",
                                 title: "Enda en fakkel lyser opp himmelen",
                                 image: {
                                     banner: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
                                 }
                             },
+                            {
+                                priority: "normal",
+                                location: "Skjærkøyveien, Ragn-Sells",
+                                title: "Enda en fakkel lyser opp himmelen",
+                                image: {
+                                    banner: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
+                                }
+                            }
+                        ],
+                    },
+                    {
+                        type: "full",
+                        priority: "normal",
+                        articles: [
                             {
                                 location: "Skjærkøyveien, Ragn-Sells",
                                 title: "Enda en fakkel lyser opp himmelen",
@@ -45,8 +60,7 @@ export default function TestArticle () {
                                 }
                             }
                         ],
-                        
-                    }
+                    },
                 ]}/>
             </div>
         </div>

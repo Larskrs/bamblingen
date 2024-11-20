@@ -36,6 +36,8 @@ model User {
   updatedAt             DateTime @updatedAt
 
   role                  UserRole @default(USER)
+
+  Articles               Article[]
 }
 
 model Account {
@@ -93,4 +95,18 @@ model Authenticator {
   transports           String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Article {
+    id              Int         @id @default(autoincrement())
+    title           String
+    components      String
+    authors         User[]
+    createdAt DateTime @default(now())
+}
+model ArticleVersion {
+    id              Int         @id @default(autoincrement())
+    title           String
+    components      String
+    createdAt DateTime @default(now())
 }
