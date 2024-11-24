@@ -117,9 +117,9 @@ export default function TestArticle () {
                     },
                     {
                         type: "double",
-                        priority: "none",
+                        priority: "priority",
                         group: {
-                            title: "Helvete"
+                            title: "Brann på skjærkøya"
                         },
                         articles: [
                             {

@@ -8,7 +8,7 @@ export default function DoubleGrid ({articles, group, priority="normal"}) {
                 <div className={`${styles.row} G-1-1${styles[priority]}`}>
                     {articles.map((a, i) => {
                         return (
-                            <section key={a?.id} lassName={`${styles.section} ${styles[a.priority]}`}>
+                            <section key={a?.id} className={`${styles.section} ${styles[a.priority]}`}>
                                 <Image alt="Image" src={a?.image.banner} className={styles.img} width={1000} height={500} />
                                 <div className={styles.details}>
                                     <p>{a?.location}</p>
