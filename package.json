@@ -14,6 +14,7 @@
     "@auth/prisma-adapter": "^2.7.3",
     "@prisma/client": "^5.22.0",
     "mime-types": "^2.1.35",
+    "nanoid": "^5.0.8",
     "next": "15.0.2",
     "next-auth": "^5.0.0-beta.25",
     "react": "19.0.0-rc-02c0e824-20241028",

@@ -105,6 +105,7 @@ export default function TestArticle () {
                         priority: "priority",
                         articles: [
                             {
+                                id: "V1StGXR8_Z5jdHi6B",
                                 priority: "priority",
                                 location: "Skjærkøyveien, Ragn-Sells",
                                 title: "Enda en fakkel lyser opp himmelen",
@@ -122,6 +123,7 @@ export default function TestArticle () {
                         },
                         articles: [
                             {
+                                id: "V1StGXR8_Z5jdHi6A",
                                 priority: "normal",
                                 location: "Skjærkøyveien, Ragn-Sells",
                                 title: "Enda en fakkel lyser opp himmelen",
@@ -130,6 +132,7 @@ export default function TestArticle () {
                                 }
                             },
                             {
+                                id: "V1StGXR8_Z5jdHi6C",
                                 priority: "priority",
                                 location: "Skjærkøyveien, Ragn-Sells",
                                 title: "Enda en fakkel lyser opp himmelen",
@@ -144,6 +147,7 @@ export default function TestArticle () {
                         priority: "normal",
                         articles: [
                             {
+                                id: "V1StGXR8_Z5jdHi6D",
                                 location: "Skjærkøyveien, Ragn-Sells",
                                 title: "Enda en fakkel lyser opp himmelen",
                                 image: {
