@@ -7,7 +7,7 @@ export default function FullGrid ({articles, priority="normal"}) {
                 <div className={`${styles.full} G-1`}>
                     {articles.map((a, i) => {
                         return (
-                            <section className={`${styles.section} ${styles[a.priority]}`}>
+                            <section key={a?.id} className={`${styles.section} ${styles[a.priority]}`}>
                                 <Image alt="Image" src={a?.image.banner} className={styles.img} width={1000} height={500} />
                                 <div className={styles.details}>
                                     <p>{a?.location}</p>
