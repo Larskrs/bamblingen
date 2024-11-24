@@ -1,37 +1,34 @@
 import Pulse from "@/components/details/pulse";
-import DoubleGrid from "../double";
-import FullGrid from "../full";
-import TripleGrid from "../triple";
 import styles from "./style.module.css"
+
+import RenderItems from "../items"
 
 export default function FrontPageRow ({rows}) {
 
-    const rowMap = {
-        full: FullGrid,
-        double: DoubleGrid,
-        triple: TripleGrid
-    };
 
     return (
         <>
-            {rows.map(({ type, group, ...props }, i) => {
-                // Select the appropriate component based on the type
-                const Row = rowMap[type];
-                if (!Row) return null; // If type is unsupported, skip
+            {rows.map(({ layout, group, items, ...props }, i) => {
 
                 // Render the component with the remaining props
                 if (group) {
-                    return <GroupedRow key={i} {...group} {...props}><Row {...props} group={group} /></GroupedRow>
+                    return <GroupedRow key={i} {...group} {...props}>
+                        <Row key={i} id={i} layout={layout} items={items} {...props} />
+                    </GroupedRow>
                 }
 
-                return <Row key={i} {...props} />;
+                return <Row key={i} id={i} layout={layout} items={items} {...props} />;
             })}
         </>
     );
 
-
-
-
+    function Row ({layout, items, ...props}) {
+        return <>
+            <div className={`${styles.row} ${layout}`}>
+                <RenderItems items={items} {...props} />
+            </div>
+        </>
+    }
     function GroupedRow ({title, priority, children}) {
         return (
             <>

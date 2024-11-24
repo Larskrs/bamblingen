@@ -1,5 +1,5 @@
 //     Components
-import FrontPageContent from "@/components/frontPage/rows/FrontPageRow"
+import FrontPageContent from "@/components/frontPage/rows"
 //     Local
 import styles from "./page.module.css"
 

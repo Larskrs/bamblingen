@@ -1,0 +1,81 @@
+.videoSection {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+.videoSection::after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(transparent, var(--secondary-100));
+    opacity: 0.25;
+    border-radius: 0.5rem;
+}
+.videoSection:hover .videoSection::after {
+    opacity: 0;
+}
+
+.videoSection:hover {
+    text-decoration: underline;
+}
+.videoSection .img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    box-shadow: 0px 0px 20px var(--secondary-25);
+}
+.videoSection .details h2 {
+    letter-spacing: 1px;
+    font-family: var(--font-domine);
+    font-weight: 500;
+    background-color: var(--secondary-50);
+    padding: 4px;
+    border-radius: 4px;
+    z-index: 8;
+    width: fit-content;
+}
+.videoSection .details p {
+    letter-spacing: 1px;
+    font-family: var(--font-domine);
+    font-weight: 600;
+    background-color: var(--secondary-900);
+    border-radius: 4px;
+    color: var(--secondary-25);
+    padding: 4px;
+    z-index: 8;
+    width: fit-content;
+}
+.videoSection .details {
+    width: 100%;
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+    z-index: 8;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-radius: 4px;
+    transition: 250ms all var(--curve-1);
+}
+.priority {
+    background-color: var(--secondary-25);
+    padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+    border-radius: .5rem;
+}
+.normal {
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: .5rem;
+    background-color: var(--secondary-75);
+}
+.video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
