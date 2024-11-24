@@ -21,7 +21,7 @@ export default function FrontPageRow ({rows}) {
 
                 // Render the component with the remaining props
                 if (group) {
-                    return <GroupedRow {...group} {...props}><Row key={i} {...props} group={group} /></GroupedRow>
+                    return <GroupedRow key={i} {...group} {...props}><Row {...props} group={group} /></GroupedRow>
                 }
 
                 return <Row key={i} {...props} />;
