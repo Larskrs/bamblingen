@@ -118,10 +118,7 @@ export default function TestArticle () {
                     },
                     {
                         layout: "G-1-1-1",
-                        priority: "priority",
-                        group: {
-                            title: "Brann på skjærkøya"
-                        },
+                        priority: "none",
                         items: [
                             {
                                 id: "V1StGXR8_Z5jdHi6A",
@@ -130,7 +127,7 @@ export default function TestArticle () {
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Skammelig, går ikke ann å oppføre seg slik.",
                                 image: {
-                                    banner: "http://aktuelt.tv/api/files?fileId=67444e1f1d55014bbbb5dd03"
+                                    banner: "http://aktuelt.tv/api/files?fileId=67335d341d55014bbbb5dcf3"
                                 }
                             },
                             {
