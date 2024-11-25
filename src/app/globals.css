@@ -11,6 +11,7 @@
   --secondary-75: rgb(0, 28, 43);  /* Very deep dark */
   --secondary-50: rgb(0, 23, 34);  /* Very deep dark */
   --secondary-25: rgb(0, 16, 23);  /* Very deep dark */
+  --secondary-0:  rgb(0,8,12);
 
   --primary-900: rgb(255, 239, 128); /* Very light */
   --primary-800: rgb(255, 235, 77);  /* Light */
@@ -36,12 +37,15 @@
   --white-50: rgb(70, 70, 70);       /* Very deep gray */
   --white-25: rgb(50, 50, 50);       /* Almost black */
 
-
   --curve-1: cubic-bezier(.35,.17,.3,.86);
+
+  --normal: var(--white-900);
+  --priority: var(--secondary-25);
+  --priority-foreground: var(--white-900);
   
 
-  --background: var(--secondary-50);
-  --foreground: #ededed;
+  --background: var(--white-800);
+  --foreground: #000000;
 
   font-size: 16px;
 }

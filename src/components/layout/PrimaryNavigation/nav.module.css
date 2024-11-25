@@ -1,14 +1,15 @@
 .nav {
     display: flex;
     gap: 32px;
-    border-bottom: 1px solid var(--secondary-100);
+    border-bottom: 1px solid var(--secondary-700);
 }
 .nav .logo {
+    color: var(--white-900);
     display: flex;
     font-size: 3rem !important;
     align-items: center;
     gap: 16px;
-    background-color: var(--secondary-200);
+    background-color: var(--secondary-500);
     padding: 8px 16px;
 }
 .nav .logo img {
@@ -24,13 +25,13 @@
     align-items: center;
 }
 .nav .links a:hover {
-    color: var(--primary-500);
+    color: var(--secondary-0);
 }
 .active {
-    color: var(--primary-500);
+    color: var(--secondary-0);
 }
 .inactive {
-    color: white;
+    color: var(--secondary-25);
 }
 
 @media only screen and (max-width: 700px) {

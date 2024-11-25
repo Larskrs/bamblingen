@@ -153,7 +153,7 @@ export default function TestArticle () {
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Enda en fakkel lyser opp himmelen",
                                 image: {
-                                    banner: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
+                                    banner: "http://aktuelt.tv/api/files?fileId=66b27e1c9ea5f48553e84ca7"
                                 }
                             }
                         ],
