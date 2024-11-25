@@ -125,7 +125,7 @@ export default function TestArticle () {
                         items: [
                             {
                                 id: "V1StGXR8_Z5jdHi6A",
-                                type: "video",
+                                type: "article",
                                 priority: "normal",
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Skammelig, går ikke ann å oppføre seg slik.",
@@ -139,17 +139,6 @@ export default function TestArticle () {
                                 priority: "priority",
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Enda en fakkel lyser opp himmelen",
-                                image: {
-                                    banner: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
-                                }
-                            },
-                            {
-                                id: "V1StGXR8_Z5jdHi67",
-                                type: "video",
-                                priority: "priority",
-                                context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Enda en fakkel lyser opp himmelen",
-                                video: "http://aktuelt.tv/api/files?fileId=673d0a3d1d55014bbbb5dd01",
                                 image: {
                                     banner: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
                                 }
