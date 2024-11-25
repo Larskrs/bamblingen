@@ -129,7 +129,7 @@ export default function TestArticle () {
                                 priority: "normal",
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Enda en fakkel lyser opp himmelen",
-                                video: "http://aktuelt.tv/api/files?fileId=671eac91a042dc159a45b919",
+                                video: "http://aktuelt.tv/api/files?fileId=6717f53ba042dc159a45b908",
                                 image: {
                                     banner: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
                                 }
