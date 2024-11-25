@@ -99,63 +99,109 @@ export default function TestArticle () {
     return (
         <div className={styles.c}>
             <div className={styles.m}>
-                <FrontPageContent rows={[
+            <FrontPageContent rows={[
                     {
-                        layout: "G-1",
+                        type: "header",
+                        layout: "G_1",
                         priority: "priority",
                         items: [
                             {
                                 id: "V1StGXR8_Z5jdHi6B",
                                 type: "article",
                                 priority: "priority",
+                                priorityPrefix: true,
                                 context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Enda en fakkel lyser opp himmelen",
-                                image: {
-                                    banner: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
-                                }
+                                title: `«Vi ar ikke kontroll» - Brann`,
+                                image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
                             }
                         ],
                     },
                     {
-                        layout: "G-1-1-1",
+                        type: "banner",
+                        priority: "normal",
+                        items: [
+                            {
+                                id: "V1StGXR8_Z5jdHi6Baef",
+                                type: "article",
+                                priority: "priority",
+                                priorityPrefix: true,
+                                context: "Artikler er ikke redaksjonelle",
+                                title: `Denne nettavisen er ikke i drift!`,
+                                // image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
+                            }
+                        ],
+                    },
+                    {
+                        type: "grid",
+                        layout: "G_2_1",
                         priority: "none",
                         items: [
                             {
                                 id: "V1StGXR8_Z5jdHi6A",
                                 type: "article",
                                 priority: "normal",
+                                priorityPrefix: false,
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Skammelig, går ikke ann å oppføre seg slik.",
-                                image: {
-                                    banner: "http://aktuelt.tv/api/files?fileId=67335d341d55014bbbb5dcf3"
-                                }
+                                image: "http://aktuelt.tv/api/files?fileId=6744b6961d55014bbbb5dd08"
                             },
                             {
-                                id: "V1StGXR8_Z5jdHi6C",
+                                id: "V1StGXR8_Z5jdHi6efC",
                                 type: "article",
                                 priority: "priority",
+                                priorityPrefix: true,
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Enda en fakkel lyser opp himmelen",
-                                image: {
-                                    banner: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
-                                }
-                            }
+                                image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
+                            },
                         ],
                     },
                     {
-                        layout: "G-1",
+                        type: "grid",
+                        layout: "G_1_1",
                         priority: "normal",
                         items: [
+                            {
+                                id: "V1StGXR8_Z5jdHi6Dzxv",
+                                type: "article",
+                                priority: "normal",
+                                context: "Skjærkøyveien, Ragn-Sells",
+                                title: "Enda en fakkel lyser opp himmelen",
+                                image: "http://aktuelt.tv/api/files?fileId=66b27e1c9ea5f48553e84ca7"
+                            },
                             {
                                 id: "V1StGXR8_Z5jdHi6D",
                                 type: "article",
                                 priority: "normal",
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Enda en fakkel lyser opp himmelen",
-                                image: {
-                                    banner: "http://aktuelt.tv/api/files?fileId=66b27e1c9ea5f48553e84ca7"
-                                }
-                            }
+                                image: "http://aktuelt.tv/api/files?fileId=66b27e1c9ea5f48553e84ca7"
+                            },
+                        ],
+                    },
+                    {
+                        type: "grid",
+                        layout: "G_1_2",
+                        priority: "none",
+                        items: [
+                            {
+                                id: "V1StGXR8_Z5jdHi6Aaw",
+                                type: "article",
+                                priority: "normal",
+                                priorityPrefix: false,
+                                context: "Skjærkøyveien, Ragn-Sells",
+                                title: "Skammelig, går ikke ann å oppføre seg slik.",
+                                image: "http://aktuelt.tv/api/files?fileId=6744b6961d55014bbbb5dd08"
+                            },
+                            {
+                                id: "V1StGXR8_Z5jdHi6Cbrg",
+                                type: "article",
+                                priority: "priority",
+                                priorityPrefix: true,
+                                context: "Skjærkøyveien, Ragn-Sells",
+                                title: "Enda en fakkel lyser opp himmelen",
+                                image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
+                            },
                         ],
                     },
                 ]}/>

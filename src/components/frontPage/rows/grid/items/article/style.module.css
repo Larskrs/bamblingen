@@ -16,6 +16,7 @@
 }
 .title {
     display: inline;
+    font-size: 2rem;
 }
 .details {
     padding: 0rem 1rem 0rem 1rem;
@@ -25,6 +26,7 @@
 }
 .latest {
     color: var(--primary-500);
+    height: 100%;
 }
 .latest {
     display: inline-block;
@@ -37,7 +39,7 @@
 .section .img {
     width: 100%;
     height: auto;
-    max-height: 50vh;
+    max-height: 300px;
     aspect-ratio: 16/9;
     object-fit: cover;
     overflow: hidden;
@@ -45,8 +47,11 @@
 }
 .section p {
     letter-spacing: 1px;
-    font-family: var(--font-domine);
-    font-weight: 700;
-    margin: 8px 0px 0px 4px;
+    font-family: var(--font-inter);
+    font-weight: 500;
+    margin: 8px 0px 0px 0px;
     margin-bottom: 4px;
+}
+.section h1 {
+    font-family: var(--font-inter);
 }

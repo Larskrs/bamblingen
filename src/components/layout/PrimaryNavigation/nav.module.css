@@ -1,7 +1,7 @@
 .nav {
     display: flex;
     gap: 32px;
-    border-bottom: 1px solid var(--secondary-700);
+    background-color: var(--secondary-25);
 }
 .nav .logo {
     color: var(--white-900);
@@ -9,7 +9,7 @@
     font-size: 3rem !important;
     align-items: center;
     gap: 16px;
-    background-color: var(--secondary-500);
+    background-color: var(--secondary-100);
     padding: 8px 16px;
 }
 .nav .logo img {
@@ -25,13 +25,13 @@
     align-items: center;
 }
 .nav .links a:hover {
-    color: var(--secondary-0);
+    color: var(--primary-500);
 }
 .active {
-    color: var(--secondary-0);
+    color: var(--primary-500);
 }
 .inactive {
-    color: var(--secondary-25);
+    color: var(--white-900);
 }
 
 @media only screen and (max-width: 700px) {

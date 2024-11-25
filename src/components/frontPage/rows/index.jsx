@@ -1,48 +1,29 @@
 import Pulse from "@/components/details/pulse";
 import styles from "./style.module.css"
 
-import RenderItems from "../items"
+import Grid from "./grid";
+import Header from "./header";
+import Banner from "./banner";
 
 export default function FrontPageRow ({rows}) {
 
+    const rowMap = {
+        "grid": Grid,
+        "header": Header,
+        "banner": Banner
+    };
 
-    return (
-        <>
-            {rows.map(({ layout, group, items, ...props }, i) => {
-
-                // Render the component with the remaining props
-                if (group) {
-                    return <GroupedRow key={i} {...group} {...props}>
-                        <Row key={i} id={i} layout={layout} items={items} {...props} />
-                    </GroupedRow>
-                }
-
-                return <Row key={i} id={i} layout={layout} items={items} {...props} />;
-            })}
-        </>
-    );
-
-    function Row ({layout, items, ...props}) {
-        return <>
-            <div className={`${styles.row} ${layout}`}>
-                <RenderItems items={items} {...props} />
-            </div>
-        </>
-    }
-    function GroupedRow ({title, priority, children}) {
         return (
-            <>
-                <div className={`${styles.group} ${styles[priority]}`}>
-                    <h1 className={styles.title}>
-                        { priority == "priority" && <span className={styles.latest}>
-                            <Pulse />
-                            <span>SISTE:</span>
-                        </span> }
-                        {title}
-                    </h1>
-                    {children}
-                </div>
-            </>
+            <div className={styles.c}>
+                {rows.map((row, i) => {
+                    // Select the appropriate component based on the type
+                    const Row = rowMap[row.type];
+                    if (!Row) return null; // If type is unsupported, skip
+
+                    return (
+                            <Row key={i} {...row} />
+                    )
+                })}
+            </div>
         )
     }
-}
