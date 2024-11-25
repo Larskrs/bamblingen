@@ -128,10 +128,9 @@ export default function TestArticle () {
                                 type: "video",
                                 priority: "normal",
                                 context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Enda en fakkel lyser opp himmelen",
-                                video: "http://aktuelt.tv/api/files?fileId=6717f53ba042dc159a45b908",
+                                title: "Skammelig, går ikke ann å oppføre seg slik.",
                                 image: {
-                                    banner: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
+                                    banner: "http://aktuelt.tv/api/files?fileId=67444e1f1d55014bbbb5dd03"
                                 }
                             },
                             {
