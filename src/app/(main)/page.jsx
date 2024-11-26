@@ -142,7 +142,7 @@ export default function TestArticle () {
                                 priority: "normal",
                                 priorityPrefix: false,
                                 context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Skammelig, går ikke ann å oppføre seg slik.",
+                                title: "Kunstustilling i Porsgrunn",
                                 image: "http://aktuelt.tv/api/files?fileId=6744b6961d55014bbbb5dd08"
                             },
                             {
@@ -190,8 +190,8 @@ export default function TestArticle () {
                                 priority: "normal",
                                 priorityPrefix: false,
                                 context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Skammelig, går ikke ann å oppføre seg slik.",
-                                image: "http://aktuelt.tv/api/files?fileId=6744b6961d55014bbbb5dd08"
+                                title: "Bambling står bak ny naturfokusert kunstustilling.",
+                                image: "http://aktuelt.tv/api/files?fileId=674583e01d55014bbbb5dd0f"
                             },
                             {
                                 id: "V1StGXR8_Z5jdHi6Cbrg",
