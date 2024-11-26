@@ -111,7 +111,7 @@ export default function TestArticle () {
                                 priority: "priority",
                                 priorityPrefix: true,
                                 context: "Skjærkøyveien, Ragn-Sells",
-                                title: `«Vi ar ikke kontroll» - Brann`,
+                                title: `«Vi har ikke kontroll» - Brannvesenet`,
                                 image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
                             }
                         ],
