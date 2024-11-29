@@ -108,11 +108,11 @@ export default function TestArticle () {
                             {
                                 id: "V1StGXR8_Z5jdHi6B",
                                 type: "article",
-                                priority: "priority",
-                                priorityPrefix: true,
+                                priority: "normal",
+                                priorityPrefix: false,
                                 context: "Skjærkøyveien, Ragn-Sells",
-                                title: `«Vi ar ikke kontroll» - Brann`,
-                                image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
+                                title: `Vi trenger bier...`,
+                                image: "http://aktuelt.tv/api/files?fileId=6744b6d01d55014bbbb5dd0a"
                             }
                         ],
                     },
@@ -127,7 +127,7 @@ export default function TestArticle () {
                                 priorityPrefix: true,
                                 context: "Artikler er ikke redaksjonelle",
                                 title: `Denne nettavisen er ikke i drift!`,
-                                // image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
+                                image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
                             }
                         ],
                     },
