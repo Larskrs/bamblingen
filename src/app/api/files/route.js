@@ -34,7 +34,7 @@ export async function GET(req, ctx) {
         fileStat = await stat(filePath);
     } catch (err) {
         console.log("An error occurred while reading file with fsstat: " + err)
-        return NextResponse.json({ error: "File not found" }, { status: 404 });
+        return NextResponse.json({ error: `File not found + ${err}` }, { status: 404 });
     }
     
     const fileSize = fileStat.size;

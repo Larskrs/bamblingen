@@ -1,7 +1,7 @@
 .nav {
     display: flex;
-    gap: 32px;
-    background-color: var(--secondary-25);
+    gap: 2rem;
+    background: linear-gradient(-90deg, var(--secondary-25), var(--secondary-100));
 }
 .nav .logo {
     color: var(--white-900);

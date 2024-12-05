@@ -2,16 +2,14 @@
     width: 100%;
     position: relative;
     max-width: 2000px;
-    min-height: 50vh;
-    overflow: hidden;
+    height:25rem;
+    overflow:visible;
 }
 .priority {
     background-color: var(--priority);
     color: var(--priority-foreground);
-    border-radius: .5rem;
 }
 .normal {
-    border-radius: .5rem;
     background-color: var(--normal);
 }
 .title {
@@ -22,13 +20,14 @@
     padding: 0rem 1rem 0rem 1rem;
     z-index: 2;
     position: absolute;
-    bottom: 0px;
-    padding-bottom: 6rem;
-    padding-top: 2rem;
+    top: 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     width: 100%;
+    height: 100%;
+    color: var(--white-900);
     background: linear-gradient(transparent, var(--secondary-25));
 }
 .details {

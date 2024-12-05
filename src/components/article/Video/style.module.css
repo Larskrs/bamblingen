@@ -6,16 +6,16 @@
 .img {
     width: 100%;
     height: auto;
+    border-radius: .5rem;
     margin-bottom: .5rem;
-    pointer-events: none;
 }
 .alt {
-    color: var(--white-50);
+    color: var(--white-500);
     font-size: 1rem;
     margin-bottom: .25rem;
 }
 .credit {
     text-transform: uppercase;
-    color: var(--white-100);
+    color: var(--white-500);
     font-size: .8rem;
 }

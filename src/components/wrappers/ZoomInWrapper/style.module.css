@@ -1,0 +1,52 @@
+.zoomableElement {
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .zoomedOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 50;
+    cursor: zoom-out;
+    overflow: hidden;
+    animation: 1s overlay var(--curve-1) forwards;
+    padding: 4rem;
+  }
+  
+  .zoomedContent {
+    position: absolute; /* Starts at the position of the unzoomed element */
+    transform-origin: center;
+    animation: 1s zoomIn cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+    height: fit-content;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0px 0px 50px black;
+    cursor: default; /* Disable zoom-out cursor for the zoomed content */
+  }
+  
+  @keyframes zoomIn {
+    100% {
+      translate: -50% -50%;
+      left: 50%;
+      top:  50%;
+    }
+  }
+  
+  @keyframes overlay {
+    100% {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+  }
+  

@@ -127,7 +127,7 @@ export default function TestArticle () {
                                 priorityPrefix: true,
                                 context: "Artikler er ikke redaksjonelle",
                                 title: `Denne nettavisen er ikke i drift!`,
-                                // image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
+                                image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
                             }
                         ],
                     },
@@ -147,11 +147,12 @@ export default function TestArticle () {
                             },
                             {
                                 id: "V1StGXR8_Z5jdHi6efC",
-                                type: "article",
+                                type: "video",
                                 priority: "priority",
                                 priorityPrefix: true,
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Enda en fakkel lyser opp himmelen",
+                                video: "http://aktuelt.tv/api/files?fileId=6748260a1d55014bbbb5dd10#t=0.1",
                                 image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
                             },
                         ],
@@ -172,6 +173,7 @@ export default function TestArticle () {
                             {
                                 id: "V1StGXR8_Z5jdHi6D",
                                 type: "article",
+                                fullImage: true,
                                 priority: "normal",
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Enda en fakkel lyser opp himmelen",
@@ -187,8 +189,9 @@ export default function TestArticle () {
                             {
                                 id: "V1StGXR8_Z5jdHi6Aaw",
                                 type: "article",
-                                priority: "normal",
+                                priority: "priority",
                                 priorityPrefix: false,
+                                fullImage: true,
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Bambling står bak ny naturfokusert kunstustilling.",
                                 image: "http://aktuelt.tv/api/files?fileId=674583e01d55014bbbb5dd0f"
