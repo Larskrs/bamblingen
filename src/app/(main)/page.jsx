@@ -207,6 +207,32 @@ export default function TestArticle () {
                             },
                         ],
                     },
+                    {
+                        type: "grid",
+                        layout: "G_1_2",
+                        priority: "none",
+                        items: [
+                            {
+                                id: "qeag",
+                                type: "article",
+                                priority: "priority",
+                                priorityPrefix: false,
+                                fullImage: false,
+                                context: "Skien",
+                                title: "Tester filsystem for femte gang.",
+                                image: "https://bamblingen.no/api/files?fileId=BildeDeles.png"
+                            },
+                            {
+                                id: "V1StGXR8_Z5jdHi6Cbrg",
+                                type: "article",
+                                priority: "priority",
+                                priorityPrefix: true,
+                                context: "Skjærkøyveien, Ragn-Sells",
+                                title: "Enda en fakkel lyser opp himmelen",
+                                image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
+                            },
+                        ],
+                    },
                 ]}/>
             </div>
         </div>

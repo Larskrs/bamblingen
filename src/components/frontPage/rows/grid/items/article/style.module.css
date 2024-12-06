@@ -40,7 +40,7 @@
     width: 100%;
     height: auto;
     max-height: 300px;
-    aspect-ratio: 16/9;
+    /* aspect-ratio: 16/9; */
     object-fit: cover;
     overflow: hidden;
 }
