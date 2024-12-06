@@ -8,7 +8,7 @@ const nextConfig = {
             },
             {
                 protocol: 'https',
-                hostname: 'bamblingen.no'
+                hostname: 'www.bamblingen.no',
             }
         ]
     }
