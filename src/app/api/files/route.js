@@ -15,7 +15,7 @@ async function GetFilePath (fileId) {
     let filePath
     let fileName
 
-    filePath = path.posix.join(process.cwd(),`\\files\\${fileId}`);
+    filePath = path.posix.join(process.cwd(),`files`, fileId);
     fileName = fileId
 
     return { filePath, fileName}
@@ -129,8 +129,8 @@ export async function POST (req) {
 
         const filename = cleanFilename(file.name)
         
-        const directoryPath = path.posix.join(process.cwd(),`\\files`)
-        const filePath = path.posix.join(`${directoryPath}\\${filename.split('.').shift()}.${extension}`)
+        const directoryPath = path.posix.join(process.cwd(),`files`)
+        const filePath = path.join(`${directoryPath}`,`${filename.split('.').shift()}.${extension}`)
 
 
         try {
