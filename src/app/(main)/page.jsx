@@ -111,13 +111,8 @@ export default function TestArticle () {
                                 priority: "normal",
                                 priorityPrefix: false,
                                 context: "Skjærkøyveien, Ragn-Sells",
-<<<<<<< HEAD
                                 title: `Vi trenger bier...`,
                                 image: "http://aktuelt.tv/api/files?fileId=6744b6d01d55014bbbb5dd0a"
-=======
-                                title: `«Vi har ikke kontroll» - Brannvesenet`,
-                                image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
->>>>>>> cdcd55aa3f6ef71151e9d29b77d976939951003f
                             }
                         ],
                     },
@@ -208,7 +203,7 @@ export default function TestArticle () {
                                 priorityPrefix: true,
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Enda en fakkel lyser opp himmelen",
-                                image: "http://localhost/api/files?fileId=BildeDeles.png"
+                                image: "http://localhost:3000/api/files?fileId=BildeDeles.png"
                             },
                         ],
                     },
