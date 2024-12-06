@@ -15,7 +15,7 @@ async function GetFilePath (fileId) {
     let filePath
     let fileName
 
-    filePath = path.join(process.cwd(),`\\files\\${fileId}`);
+    filePath = path.join(process.env.API_BASE_PATH,`\\files\\${fileId}`);
     fileName = fileId
 
     return { filePath, fileName}
@@ -129,7 +129,7 @@ export async function POST (req) {
 
         const filename = cleanFilename(file.name)
         
-        const directoryPath = path.join(process.cwd(),`\\files`)
+        const directoryPath = path.join(process.env.API_BASE_PATH,`\\files`)
         const filePath = path.join(`${directoryPath}\\${filename.split('.').shift()}.${extension}`)
 
 
