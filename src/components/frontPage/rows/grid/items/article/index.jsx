@@ -7,7 +7,7 @@ export default function FullGrid ({id, context, title, image, priority, priority
     return (
         <>
             <section key={id} className={`${styles.section} ${styles[priority]}`}>
-                    <Image alt="Image" src={image} className={`${styles.img} ${fullImage && styles.fullImage}`} width={1000} height={500} />
+                    <Image unoptimized alt="Image" src={image} className={`${styles.img} ${fullImage && styles.fullImage}`} width={1000} height={500} />
                     <div className={`${styles.details} ${fullImage && styles.overlay}`}>
                         <p>{context}</p>
                         <h1>

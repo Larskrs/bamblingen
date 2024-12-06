@@ -7,7 +7,7 @@ const nextConfig = {
                 hostname: 'aktuelt.tv',
             },
             {
-                protocol: 'https',
+                protocol: 'http',
                 hostname: 'bamblingen.no',
             },
             {
