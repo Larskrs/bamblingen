@@ -69,7 +69,13 @@
     display: grid;
     grid-template-columns: 3fr 2fr 1fr;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
+    .G_1_2, .G_2_1 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media only screen and (max-width: 500px) {
     .G_1,
     .G_1_1,
     .G_1_1_1,

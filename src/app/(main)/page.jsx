@@ -111,8 +111,13 @@ export default function TestArticle () {
                                 priority: "normal",
                                 priorityPrefix: false,
                                 context: "Skjærkøyveien, Ragn-Sells",
+<<<<<<< HEAD
                                 title: `Vi trenger bier...`,
                                 image: "http://aktuelt.tv/api/files?fileId=6744b6d01d55014bbbb5dd0a"
+=======
+                                title: `«Vi har ikke kontroll» - Brannvesenet`,
+                                image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
+>>>>>>> cdcd55aa3f6ef71151e9d29b77d976939951003f
                             }
                         ],
                     },
@@ -142,16 +147,17 @@ export default function TestArticle () {
                                 priority: "normal",
                                 priorityPrefix: false,
                                 context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Skammelig, går ikke ann å oppføre seg slik.",
+                                title: "Kunstustilling i Porsgrunn",
                                 image: "http://aktuelt.tv/api/files?fileId=6744b6961d55014bbbb5dd08"
                             },
                             {
                                 id: "V1StGXR8_Z5jdHi6efC",
-                                type: "article",
+                                type: "video",
                                 priority: "priority",
                                 priorityPrefix: true,
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Enda en fakkel lyser opp himmelen",
+                                video: "http://aktuelt.tv/api/files?fileId=6748260a1d55014bbbb5dd10#t=0.1",
                                 image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
                             },
                         ],
@@ -172,6 +178,7 @@ export default function TestArticle () {
                             {
                                 id: "V1StGXR8_Z5jdHi6D",
                                 type: "article",
+                                fullImage: true,
                                 priority: "normal",
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Enda en fakkel lyser opp himmelen",
@@ -187,11 +194,38 @@ export default function TestArticle () {
                             {
                                 id: "V1StGXR8_Z5jdHi6Aaw",
                                 type: "article",
-                                priority: "normal",
+                                priority: "priority",
                                 priorityPrefix: false,
+                                fullImage: true,
                                 context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Skammelig, går ikke ann å oppføre seg slik.",
-                                image: "http://aktuelt.tv/api/files?fileId=6744b6961d55014bbbb5dd08"
+                                title: "Bambling står bak ny naturfokusert kunstustilling.",
+                                image: "https://bamblingen.no/api/files?fileId=BildeDeles.png"
+                            },
+                            {
+                                id: "V1StGXR8_Z5jdHi6Cbrg",
+                                type: "article",
+                                priority: "priority",
+                                priorityPrefix: true,
+                                context: "Skjærkøyveien, Ragn-Sells",
+                                title: "Enda en fakkel lyser opp himmelen",
+                                image: "http://localhost/api/files?fileId=BildeDeles.png"
+                            },
+                        ],
+                    },
+                    {
+                        type: "grid",
+                        layout: "G_1_2",
+                        priority: "none",
+                        items: [
+                            {
+                                id: "qeag",
+                                type: "article",
+                                priority: "priority",
+                                priorityPrefix: false,
+                                fullImage: false,
+                                context: "Skien",
+                                title: "Tester filsystem for femte gang.",
+                                image: "https://bamblingen.no/api/files?fileId=BildeDeles.png"
                             },
                             {
                                 id: "V1StGXR8_Z5jdHi6Cbrg",

@@ -39,13 +39,13 @@
 
   --curve-1: cubic-bezier(.35,.17,.3,.86);
 
-  --normal: var(--secondary-100);
+  --normal: var(--white-900);
   --priority: var(--secondary-0);
   --priority-foreground: var(--white-900);
   
 
-  --background: var(--secondary-25);
-  --foreground: white;
+  --background: #f5f5f5;
+  --foreground: black;
 
   font-size: 16px;
 }

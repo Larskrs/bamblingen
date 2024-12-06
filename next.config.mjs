@@ -5,6 +5,14 @@ const nextConfig = {
             {
                 protocol: 'http',
                 hostname: 'aktuelt.tv',
+            },
+            {
+                protocol: 'https',
+                hostname: 'bamblingen.no',
+            },
+            {
+                protocol: 'http',
+                hostname: 'localhost',
             }
         ]
     }

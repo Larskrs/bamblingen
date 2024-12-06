@@ -100,8 +100,8 @@ model Authenticator {
 model Article {
     id              Int         @id @default(autoincrement())
     title           String
-    components      String
     authors         User[]
+    versions        ArticleVersion[]
     createdAt DateTime @default(now())
 }
 model ArticleVersion {
@@ -109,4 +109,6 @@ model ArticleVersion {
     title           String
     components      String
     createdAt DateTime @default(now())
+
+    Article Article[]
 }

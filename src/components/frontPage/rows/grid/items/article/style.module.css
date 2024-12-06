@@ -1,6 +1,8 @@
 .section {
     cursor: pointer;
     width: 100%;
+
+    position: relative;
 }
 .full .img {
     height: 400px !important;
@@ -8,10 +10,8 @@
 .priority {
     background-color: var(--priority);
     color: var(--priority-foreground);
-    border-radius: .5rem;
 }
 .normal {
-    border-radius: .5rem;
     background-color: var(--normal);
 }
 .title {
@@ -19,7 +19,7 @@
     font-size: 2rem;
 }
 .details {
-    padding: 0rem 1rem 0rem 1rem;
+    padding: 0.5rem 1rem 0rem 1rem;
 }
 .section:hover {
     text-decoration: underline;
@@ -40,10 +40,9 @@
     width: 100%;
     height: auto;
     max-height: 300px;
-    aspect-ratio: 16/9;
+    /* aspect-ratio: 16/9; */
     object-fit: cover;
     overflow: hidden;
-    margin-bottom: 8px;
 }
 .section p {
     letter-spacing: 1px;
@@ -54,4 +53,36 @@
 }
 .section h1 {
     font-family: var(--font-inter);
+}
+.overlay {
+    position: absolute;
+    bottom: 0px;
+    min-height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: var(--white-900);
+    background: linear-gradient(transparent, var(--secondary-25));
+}
+.fullImage {
+    height: 100% !important;
+    aspect-ratio: unset !important;
+    max-height: unset !important;
+    object-fit: cover;
+    position: relative;
+}
+.wrappedText {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.normal .wrappedText span {
+    padding-right: 0.5rem;
+    background-color: var(--normal);
+}
+.priority .wrappedText span {
+    padding-right: 0.5rem;
+    background-color: var(--priority);
+    color: var(--priority-foreground);
 }

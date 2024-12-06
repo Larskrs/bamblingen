@@ -9,10 +9,8 @@
 .priority {
     background-color: var(--priority);
     color: var(--priority-foreground);
-    border-radius: .5rem;
 }
 .normal {
-    border-radius: .5rem;
     background-color: var(--normal);
 }
 .details {
