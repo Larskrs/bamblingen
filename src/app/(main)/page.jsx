@@ -203,7 +203,7 @@ export default function TestArticle () {
                                 priorityPrefix: true,
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Enda en fakkel lyser opp himmelen",
-                                image: "https://bamblingen.no/api/files?fileId=BildeDeles.png"
+                                image: "http://localhost/api/files?fileId=BildeDeles.png"
                             },
                         ],
                     },
