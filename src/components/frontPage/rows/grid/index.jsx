@@ -20,17 +20,20 @@ export default function Grid ({items, layout, group, ...props}) {
             </div>
         </>
     }
-    function GroupedRow ({title, priority, background, foreground, children}) {
+    function GroupedRow ({title, priority, context="", priorityPrefix=false, background, foreground, children}) {
         return (
             <>
                 <div style={{borderColor: foreground, background: background}} className={`${styles.group} ${styles[priority]}`}>
                     <h1 className={styles.title}>
-                        { priority == "priority" && <span className={styles.latest}>
+                        { priorityPrefix && <span className={styles.latest}>
                             <Pulse />
                             <span>SISTE:</span>
                         </span> }
                         {title}
                     </h1>
+                    <p className={styles.context}>
+                        {context}
+                    </p>
                     {children}
                 </div>
             </>

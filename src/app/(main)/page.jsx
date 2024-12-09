@@ -133,27 +133,46 @@ export default function TestArticle () {
                     },
                     {
                         type: "grid",
-                        layout: "G_2_1",
-                        priority: "none",
+                        layout: "G_1_1_1",
+                        group: {
+                            title: "Åpner ny vaskemodul for motorsykler",
+                            context: "Lasses, Rughtvedtmyra",
+                            priority: "priority",
+                            priorityPrefix: false,
+                            foreground: "var(--primary-500)",
+                        },
                         items: [
                             {
                                 id: "V1StGXR8_Z5jdHi6A",
-                                type: "article",
+                                type: "image",
                                 priority: "normal",
                                 priorityPrefix: false,
+                                fullImage: true,
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Kunstustilling i Porsgrunn",
-                                image: "http://aktuelt.tv/api/files?fileId=6744b6961d55014bbbb5dd08"
+                                image: "http://aktuelt.tv/api/files?fileId=67576d48d222fb15c503bc61"
                             },
                             {
                                 id: "V1StGXR8_Z5jdHi6efC",
-                                type: "video",
+                                type: "image",
                                 priority: "priority",
-                                priorityPrefix: true,
+                                priorityPrefix: false,
+                                fullImage: true,
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Enda en fakkel lyser opp himmelen",
                                 video: "http://aktuelt.tv/api/files?fileId=6748260a1d55014bbbb5dd10#t=0.1",
-                                image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
+                                image: "http://aktuelt.tv/api/files?fileId=675766acd222fb15c503bc57"
+                            },
+                            {
+                                id: "V1StGXR8_Z5jdHi6efC",
+                                type: "image",
+                                priority: "priority",
+                                priorityPrefix: false,
+                                fullImage: true,
+                                context: "Skjærkøyveien, Ragn-Sells",
+                                title: "Enda en fakkel lyser opp himmelen",
+                                video: "http://aktuelt.tv/api/files?fileId=6748260a1d55014bbbb5dd10#t=0.1",
+                                image: "http://aktuelt.tv/api/files?fileId=67576d46d222fb15c503bc5c"
                             },
                         ],
                     },
@@ -166,9 +185,8 @@ export default function TestArticle () {
                                 id: "V1StGXR8_Z5jdHi6Dzxv",
                                 type: "article",
                                 priority: "normal",
-                                context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Enda en fakkel lyser opp himmelen",
-                                image: "http://aktuelt.tv/api/files?fileId=66b27e1c9ea5f48553e84ca7"
+                                title: "Er vi for opptatt av å filme det vi gjør?",
+                                image: "http://aktuelt.tv/api/files?fileId=67576551d222fb15c503bc51"
                             },
                             {
                                 id: "V1StGXR8_Z5jdHi6D",

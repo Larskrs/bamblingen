@@ -5,13 +5,22 @@
 .group .row {
     padding: 0px;
 }
+.context {
+    letter-spacing: 1px;
+    font-family: var(--font-inter);
+    font-weight: 500;
+    margin: 8px 0px 0px 0px;
+    margin-bottom: 4px;
+    padding: 0rem 0rem 1rem 0rem;
+}
 .title {
-    padding: 1rem 0rem 1rem 0rem;
+    padding: 1rem 0rem 0rem 0rem;
     font-size: 2rem;
     font-family: var(--font-inter);
 }
 .priority {
     background-color: var(--secondary-25);
+    color: var(--priority-foreground);
 }
 .normal {
     background-color: var(--white-900);

@@ -7,9 +7,10 @@ export default function FullGrid ({id, context, title, image, video}) {
         <>
             <section key={id} className={styles.videoSection}>
                 {/* <Image alt="Image" src={"http://aktuelt.tv/api/files?fileId=66d5c36efc76034dbe113566"} className={styles.img} width={700} height={250} /> */}
-                <ZoomableElement>
-                    <video autoPlay loop muted className={styles.video} src={video}></video>
-                </ZoomableElement>
+                <video className={styles.video} playsInline width="320" height="240" controls preload="none">
+                    <source src={video} type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
                 <div className={styles.details}>
                     <div className={styles.wrapped}>
                         {context.split(" ").map((t, i) => (<p key={t+i}>{t}</p>))}

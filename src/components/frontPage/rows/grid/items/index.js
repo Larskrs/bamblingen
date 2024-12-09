@@ -1,10 +1,12 @@
 import Article from "./article"
 import Video from "./video"
+import Image from "./image"
 
 
 const itemMap = {
     "article": Article,
     "video": Video,
+    "image": Image,
 }
 
 export default function RenderRowItems ({items}) {
