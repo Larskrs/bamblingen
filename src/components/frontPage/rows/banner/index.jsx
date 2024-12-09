@@ -8,9 +8,9 @@ export default function Banner ({items}) {
 
 function Render ({image, context, priority, priorityPrefix=false, title}) {
     return (
-        <div className={`${styles.header} ${styles[priority]}`}>
+        <div className={`${styles.header}`}>
             {image && <Image alt="Header Image" src={image} className={styles.img} width={2000} height={1000} />}
-                <div className={styles.details}>
+                <div className={`${styles.details} ${styles[priority]}`}>
                     <h1>
                         {priorityPrefix && <span className={styles.latest}>
                             <Pulse />

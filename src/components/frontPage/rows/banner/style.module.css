@@ -5,6 +5,8 @@
     overflow: hidden;
     display: flex;
     flex-direction: row;
+    cursor: pointer;
+    padding-inline: 1rem;
 }
 .priority {
     background-color: var(--priority);

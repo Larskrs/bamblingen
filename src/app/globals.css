@@ -1,4 +1,5 @@
 :root {
+  --secondary-950: rgb(238, 245, 255);
   --secondary-900: rgb(179, 222, 240);
   --secondary-800: rgb(128, 199, 232);
   --secondary-700: rgb(77, 176, 224);
@@ -13,6 +14,7 @@
   --secondary-25: rgb(0, 16, 23);  /* Very deep dark */
   --secondary-0:  rgb(0,8,12);
 
+  --primary-950: rgb(255, 246, 187); /* Very light */
   --primary-900: rgb(255, 239, 128); /* Very light */
   --primary-800: rgb(255, 235, 77);  /* Light */
   --primary-700: rgb(255, 230, 26);  /* Lighter */
@@ -24,6 +26,21 @@
   --primary-100: rgb(115, 101, 0);   /* Very deep dark */
   --primary-50: rgb(76, 67, 0);      /* Very deep dark */
   --primary-25: rgb(51, 44, 0);      /* Very deep dark */
+
+  --red-950: rgb(255, 235, 231); /* Very light */
+  --red-900: rgb(255, 217, 211); /* Very light */
+  --red-800: rgb(255, 190, 181); /* Light */
+  --red-700: rgb(255, 162, 151); /* Lighter */
+  --red-600: rgb(255, 134, 121); /* Slightly lighter */
+  --red-500: rgb(255, 116, 97);  /* Base color */
+  --red-400: rgb(229, 104, 87);  /* Slightly darker */
+  --red-300: rgb(204, 91, 77);   /* Darker */
+  --red-200: rgb(153, 68, 58);   /* Deeper dark */
+  --red-100: rgb(115, 51, 43);   /* Very deep dark */
+  --red-50:  rgb(76, 34, 29);    /* Very deep dark */
+  --red-25:  rgb(51, 22, 19);    /* Very deep dark */
+
+
 
   --white-900: rgb(255, 255, 255);   /* Pure white */
   --white-800: rgb(245, 245, 245);   /* Very light white */

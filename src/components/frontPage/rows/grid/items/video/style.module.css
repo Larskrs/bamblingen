@@ -2,6 +2,10 @@
     position: relative;
     overflow: hidden;
     width: 100%;
+    cursor: pointer;
+}
+.videoSection > * {
+    user-select: none;
 }
 .videoSection::after {
     content: "";
@@ -12,6 +16,7 @@
     height: 100%;
     background: radial-gradient(transparent, var(--secondary-100));
     opacity: 0.25;
+    pointer-events: none;
 }
 .videoSection:hover .videoSection::after {
     opacity: 0;

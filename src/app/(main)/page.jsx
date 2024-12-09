@@ -177,7 +177,7 @@ export default function TestArticle () {
                                 priority: "normal",
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Enda en fakkel lyser opp himmelen",
-                                image: "http://aktuelt.tv/api/files?fileId=66b27e1c9ea5f48553e84ca7"
+                                image: "http://aktuelt.tv/api/files?fileId=66b2aa2e2f345ee36279cd88"
                             },
                         ],
                     },
@@ -188,11 +188,11 @@ export default function TestArticle () {
                             {
                                 id: "V1StGXR8_Z5jdHi6Baef",
                                 type: "article",
-                                priority: "priority",
-                                priorityPrefix: true,
+                                priority: "normal",
+                                priorityPrefix: false,
                                 context: "Artikler er ikke redaksjonelle",
                                 title: `Denne nettavisen er ikke i drift!`,
-                                image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
+                                image: "http://aktuelt.tv/api/files?fileId=66b2aa2e2f345ee36279cd88"
                             }
                         ],
                     },
@@ -226,57 +226,6 @@ export default function TestArticle () {
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Bambling står bak ny naturfokusert kunstustilling.",
                                 image: "http://aktuelt.tv/api/files?fileId=66b27e1c9ea5f48553e84ca7"
-                            },
-                        ],
-                    },
-                    {
-                        type: "banner",
-                        priority: "normal",
-                        items: [
-                            {
-                                id: "V1StGXR8_Z5jdHi6Baef",
-                                type: "article",
-                                priority: "normal",
-                                priorityPrefix: false,
-                                fullImage: true,
-                                context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Bambling står bak ny naturfokusert kunstustilling.",
-                                image: "https://bamblingen.no/api/files?fileId=BildeDeles.png"
-                            },
-                            {
-                                id: "V1StGXR8_Z5jdHi6Cbrg",
-                                type: "article",
-                                priority: "priority",
-                                priorityPrefix: true,
-                                context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Enda en fakkel lyser opp himmelen",
-                                image: "http://localhost/api/files?fileId=BildeDeles.png"
-                            },
-                        ],
-                    },
-                    {
-                        type: "grid",
-                        layout: "G_1_2",
-                        priority: "none",
-                        items: [
-                            {
-                                id: "qeag",
-                                type: "article",
-                                priority: "priority",
-                                priorityPrefix: false,
-                                fullImage: false,
-                                context: "Skien",
-                                title: "Tester filsystem for femte gang.",
-                                image: "https://bamblingen.no/api/files?fileId=BildeDeles.png"
-                            },
-                            {
-                                id: "V1StGXR8_Z5jdHi6Cbrg",
-                                type: "article",
-                                priority: "priority",
-                                priorityPrefix: true,
-                                context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Enda en fakkel lyser opp himmelen",
-                                image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
                             },
                         ],
                     },

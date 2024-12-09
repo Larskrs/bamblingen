@@ -2,13 +2,13 @@
 .c {
     display: flex;
     flex-direction: row;
-    background: linear-gradient(90deg, var(--secondary-50), var(--secondary-100));
     width: 100%;
     align-items: stretch; /* Stretch children to match parent's height */
     cursor: pointer;
     overflow: hidden;
     position: relative; /* Ensure positioning context for children */
     margin-bottom: 2rem;
+    background-color: var(--white-900);
 }
 .c:hover .text p {
     text-decoration: underline;
@@ -29,7 +29,7 @@
     gap: 0.25rem;
     padding: 1rem;
     line-height: 1.25rem;
-    color: var(--white-800);
+    color: var(--white-25);
 }
 
 /* Title styling */

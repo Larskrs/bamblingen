@@ -2,8 +2,9 @@
     width: 100%;
     position: relative;
     max-width: 2000px;
-    height:25rem;
-    overflow:visible;
+    height: 25rem;
+    overflow: visible;
+    margin-top: 1rem;
 }
 .priority {
     background-color: var(--priority);
@@ -76,5 +77,12 @@
 @media only screen and (max-width: 500px) {
     .header h1 {
         font-size: 3rem;
+    }
+}
+@media only screen and (max-width: 2032px) {
+    .header {
+        margin-top: 0px;
+        width: 100%;
+        max-width: 100%;
     }
 }
