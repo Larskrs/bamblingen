@@ -110,8 +110,8 @@ export default function TestArticle () {
                                 type: "article",
                                 priority: "priority",
                                 priorityPrefix: false,
-                                context: "Terrorplaner i Bamble",
-                                title: `«Alt er chill mann» -`,
+                                context: "Cowboy filming i Flå",
+                                title: `«Vi har ikke kontroll» - Flå Politistasjon`,
                                 image: "http://aktuelt.tv/api/files?fileId=674dda0e28ee2a35e5445501"
                             }
                         ],
@@ -238,10 +238,20 @@ export default function TestArticle () {
                                 type: "article",
                                 priority: "normal",
                                 priorityPrefix: false,
-                                context: "Artikler er ikke redaksjonelle",
-                                title: `Denne nettavisen er ikke i drift!`,
-                                image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
-                            }
+                                fullImage: true,
+                                context: "Skjærkøyveien, Ragn-Sells",
+                                title: "Bambling står bak ny naturfokusert kunstustilling.",
+                                image: "https://bamblingen.no/api/files?fileId=BildeDeles.png"
+                            },
+                            {
+                                id: "V1StGXR8_Z5jdHi6Cbrg",
+                                type: "article",
+                                priority: "priority",
+                                priorityPrefix: true,
+                                context: "Skjærkøyveien, Ragn-Sells",
+                                title: "Enda en fakkel lyser opp himmelen",
+                                image: "http://localhost/api/files?fileId=BildeDeles.png"
+                            },
                         ],
                     },
                     {
