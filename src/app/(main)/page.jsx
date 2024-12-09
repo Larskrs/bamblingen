@@ -103,19 +103,84 @@ export default function TestArticle () {
                     {
                         type: "header",
                         layout: "G_1",
-                        priority: "priority",
+                        priority: "normal",
                         items: [
                             {
                                 id: "V1StGXR8_Z5jdHi6B",
                                 type: "article",
                                 priority: "priority",
-                                priorityPrefix: true,
-                                context: "Skjærkøyveien, Ragn-Sells",
-                                title: `«Vi har ikke kontroll» - Brannvesenet`,
-                                image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
+                                priorityPrefix: false,
+                                context: "Terrorplaner i Bamble",
+                                title: `«Alt er chill mann» -`,
+                                image: "http://aktuelt.tv/api/files?fileId=674dda0e28ee2a35e5445501"
                             }
                         ],
                     },
+                    // {
+                    //     type: "banner",
+                    //     priority: "normal",
+                    //     items: [
+                    //         {
+                    //             id: "V1StGXR8_Z5jdHi6Baef",
+                    //             type: "article",
+                    //             priority: "priority",
+                    //             priorityPrefix: true,
+                    //             context: "Artikler er ikke redaksjonelle",
+                    //             title: `Denne nettavisen er ikke i drift!`,
+                    //             image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
+                    //         }
+                    //     ],
+                    // },
+                    // {
+                    //     type: "grid",
+                    //     layout: "G_2_1",
+                    //     priority: "none",
+                    //     items: [
+                    //         {
+                    //             id: "V1StGXR8_Z5jdHi6A",
+                    //             type: "article",
+                    //             priority: "normal",
+                    //             priorityPrefix: false,
+                    //             context: "Skjærkøyveien, Ragn-Sells",
+                    //             title: "Kunstustilling i Porsgrunn",
+                    //             image: "http://aktuelt.tv/api/files?fileId=6744b6961d55014bbbb5dd08"
+                    //         },
+                    //         {
+                    //             id: "V1StGXR8_Z5jdHi6efC",
+                    //             type: "video",
+                    //             priority: "priority",
+                    //             priorityPrefix: true,
+                    //             context: "Skjærkøyveien, Ragn-Sells",
+                    //             title: "Enda en fakkel lyser opp himmelen",
+                    //             video: "http://aktuelt.tv/api/files?fileId=6748260a1d55014bbbb5dd10#t=0.1",
+                    //             image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
+                    //         },
+                    //     ],
+                    // },
+                    // {
+                    //     type: "grid",
+                    //     layout: "G_1_1",
+                    //     priority: "normal",
+                    //     items: [
+                    //         {
+                    //             id: "V1StGXR8_Z5jdHi6Dzxv",
+                    //             type: "article",
+                    //             priority: "normal",
+                    //             context: "Skjærkøyveien, Ragn-Sells",
+                    //             title: "Enda en fakkel lyser opp himmelen",
+                    //             image: "http://aktuelt.tv/api/files?fileId=66b27e1c9ea5f48553e84ca7"
+                    //         },
+                    //         {
+                    //             id: "V1StGXR8_Z5jdHi6D",
+                    //             type: "article",
+                    //             fullImage: true,
+                    //             priority: "normal",
+                    //             context: "Skjærkøyveien, Ragn-Sells",
+                    //             title: "Enda en fakkel lyser opp himmelen",
+                    //             image: "http://aktuelt.tv/api/files?fileId=66b27e1c9ea5f48553e84ca7"
+                    //         },
+                    //     ],
+                    // },
                     {
                         type: "banner",
                         priority: "normal",
@@ -132,56 +197,12 @@ export default function TestArticle () {
                         ],
                     },
                     {
-                        type: "grid",
-                        layout: "G_2_1",
-                        priority: "none",
-                        items: [
-                            {
-                                id: "V1StGXR8_Z5jdHi6A",
-                                type: "article",
-                                priority: "normal",
-                                priorityPrefix: false,
-                                context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Kunstustilling i Porsgrunn",
-                                image: "http://aktuelt.tv/api/files?fileId=6744b6961d55014bbbb5dd08"
-                            },
-                            {
-                                id: "V1StGXR8_Z5jdHi6efC",
-                                type: "video",
-                                priority: "priority",
-                                priorityPrefix: true,
-                                context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Enda en fakkel lyser opp himmelen",
-                                video: "http://aktuelt.tv/api/files?fileId=6748260a1d55014bbbb5dd10#t=0.1",
-                                image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
-                            },
-                        ],
-                    },
-                    {
-                        type: "grid",
-                        layout: "G_1_1",
-                        priority: "normal",
-                        items: [
-                            {
-                                id: "V1StGXR8_Z5jdHi6Dzxv",
-                                type: "article",
-                                priority: "normal",
-                                context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Enda en fakkel lyser opp himmelen",
-                                image: "http://aktuelt.tv/api/files?fileId=66b27e1c9ea5f48553e84ca7"
-                            },
-                            {
-                                id: "V1StGXR8_Z5jdHi6D",
-                                type: "article",
-                                fullImage: true,
-                                priority: "normal",
-                                context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Enda en fakkel lyser opp himmelen",
-                                image: "http://aktuelt.tv/api/files?fileId=66b27e1c9ea5f48553e84ca7"
-                            },
-                        ],
-                    },
-                    {
+                        group: {
+                            title: "Desperados, Banditos & Litagos",
+                            priority: "normal",
+                            background: "#ffefef",
+                            foreground: "red",
+                        },
                         type: "grid",
                         layout: "G_1_2",
                         priority: "none",
@@ -189,22 +210,38 @@ export default function TestArticle () {
                             {
                                 id: "V1StGXR8_Z5jdHi6Aaw",
                                 type: "article",
-                                priority: "priority",
+                                priority: "normal",
                                 priorityPrefix: false,
                                 fullImage: true,
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Bambling står bak ny naturfokusert kunstustilling.",
-                                image: "https://bamblingen.no/api/files?fileId=BildeDeles.png"
+                                image: "http://aktuelt.tv/api/files?fileId=674dda0e28ee2a35e5445500"
                             },
                             {
-                                id: "V1StGXR8_Z5jdHi6Cbrg",
+                                id: "V1StGXR8_Z5jdHi6Aaw",
                                 type: "article",
-                                priority: "priority",
-                                priorityPrefix: true,
+                                priority: "normal",
+                                priorityPrefix: false,
+                                fullImage: false,
                                 context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Enda en fakkel lyser opp himmelen",
-                                image: "http://localhost/api/files?fileId=BildeDeles.png"
+                                title: "Bambling står bak ny naturfokusert kunstustilling.",
+                                image: "http://aktuelt.tv/api/files?fileId=66b27e1c9ea5f48553e84ca7"
                             },
+                        ],
+                    },
+                    {
+                        type: "banner",
+                        priority: "normal",
+                        items: [
+                            {
+                                id: "V1StGXR8_Z5jdHi6Baef",
+                                type: "article",
+                                priority: "normal",
+                                priorityPrefix: false,
+                                context: "Artikler er ikke redaksjonelle",
+                                title: `Denne nettavisen er ikke i drift!`,
+                                image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
+                            }
                         ],
                     },
                     {

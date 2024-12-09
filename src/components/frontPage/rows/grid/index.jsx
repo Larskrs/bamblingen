@@ -7,7 +7,7 @@ export default function Grid ({items, layout, group, ...props}) {
 
     // Render the component with the remaining props
     if (group) {
-        return <GroupedRow {...group} {...props}>
+        return <GroupedRow {...group}>
             <Row layout={layout} items={items} {...props} />
         </GroupedRow>
     }
@@ -20,10 +20,10 @@ export default function Grid ({items, layout, group, ...props}) {
             </div>
         </>
     }
-    function GroupedRow ({title, priority, children}) {
+    function GroupedRow ({title, priority, background, foreground, children}) {
         return (
             <>
-                <div className={`${styles.group} ${styles[priority]}`}>
+                <div style={{borderColor: foreground, background: background}} className={`${styles.group} ${styles[priority]}`}>
                     <h1 className={styles.title}>
                         { priority == "priority" && <span className={styles.latest}>
                             <Pulse />

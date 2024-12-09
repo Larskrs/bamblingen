@@ -1,5 +1,6 @@
 .group {
     padding: 0rem 1rem 1rem 1rem;
+    border-left: 5px solid white;
 }
 .title {
     padding: 1rem 0rem 1rem 0rem;
@@ -7,11 +8,9 @@
 }
 .priority {
     background-color: var(--secondary-25);
-    border-radius: .5rem;
 }
 .normal {
-    border-radius: .5rem;
-    background-color: var(--secondary-75);
+    background-color: var(--white-900);
 }
 .row h1 {
     margin-bottom: 1rem;
@@ -73,6 +72,17 @@
     .G_1_2, .G_2_1 {
         display: grid;
         grid-template-columns: 1fr 1fr;
+    }
+    .G_1_1_1 {
+        display: grid;
+        grid-template-rows: auto 1fr; 
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .G_1_1_1 > :first-child {
+        grid-column: span 2;
+        max-height: 360px !important;
+        overflow: hidden; 
     }
 }
 @media only screen and (max-width: 500px) {
