@@ -112,7 +112,7 @@ export default function TestArticle () {
                                 priorityPrefix: false,
                                 context: "Cowboy filming i Flå",
                                 title: `«Vi har ikke kontroll» - Flå Politistasjon`,
-                                image: "http://aktuelt.tv/api/files?fileId=674dda0e28ee2a35e5445501"
+                                image: "http://aktuelt.tv/api/files?fileId=675766acd222fb15c503bc57"
                             }
                         ],
                     },
@@ -133,46 +133,17 @@ export default function TestArticle () {
                     },
                     {
                         type: "grid",
-                        layout: "G_1_1_1",
-                        group: {
-                            title: "Åpner ny vaskemodul for motorsykler",
-                            context: "Lasses, Rughtvedtmyra",
-                            priority: "priority",
-                            priorityPrefix: false,
-                            foreground: "var(--primary-500)",
-                        },
+                        layout: "G_1",
                         items: [
                             {
                                 id: "V1StGXR8_Z5jdHi6A",
-                                type: "image",
-                                priority: "normal",
+                                type: "article",
+                                priority: "priority",
                                 priorityPrefix: false,
-                                fullImage: true,
+                                fullImage: false,
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Kunstustilling i Porsgrunn",
-                                image: "http://aktuelt.tv/api/files?fileId=67576d48d222fb15c503bc61"
-                            },
-                            {
-                                id: "V1StGXR8_Z5jdHi6efC",
-                                type: "image",
-                                priority: "priority",
-                                priorityPrefix: false,
-                                fullImage: true,
-                                context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Enda en fakkel lyser opp himmelen",
-                                video: "http://aktuelt.tv/api/files?fileId=6748260a1d55014bbbb5dd10#t=0.1",
-                                image: "http://aktuelt.tv/api/files?fileId=675766acd222fb15c503bc57"
-                            },
-                            {
-                                id: "V1StGXR8_Z5jdHi6efC",
-                                type: "image",
-                                priority: "priority",
-                                priorityPrefix: false,
-                                fullImage: true,
-                                context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Enda en fakkel lyser opp himmelen",
-                                video: "http://aktuelt.tv/api/files?fileId=6748260a1d55014bbbb5dd10#t=0.1",
-                                image: "http://aktuelt.tv/api/files?fileId=67576d46d222fb15c503bc5c"
+                                image: "/api/image/join?bg=black&images=http%3A%2F%2Faktuelt.tv%2Fapi%2Ffiles%3FfileId%3D67576d48d222fb15c503bc60,http://aktuelt.tv/api/files?fileId=675766acd222fb15c503bc57"
                             },
                         ],
                     },
@@ -210,7 +181,7 @@ export default function TestArticle () {
                                 priorityPrefix: false,
                                 context: "Artikler er ikke redaksjonelle",
                                 title: `Denne nettavisen er ikke i drift!`,
-                                image: "http://aktuelt.tv/api/files?fileId=66b2aa2e2f345ee36279cd88"
+                                image: "/api/image/join?bg=black&images=http%3A%2F%2Faktuelt.tv%2Fapi%2Ffiles%3FfileId%3D67576d48d222fb15c503bc60,http://aktuelt.tv/api/files?fileId=675766acd222fb15c503bc56"
                             }
                         ],
                     },

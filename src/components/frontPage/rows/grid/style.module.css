@@ -59,8 +59,8 @@
 }
 
 .G_1 {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;  
+    width: 100%;
 }
 .G_1_1 {
     display: grid;
