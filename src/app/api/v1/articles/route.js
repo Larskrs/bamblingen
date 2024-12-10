@@ -5,10 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 export const dynamic = 'force-dynamic' 
 
 export async function GET () {
-    db.article.findMany({
-        select: {
-            authors: true,
-            id: true,
-        }
-    })
+    
+    return NextResponse.json({message: "Dead ass ghost."})
+
 }
