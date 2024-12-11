@@ -20,6 +20,34 @@ export default function AI({
                 </div>
             </section>
             <section>
+                <video alt="background-intro" className={styles.image} playsInline muted autoPlay loop src={"http://aktuelt.tv/api/files?fileId=6759d637d222fb15c503bc69"} width={1920} height={1080} />
+                <div className={styles.middle}>
+                  <TypingEffect
+                      typingSpeed={75}
+                      pauseTime={2000}
+                      prefix={"Lag en video av "}
+                      prompts={["Hilde når noen bruker Photoshop til vektorgrafikk."]}
+                      textStyle={{
+                        fontSize: "2rem",
+                        color: "var(--white-900)",
+                        background: "var(--secondary-25)",
+                        fontFamily: "var(--font-inter)",
+                        borderRadius: "1rem",
+                        padding: ".25em .5em",
+                        width: "90vw",
+                        maxWidth: "100%",
+                        boxShadow: "0px 0px 10px var(--secondary-25)"
+                      }} />
+                  {/* <TextHighlight
+                      center={true}
+                      text={"Gjør alt det du vil på få tastetrykk"}
+                      itemStyle={{
+                          fontSize: "1.5rem"
+                      }}
+                  /> */}
+                </div>
+            </section>
+            <section>
                 <Image alt="background-intro" className={styles.image} src={"http://aktuelt.tv/api/files?fileId=675957d7d222fb15c503bc68"} width={1920} height={1080} />
                 <div className={styles.bottom}>
                   <TypingEffect prompts={["Assosiasjoner", ""]} textStyle={{fontSize: "3rem", color: "var(--primary-500)", background: "var(--secondary-25)", fontFamily: "var(--font-domine)"}} />
