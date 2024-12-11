@@ -1,0 +1,18 @@
+.effect {
+    width: 100vw !important;
+    max-width: fit-content;
+}
+.cursor {
+    animation: cursor 2s all linear;
+}
+@keyframes cursor {
+    0% {
+        opacity: .5;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: .5;
+    }
+}

@@ -1,0 +1,15 @@
+.c {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 90%;
+}
+.center {
+    align-items: center;
+    justify-content: center;
+}
+.c p {
+    background-color: var(--secondary-50);
+    color: white;
+    font-size: 1.3rem;
+    padding: .2em;
+}
