@@ -12,6 +12,7 @@
     height: 100dvh;
     z-index: 2;
     position: relative;
+    transition: all 1s var(--curve-1);
 }
 .pages {
     transition: margin 1s cubic-bezier(0.075, 0.82, 0.165, 1);

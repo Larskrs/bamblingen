@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from "./index.module.css"
 
-const TypingEffect = ({ prompts, textStyle, typingSpeed = 100, pauseTime = 2000 }) => {
+const TypingEffect = ({ prompts, prefix="", textStyle, typingSpeed = 100, pauseTime = 2000 }) => {
   const [currentText, setCurrentText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -41,7 +41,7 @@ const TypingEffect = ({ prompts, textStyle, typingSpeed = 100, pauseTime = 2000 
     return () => clearTimeout(timeout);
   }, [currentText, currentIndex, isDeleting, prompts, typingSpeed, pauseTime]);
 
-  return <div className={styles.effect} style={textStyle}>{currentText}<span className={styles.cursor}>|</span></div>;
+  return <div className={styles.effect} style={textStyle}>{prefix + currentText}<span className={styles.cursor}>|</span></div>;
 };
 
 export default TypingEffect;

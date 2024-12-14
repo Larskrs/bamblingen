@@ -28,32 +28,33 @@ const FullPageVerticalSnap = ({ children, pageHeight = "100dvh", UnLitColor="dar
 
         const handleWheel = (event) => {
             event.stopPropagation();
-            if (event.deltaY > 0) {
-                setPreviousSection(currentSection)
-                setCurrentSection((prevSection) =>
-                    prevSection < children.length - 1 ? prevSection + 1 : prevSection
-                );
-            } else {
-                setPreviousSection(currentSection)
-                setCurrentSection((prevSection) =>
-                    prevSection > 0 ? prevSection - 1 : prevSection
-                );
-            }
+            setCurrentSection((prevSection) => {
+                const newSection =
+                    event.deltaY > 0
+                        ? Math.min(prevSection + 1, children.length - 1)
+                        : Math.max(prevSection - 1, 0);
+                if (prevSection != newSection) {
+                    setPreviousSection(prevSection); // Use the previous state here
+                }
+                return newSection;
+            });
         };
 
         const handleKeyDown = (event) => {
-            if (event.key === "ArrowDown") {
-                setPreviousSection(currentSection)
-                setCurrentSection((prevSection) =>
-                    prevSection < children.length - 1 ? prevSection + 1 : prevSection
-                );
-            } else if (event.key === "ArrowUp") {
-                setPreviousSection(currentSection)
-                setCurrentSection((prevSection) =>
-                    prevSection > 0 ? prevSection - 1 : prevSection
-                );
-            }
+            setCurrentSection((prevSection) => {
+                const newSection =
+                    event.key === "ArrowDown"
+                        ? Math.min(prevSection + 1, children.length - 1)
+                        : event.key === "ArrowUp"
+                        ? Math.max(prevSection - 1, 0)
+                        : prevSection;
+                if (prevSection != newSection) {
+                    setPreviousSection(prevSection); // Use the previous state here
+                }
+                return newSection;
+            });
         };
+
         const swipeStart = (event) => {
             const swipeY = event.changedTouches[0].screenY
             const swipeX = event.changedTouches[0].screenX
@@ -80,20 +81,27 @@ const FullPageVerticalSnap = ({ children, pageHeight = "100dvh", UnLitColor="dar
     }, [children.length]);
 
     useEffect(() => {
-        const swipeY = ToDistance(swipeStart[0], swipeEnd[0])
-        const swipeX = ToDistance(swipeStart[1], swipeEnd[1])
+        const swipeY = ToDistance(swipeStart[0], swipeEnd[0]);
+        const swipeX = ToDistance(swipeStart[1], swipeEnd[1]);
+    
+        if (swipeX > swipeY) {
+            return;
+        }
+    
+        setCurrentSection((prevSection) => {
+            const newSection =
+                swipeEnd[0] > swipeStart[0]
+                    ? Math.max(prevSection - 1, 0)
+                    : swipeEnd[0] < swipeStart[0]
+                    ? Math.min(prevSection + 1, children.length - 1)
+                    : prevSection;
+            if (prevSection != newSection) {
+                setPreviousSection(prevSection); // Use the previous state here
+            }
+            return newSection;
+        });
+    }, [swipeEnd]);
 
-        if (swipeX > swipeY) { return; }
-
-        
-        setPreviousSection(currentSection)
-        if (swipeEnd[0] > swipeStart[0]) setCurrentSection((prevSection) =>
-                prevSection > 0 ? prevSection - 1 : prevSection
-            );
-        if (swipeEnd[0] < swipeStart[0]) setCurrentSection((prevSection) =>
-                prevSection < children.length - 1 ? prevSection + 1 : prevSection
-        );
-    }, [swipeEnd])
     useEffect(() => {
         triggerScrollEvent()
     }, [currentSection])
@@ -106,7 +114,18 @@ const FullPageVerticalSnap = ({ children, pageHeight = "100dvh", UnLitColor="dar
                         <div
                         key={index}
                         className={styles.section}
-                        style={{ height: pageHeight }}
+                        style={((index == previousSection) || (index === currentSection) 
+                            ? {
+                                height: pageHeight,
+                                opacity: 1,
+                                scale: 1,
+                            }
+                            : {
+                                opacity: 0,
+                                scale: .9,
+                                height: pageHeight,
+                            }
+                            )}
                         >
                             {child}
                         </div>
