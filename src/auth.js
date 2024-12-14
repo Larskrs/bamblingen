@@ -11,13 +11,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [Google({
     clientId: process.env.AUTH_GOOGLE_ID,
     clientSecret: process.env.AUTH_GOOGLE_SECRET,
-    authorization: {
-      params: {
-        prompt: "consent",
-        access_type: "offline",
-        response_type: "code",
-      },
-    }
   })
   ],
   session: {
@@ -28,10 +21,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (token) {
         session.user.id = token.id;
         session.user.name = token.name;
-        session.user.username= token.username
         session.user.email = token.email;
         session.user.image = token.picture;
-        session.user.role = token.role;
       }
 
       return session;
@@ -52,7 +43,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     return {
       id: dbUser.id,
       name: dbUser.name,
-      role: dbUser.role,
       email: dbUser.email,
       picture: dbUser.image,
     };
