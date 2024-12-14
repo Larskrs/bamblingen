@@ -204,7 +204,7 @@ export default function TestArticle () {
                                 fullImage: true,
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Bambling står bak ny naturfokusert kunstustilling.",
-                                image: "http://aktuelt.tv/api/files?fileId=674dda0e28ee2a35e5445500"
+                                image: "http://aktuelt.tv/api/files?fileId=675c531fd222fb15c503bc6b"
                             },
                             {
                                 id: "V1StGXR8_Z5jdHi6Aaw",
@@ -214,7 +214,7 @@ export default function TestArticle () {
                                 fullImage: false,
                                 context: "Skjærkøyveien, Ragn-Sells",
                                 title: "Bambling står bak ny naturfokusert kunstustilling.",
-                                image: "/api/files?fileId=Image.jpg"
+                                image: "http://aktuelt.tv/api/files?fileId=66b27e1c9ea5f48553e84ca7"
                             },
                         ],
                     },
