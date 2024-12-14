@@ -22,6 +22,8 @@
 # production
 /build
 
+app.log
+
 # misc
 .DS_Store
 *.pem
