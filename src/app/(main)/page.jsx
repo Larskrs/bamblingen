@@ -132,6 +132,40 @@ export default function TestArticle () {
                         ],
                     },
                     {
+                        group: {
+                            title: "Eventyr i Oslo",
+                            context: "Oslo",
+                            priority: "priority",
+                            foreground: "var(--primary-500)",
+                            priorityPrefix: true,
+                        },
+                        type: "grid",
+                        layout: "G_1_2",
+                        priority: "none",
+                        items: [
+                            {
+                                id: "V1StGXR8_Z5jdHi6Aaw",
+                                type: "article",
+                                priority: "normal",
+                                priorityPrefix: false,
+                                fullImage: true,
+                                context: "Oslo",
+                                title: "Vil Carl finne kjærligheten i Oslo?",
+                                image: "http://aktuelt.tv/api/files?fileId=675c531fd222fb15c503bc6b"
+                            },
+                            {
+                                id: "V1StGXR8_Z5jdHi6Aaw",
+                                type: "article",
+                                priority: "priority",
+                                priorityPrefix: false,
+                                fullImage: false,
+                                context: "Oslo",
+                                title: "Harde tider på soverom, lite trygghet på Comfort Hotel",
+                                image: "/api/image/join?bg=black&images=http://aktuelt.tv/api/files?fileId=675c5320d222fb15c503bc6c,http://aktuelt.tv/api/files?fileId=675ce653d222fb15c503bc6e"
+                            },
+                        ],
+                    },
+                    {
                         type: "grid",
                         layout: "G_1",
                         items: [
@@ -183,40 +217,6 @@ export default function TestArticle () {
                                 title: `Denne nettavisen er ikke i drift!`,
                                 image: "/api/image/join?bg=black&images=http%3A%2F%2Faktuelt.tv%2Fapi%2Ffiles%3FfileId%3D67576d48d222fb15c503bc60,http://aktuelt.tv/api/files?fileId=675766acd222fb15c503bc56"
                             }
-                        ],
-                    },
-                    {
-                        group: {
-                            title: "Eventyr i Oslo",
-                            context: "Oslo",
-                            priority: "priority",
-                            foreground: "var(--primary-500)",
-                            priorityPrefix: true,
-                        },
-                        type: "grid",
-                        layout: "G_1_2",
-                        priority: "none",
-                        items: [
-                            {
-                                id: "V1StGXR8_Z5jdHi6Aaw",
-                                type: "article",
-                                priority: "normal",
-                                priorityPrefix: false,
-                                fullImage: true,
-                                context: "Oslo",
-                                title: "Vil Carl finne kjærligheten i Oslo?",
-                                image: "http://aktuelt.tv/api/files?fileId=675c531fd222fb15c503bc6b"
-                            },
-                            {
-                                id: "V1StGXR8_Z5jdHi6Aaw",
-                                type: "article",
-                                priority: "priority",
-                                priorityPrefix: false,
-                                fullImage: false,
-                                context: "Oslo",
-                                title: "Harde tider på soverom, lite trygghet på Comfort Hotel",
-                                image: "/api/image/join?bg=black&images=http://aktuelt.tv/api/files?fileId=675c5320d222fb15c503bc6c,http://aktuelt.tv/api/files?fileId=675ce653d222fb15c503bc6e"
-                            },
                         ],
                     },
                 ]}/>
