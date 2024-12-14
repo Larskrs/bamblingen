@@ -28,6 +28,7 @@ export async function GET(req, ctx) {
     
     const [id, extension] = fileId.split(".");
     const mimeType = mime.lookup(filePath) || 'application/octet-stream';
+    
     let fileStat;
 
     try {
@@ -51,6 +52,10 @@ export async function GET(req, ctx) {
                 status: 416,
                 headers: {
                     "Content-Range": `bytes */${fileSize}`,
+                    "Content-Type": mimeType,
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
+                    "Access-Control-Allow-Headers": "Content-Type, Range",
                 },
             });
         }
@@ -66,7 +71,9 @@ export async function GET(req, ctx) {
                 "Content-Length": chunkSize,
                 "Content-Type": mimeType,
                 "filename": fileName,
-                "Content-Disposition": `filename=${fileName}`
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type, Range",
             },
         });
     } else {
@@ -75,7 +82,9 @@ export async function GET(req, ctx) {
             headers: {
                 "Content-Length": fileSize,
                 "Content-Type": mimeType,
-                "Content-Disposition": `filename="${cleanFilename(fileName)}"`
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type, Range",
             },
         });
     }

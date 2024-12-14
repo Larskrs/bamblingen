@@ -3,6 +3,18 @@ const nextConfig = {
     reactStrictMode: true,
     output: "standalone",
     distDir: "/.next",
+    async rewrites() {
+        return [
+            {
+                source: '/about',
+                destination: '/',
+            },
+            {
+                source: '/kontrollpanel',
+                destination: '/dashboard'
+            }
+        ]
+    },
     images: {
         remotePatterns: [
             {
