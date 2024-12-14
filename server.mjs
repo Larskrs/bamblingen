@@ -20,6 +20,8 @@ app.prepare().then(() => {
     }`
   )
 
+  logger.clear()
+  logger.info("Cleared previous logger data")
   logger.info("Server started")
-  logger.info(`${process.env.AUTH_GOOGLE_ID}, ${process.env.AUTH_GOOGLE_SECRET}, ${process.env.AUTH_SECRET}, ${process.env.AUTH_URL}`)
+  logger.info("Using Database: " + process.env.DATABASE_URL)
 })
