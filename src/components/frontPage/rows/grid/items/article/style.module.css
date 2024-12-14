@@ -4,6 +4,8 @@
 
     position: relative;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
 }
 .section > * {
     user-select: none;
@@ -28,6 +30,7 @@
 .details {
     padding: 0.5rem 1rem 0rem 1rem;
     width: 100%;
+    height: fit-content;
 }
 .section:hover {
     text-decoration: underline;
@@ -51,6 +54,7 @@
     /* aspect-ratio: 16/9; */
     object-fit: cover;
     overflow: hidden;
+    flex-grow: 1;
 }
 .section p {
     letter-spacing: 1px;

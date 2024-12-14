@@ -187,10 +187,11 @@ export default function TestArticle () {
                     },
                     {
                         group: {
-                            title: "Desperados, Banditos & Litagos",
-                            priority: "normal",
-                            background: "#ffefef",
-                            foreground: "red",
+                            title: "Eventyr i Oslo",
+                            context: "Oslo",
+                            priority: "priority",
+                            foreground: "var(--primary-500)",
+                            priorityPrefix: true,
                         },
                         type: "grid",
                         layout: "G_1_2",
@@ -202,19 +203,19 @@ export default function TestArticle () {
                                 priority: "normal",
                                 priorityPrefix: false,
                                 fullImage: true,
-                                context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Bambling står bak ny naturfokusert kunstustilling.",
+                                context: "Oslo",
+                                title: "Vil Carl finne kjærligheten i Oslo?",
                                 image: "http://aktuelt.tv/api/files?fileId=675c531fd222fb15c503bc6b"
                             },
                             {
                                 id: "V1StGXR8_Z5jdHi6Aaw",
                                 type: "article",
-                                priority: "normal",
+                                priority: "priority",
                                 priorityPrefix: false,
                                 fullImage: false,
-                                context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Bambling står bak ny naturfokusert kunstustilling.",
-                                image: "http://aktuelt.tv/api/files?fileId=66b27e1c9ea5f48553e84ca7"
+                                context: "Oslo",
+                                title: "Harde tider på soverom, lite trygghet på Comfort Hotel",
+                                image: "/api/image/join?bg=black&images=http://aktuelt.tv/api/files?fileId=675c5320d222fb15c503bc6c,http://aktuelt.tv/api/files?fileId=675ce653d222fb15c503bc6e"
                             },
                         ],
                     },

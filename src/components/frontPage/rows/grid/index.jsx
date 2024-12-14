@@ -26,8 +26,8 @@ export default function Grid ({items, layout, group, ...props}) {
                 <div style={{borderColor: foreground, background: background}} className={`${styles.group} ${styles[priority]}`}>
                     <h1 className={styles.title}>
                         { priorityPrefix && <span className={styles.latest}>
-                            <Pulse />
-                            <span>SISTE:</span>
+                            <Pulse color={foreground && foreground} />
+                            <span style={{color: foreground}}>SISTE:</span>
                         </span> }
                         {title}
                     </h1>
