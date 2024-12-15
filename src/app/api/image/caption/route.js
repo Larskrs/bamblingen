@@ -16,7 +16,8 @@ export const runtime = 'edge';
 export const alt = 'Dynamic Images';
 export const contentType = 'image/png';
 
-export const upperPadding = 150;
+
+export const upperPadding = 64;
 export const targetWidth = 700;
 
 // Image generation
@@ -30,7 +31,7 @@ export async function GET(req) {
     const aspectRatio = mData.width / mData.height
     const size = {
         width: targetWidth,
-        height: targetWidth / aspectRatio,
+        height: (targetWidth / aspectRatio) + upperPadding,
     }
 
     return new ImageResponse(
@@ -48,14 +49,21 @@ export async function GET(req) {
                 gap: "1rem"
             }}
         >
-        <h1 style={{
-            fontSize: "50px",
-            margin: "0px",
-            marginLeft: "32px",
-            textAlign: "center",
-            textAlignLast: "center",
-            color: color,
-        }}>{caption}</h1>
+        <div style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            paddingInline: "32px",
+            minHeight: upperPadding,
+        }}>
+            <h1 style={{
+                fontSize: "40px",
+                margin: "0px",
+                textAlign: "center",
+                color: color,
+            }}>{caption}</h1>
+        </div>
         <img
             src={image}
             alt={`Image ${image}`}
@@ -68,6 +76,29 @@ export async function GET(req) {
                 objectFit: 'cover', // Ensure images cover their space
             }}
         />
+            <div style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "16px",
+                position: "absolute",
+                left: 8,
+                bottom: 0,
+                opacity: .4,
+                minHeight: upperPadding,
+            }}>
+                <img
+                    src={"http://bamblingen.no/_next/image?url=%2Flogo%2Fwhite_logo.png&w=64&q=75"}
+                    alt={`Image ${image}`}
+                    width={48}
+                    height={48}
+                    style={{
+                        objectFit: 'cover', // Ensure images cover their space
+                    }}
+                />
+                <p style={{color: "white", fontSize: "24px"}}>Bamblingen.no</p>
+            </div>
         </div>
     ),
     {
