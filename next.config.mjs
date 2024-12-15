@@ -28,6 +28,10 @@ const nextConfig = {
             {
                 protocol: 'http',
                 hostname: 'localhost:3000',
+            },
+            {
+                protocol: 'https',
+                hostname: 'lh3.googleusercontent.com'
             }
         ]
     }

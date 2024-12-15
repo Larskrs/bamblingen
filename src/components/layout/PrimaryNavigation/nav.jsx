@@ -4,15 +4,16 @@ import Link from "next/link";
 import styles from "./nav.module.css"
 import Image from "next/image";
 import { usePathname } from 'next/navigation'
+import UserAvatar from "@/components/common/Authentication/UserAvatar"
 
 export default function Navigation () {
 
     const links = [
         { href: "/nyheter", display: "Nyheter"},
-        { href: "/meninger", display: "Meninger"},
-        { href: "/satire", display: "Satire"},
-        { href: "/tips", display: "Tips oss"},
-        { href: "/calendar", display: "Kalender"},
+        // { href: "/meninger", display: "Meninger"},
+        // { href: "/satire", display: "Satire"},
+        // { href: "/tips", display: "Tips oss"},
+        // { href: "/calendar", display: "Kalender"},
     ]
 
     const pathname = usePathname()
@@ -29,6 +30,8 @@ export default function Navigation () {
                             )}
                     {/* <Link href={"/dsib"}>Det skjer i Bamble</Link> */}
                 </div>
+                <UserAvatar ></UserAvatar> 
+
             </nav>
     );
 }

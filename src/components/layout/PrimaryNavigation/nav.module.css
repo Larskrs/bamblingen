@@ -2,6 +2,10 @@
     display: flex;
     gap: 2rem;
     background: linear-gradient(-90deg, var(--secondary-25), var(--secondary-100));
+    align-items: center;
+}
+.nav > *:last-child {
+    margin-left: auto;
 }
 .nav .logo {
     color: var(--white-900);

@@ -1,0 +1,19 @@
+.c {
+    background-color: var(--secondary-75);
+    padding-inline: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    height: 100%;
+    margin: 0px;
+}
+.c p {
+    font-size: 1rem;
+}
+.c img {
+    height: auto;
+    width: auto;
+    margin: 0px;
+}

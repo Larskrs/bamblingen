@@ -1,6 +1,9 @@
 import localFont from "next/font/local";
 import googleFont from "next/font/google"
 import { Inter } from "next/font/google";
+
+import { SessionProvider } from "next-auth/react"
+
 import "./globals.css";
 
 const geistSans = localFont({
@@ -31,10 +34,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${domine.variable} ${inter.variable}`}>
-        {children}
-      </body>
-    </html>
+    <SessionProvider>
+      <html lang="en">
+        <body className={`${geistSans.variable} ${geistMono.variable} ${domine.variable} ${inter.variable}`}>
+          {children}
+        </body>
+      </html>
+    </SessionProvider>
   );
 }

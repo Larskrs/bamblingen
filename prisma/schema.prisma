@@ -6,7 +6,14 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
- 
+
+enum Role {
+  ADMIN
+  DIRECTOR
+  WRITER
+  USER
+}
+
 model User {
   id            String          @id @default(cuid())
   name          String?
@@ -21,6 +28,11 @@ model User {
  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  role          Role @default(USER)
+
+  // Joined Data
+  articles      Article[]
 }
  
 model Account {
@@ -77,24 +89,26 @@ model Authenticator {
   credentialDeviceType String
   credentialBackedUp   Boolean
   transports           String?
- 
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   @@id([userId, credentialID])
 }
 
 model Article {
-  id        Int              @id @default(autoincrement())
-  title     String
-  versions  ArticleVersion[]
-  createdAt DateTime         @default(now())
+  id                  String  @id @default(cuid())
+  title               String
+  versions            ArticleVersion[]
+  authors             User[]
+  createdAt           DateTime         @default(now())
 }
 
 model ArticleVersion {
-  id         Int      @id @default(autoincrement())
-  title      String
-  components String
-  createdAt  DateTime @default(now())
+  id                  Int      @id @default(autoincrement())
+  title               String
+  components          String
+  createdAt           DateTime @default(now())
 
-  Article Article[]
+  Article             Article @relation(fields: [ArticleId], references: [id])
+  ArticleId           String @unique
 }
