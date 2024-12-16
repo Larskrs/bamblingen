@@ -40,7 +40,7 @@ export async function GenerateUniqueIdentifier(creationDate) {
                         gte: new Date(`${formattedDate}T00:00:00Z`), // Start of the day
                         lt: new Date(`${formattedDate}T23:59:59Z`), // End of the day
                     },
-                    slugId: uniqueIdentifier
+                    id: uniqueIdentifier
                 },
             });
 
@@ -53,5 +53,5 @@ export async function GenerateUniqueIdentifier(creationDate) {
     }
 
 
-    export const MAX_PER_PAGE = 12
+    export const MAX_PER_PAGE = 20
 

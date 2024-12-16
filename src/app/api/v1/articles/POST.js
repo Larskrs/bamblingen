@@ -4,38 +4,36 @@ import { NextResponse } from "next/server";
 
 export default async function POST(req) {
 
-    const body = await req.json()
-    if (!body.title) {
-        return MissingArgumentError("Title argument is missing")
-    }
-    if (!body.authors) {
-        return MissingArgumentError("Author argument is missing")
-    }
-    const authors = body.authors
+    try {
 
-    let query = {
-        data: {
-            title: body.title,
-            authors: {
-                connect: authors.map((a) => {return {id: a}})
+            const body = await req.json()
+            if (!body.title) {
+                return MissingArgumentError("Title argument is missing")
             }
-        }
-    }
-    const shortId = await GenerateUniqueIdentifier(new Date());
-    query.data.slugId = shortId
-    query.data.id = shortId
+            if (!body.authors) {
+                return MissingArgumentError("Authors argument is missing")
+            }
+            const authors = body.authors
 
-    console.log(query)
+            let query = {
+                data: {
+                    title: body.title,
+                    authors: {
+                        connect: authors.map((a) => {return {id: a}})
+                    }
+                }
+            }
+            const id = await GenerateUniqueIdentifier(new Date());
+            // query.data.slugId = shortId
+            query.data.id = id
 
-        try {
+            console.log(query)
+
             const data = await db.article.create(query)
             return Response.json(data)
         } catch (err) {
             return NextResponse.json(
-                {
-                    message: "Could not retrieve articles due to an error",
-                    error: err.message || err,
-                },
+                err.message,
                 { status: 500 }
             );
         }

@@ -23,6 +23,9 @@ export default async function GET(req) {
                 },
             },
             where: {}, // Initialize an empty `where` object
+            orderBy: {
+                createdAt: "desc"
+            }
         };
 
         // Add conditions dynamically based on query parameters
@@ -37,8 +40,9 @@ export default async function GET(req) {
             query.take = parseInt(per_page)
         }
         if (page) {
-            if (isNaN(per_page)) { return ArgumentError('The (page) parameter is not a valid number', 'Use a generic integer number') }
-            query.skip = (parseInt(page) * parseInt(per_page))
+            if (isNaN(page)) { return ArgumentError('The (page) parameter is not a valid number', 'Use a generic integer number') }
+            console.log(parseInt(page) * parseInt(per_page))
+            query.skip = (parseInt(page-1) * parseInt(per_page))
         }
         if (authorIds && authorIds.length > 0) {
 

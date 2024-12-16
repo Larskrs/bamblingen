@@ -1,5 +1,4 @@
 .c {
-    background-color: var(--secondary-75);
     padding-inline: 1rem;
     display: flex;
     gap: 1rem;
@@ -13,7 +12,8 @@
     font-size: 1rem;
 }
 .c img {
-    height: auto;
-    width: auto;
+    height: 100%;
+    padding: .75rem;
     margin: 0px;
+    border-radius: 50%;
 }

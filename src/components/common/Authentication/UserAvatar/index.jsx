@@ -10,8 +10,7 @@ export default function Dashboard() {
   if (session?.user?.name) {
 
     return <div className={styles.c}>
-      <p>{session?.user?.name}</p>
-      <Image width={32} height={32} src={session?.user?.image}></Image>
+      <Image alt="Avatar Image" width={64} height={64} src={session?.user?.image}></Image>
     </div>
     
   }

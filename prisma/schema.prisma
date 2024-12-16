@@ -97,7 +97,6 @@ model Authenticator {
 
 model Article {
   id                  String  @id @default(cuid())
-  // slugId              String?  @unique @default(cuid())
   title               String
   versions            ArticleVersion[]
   authors             User[]
