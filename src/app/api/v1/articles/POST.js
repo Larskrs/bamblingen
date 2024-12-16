@@ -9,14 +9,9 @@ export default async function POST(req) {
 
         const data = await db.article.create({
             data: {
-                title: body.title,
-                authors: {
-                connect: {
-                    id: body.authors
-                }
+                body
             }
-        }
-    })
+        })
 
     return Response.json(data)
     
