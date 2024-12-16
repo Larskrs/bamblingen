@@ -5,10 +5,12 @@ export default async function POST(req) {
 
     const body = await req.json()
 
-    const data = await db.article.create({
-        data: {
-            title: body.title,
-            authors: {
+    try {
+
+        const data = await db.article.create({
+            data: {
+                title: body.title,
+                authors: {
                 connect: {
                     id: body.authors
                 }
@@ -17,5 +19,11 @@ export default async function POST(req) {
     })
 
     return Response.json(data)
+    
+    } catch (err) {
+        return Response.json({
+            error: err
+        })
+    }
 
 }
