@@ -14,6 +14,7 @@
     "@auth/prisma-adapter": "^2.7.4",
     "@prisma/client": "^5.22.0",
     "axios": "^1.7.9",
+    "crypto": "^1.0.1",
     "fs": "^0.0.1-security",
     "mime-types": "^2.1.35",
     "nanoid": "^5.0.8",
@@ -22,6 +23,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sharp": "^0.33.5",
+    "slugify": "^1.6.6",
     "uuid": "^11.0.3",
     "winston": "^3.17.0"
   },
