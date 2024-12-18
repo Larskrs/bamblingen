@@ -12,15 +12,11 @@ const useFetch = (url) => {
       setLoading(true);
       try {
         const response = await axios.get(url);
-        console.log(response)
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
-        }
         const result = await response.json();
         setData(result);
-      } catch (err) {
+    } catch (err) {
         setError(err.message);
-      } finally {
+    } finally {
         setLoading(false);
       }
     };
