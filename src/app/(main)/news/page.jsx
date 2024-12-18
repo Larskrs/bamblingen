@@ -3,6 +3,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import useFetch from "@/hooks/useFetch";
+import Article from "@/components/frontPage/rows/grid/items/article";
 
 export default function News () {
 
@@ -15,13 +16,14 @@ export default function News () {
             { error && <h1>{error}</h1> }
 
             {data && data.map((article) => {
-                return (<div key={article.id}>
-                    <h2>{article.title}</h2>
-                    {article.authors.map((author) => {
-                        return <p key={author.id}>{author.name}</p>
-                    })}
-                    {article.id}
-                </div>)
+                return (
+                    <>
+                    <Article title={article.title} id={article.id} key={article.id} /> 
+                        {article.authors.map((author) => {
+                            return <p key={author.id}>{author.name}</p>
+                        })}
+                    </>
+                )
             })}
 
             {/* {data && data.toString()} */}
