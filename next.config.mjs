@@ -12,6 +12,10 @@ const nextConfig = {
             {
                 source: '/kontrollpanel',
                 destination: '/dashboard'
+            },
+            {
+                source: "/nyheter",
+                destination: "/news"
             }
         ]
     },
