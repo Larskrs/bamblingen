@@ -14,14 +14,16 @@ export default function News () {
             { loading && <h1>Loading...</h1> }
             { error && <h1>{error}</h1> }
 
-            {data && data.map((article) => {
+            {/* {data && data.map((article) => {
                 return (<div key={article.id}>
                     <h2>{article.title}</h2>
                     {article.authors.map((author) => {
                         return <p key={author.id}>{author.name}</p>
                     })}
                 </div>)
-            })}
+            })} */}
+
+            {data && data.toString()}
         </>
     )
 }
