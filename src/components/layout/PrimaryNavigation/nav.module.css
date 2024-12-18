@@ -10,20 +10,26 @@
 .nav .logo {
     color: var(--white-900);
     display: flex;
-    font-size: 3rem !important;
+    text-align: center;
     align-items: center;
+    justify-content: center;
+    font-size: 2.5rem !important;
     gap: 16px;
     background-color: var(--secondary-100);
-    padding: 8px 16px;
+    padding: .5rem 1rem;
 }
 .nav .logo img {
     animation: logoRotate 50s linear infinite;
+    height: 2.5rem;
+    width: auto;
 }
 .nav h3 {
-    font-size: 2rem;
+    font-size: 1.5rem;
+    text-align: center;
+    vertical-align: middle;
 }
 .nav .links {
-    font-size: 20px;
+    font-size: 1rem;
     display: flex;
     gap: 16px;
     align-items: center;

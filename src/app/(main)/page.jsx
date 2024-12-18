@@ -1,4 +1,4 @@
-// "use client"
+"use client"
 
 // import Image from "next/image";
 // import styles from "./page.module.css";
@@ -93,9 +93,13 @@
 import FrontPageContent from "@/components/frontPage/rows"
 //     Local
 import styles from "./page.module.css"
+import useTabReopenAlert from "@/hooks/useAlert";
 
 
 export default function TestArticle () {
+
+    useTabReopenAlert("Refetch")
+
     return (
         <div className={styles.c}>
             <div className={styles.m}>
@@ -110,9 +114,9 @@ export default function TestArticle () {
                                 type: "article",
                                 priority: "priority",
                                 priorityPrefix: false,
-                                context: "Cowboy filming i Flå",
-                                title: `«Vi har ikke kontroll» - Flå Politistasjon`,
-                                image: "http://aktuelt.tv/api/files?fileId=675766acd222fb15c503bc57"
+                                context: "Nettavisen til bamblingene",
+                                title: `Velkommen til Bamblingen.no`,
+                                image: "http://aktuelt.tv/api/files?fileId=675c5320d222fb15c503bc6c"
                             }
                         ],
                     },
@@ -132,13 +136,6 @@ export default function TestArticle () {
                         ],
                     },
                     {
-                        group: {
-                            title: "Eventyr i Oslo",
-                            context: "Oslo",
-                            priority: "priority",
-                            foreground: "var(--primary-500)",
-                            priorityPrefix: true,
-                        },
                         type: "grid",
                         layout: "G_1_2",
                         priority: "none",
@@ -156,13 +153,23 @@ export default function TestArticle () {
                             {
                                 id: "V1StGXR8_Z5jdHi6Aaw",
                                 type: "article",
-                                priority: "priority",
+                                priority: "normal",
                                 priorityPrefix: false,
                                 fullImage: false,
                                 context: "Oslo",
                                 title: "Harde tider på soverom, lite trygghet på Comfort Hotel",
-                                image: "/api/image/join?bg=black&images=http://aktuelt.tv/api/files?fileId=675c5320d222fb15c503bc6c,http://aktuelt.tv/api/files?fileId=675ce653d222fb15c503bc6e"
+                                image: "http://aktuelt.tv/api/files?fileId=672c88f91d55014bbbb5dcee"
                             },
+                            // {
+                            //     id: "V1StGXR8_Z5jdHi6Aaw",
+                            //     type: "article",
+                            //     priority: "priority",
+                            //     priorityPrefix: false,
+                            //     fullImage: false,
+                            //     context: "Oslo",
+                            //     title: "Vil Carl finne kjærligheten i Oslo?",
+                            //     image: "http://aktuelt.tv/api/files?fileId=675c531fd222fb15c503bc6b"
+                            // },
                         ],
                     },
                     {

@@ -5,15 +5,14 @@
     align-items: center;
     justify-content: center;
     color: white;
-    height: 100%;
     margin: 0px;
 }
 .c p {
     font-size: 1rem;
 }
 .c img {
-    height: 100%;
-    padding: .75rem;
+    height: 1.75rem;
+    width: auto;
     margin: 0px;
     border-radius: 50%;
 }

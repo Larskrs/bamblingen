@@ -7,20 +7,31 @@ const useFetch = (url) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get(url);
-        const result = await response.data;
-        setData(result);
-    } catch (err) {
-        setError(err.message);
-    } finally {
-        setLoading(false);
-      }
-    };
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(url);
+      const result = await response.data;
+      setData(result);
+  } catch (err) {
+      setError(err.message);
+  } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      fetchData()
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [url]);
+
+  useEffect(() => {
     fetchData();
   }, [url]);
 
