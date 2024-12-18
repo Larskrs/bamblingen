@@ -5,9 +5,11 @@ import FullPageVerticalSnap from "@/components/wrappers/FullPageVerticalSnap"
 import TextHighlight from "@/components/common/TextHighlight/page";
 import TypingEffect from "@/components/common/TypingEffect";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 export default function AI({
 }) {
+
   return (
     <main className={styles.c}>
       <div className={styles.wrapper}>
@@ -48,10 +50,31 @@ export default function AI({
                 </div>
             </section>
             <section>
+                <Image alt="background" className={styles.background} src={"http://aktuelt.tv/api/files?fileId=67576551d222fb15c503bc52"} width={1920} height={1080} />
+                <div className={styles.bottom}>
+                  <TypingEffect 
+                      textStyle={{fontSize: "3rem", color: "var(--primary-500)", background: "var(--secondary-25)", fontFamily: "var(--font-domine)"}}
+                      prompts={["Assosiasjoner", ""]}
+                  />
+                  <TextHighlight 
+                      pauseTime={4000}
+                      typingSpeed={5}
+                      textStyle={{fontSize: "1.5rem", color: "var(--white-900)", background: "var(--secondary-25)", fontFamily: "var(--font-domine)"}}
+                      text={"Slikt som oss mennesker så bruker Ai assosiasjoner for å skape. Når det du ber om noe til en Ai (Prompter) så bruker du dine assosiasjoner, men Ai bruker sine, da kan det oppstå en assosiasjonskonflikt"} />
+                </div>
+            </section>
+            <section>
                 <Image alt="background-intro" className={styles.image} src={"http://aktuelt.tv/api/files?fileId=675957d7d222fb15c503bc68"} width={1920} height={1080} />
                 <div className={styles.bottom}>
-                  <TypingEffect prompts={["Assosiasjoner", ""]} textStyle={{fontSize: "3rem", color: "var(--primary-500)", background: "var(--secondary-25)", fontFamily: "var(--font-domine)"}} />
-                  <TextHighlight pauseTime={4000} typingSpeed={5} textStyle={{fontSize: "1.5rem", color: "var(--white-900)", background: "var(--secondary-25)", fontFamily: "var(--font-domine)"}} text={"Slikt som oss mennesker så bruker Ai assosiasjoner for å skape. Når det du ber om noe til en Ai (Prompter) så bruker du dine assosiasjoner, men Ai bruker sine, da kan det oppstå en assosiasjonskonflikt"} />
+                  <TypingEffect 
+                      textStyle={{fontSize: "3rem", color: "var(--primary-500)", background: "var(--secondary-25)", fontFamily: "var(--font-domine)"}}
+                      prompts={["Assosiasjoner", ""]}
+                  />
+                  <TextHighlight 
+                      pauseTime={4000}
+                      typingSpeed={5}
+                      textStyle={{fontSize: "1.5rem", color: "var(--white-900)", background: "var(--secondary-25)", fontFamily: "var(--font-domine)"}}
+                      text={"Slikt som oss mennesker så bruker Ai assosiasjoner for å skape. Når det du ber om noe til en Ai (Prompter) så bruker du dine assosiasjoner, men Ai bruker sine, da kan det oppstå en assosiasjonskonflikt"} />
                 </div>
             </section>
 

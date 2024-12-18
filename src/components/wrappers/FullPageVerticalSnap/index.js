@@ -6,7 +6,7 @@ function ToDistance(coord1, coord2) {
     return Math.abs(coord2 - coord1);
 }
 
-const FullPageVerticalSnap = ({ children, pageHeight = "100dvh", UnLitColor="darkred", LitColor="red", minimumSwipe=0 }) => {
+const FullPageVerticalSnap = ({ children, pageHeight = "100vh", UnLitColor="darkred", LitColor="red", minimumSwipe=0 }) => {
     const containerRef = useRef(null);
     const [currentSection, setCurrentSection] = useState(0);
     const [previousSection, setPreviousSection] = useState(0);
@@ -109,7 +109,7 @@ const FullPageVerticalSnap = ({ children, pageHeight = "100dvh", UnLitColor="dar
     return (
         <>
             <div ref={containerRef} className={styles.container}>
-                <div className={styles.pages} style={{marginTop: `${-100 * (currentSection)}vh`}}>
+                <div className={styles.pages} style={{translate: `0px ${-100 * (currentSection)}vh`}}>
                     {React.Children.map(children, (child, index) => (
                         <div
                         key={index}
