@@ -16,8 +16,8 @@ export default function News () {
             { error && <h1>{error}</h1> }
 
             {data && data.map((article) => {
-            
-                return (<div key={article.id}>
+
+                return (<div className={styles.article} key={article.id}>
                     <h2>{article.title}</h2>
                     {article.authors.map((author) => {
                         return <p key={author.id}>{author.name}</p>
