@@ -20,6 +20,7 @@ export default function News () {
                     {article.authors.map((author) => {
                         return <p key={author.id}>{author.name}</p>
                     })}
+                    {article.id}
                 </div>)
             })}
 
