@@ -60,7 +60,7 @@ export default async function GET(req) {
         // Fetch data from the database with the constructed query
         const data = await db.article.findMany(query);
 
-        return NextResponse.json({ data });
+        return NextResponse.json( data );
     } catch (err) {
         return NextResponse.json(
             {
