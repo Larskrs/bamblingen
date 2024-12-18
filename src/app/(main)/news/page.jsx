@@ -11,7 +11,7 @@ export default function News () {
 
     console.log("Fetch: ", data, error, loading)
     return (
-        <>
+        <div className={styles.c}>
             { loading && <h1>Loading...</h1> }
             { error && <h1>{error}</h1> }
 
@@ -27,6 +27,6 @@ export default function News () {
             })}
 
             {/* {data && data.toString()} */}
-        </>
+        </div>
     )
 }
