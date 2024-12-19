@@ -10,7 +10,7 @@ export default async function NewsArticlePage ({ params }) {
     const id = parm.id
 
     const url = `${process.env.LOCAL_ADDRESS}/api/v1/articles/${id}`
-    logger.info(url)
+    logger.info("URL=" + url)
 
     const response = await axios.get(url)
     const data = response.data
