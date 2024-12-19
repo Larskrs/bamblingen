@@ -22,13 +22,13 @@ export default function AI({
                 </div>
             </section>
             <section>
-                <video alt="background-intro" className={styles.image} playsInline muted autoPlay loop src={"/api/files?fileId=hildehagle.mp4"} width={1920} height={1080} />
+                <video alt="background-intro" className={styles.image} playsInline muted autoPlay loop src={"/api/files?fileId=1575c4b0_752d_456f_847a_5ca8cd960c52.mp4"} width={1920} height={1080} />
                 <div className={styles.middle}>
                   <TypingEffect
                       typingSpeed={75}
                       pauseTime={2000}
                       prefix={"Lag en video av "}
-                      prompts={["Hilde når noen bruker Photoshop til vektorgrafikk."]}
+                      prompts={["Levin som får kreftene til Spider-Man"]}
                       textStyle={{
                         fontSize: "2rem",
                         color: "var(--white-900)",
