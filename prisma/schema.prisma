@@ -2,7 +2,7 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
- 
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -25,16 +25,16 @@ model User {
   sessions      Session[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
- 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  role          Role @default(USER)
+  role Role @default(USER)
 
   // Joined Data
-  articles      Article[]
+  articles Article[]
 }
- 
+
 model Account {
   id                       String  @id @default(cuid())
   userId                   String  @unique
@@ -50,35 +50,35 @@ model Account {
   session_state            String?
   refresh_token_expires_in Int?
   user                     User?   @relation(fields: [userId], references: [id])
- 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
- 
+
   @@unique([provider, providerAccountId])
   @@index([userId])
 }
- 
+
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id])
- 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
- 
+
   @@index([userId])
 }
- 
+
 model VerificationToken {
   identifier String
   token      String
   expires    DateTime
- 
+
   @@unique([identifier, token])
 }
- 
+
 // Optional for WebAuthn support
 model Authenticator {
   credentialID         String  @unique
@@ -96,19 +96,41 @@ model Authenticator {
 }
 
 model Article {
-  id                  String  @id @default(cuid())
-  title               String
-  versions            ArticleVersion[]
-  authors             User[]
-  createdAt           DateTime         @default(now())
+  id              String            @id @default(cuid())
+  title           String
+  versions        ArticleVersion[]
+  authors         User[]
+  createdAt       DateTime          @default(now())
+  ArticleCategory ArticleCategory[]
 }
 
 model ArticleVersion {
-  id                  Int      @id @default(autoincrement())
-  title               String
-  components          String
-  createdAt           DateTime @default(now())
+  id         Int      @id @default(autoincrement())
+  title      String
+  components String
+  createdAt  DateTime @default(now())
 
-  Article             Article @relation(fields: [ArticleId], references: [id])
-  ArticleId           String @unique
+  Article   Article @relation(fields: [ArticleId], references: [id])
+  ArticleId String  @unique
+}
+
+model Category {
+  id              String            @id @default(cuid())
+  name            String            @unique
+  slug            String            @unique
+  description     String?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  ArticleCategory ArticleCategory[]
+}
+
+model ArticleCategory {
+  id         Int    @id @default(autoincrement())
+  articleId  String
+  categoryId String
+
+  article  Article  @relation(fields: [articleId], references: [id])
+  category Category @relation(fields: [categoryId], references: [id])
+
+  @@unique([articleId, categoryId]) // Prevent duplicate relationships
 }
