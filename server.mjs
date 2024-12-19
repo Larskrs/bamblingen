@@ -23,4 +23,9 @@ app.prepare().then(() => {
   logger.info("Cleared previous logger data")
   logger.info("Server started")
   logger.info("Using Database: " + process.env.DATABASE_URL)
+
+  const id = "20241218-903510"
+
+  const url = `${process.env.LOCAL_ADDRESS}/api/v1/articles/${id}`
+  logger.info("URL=" + url)
 })
