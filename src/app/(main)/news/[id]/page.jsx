@@ -9,9 +9,8 @@ export default async function NewsArticlePage ({ params }) {
     const parm = await params
     const id = parm.id
 
-    const response = await axios.get(`/api/v1/articles/${id}`)
-    const data = response.data
-
+    const { data, error, loading } = await axios.get(`/api/v1/articles/${id}`)
+    
     if (!data) {
         return notFound()
     }
