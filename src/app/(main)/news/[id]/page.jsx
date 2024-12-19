@@ -26,7 +26,7 @@ export default async function NewsArticlePage ({ params }) {
     const parm = await params
     const id = parm.id
 
-    const response = await axios.get(`${process.env.PUBLIC_NEXT_URL}/api/v1/articles/${id}`)
+    const response = await axios.get(`/api/v1/articles/${id}`)
     const data = response.data
 
     if (!data) {
