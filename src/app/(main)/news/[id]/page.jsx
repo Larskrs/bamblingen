@@ -9,7 +9,10 @@ export default async function NewsArticlePage ({ params }) {
     const parm = await params
     const id = parm.id
 
-    const response = await axios.get(`${process.env.LOCAL_ADDRESS}/api/v1/articles/${id}`)
+    const url = `${process.env.LOCAL_ADDRESS}/api/v1/articles/${id}`
+    logger.info(url)
+
+    const response = await axios.get(url)
     const data = response.data
 
     if (!data) {
