@@ -11,9 +11,9 @@ export default async function NewsArticlePage ({ params }) {
     const parm = await params
     const id = parm.id
 
-    const url = `${process.env.LOCAL_ADDRESS}/api/v1/articles/${id}`
-    console.log(url)
-    logger.info("URL=" + url)
+    // const url = `${process.env.LOCAL_ADDRESS}/api/v1/articles/${id}`
+    // console.log(url)
+    // logger.info("URL=" + url)
 
     // const response = await axios.get(url)
     // const data = response.data
@@ -30,6 +30,7 @@ export default async function NewsArticlePage ({ params }) {
         <div className={styles.c}>
             <h1>{data.title}</h1>
             <p>Article for {await id}</p>
+            <code>{`${process.env.LOCAL_ADDRESS}/api/v1/articles/${id}`}</code>
             {/* {data && data.toString()} */}
         </div>
     )
