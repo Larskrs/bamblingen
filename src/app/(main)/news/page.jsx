@@ -9,7 +9,7 @@ import Link from "next/link";
 
 export default function News () {
 
-    const { data, error, loading } = useFetch("/api/v1/articles?showAuthors=true")
+    const { data, error, loading } = useFetch("/api/v1/articles?showAuthors=true&showCategories=true")
 
     console.log("Fetch: ", data, error, loading)
     return (
@@ -24,6 +24,9 @@ export default function News () {
                     <p>Sist oppdatert {formatRelativeDate(new Date(article.createdAt))}</p>
                     {article.authors.map((author) => {
                         return <p key={author.id}>{author.name}</p>
+                    })}
+                    {article.categories.map((category) => {
+                        return <p key={category.id}>{category.name}</p>
                     })}
                     {article.id}
                 </Link>)

@@ -5,16 +5,21 @@ import { NextResponse } from "next/server";
 export default async function GET(req) {
     const url = new URL(req.url); // Parse the URL to extract query parameters
     const id = url.searchParams.get("id"); // Article ID
-    let authorIds = url.searchParams.get("authorIds"); // List of author IDs (comma-separated or multiple query params)
     let per_page = url.searchParams.get("per_page") || 10
     let page = url.searchParams.get("page") || 1
+
+    let authorIds = url.searchParams.get("authorIds") || [] // List of author IDs (comma-separated or multiple query params)
     let showAuthors = (url.searchParams.get("showAuthors") == "true")
+
+    let categories = url.searchParams.get("categories") || []
+    let showCategories = (url.searchParams.get("showCategories") == "true")
 
     try {
         // Dynamically build the query based on optional parameters
         const query = {
             include: {
                 authors: showAuthors,
+                categories: showCategories,
                 versions: {
                     take: 1,
                     orderBy: {
@@ -53,6 +58,17 @@ export default async function GET(req) {
                     id: {
                         in: authorIds, // Ensure the IDs are numbers (or keep as strings if needed)
                     },
+                }
+            }
+        }
+        if (categories && categories.length > 0) {
+            categories = categories.split(",")
+
+            query.where.categories = {
+                some: {
+                    id: {
+                        in: categories
+                    }
                 }
             }
         }

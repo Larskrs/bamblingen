@@ -68,6 +68,7 @@ export async function GetArticle (id) {
             const query = {
                 include: {
                     authors: true,
+                    categories: true,
                     versions: {
                         take: 1,
                         orderBy: {

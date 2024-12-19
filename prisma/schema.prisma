@@ -102,7 +102,7 @@ model Article {
   versions        ArticleVersion[]
   authors         User[]
   createdAt       DateTime          @default(now())
-  ArticleCategory ArticleCategory[]
+  categories      Category[]
 }
 
 model ArticleVersion {
@@ -116,22 +116,10 @@ model ArticleVersion {
 }
 
 model Category {
-  id              String            @id @default(cuid())
   name            String            @unique
-  slug            String            @unique
+  id              String            @id @unique @default(cuid())
   description     String?
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
-  ArticleCategory ArticleCategory[]
-}
-
-model ArticleCategory {
-  id         Int    @id @default(autoincrement())
-  articleId  String
-  categoryId String
-
-  article  Article  @relation(fields: [articleId], references: [id])
-  category Category @relation(fields: [categoryId], references: [id])
-
-  @@unique([articleId, categoryId]) // Prevent duplicate relationships
+  articles        Article[]
 }

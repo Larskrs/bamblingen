@@ -19,6 +19,12 @@ export default async function NewsArticlePage ({ params }) {
             <h1>{article.title}</h1>
             <p>Sist oppdatert {formatRelativeDate(new Date(article.createdAt))}</p>
             <p>Article for {await id}</p>
+            <p>{article.authors.map((author) => {
+                return <span key={author.id}>{author.name}</span>
+            })}</p>
+            <p>{article.categories.map((category) => {
+                return <span key={category.id}>{category.name}</span>
+            })}</p>
         </div>
     )
 }
