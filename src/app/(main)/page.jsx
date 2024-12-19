@@ -154,8 +154,8 @@ export default function TestArticle () {
                                 priorityPrefix: false,
                                 fullImage: false,
                                 context: "Oslo",
-                                title: "Harde tider på soverom, lite trygghet på Comfort Hotel",
-                                image: "http://aktuelt.tv/api/files?fileId=672c88f91d55014bbbb5dcee"
+                                title: "Er du avhengig av froskebein? Julian har svaret!",
+                                image: "/api/files?fileId=JulianHolder.jpg"
                             },
                             // {
                             //     id: "V1StGXR8_Z5jdHi6Aaw",
