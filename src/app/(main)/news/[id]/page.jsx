@@ -1,3 +1,4 @@
+"use server"
 import Image from "next/image";
 import styles from "./page.module.css";
 import { formatRelativeDate } from "@/lib/timeLib";
@@ -11,13 +12,18 @@ export default async function NewsArticlePage ({ params }) {
     const id = parm.id
 
     const url = `${process.env.LOCAL_ADDRESS}/api/v1/articles/${id}`
+    console.log(url)
     logger.info("URL=" + url)
 
-    const response = await axios.get(url)
-    const data = response.data
+    // const response = await axios.get(url)
+    // const data = response.data
 
-    if (!data) {
-        return notFound()
+    // if (!data) {
+    //     return notFound()
+    // }
+
+    const data = {
+        title: "Test Data"
     }
 
     return (
