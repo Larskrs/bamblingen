@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import { formatRelativeDate } from "@/lib/timeLib";
 import axios from "axios";
 import { notFound } from "next/navigation";
+import { logger } from "logger.mjs";
 
 export default async function NewsArticlePage ({ params }) {
 
