@@ -22,7 +22,7 @@ export default function AI({
                 </div>
             </section>
             <section>
-                <video alt="background-intro" className={styles.image} playsInline muted autoPlay loop src={"http://aktuelt.tv/api/files?fileId=6759d637d222fb15c503bc69"} width={1920} height={1080} />
+                <video alt="background-intro" className={styles.image} playsInline muted autoPlay loop src={"/api/files?fileId=hildehagle.mp4"} width={1920} height={1080} />
                 <div className={styles.middle}>
                   <TypingEffect
                       typingSpeed={75}
@@ -52,7 +52,7 @@ export default function AI({
             <section>
                 <Image alt="background" className={styles.background} src={"http://aktuelt.tv/api/files?fileId=67576551d222fb15c503bc52"} width={1920} height={1080} />
                 <div className={styles.bottom}>
-                  <TypingEffect 
+                  <TypingEffect
                       textStyle={{fontSize: "3rem", color: "var(--primary-500)", background: "var(--secondary-25)", fontFamily: "var(--font-domine)"}}
                       prompts={["Assosiasjoner", ""]}
                   />
