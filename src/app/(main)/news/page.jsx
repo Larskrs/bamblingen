@@ -4,6 +4,8 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import useFetch from "@/hooks/useFetch";
 import Article from "@/components/frontPage/rows/grid/items/article";
+import { formatRelativeDate } from "@/lib/timeLib";
+import Link from "next/link";
 
 export default function News () {
 
@@ -17,13 +19,14 @@ export default function News () {
 
             {data && data.map((article) => {
 
-                return (<div className={styles.article} key={article.id}>
+                return (<Link href={`/n/${article.id}`} className={styles.article} key={article.id}>
                     <h2>{article.title}</h2>
+                    <p>Sist oppdatert {formatRelativeDate(new Date(article.createdAt))}</p>
                     {article.authors.map((author) => {
                         return <p key={author.id}>{author.name}</p>
                     })}
                     {article.id}
-                </div>)
+                </Link>)
             })}
 
             {/* {data && data.toString()} */}

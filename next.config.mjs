@@ -15,8 +15,16 @@ const nextConfig = {
             },
             {
                 source: "/nyheter",
-                destination: "/news"
-            }
+                destination: "/news",
+            },
+            {
+                source: '/n/:id*',
+                destination: '/news/:id*', // Matched parameters can be used in the destination
+            },
+            {
+                source: '/nytt/:id*',
+                destination: '/news/:id*', // Matched parameters can be used in the destination
+            },
         ]
     },
     images: {

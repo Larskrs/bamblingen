@@ -93,12 +93,9 @@
 import FrontPageContent from "@/components/frontPage/rows"
 //     Local
 import styles from "./page.module.css"
-import useTabReopenAlert from "@/hooks/useAlert";
 
 
 export default function TestArticle () {
-
-    useTabReopenAlert("Refetch")
 
     return (
         <div className={styles.c}>

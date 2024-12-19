@@ -2,7 +2,10 @@ import { MAX_PER_PAGE } from "@/lib/articleLib";
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 
-export default async function GET(req) {
+export default async function GET(req, params) {
+
+    const parm = await params
+    const id = parm.id
 
     try {
         // Dynamically build the query based on optional parameters
@@ -16,13 +19,15 @@ export default async function GET(req) {
                     },
                 },
             },
-            where: {}, // Initialize an empty `where` object
+            where: {
+                id: id
+            }, // Initialize an empty `where` object
         };
 
         // Fetch data from the database with the constructed query
-        const data = await db.article.findMany(query);
+        const data = await db.article.findUnique(query);
 
-        return NextResponse.json({ data });
+        return NextResponse.json( data );
     } catch (err) {
         return NextResponse.json(
             {

@@ -10,7 +10,7 @@ export default function Navigation () {
 
     const links = [
         { href: "/nyheter", display: "Nyheter"},
-        { href: "/ai-artikkel", display: "AI"},
+        // { href: "/ai-artikkel", display: "AI"},
         // { href: "/meninger", display: "Meninger"},
         // { href: "/satire", display: "Satire"},
         // { href: "/tips", display: "Tips oss"},

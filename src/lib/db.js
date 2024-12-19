@@ -6,5 +6,5 @@ export const db = client
 
 
 export async function testConnection () {
-    return await db.user.findFirst({})
+    return await db.user.findMany({})
 }
