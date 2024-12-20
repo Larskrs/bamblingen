@@ -6,7 +6,7 @@ function ToDistance(coord1, coord2) {
     return Math.abs(coord2 - coord1);
 }
 
-const FullPageVerticalSnap = ({ children, pageHeight = "100vh", UnLitColor="darkred", LitColor="red", minimumSwipe=0 }) => {
+const FullPageVerticalSnap = ({ children, pageHeight = "100dvh", UnLitColor="darkred", LitColor="red", minimumSwipe=0 }) => {
     const containerRef = useRef(null);
     const [currentSection, setCurrentSection] = useState(0);
     const [previousSection, setPreviousSection] = useState(0);
