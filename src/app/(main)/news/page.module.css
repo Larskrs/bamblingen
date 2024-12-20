@@ -13,12 +13,13 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding: 1rem;
+    padding: .5rem;
     align-items: center;
 }
 .body {
     padding: 1rem;
     margin-left: 1rem;
+    font-size: .9rem;
 }
 .body p {
     margin-top: .5rem;
@@ -26,10 +27,28 @@
 .body > p:last-child {
     float: right;
 }
-.article img {
-    height: 100%;
+.thumbnail {
     width: 30%;
+    height: inherit;
     object-fit: cover;
     background-color: var(--white-700);
-    max-height: 12rem;
+    width: 100%;
+    max-width: 12rem;
+    position: relative;
+}
+.thumbnail img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+.c button {
+    padding: .5rem 1rem;
+    border-radius: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background-color: var(--white-900);
+    color: var(--secondary-100);
+    border: 2px solid var(--secondary-100);
+    cursor: pointer;
 }

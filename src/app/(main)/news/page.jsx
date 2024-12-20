@@ -2,14 +2,19 @@
 
 import Image from "next/image";
 import styles from "./page.module.css";
-import useFetch from "@/hooks/useFetch";
+import useInfiniteFetch from "@/hooks/useInfiniteFetch";
 import Article from "@/components/frontPage/rows/grid/items/article";
 import { formatRelativeDate } from "@/lib/timeLib";
 import Link from "next/link";
 
+    const per_page = 10
+
+    const url = (page) =>
+    `/api/v1/articles?showAuthors=true&showCategories=true&per_page=${per_page}&page=${page}`;
+
 export default function News () {
 
-    const { data, error, loading } = useFetch("/api/v1/articles?showAuthors=true&showCategories=true")
+    const { data, error, loading, loadMore } = useInfiniteFetch(url)
 
     return (
         <div className={styles.c}>
@@ -25,9 +30,11 @@ export default function News () {
                 }
 
                 return (<Link href={`/n/${article.id}`} className={styles.article} key={article.id}>
-                    {v?.image &&<Image src={v.image} width={1280} height={720} alt={`${v.title} artikkel bilde`}/> }
+                    {v?.image && <div className={styles.thumbnail}>
+                        <Image src={v.image} width={1280} height={720} alt={`${v.title} artikkel bilde`}/> 
+                    </div> }
                     <div className={styles.body}>
-                        <h2>{v.title}</h2>
+                        <h3>{v.title}</h3>
                         <p>{v.subtitle}</p>
                         <p>Sist oppdatert {formatRelativeDate(new Date(v.createdAt))}</p>
                     </div>
@@ -40,7 +47,9 @@ export default function News () {
                     {article.id} */}
                 </Link>)
             })}
-
+            <button onClick={loadMore} disabled={loading}>
+                Last mer
+            </button>
             {/* {data && data.toString()} */}
         </div>
     )
