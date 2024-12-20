@@ -9,7 +9,7 @@
 
 .section {
     width: 100%;
-    height: 100dvh;
+    height: 100%;
     z-index: 2;
     position: relative;
     transition: all 1s var(--curve-1);
