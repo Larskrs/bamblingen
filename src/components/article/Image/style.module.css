@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 2rem;
+    height: fit-content;
 }
 .img {
     width: 100%;
@@ -11,7 +12,7 @@
 }
 .alt {
     color: var(--white-50);
-    font-size: 1rem;
+    font-size: .9rem;
     margin-bottom: .25rem;
 }
 .credit {

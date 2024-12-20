@@ -11,7 +11,6 @@ export default function News () {
 
     const { data, error, loading } = useFetch("/api/v1/articles?showAuthors=true&showCategories=true")
 
-    console.log("Fetch: ", data, error, loading)
     return (
         <div className={styles.c}>
             { loading && <h1>Loading...</h1> }
@@ -19,16 +18,26 @@ export default function News () {
 
             {data && data.map((article) => {
 
+                const v = article?.versions?.[0]
+                
+                if (!v) {
+                    return <></>
+                }
+
                 return (<Link href={`/n/${article.id}`} className={styles.article} key={article.id}>
-                    <h2>{article.title}</h2>
-                    <p>Sist oppdatert {formatRelativeDate(new Date(article.createdAt))}</p>
-                    {article.authors.map((author) => {
+                    {v?.image &&<Image src={v.image} width={1280} height={720} alt={`${v.title} artikkel bilde`}/> }
+                    <div className={styles.body}>
+                        <h2>{v.title}</h2>
+                        <p>{v.subtitle}</p>
+                        <p>Sist oppdatert {formatRelativeDate(new Date(v.createdAt))}</p>
+                    </div>
+                    {/* {article.authors.map((author) => {
                         return <p key={author.id}>{author.name}</p>
                     })}
                     {article.categories.map((category) => {
                         return <p key={category.id}>{category.name}</p>
                     })}
-                    {article.id}
+                    {article.id} */}
                 </Link>)
             })}
 

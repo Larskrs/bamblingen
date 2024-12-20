@@ -1,4 +1,4 @@
-import { GenerateUniqueIdentifier } from "@/lib/articleLib";
+import { ConnectOrCreateCategoryTags, GenerateUniqueIdentifier } from "@/lib/articleLib";
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 
@@ -8,21 +8,54 @@ export default async function POST(req) {
 
             const body = await req.json()
             if (!body.title) {
-                return MissingArgumentError("Title argument is missing")
+                return ErrorMessage("Title argument is missing")
+            }
+            if (!body.subtitle) {
+                return ErrorMessage("Subtitle argument is missing")
+            }
+            if (!body.image) {
+                return ErrorMessage("Image argument is missing")
+            }
+            if (body.components) {
+                body.components = JSON.stringify(body.components)
+                console.log(body.components)
+            } else {
+                return ErrorMessage("Components argument is missing")
             }
             if (!body.authors) {
-                return MissingArgumentError("Authors argument is missing")
+                return ErrorMessage("Authors argument is missing")
             }
             const authors = body.authors
 
             let query = {
                 data: {
-                    title: body.title,
                     authors: {
                         connect: authors.map((a) => {return {id: a}})
+                    },
+                    versions: {
+                        create: [
+                            {
+                                components: body.components,
+                                title: body.title,
+                                subtitle: body.subtitle,
+                                image: body.image
+                            }
+                        ]
                     }
                 }
             }
+
+            if (body.categories) {
+
+                if (!body.categories.length) {
+                    return ErrorMessage("Categories property is not an array or list.")
+                }
+
+                query.data.categories = {
+                    connectOrCreate: ConnectOrCreateCategoryTags(body.categories)
+                }
+            }
+
             const id = await GenerateUniqueIdentifier(new Date());
             // query.data.slugId = shortId
             query.data.id = id
@@ -41,7 +74,7 @@ export default async function POST(req) {
 
 }
 
-function MissingArgumentError (err) {
+function ErrorMessage (err) {
     return NextResponse.json(
     {
         error: err,

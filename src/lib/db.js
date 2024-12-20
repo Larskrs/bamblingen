@@ -1,10 +1,16 @@
-import { PrismaClient } from "@prisma/client"
+import { PrismaClient } from "@prisma/client";
 
-const client = new PrismaClient()
+let prisma;
 
-export const db = client
+// Use a singleton pattern to initialize the PrismaClient
+if (!globalThis.prisma) {
+  globalThis.prisma = new PrismaClient();
+}
 
+prisma = globalThis.prisma;
 
-export async function testConnection () {
-    return await db.user.findMany({})
+export const db = prisma;
+
+export async function testConnection() {
+  return await db.user.findMany({});
 }

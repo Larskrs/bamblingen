@@ -98,7 +98,6 @@ model Authenticator {
 
 model Article {
   id              String            @id @default(cuid())
-  title           String
   versions        ArticleVersion[]
   authors         User[]
   createdAt       DateTime          @default(now())
@@ -107,8 +106,12 @@ model Article {
 
 model ArticleVersion {
   id         Int      @id @default(autoincrement())
-  title      String
-  components String
+  title      String   @default("") @db.MediumText
+  subtitle   String   @default("")
+  image      String   @default("") @db.LongText
+  location   String   @default("")
+
+  components String   @db.LongText
   createdAt  DateTime @default(now())
 
   Article   Article @relation(fields: [ArticleId], references: [id])

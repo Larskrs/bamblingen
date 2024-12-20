@@ -46,7 +46,6 @@ export default async function GET(req) {
         }
         if (page) {
             if (isNaN(page)) { return ArgumentError('The (page) parameter is not a valid number', 'Use a generic integer number') }
-            console.log(parseInt(page) * parseInt(per_page))
             query.skip = (parseInt(page-1) * parseInt(per_page))
         }
         if (authorIds && authorIds.length > 0) {

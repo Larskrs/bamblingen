@@ -19,8 +19,6 @@ export default function ArticleContent({ components }) {
                 const Component = componentMap[type];
                 if (!Component) return null; // If type is unsupported, skip
 
-                console.log(props)
-
                 // Render the component with the remaining props
                 return <Component key={i} {...props} />;
             })}

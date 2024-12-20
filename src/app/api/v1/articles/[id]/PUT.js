@@ -1,4 +1,4 @@
-import { MAX_PER_PAGE } from "@/lib/articleLib";
+import { ConnectOrCreateCategoryTags, MAX_PER_PAGE } from "@/lib/articleLib";
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 
@@ -14,16 +14,6 @@ export default async function GET(req, params) {
                 { status: 400 }
             );
         }
-        
-
-        const connectOrCreateTags = (_tags) => _tags.map((tagName) => ({
-            where: { id: tagName.toLowerCase() },
-            create: {
-                name: tagName,
-                id: tagName.toLowerCase(),
-                description: `Kategori for ${tagName}`,
-            },
-        }));
 
         const data = await db.article.update({
             where: {
@@ -32,7 +22,7 @@ export default async function GET(req, params) {
             data: {
                 categories: {
                     set: [], // Clear all current relationships
-                    connectOrCreate: connectOrCreateTags(["Skogbrann"]), // Add or create the new categories
+                    connectOrCreate: ConnectOrCreateCategoryTags(["Skogbrann"]), // Add or create the new categories
                 },
             },
             include: {

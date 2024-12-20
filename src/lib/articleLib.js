@@ -93,3 +93,11 @@ export async function GetArticle (id) {
         }
 
 }
+export const ConnectOrCreateCategoryTags = (_tags) => _tags.map((tagName) => ({
+    where: { id: tagName.toLowerCase() },
+    create: {
+        name: tagName,
+        id: tagName.toLowerCase(),
+        description: `Kategori for ${tagName}`,
+    },
+}));
