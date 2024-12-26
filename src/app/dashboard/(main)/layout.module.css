@@ -27,9 +27,11 @@
     align-items: center;
 }
 .user img {
-    width: 50%;
+    width: 100%;
     height: auto;
     border-radius: 50%;
+    max-width: 2rem;
+    max-height: 2rem;
 }
 .link:first-child {
     border: none;
@@ -65,13 +67,12 @@
     height: 100%;
 }
 
-
-
 @media screen and (max-width: 700px) {
     .c nav {
         width: 3.5rem;
         border-radius: 0px;
         margin-right: 0px;
+        margin-top: 0.5crem;
         padding: 0.25rem;
         min-width: 3.5rem;
         border: none;
@@ -97,5 +98,9 @@
         padding: 0.25rem;
         width: 2rem;
         height: 2rem;
+    }
+    .user img {
+        max-width: 8rem;
+        max-height: 8rem;
     }
 }

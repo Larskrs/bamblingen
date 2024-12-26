@@ -22,7 +22,7 @@ export default function NewsArticlePage ({ userId, defaultArticle }) {
             <div className={styles.article}>
             <div className={styles.context}>
                 {article.categories.map((tag) => {
-                    return (
+                    return (  
                         <p key={tag.id}>{tag.name}</p>
                     )
                 })}

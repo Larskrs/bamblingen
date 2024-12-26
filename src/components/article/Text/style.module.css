@@ -4,6 +4,11 @@
     line-height: 1.4em;
     cursor: pointer;
 }
+.editor textarea {
+    font-size: 1.1rem;
+    line-height: 1.4em;
+    cursor: pointer;
+}
 .bold {
     font-weight: 600;
 }

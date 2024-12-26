@@ -3,6 +3,7 @@ import styles from "./style.module.css"
 import React, { useState } from "react";
 import Editor from "./editor"
 import MarkdownFormatter from "@/components/common/MarkdownText";
+import TextArea from "@/components/common/input/TextArea";
 
 export default function TextComponent({
     id,
@@ -16,6 +17,11 @@ export default function TextComponent({
     console.log(_lines)
 
     const UpdateLine = (index, newValue) => {
+        if (!newValue) {
+            DeleteLine(index)
+            return
+        }
+
         const _ = [..._lines]
         _[index] = newValue
         setLines(_)
@@ -24,23 +30,31 @@ export default function TextComponent({
         const _ = _lines.filter((_, i) => i !== index);
         setLines(_)
     }
+    const AddLine = () => {
+        setLines([..._lines, `Ny linje (${_lines.length + 1})`])
+    }
+
+    const SubmitLine = (e) => {
+        AddLine()
+        setCurrent(current + 1)
+    }
 
     return (
         <div className={styles.c}>
             {_lines.map((line, i) => {
                 if (current === i) {
-                    return <LineEditor key={i} id={i} line={line} onChange={(v) => {UpdateLine(i, v)}} onDelete={DeleteLine}/>
+                    return <LineEditor key={i} id={i} line={line} onSubmit={SubmitLine} onChange={(v) => {UpdateLine(i, v)}} onDelete={DeleteLine}/>
                 }
                 return (<div key={i} onClick={() => {setCurrent(i)}}>
                             <MarkdownFormatter className={styles.line} key={i+line} text={line} />
                         </div>)
             })}
-            <div onClick={() => {setLines([..._lines, `Ny linje (${_lines.length})`])}} className={styles.createLine}>Legg til linje</div>
+            <div onClick={AddLine} className={styles.createLine}>Legg til linje</div>
         </div>
     );
-}
 
-function LineEditor ({line, id, onChange, onDelete}) {
+}
+function LineEditor ({line, id, onChange, onDelete, onSubmit}) {
 
     const [value, setValue] = useState(line)
 
@@ -51,11 +65,12 @@ function LineEditor ({line, id, onChange, onDelete}) {
 
     return (
         <div className={styles.editor}>
-            <textarea className={styles.editing} value={value} onChange={handleInput}></textarea>
+            <TextArea className={styles.editing} onEnter={onSubmit} defaultValue={value} onChange={handleInput}></TextArea>
             <button onClick={() => onDelete(id)}>Slett Linje</button>
         </div>
     )
 }
+
 
 
 

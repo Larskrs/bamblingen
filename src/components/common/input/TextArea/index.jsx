@@ -2,7 +2,7 @@
 import React, { useRef, useEffect } from 'react';
 import styles from "./style.module.css"; 
 
-const TextArea = ({ value, onChange, ...props }) => {
+const TextArea = ({ value, onChange=() => {}, onEnter=() => {}, ...props }) => {
   const textareaRef = useRef(null);
 
   // Adjust the height of the textarea dynamically
@@ -24,9 +24,11 @@ const TextArea = ({ value, onChange, ...props }) => {
       onKeyDown={(e) => {
         if (e.key === 'Enter') {
             e.preventDefault()
+            onEnter()
         }
       }}
       onChange={(e) => {
+        onChange(e)
         adjustHeight(); // Adjust height on user input
       }}
       {...props}
