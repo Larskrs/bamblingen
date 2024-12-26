@@ -34,6 +34,8 @@ model User {
 
   // Joined Data
   articles Article[]
+  files    File[]
+  batches  Batch[]
 }
 
 model Account {
@@ -145,4 +147,31 @@ model Category {
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
   articles        Article[]
+  batches         Batch[]
+}
+model Batch {
+  name            String
+  id              String            @id @unique @default(cuid())
+  files           File[]
+  categories      Category[]
+
+  user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         String  @unique
+
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+}
+model File {
+  id              String            @id @unique @default(cuid())
+  name            String
+  address         String
+  type            String
+
+  Batch           Batch @relation(fields: [BatchId], references: [id])
+  BatchId         String  @unique
+
+  user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         String  @unique
+
+  createdAt       DateTime          @default(now())
 }
