@@ -1,13 +1,12 @@
-import Image from "next/image";
+"use client"
 import styles from "./style.module.css"
-import ZoomableElement from "@/components/wrappers/ZoomInWrapper";
-import Editor from "./editor"
+import React, { useState } from "react";
+import MarkdownFormatter from "@/components/common/MarkdownText";
+import Image from "next/image";
 
-export default function TextComponent ({id, src, alt, credit, editor}) {
-
-    if (editor) {
-        return <Editor id={id} src={src} alt={alt} credit={credit} />
-    }
+export default function TextComponent({
+    id, src, alt, credit
+}) {
 
     return (
         <div className={styles.c}>
@@ -19,4 +18,3 @@ export default function TextComponent ({id, src, alt, credit, editor}) {
         </div>
     );
 }
-

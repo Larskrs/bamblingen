@@ -1,62 +1,55 @@
 import React from 'react';
 import styles from './style.module.css';
 
-const MarkdownFormatter = ({ text }) => {
+const MarkdownFormatter = ({ text, }) => {
   // Functions to handle formatting cases
-  const formatBoldItalic = (match, content) => {
+  const formatBoldItalic = (content) => {
     return <strong className={styles.boldItalic}><em>{content}</em></strong>;
   };
 
-  const formatBold = (match, content) => {
+  const formatBold = (content) => {
     return <strong className={styles.bold}>{content}</strong>;
   };
 
-  const formatItalic = (match, content) => {
+  const formatItalic = (content) => {
     return <em className={styles.italic}>{content}</em>;
   };
 
-  // Function to format text into React elements
+  // Recursive function to process text into React elements
   const formatText = (text) => {
-    const elements = [];
-    let remainingText = text;
+    if (!text) return text;
 
-    const processRegex = (regex, formatFunction) => {
-      let match;
-      while ((match = regex.exec(remainingText)) !== null) {
+    const patterns = [
+      { regex: /\*\*\*(.*?)\*\*\*/g, formatter: formatBoldItalic }, // Bold + Italic
+      { regex: /\*\*(.*?)\*\*/g, formatter: formatBold },           // Bold
+      { regex: /\*(.*?)\*/g, formatter: formatItalic },              // Italic
+    ];
+
+    // Process each regex pattern in order of precedence
+    for (const { regex, formatter } of patterns) {
+      const match = regex.exec(text);
+      if (match) {
         const [fullMatch, content] = match;
-        const index = match.index;
+        const before = text.slice(0, match.index);
+        const after = text.slice(match.index + fullMatch.length);
 
-        // Push plain text before the match
-        if (index > 0) {
-          elements.push(remainingText.slice(0, index));
-        }
-
-        // Push the formatted content
-        elements.push(formatFunction(fullMatch, content));
-
-        // Update the remaining text
-        remainingText = remainingText.slice(index + fullMatch.length);
-        regex.lastIndex = 0; // Reset regex index for next iteration
+        // Recursively format the remaining text
+        return (
+          <>
+            {formatText(before)}
+            {formatter(content)}
+            {formatText(after)}
+          </>
+        );
       }
-    };
-
-    // Process bold and italic (***text***)
-    processRegex(/\*\*\*(.*?)\*\*\*/g, formatBoldItalic);
-    // Process bold (**text**)
-    processRegex(/\*\*(.*?)\*\*/g, formatBold);
-    // Process italic (*text*)
-    processRegex(/\*(.*?)\*/g, formatItalic);
-
-    // Push any remaining plain text
-    if (remainingText) {
-      elements.push(remainingText);
     }
 
-    return elements;
+    // If no patterns match, return plain text
+    return text;
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.c} >
       {formatText(text)}
     </div>
   );

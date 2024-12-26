@@ -1,10 +1,17 @@
 import styles from "./style.module.css"
 import React from "react";
+import Editor from "./editor"
 
 export default function TextComponent({
     id,
-    lines = ["ERROR!!", "Noice", "Text Component Missing Lines Property"]
+    lines = ["ERROR!!", "Noice", "Text Component Missing Lines Property"],
+    editor
 }) {
+
+
+    if (editor) {
+      return <Editor id={id} lines={lines} />
+    }
     return (
         <div className={styles.c}>
             {lines.map((line, index) => {
@@ -67,7 +74,7 @@ const MarkdownFormatter = ({ text }) => {
 
     return elements;
   };
-
+  
   return (
     <div className={styles.container}>
       {formatText(text)}

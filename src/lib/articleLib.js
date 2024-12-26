@@ -2,6 +2,7 @@
 import crypto from "crypto"
 import slugify from "slugify";
 import { db } from "./db";
+import { GetUser } from "./userLib";
 
 
 /**
@@ -101,3 +102,54 @@ export const ConnectOrCreateCategoryTags = (_tags) => _tags.map((tagName) => ({
         description: `Kategori for ${tagName}`,
     },
 }));
+
+export async function DefaultArticle (authors) {
+
+    const _authors = await Promise.all(authors.map(async (a) => {
+        return await GetUser(a)
+    }))
+
+    return {
+        authors:
+            _authors
+        ,
+        versions: [
+            {
+                createdAt: "2024-12-24T01:09:49.804Z",
+                updatedAt: "2024-12-24T01:09:49.804Z",
+                components: [
+                    {
+                        type: "text",
+                        lines: [
+                            "Denne teksten må endres før den publiseres!",
+                            "Den er *skrå*, den er **fet** eller ***begge to***",
+                            "Den er *skrå*",
+                            "den er **fet**",
+                            "eller ***begge to***"
+                        ]
+                    },
+                    {
+                        type: "image",
+                        src: "https://bamblingen.no/api/files?fileId=cachedImage.png",
+                        alt: "",
+                        credit: "Foto: Bamblingen.no"
+                    },
+                ],
+                title: "Tittel",
+                subtitle: "Undertittel",
+                image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc",
+                location: "Herre"
+            },
+        ],
+        categories: [
+            {
+                name: "Herre",
+                id: "herre"
+            },
+            {
+                name: "Pistolran",
+                id: "pistolran"
+            }
+        ]
+    }
+}

@@ -1,0 +1,12 @@
+.c {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    line-height: 1.4em;
+    animation: 500ms drop-in var(--curve-1);
+}
+.bold {
+    font-weight: 600;
+}
+.italic {
+    font-style: italic;
+}

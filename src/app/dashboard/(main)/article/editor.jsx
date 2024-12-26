@@ -1,27 +1,21 @@
-"use server"
+"use client"
 import Image from "next/image";
 import styles from "./page.module.css";
 import { formatRelativeDate } from "@/lib/timeLib";
 import axios, { AxiosRequestConfig } from 'axios';
 import { notFound } from "next/navigation";
-import { logger } from "logger.mjs";
-import { GetArticle } from "@/lib/articleLib";
+import { GetArticle, DefaultArticle } from "@/lib/articleLib";
 import ArticleContent from "@/components/article/ArticleContent";
 import ArticleImage from "@/components/article/Image"
+import { useEffect, useState } from "react"
+import TextArea from "@/components/common/input/TextArea";
 
-export default async function NewsArticlePage ({ params }) {
+export default function NewsArticlePage ({ userId, defaultArticle }) {
 
-    const parm = await params
-    const id = parm.id
+    const [article, setArticle] = useState(defaultArticle)
 
-    const article = await GetArticle(id)
-
-    if (!article) {
-        return notFound()
-    }
-
-    const v = article?.versions?.[0]
-    const components = JSON.parse(v.components)
+    const v = article.versions?.[0]
+    console.log(article)
 
     return (
         <div className={styles.c}>
@@ -34,8 +28,8 @@ export default async function NewsArticlePage ({ params }) {
                 })}
             </div>
                 <header className={styles.header}>
-                    <h1>{v.title}</h1>
-                    <p>{v.subtitle}</p>
+                    <h1><TextArea defaultValue={v.title}></TextArea></h1>
+                    <p><TextArea defaultValue={v.subtitle}></TextArea></p>
                 </header>
                 <div className={styles["lead"]}>
                     <div className={styles["lead-media"]}>
@@ -45,7 +39,7 @@ export default async function NewsArticlePage ({ params }) {
                         <div className={styles.authors}>
                             {article.authors.map((author) => {
                                 return (
-                                    <div key={author.id} className={styles.author}>
+                                    <div key={author} className={styles.author}>
                                         {article.authors.length < 3 && <Image alt={`${author.name}'s image`} src={author.image} height={128} width={128}/>}
                                         <div className={styles.body}>
                                             <p>{author.name}</p>
@@ -55,17 +49,13 @@ export default async function NewsArticlePage ({ params }) {
                                 )
                             })}
                         </div>
-                        <p className={styles.date}>Sist oppdatert {formatRelativeDate(new Date(article.createdAt))}</p>
+                        {/* <p className={styles.date}>Sist oppdatert {formatRelativeDate(new Date(article.createdAt))}</p> */}
                     </div>
                 </div>
                 <div className={styles.m}>
                     {/* <p>Article for {await id}</p> */}
                     <div className={styles.body}>
-                        <ArticleContent components={components} EditorRender={() => {
-                            return <>
-                                <h1>Editor</h1>
-                            </>
-                        }}/>
+                        <ArticleContent editor={true} components={v.components} />
                     </div>
                 </div>
             </div>

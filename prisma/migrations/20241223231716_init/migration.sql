@@ -33,7 +33,6 @@ CREATE TABLE `Account` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
-    UNIQUE INDEX `Account_userId_key`(`userId`),
     INDEX `Account_userId_idx`(`userId`),
     UNIQUE INDEX `Account_provider_providerAccountId_key`(`provider`, `providerAccountId`),
     PRIMARY KEY (`id`)
@@ -88,13 +87,40 @@ CREATE TABLE `Article` (
 -- CreateTable
 CREATE TABLE `ArticleVersion` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `title` LONGTEXT NOT NULL DEFAULT '',
+    `title` MEDIUMTEXT NOT NULL DEFAULT '',
     `subtitle` VARCHAR(191) NOT NULL DEFAULT '',
-    `components` VARCHAR(191) NOT NULL,
+    `image` LONGTEXT NOT NULL DEFAULT '',
+    `location` VARCHAR(191) NOT NULL DEFAULT '',
+    `components` LONGTEXT NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `ArticleId` VARCHAR(191) NOT NULL,
 
     UNIQUE INDEX `ArticleVersion_ArticleId_key`(`ArticleId`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `ComponentPage` (
+    `id` VARCHAR(191) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
+
+    UNIQUE INDEX `ComponentPage_id_key`(`id`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `ComponentPageVersion` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `title` MEDIUMTEXT NOT NULL DEFAULT '',
+    `subtitle` VARCHAR(191) NOT NULL DEFAULT '',
+    `image` LONGTEXT NOT NULL DEFAULT '',
+    `location` VARCHAR(191) NOT NULL DEFAULT '',
+    `components` LONGTEXT NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `ComponentPageId` VARCHAR(191) NOT NULL,
+
+    UNIQUE INDEX `ComponentPageVersion_ComponentPageId_key`(`ComponentPageId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -140,6 +166,9 @@ ALTER TABLE `Authenticator` ADD CONSTRAINT `Authenticator_userId_fkey` FOREIGN K
 
 -- AddForeignKey
 ALTER TABLE `ArticleVersion` ADD CONSTRAINT `ArticleVersion_ArticleId_fkey` FOREIGN KEY (`ArticleId`) REFERENCES `Article`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `ComponentPageVersion` ADD CONSTRAINT `ComponentPageVersion_ComponentPageId_fkey` FOREIGN KEY (`ComponentPageId`) REFERENCES `ComponentPage`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `_ArticleToUser` ADD CONSTRAINT `_ArticleToUser_A_fkey` FOREIGN KEY (`A`) REFERENCES `Article`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

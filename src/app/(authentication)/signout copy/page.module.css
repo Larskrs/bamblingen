@@ -1,0 +1,32 @@
+.c {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+}
+.c img {
+    object-fit: cover;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 0;
+    opacity: .25;
+}
+.c h1 {
+    z-index: 1;
+    background-color: var(--white-700);
+    padding: 0.5rem 1rem;
+}
+.c form {
+    z-index: 1;
+}
+.c button {
+    z-index: 1 !important;
+    background-color: var(--secondary-100);
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+}
