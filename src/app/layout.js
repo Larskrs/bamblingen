@@ -5,6 +5,8 @@ import { Inter } from "next/font/google";
 import { SessionProvider } from "next-auth/react"
 
 import "./globals.css";
+import Link from "next/link";
+import { auth } from "@/auth";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,7 +34,10 @@ export const metadata = {
   description: "Folkeblad for Bamble",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+
+  const session = await auth()
+
   return (
     <SessionProvider>
       <html lang="en">

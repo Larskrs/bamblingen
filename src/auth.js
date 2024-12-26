@@ -33,7 +33,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
 
       return session;
-    },
+    }
   },
   async jwt({ token, user }) {
     const dbUser = await db.user.findFirst({

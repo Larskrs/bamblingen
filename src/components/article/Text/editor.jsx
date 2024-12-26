@@ -16,11 +16,14 @@ export default function TextComponent({
     const [_lines, setLines] = useState(lines)
     console.log(_lines)
 
-    const UpdateLine = (index, newValue) => {
-        if (!newValue) {
-            DeleteLine(index)
-            return
+    const Select = (index) => {
+        setCurrent(index)
+        if (_lines[current] === "") {
+            DeleteLine(current)
         }
+    }
+
+    const UpdateLine = (index, newValue) => {
 
         const _ = [..._lines]
         _[index] = newValue
@@ -32,6 +35,7 @@ export default function TextComponent({
     }
     const AddLine = () => {
         setLines([..._lines, `Ny linje (${_lines.length + 1})`])
+        Select(_lines.length)
     }
 
     const SubmitLine = (e) => {
@@ -41,12 +45,13 @@ export default function TextComponent({
 
     return (
         <div className={styles.c}>
+            <p className={styles.details}>Lines: {_lines.length}</p>
             {_lines.map((line, i) => {
                 if (current === i) {
                     return <LineEditor key={i} id={i} line={line} onSubmit={SubmitLine} onChange={(v) => {UpdateLine(i, v)}} onDelete={DeleteLine}/>
                 }
-                return (<div key={i} onClick={() => {setCurrent(i)}}>
-                            <MarkdownFormatter className={styles.line} key={i+line} text={line} />
+                return (<div className={styles.line} key={i} onClick={() => {Select(i)}}>
+                            <MarkdownFormatter key={i+line} text={line} />
                         </div>)
             })}
             <div onClick={AddLine} className={styles.createLine}>Legg til linje</div>

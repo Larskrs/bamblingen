@@ -16,9 +16,18 @@
     font-style: italic;
 }
 
+.details {
+    font-size: .75rem;
+    font-weight: 300;
+    color: var(--white-400);
+    margin: 0px;
+}
+
 @keyframes drop-in {
     0% {
-        opacity: 0.25;
+        opacity: 0;
+        translate: -2rem 0px;
+        height: 0rem;
     }
     100% {
         scale: 1;
@@ -26,6 +35,11 @@
     }
 }
 
+.line > *{
+    /* border-bottom: 8px solid var(--white-800); */
+    min-height: 1rem;
+    border: 1px solid var(--white-800 );
+}
 
 .editing {
     padding: .5rem 1rem;
@@ -36,7 +50,7 @@
     border: 2px dotted var(--white-600);
     color: #5c5c5c;
     max-width: 100%;
-    animation: 500ms drop-in var(--curve-1);
+    animation: 250ms drop-in var(--curve-1);
 }
 .editing:focus {
     outline: none;
