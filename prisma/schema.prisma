@@ -109,9 +109,9 @@ model Article {
 
 model ArticleVersion {
   id         Int      @id @default(autoincrement())
-  title      String   @default("") @db.MediumText
+  title      String   @db.MediumText
   subtitle   String   @default("")
-  image      String   @default("") @db.LongText
+  image      String   @db.LongText
   location   String   @default("")
 
   components String   @db.LongText
@@ -129,10 +129,6 @@ model ComponentPage {
 }
 model ComponentPageVersion {
   id              Int      @id @default(autoincrement())
-  title           String   @default("") @db.MediumText
-  subtitle        String   @default("")
-  image           String   @default("") @db.LongText
-  location        String   @default("")
 
   components      String   @db.LongText
   createdAt       DateTime @default(now())
