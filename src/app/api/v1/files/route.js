@@ -202,6 +202,7 @@ async function UploadFileToDB (id, name, address, type, userId) {
 
 export const POST = auth(async function POST(req) {
 
+    try {
         if (!req.auth) return NextResponse.json({ message: "Not authenticated" }, { status: 401 })
 
         const auth = req.auth
@@ -284,7 +285,13 @@ export const POST = auth(async function POST(req) {
                 user: auth.user
             }, 
         })
-            
+    } catch (err) {
+        return NextResponse.json({
+            message: "Error: " + err
+        }, {
+            status: 505
+        })
+    }
             
 }
 )
