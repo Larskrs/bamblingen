@@ -58,6 +58,7 @@ export async function GET(req, ctx) {
                     "Access-Control-Allow-Origin": "*",
                     "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
                     "Access-Control-Allow-Headers": "Content-Type, Range",
+                    'Content-Disposition': `filename="${fileName}"`,
                 },
             });
         }
@@ -73,6 +74,7 @@ export async function GET(req, ctx) {
                 "Content-Length": chunkSize,
                 "Content-Type": mimeType,
                 "filename": fileName,
+                'Content-Disposition': `filename="${fileName}"`,
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
                 "Access-Control-Allow-Headers": "Content-Type, Range",
@@ -87,6 +89,7 @@ export async function GET(req, ctx) {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
                 "Access-Control-Allow-Headers": "Content-Type, Range",
+                'Content-Disposition': `filename="${fileName}"`,
             },
         });
     }
@@ -155,6 +158,7 @@ export const POST = auth(async function POST(req) {
             
             const directoryPath = path.posix.join(process.cwd(),`files`)
             const filePath = path.join(`${directoryPath}`,`${filename}.${extension}`)
+            const mimeType = mime.lookup(filePath) || 'application/octet-stream';
             
 
             try {
@@ -174,7 +178,8 @@ export const POST = auth(async function POST(req) {
             const data = {
                 file,
                 name: filename,
-                url: encodeURI(`${process.env.NEXT_PUBLIC_URL}/api/files?fileId=${filename}.${extension}`)
+                mimeType,
+                url: encodeURI(`/api/v1/files?fileId=${filename}.${extension}`)
             }
 
             await pump(file.stream(), createWriteStream(filePath));

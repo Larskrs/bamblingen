@@ -1,4 +1,5 @@
 // components/FileUpload.js
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 
@@ -61,9 +62,12 @@ const SimpleFileDropper = () => {
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {success && <p style={{ color: 'green' }}>Upload successful!</p>}
 
-      {success && <div style={{display: 'flex', flexDirection: 'column', gap: '.5rem', padding: '1rem'}}>
+      {success && <div style={{display: 'flex', flexDirection: 'row', flexFlow: "wrap", gap: '.5rem', padding: '1rem'}}>
             {uploaded.map((f) => {
-                return <Link href={f.url} key={f.name}>{f.name}</Link>
+                return <Link style={{background: "var(--white-900)", padding: "0.5rem"}} href={f.url} key={f.name}>
+                  <Image width={96*2} height={64*2} src={f.url} />
+                  {/* <p>{f.name}</p> */}
+                </Link>
             })}
         </div>}
     </div>

@@ -14,9 +14,11 @@
     color: var(--white-50);
     font-size: .9rem;
     margin-bottom: .25rem;
+    width: 100%;
 }
 .credit {
     text-transform: uppercase;
     color: var(--white-100);
     font-size: .8rem;
+    display: flex;
 }

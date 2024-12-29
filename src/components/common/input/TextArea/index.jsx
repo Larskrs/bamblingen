@@ -32,7 +32,7 @@ const TextArea = ({ value, onChange=() => {}, onEnter=() => {}, ...props }) => {
         adjustHeight(); // Adjust height on user input
       }}
       {...props}
-      style={{ resize: 'both', overflow: 'hidden' }} // Enable manual resizing while hiding scrollbars
+      style={{ resize: 'none', fontWeight: "inherit", overflow: 'hidden', width: "100%" }} // Enable manual resizing while hiding scrollbars
     />
   );
 };
