@@ -10,7 +10,8 @@ const pump = promisify(pipeline);
 import { stat } from 'fs/promises';
 import { cleanFilename } from "@/lib/fileLib"
 import { auth } from '@/auth';
-import { GenerateUniqueIdentifier } from '@/lib/articleLib';
+import { ConnectOrCreateCategoryTags, GenerateUniqueIdentifier } from '@/lib/articleLib';
+import { db } from '@/lib/db';
 
 async function GetFilePath (fileId) {
 
@@ -23,10 +24,38 @@ async function GetFilePath (fileId) {
     return { filePath, fileName}
 }
 
+async function GetNewFilePath (fileId, batchId, fileName) {
+    const directoryPath = path.posix.join(process.cwd(),`files`, `batch-${batchId}`)
+    const filePath = path.join(`${directoryPath}`,`${fileName}`)
+
+    return { directoryPath, filePath, fileName }
+}
+
+async function GetDBFile (fileId) {
+    const response = await db.file.findUnique({
+        where: {
+            id: fileId
+        },
+        include: {
+            batch: true,
+        }
+    })
+
+    return response
+}
+
 export async function GET(req, ctx) {
     const fileId = req.nextUrl.searchParams.get("fileId").replace("/", '');
 
-    let { filePath, fileName } = await GetFilePath(fileId)
+    const dbFile = await GetDBFile(fileId)
+    if (!dbFile) {
+        return NextResponse.json({ message: `File with id of: '${fileId}', could not be found in our database.` }, { status: 401 })
+    }
+
+    const batchId = dbFile.batch.id
+
+    const fileName = dbFile.name
+    let { filePath } = await GetNewFilePath(fileId, batchId, fileName)
     
     const [id, extension] = fileId.split(".");
     const mimeType = mime.lookup(filePath) || 'application/octet-stream';
@@ -133,14 +162,62 @@ export const POST = auth(async (req) => {
 })
 */
 
-export const POST = auth(async function POST(req) {
-    // if (!req.auth) return NextResponse.json({ message: "Not authenticated" }, { status: 401 })
+async function UploadFileToDB (id, name, address, type, userId) {
+    const query = {
+        data: {
+            id,
+            name,
+            address,
+            type,
+            user: {
+                connect: {
+                    id: userId
+                }
+            },
+            batch: {
+                connectOrCreate: {
+                    where: {
+                      id: 'debug',
+                    },
+                    create: {
+                      id: 'debug',
+                      name: "Debug Batch",
+                      categories: { connectOrCreate: ConnectOrCreateCategoryTags(["debug", "testing", "development"]) },
+                      user: {
+                        connect: {
+                            id: userId
+                        }
+                      },
+                    },
+                },
+            }
+        }
+    }
 
-    // return NextResponse.json(req.auth);
+    console.log(query.data.batch)
+
+    const response = await db.file.create(query)
+    return response
+}
+
+export const POST = auth(async function POST(req) {
+
+        if (!req.auth) return NextResponse.json({ message: "Not authenticated" }, { status: 401 })
+
+        const auth = req.auth
 
         let   files = []
 
         const formData = await req.formData();
+        if (!formData.has('files')) {
+            return NextResponse.json({ message: "No 'files', provided" }, { status: 401 })
+        }
+        if (!formData.has('batchId')) {
+            return NextResponse.json({ message: "No 'batchId', provided" }, { status: 401 })
+        }
+
+        const batchId = cleanFilename(formData.get('batchId'))
+        const userId = auth.user.id
 
         const fileCount = formData.getAll('files').length
 
@@ -149,14 +226,13 @@ export const POST = auth(async function POST(req) {
         for (let i = 0; i < fileCount; i++) {
             const file = formData.getAll('files')[i]
             
-            const userId = formData.get("")
             const extension = file.name.split('.').pop()
 
             const cleanFileName = cleanFilename(file.name.split('.').shift())
             const identifier = await GenerateUniqueIdentifier(new Date())
             const filename = `${identifier}-${cleanFileName}`
             
-            const directoryPath = path.posix.join(process.cwd(),`files`)
+            const directoryPath = path.posix.join(process.cwd(),`files`, `batch-${batchId}`)
             const filePath = path.join(`${directoryPath}`,`${filename}.${extension}`)
             const mimeType = mime.lookup(filePath) || 'application/octet-stream';
             
@@ -175,15 +251,27 @@ export const POST = auth(async function POST(req) {
 
             // Produce File
 
+            const url = encodeURI(`/api/v1/files?fileId=${identifier}`)
+
+            const dbEntry = await UploadFileToDB(
+                identifier,
+                `${filename}.${extension}`,
+                filePath,
+                mimeType,
+                auth.user.id
+            )
+
             const data = {
                 file,
                 name: filename,
                 mimeType,
-                url: encodeURI(`/api/v1/files?fileId=${filename}.${extension}`)
+                dbEntry,
+                url
             }
 
             await pump(file.stream(), createWriteStream(filePath));
             console.log(data)
+            // console.log(auth.user)
 
             files = [...files, data]
         }
@@ -191,7 +279,10 @@ export const POST = auth(async function POST(req) {
 
         return NextResponse.json({
             status:"success",
-            data: files, 
+            data: {
+                files,
+                user: auth.user
+            }, 
         })
             
             

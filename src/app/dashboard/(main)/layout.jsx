@@ -38,8 +38,8 @@ export default async function Layout({ children }) {
           <Image
             alt="user-avatar"
             src={session.user.image}
-            width={512}
-            height={512}
+            width={1080}
+            height={1080}
           />
         </div>
 

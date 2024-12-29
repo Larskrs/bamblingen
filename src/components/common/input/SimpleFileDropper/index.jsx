@@ -21,9 +21,12 @@ const SimpleFileDropper = () => {
     }
 
     const formData = new FormData();
+    formData.set('batchId', "debug")
     for (let i = 0; i < files.length; i++) {
       formData.append('files', files[i]);
     }
+
+    console.log(formData)
 
     setUploading(true);
     setError(null);
@@ -36,7 +39,8 @@ const SimpleFileDropper = () => {
       });
 
       if (!res.ok) {
-        throw new Error('Upload failed');
+        const json = await res.json()
+        throw new Error('Upload failed: ' + json.message);
       }
 
       const json = await res.json()
@@ -63,9 +67,9 @@ const SimpleFileDropper = () => {
       {success && <p style={{ color: 'green' }}>Upload successful!</p>}
 
       {success && <div style={{display: 'flex', flexDirection: 'row', flexFlow: "wrap", gap: '.5rem', padding: '1rem'}}>
-            {uploaded.map((f) => {
+            {uploaded.files.map((f) => {
                 return <Link style={{background: "var(--white-900)", padding: "0.5rem"}} href={f.url} key={f.name}>
-                  <Image width={96*2} height={64*2} src={f.url} />
+                  <Image alt={f.name} width={96*2} height={64*2} src={f.url} />
                   {/* <p>{f.name}</p> */}
                 </Link>
             })}

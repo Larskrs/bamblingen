@@ -152,7 +152,7 @@ model Batch {
   categories      Category[]
 
   user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId         String  @unique
+  userId          String
 
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
@@ -163,11 +163,11 @@ model File {
   address         String
   type            String
 
-  Batch           Batch @relation(fields: [BatchId], references: [id])
-  BatchId         String  @unique
+  batch           Batch @relation(fields: [batchId], references: [id])
+  batchId         String
 
   user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId         String  @unique
+  userId          String 
 
   createdAt       DateTime          @default(now())
 }
