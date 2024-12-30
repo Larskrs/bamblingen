@@ -17,6 +17,10 @@ export default function ImageComponent ({
     const [_alt, setAlt] = useState(alt)
     const [_credit, setCredit] = useState(credit)
 
+    useEffect(() => {
+        onChange(query())
+    }, [_src, _credit, _alt])
+
     if (!_src) {
         return <></>
     }
@@ -29,10 +33,6 @@ export default function ImageComponent ({
             credit: _credit
         }
     }
-
-    useEffect(() => {
-        onChange(query())
-    }, [_src, _credit, _alt])
 
     return (
         <div className={styles.c}>
