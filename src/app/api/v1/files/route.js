@@ -8,9 +8,9 @@ import { pipeline } from 'stream';
 import { promisify } from 'util';
 const pump = promisify(pipeline);
 import { stat } from 'fs/promises';
-import { cleanFilename } from "@/lib/fileLib"
+import { cleanFilename, GenerateUniqueIdentifier } from "@/lib/fileLib"
 import { auth } from '@/auth';
-import { ConnectOrCreateCategoryTags, GenerateUniqueIdentifier } from '@/lib/articleLib';
+import { ConnectOrCreateCategoryTags } from '@/lib/articleLib';
 import { db } from '@/lib/db';
 
 async function GetFilePath (fileId) {
@@ -49,7 +49,7 @@ export async function GET(req, ctx) {
 
     const dbFile = await GetDBFile(fileId)
     if (!dbFile) {
-        return NextResponse.json({ message: `File with id of: '${fileId}', could not be found in our database.` }, { status: 401 })
+        return NextResponse.json({ message: `File with id of: '${fileId}', could not be found in our database.` }, { status: 404 })
     }
 
     const batchId = dbFile.batch.id

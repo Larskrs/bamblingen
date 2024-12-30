@@ -3,10 +3,10 @@ import styles from "./style.module.css"
 import ZoomableElement from "@/components/wrappers/ZoomInWrapper";
 import Editor from "./editor"
 
-export default function TextComponent ({id, src, alt, credit, editor}) {
+export default function TextComponent ({id, src, alt, credit, editor, onChange=()=>{}}) {
 
     if (editor) {
-        return <Editor id={id} src={src} alt={alt} credit={credit} />
+        return <Editor id={id} src={src} alt={alt} credit={credit} onChange={onChange}/>
     }
 
     return (

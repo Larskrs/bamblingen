@@ -134,6 +134,12 @@ export async function DefaultArticle (authors) {
                         alt: "",
                         credit: "Foto: Bamblingen.no"
                     },
+                    {
+                        type: "text",
+                        lines: [
+                            "Denne teksten må endres før den publiseres!",
+                        ]
+                    },
                 ],
                 title: "Tittel",
                 subtitle: "Undertittel",

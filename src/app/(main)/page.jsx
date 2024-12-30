@@ -102,7 +102,7 @@ export default function TestArticle () {
             <div className={styles.m}>
             <FrontPageContent rows={[
                     {
-                        type: "header",
+                        type: "countdown",
                         layout: "G_1",
                         priority: "normal",
                         items: [

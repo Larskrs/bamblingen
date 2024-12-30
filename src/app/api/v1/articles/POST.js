@@ -5,8 +5,9 @@ import { NextResponse } from "next/server";
 export default async function POST(req) {
 
     try {
-
+        
             const body = await req.json()
+
             if (!body.title) {
                 return ErrorMessage("Title argument is missing")
             }

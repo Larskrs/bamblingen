@@ -3,12 +3,43 @@
     flex-direction: column;
     margin-bottom: 2rem;
     height: fit-content;
+    width: 100%;
 }
 .img {
     width: 100%;
     height: auto;
-    margin-bottom: .5rem;
     pointer-events: none;
+    position: relative;
+    object-fit: contain;
+    max-height: 90vh;
+    transition: 250ms var(--curve-1);
+}
+.holder {
+    margin-bottom: .5rem;
+    min-height: 4em;
+    height: fit-content;
+    position: relative;
+    background-color: var(--white-700);
+}
+.holder:hover img {
+    opacity: .5;
+}
+.holder:hover .controls {
+    opacity: 1;
+}
+.controls {
+    opacity: .5;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: 100%;
+    padding: 1rem;
+    padding: 0.5rem;
+    /* background-color: var(--white-700); */
+    font-size: 1rem !important;
+    z-index: 2;
+    transition: 250ms var(--curve-1);
 }
 .alt {
     color: var(--white-50);
@@ -21,4 +52,19 @@
     color: var(--white-100);
     font-size: .8rem;
     display: flex;
+}
+
+.comment {
+    font-size: 0.75rem;
+}
+
+@keyframes controls {
+    0% {
+        scale: 0.9;
+        opacity: 0;
+    }
+    100% {
+        scale: 1;
+        opacity: 1;
+    }
 }

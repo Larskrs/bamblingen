@@ -16,6 +16,6 @@ export default async function NewsArticlePage ({ params }) {
     const defaultArticle = await DefaultArticle([session.user.id])
 
     return (
-        <Editor defaultArticle={defaultArticle} />
+        <Editor defaultArticle={defaultArticle} userId={session.user.id} />
     )
 }

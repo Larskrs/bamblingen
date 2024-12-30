@@ -1,3 +1,8 @@
+
+import crypto from "crypto"
+import slugify from "slugify";
+import { db } from "./db";
+
 export function cleanFilename(filename) {
     // Step 1: Remove any characters not allowed in filenames.
     let cleaned = filename.replace(/[\/\\:*?"<>|]/g, '');
@@ -24,3 +29,38 @@ export function cleanFilename(filename) {
   
     return cleaned;
   }
+
+
+export async function GenerateUniqueIdentifier(creationDate) {
+        const formattedDate = creationDate.toISOString().slice(0, 10);
+        const datePart = formattedDate.replace(/-/g, ''); // YYYYMMDD format
+        let uniqueIdentifier;
+        
+        let collisions = 0
+
+        // Retry mechanism in case of collisions
+        while (true) {
+            const randomPart = crypto.randomBytes(24).toString('hex'); // 6-character random string
+            uniqueIdentifier = `${datePart}-${randomPart}`;
+
+            // Check if the identifier is unique in the database
+            const existingItem = await db.file.findUnique({
+                where: {
+                    createdAt: {
+                        gte: new Date(`${formattedDate}T00:00:00Z`), // Start of the day
+                        lt: new Date(`${formattedDate}T23:59:59Z`), // End of the day
+                    },
+                    id: uniqueIdentifier
+                },
+            });
+            if (existingItem) {
+              collisions++
+            }
+
+            if (!existingItem) {
+                break; // Exit the loop if the identifier is unique
+            }
+        }
+
+        return uniqueIdentifier;
+    }

@@ -5,12 +5,13 @@ import Editor from "./editor"
 export default function TextComponent({
     id,
     lines = ["ERROR!!", "Noice", "Text Component Missing Lines Property"],
-    editor
+    editor,
+    onChange
 }) {
 
 
     if (editor) {
-      return <Editor id={id} lines={lines} />
+      return <Editor id={id} lines={lines} onChange={onChange}/>
     }
     return (
         <div className={styles.c}>

@@ -11,11 +11,58 @@ import { useEffect, useState } from "react"
 import TextArea from "@/components/common/input/TextArea";
 
 export default function NewsArticlePage ({ userId, defaultArticle }) {
+    
+    const v = defaultArticle.versions?.[0]
 
+    const [title, setTitle] = useState(v.title)
+    const [subTitle, setSubTitle] = useState(v.subtitle)
+    const [image, setImage] = useState(v.image)
+    const [components, setComponents] = useState(v.components)
     const [article, setArticle] = useState(defaultArticle)
+    const [authors, setAuthors] = useState([userId])
 
-    const v = article.versions?.[0]
-    console.log(article)
+    
+    const query = () => {
+        const _ = {
+            title: title,
+            subtitle: subTitle,
+            authors,
+            image,
+            components
+        }
+        return _
+    }
+
+    const UpdateComponents = (line, newValue) => {
+        console.log("Updating components")
+        console.log({newValue})
+        const _ = [...components]
+        _[line] = newValue
+        setComponents(_)
+    }
+
+    const handleUpload = async () => {
+    
+        try {
+          const res = await fetch('/api/v1/articles', {
+            method: 'POST',
+            body: JSON.stringify(query()),
+          });
+    
+          if (!res.ok) {
+            const json = await res.json()
+            throw new Error('Upload failed: ' + json.message);
+          }
+    
+          const json = await res.json()
+
+        } catch (error) {
+          
+        } finally {
+            
+        }
+      };
+    
 
     return (
         <div className={styles.c}>
@@ -28,12 +75,12 @@ export default function NewsArticlePage ({ userId, defaultArticle }) {
                 })}
             </div>
                 <header className={styles.header}>
-                    <h1><TextArea defaultValue={v.title}></TextArea></h1>
-                    <p><TextArea defaultValue={v.subtitle}></TextArea></p>
+                    <h1><TextArea onChange={(v) => setTitle(v)} defaultValue={v.title}></TextArea></h1>
+                    <p><TextArea onChange={setSubTitle} defaultValue={v.subtitle}></TextArea></p>
                 </header>
                 <div className={styles["lead"]}>
                     <div className={styles["lead-media"]}>
-                        <Image alt="lead-media" src={v.image} width={1280} height={720} />
+                        <ArticleImage onChange={(e) => {setImage(e.src)}} editor={true} alt="lead-media" src={image} width={1280} height={720} />
                     </div>
                     <div className={styles.sidebar}>
                         <div className={styles.authors}>
@@ -55,10 +102,16 @@ export default function NewsArticlePage ({ userId, defaultArticle }) {
                 <div className={styles.m}>
                     {/* <p>Article for {await id}</p> */}
                     <div className={styles.body}>
-                        <ArticleContent editor={true} components={v.components} />
+                        <ArticleContent editor={true} components={components} onUpdateComponent={UpdateComponents}/>
                     </div>
                 </div>
             </div>
+            <pre>{JSON.stringify(query(), null, 2)}</pre>
+
+            <button onClick={handleUpload}>Skap Artikkel</button>
         </div>
+
     )
+
+
 }

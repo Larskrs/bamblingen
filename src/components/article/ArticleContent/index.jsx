@@ -3,7 +3,7 @@ import Image from "../Image";
 import Reference from "../Reference";
 import Heading from "../Heading";
 
-export default function ArticleContent({ components, editor=false }) {
+export default function ArticleContent({ components, editor=false, onUpdateComponent }) {
     // Define the component mapping
     const componentMap = {
         text: Text,
@@ -20,7 +20,7 @@ export default function ArticleContent({ components, editor=false }) {
                 if (!Component) return null; // If type is unsupported, skip
 
                 // Render the component with the remaining props
-                return <Component editor={editor} key={i} {...props} />
+                return <Component editor={editor} onChange={(value) => {onUpdateComponent(i, value)}} key={i} {...props} />
                 
             })}
         </div>

@@ -1,20 +1,53 @@
 "use client"
 import styles from "./style.module.css"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MarkdownFormatter from "@/components/common/MarkdownText";
 import Image from "next/image";
 import TextArea from "@/components/common/input/TextArea";
 
-export default function TextComponent({
-    id, src, alt, credit
+export default function ImageComponent ({
+    id, src, alt, credit, onChange=()=>{}
 }) {
+
+    const fixURL = (source) => {
+        return source.replace("https://bamblingen.no", "")
+    }
+
+    const [_src, setSource] = useState(src)
+    const [_alt, setAlt] = useState(alt)
+    const [_credit, setCredit] = useState(credit)
+
+    if (!_src) {
+        return <></>
+    }
+
+    const query = () => {
+        return {
+            type: "image",
+            src: _src,
+            alt: _alt,
+            credit: _credit
+        }
+    }
+
+    useEffect(() => {
+        onChange(query())
+    }, [_src, _credit, _alt])
 
     return (
         <div className={styles.c}>
-            <Image className={styles.img} src={src} alt={alt} width={500} height={500} />
+            <div className={styles.holder}>
+                <div className={styles.controls}>
+                    {/* <span className={styles.comments}>Trykk på 'enter' eller 'send' for å lagre</span> */}
+                    <TextArea defaultValue={_src} value={_src} onEnter={(value) => { setSource(value) }} />
+                </div>
+                <Image className={styles.img} src={_src} alt={_alt} width={500} height={500} />
+            </div>
             <div>
-            <p className={styles.alt}><TextArea defaultValue={alt}></TextArea></p>
-            <p className={styles.credit}><TextArea defaultValue={credit}></TextArea></p>
+            <span className={styles.comment}>Beskriv handlingen i bildet</span>
+            <TextArea onChange={(value) => { setAlt(value) }} defaultValue={alt}></TextArea>
+            <span className={styles.comment}>Hvem er det som står bak bildet?</span>
+            <TextArea onChange={(value) => { setCredit(value) }} defaultValue={credit}></TextArea>
             </div>
         </div>
     );
