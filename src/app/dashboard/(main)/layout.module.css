@@ -18,6 +18,7 @@
     overflow: hidden;
     border: 2px solid var(--secondary-100);
     align-items: center;
+    font-size: 0.85rem;
 }
 .user {
     width: 100%;

@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { FileList } from '../../FileList';
 
 const SimpleFileDropper = () => {
   const [files, setFiles] = useState(null);
@@ -67,12 +68,7 @@ const SimpleFileDropper = () => {
       {success && <p style={{ color: 'green' }}>Upload successful!</p>}
 
       {success && <div style={{display: 'flex', flexDirection: 'row', flexFlow: "wrap", gap: '.5rem', padding: '1rem'}}>
-            {uploaded.files.map((f) => {
-                return <Link style={{background: "var(--white-900)", padding: "0.5rem"}} href={f.url} key={f.name}>
-                  <Image alt={f.name} width={96*2} height={64*2} src={f.url} />
-                  {/* <p>{f.name}</p> */}
-                </Link>
-            })}
+            <FileList files={uploaded.files} />
         </div>}
     </div>
   );

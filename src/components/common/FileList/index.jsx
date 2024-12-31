@@ -10,15 +10,16 @@ export function FileList ({files}) {
 
     console.log(files)
 
-    return <div style={{padding: "1rem", display: "flex", flexWrap: "wrap"}}>
-        {files.map((f) => {
+    return <div className={styles.c}>
+        {files.map((f, i) => {
 
                 const url = `/api/v1/files?fileId=${f.id}`
 
-                return <Link style={{background: "var(--white-900)", padding: "0.5rem"}} href={url} key={f.name}>
-                  <Image alt={f.name} width={96*2} height={64*2} src={url} />
-                  {/* <p>{f.name}</p> */}
-                </Link>
+                return (
+                    <Link style={{animationDelay: `${i*50}ms`}} className={styles.file} href={url} key={f.id}>
+                        <Image alt={f.name} width={256} height={256} src={url} />
+                    </Link>
+                )
             })}
     </div>
 }
