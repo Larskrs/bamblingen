@@ -1,7 +1,6 @@
 "use server"
 
 import styles from "./page.module.css";
-import Editor from "./editor"
 import { auth } from "@/auth";
 import { DefaultArticle } from "@/lib/articleLib";
 import { notFound } from "next/navigation";
@@ -16,6 +15,7 @@ export default async function NewsArticlePage ({ params }) {
     const defaultArticle = await DefaultArticle([session.user.id])
 
     return (
-        <Editor defaultArticle={defaultArticle} userId={session.user.id} />
+        <p></p>
+        // <Editor defaultArticle={defaultArticle} userId={session.user.id} />
     )
 }

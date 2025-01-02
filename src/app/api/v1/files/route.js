@@ -55,7 +55,8 @@ export async function GET(req, ctx) {
     const batchId = dbFile.batch.id
 
     const fileName = dbFile.name
-    let { filePath } = await GetNewFilePath(fileId, batchId, fileName)
+    // let { filePath } = await GetNewFilePath(fileId, batchId, fileName)
+    const filePath = dbFile.address
     
     const [id, extension] = fileId.split(".");
     const mimeType = mime.lookup(filePath) || 'application/octet-stream';

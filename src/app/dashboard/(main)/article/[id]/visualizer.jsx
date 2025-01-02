@@ -1,52 +1,43 @@
-"use server"
+"use client"
 import Image from "next/image";
-import styles from "./page.module.css";
+import styles from "./visualizer.module.css";
 import { formatRelativeDate } from "@/lib/timeLib";
-import axios, { AxiosRequestConfig } from 'axios';
-import { notFound } from "next/navigation";
-import { logger } from "logger.mjs";
-import { GetArticle } from "@/lib/articleLib";
 import ArticleContent from "@/components/article/ArticleContent";
-import ArticleImage from "@/components/article/Image"
 
-export default async function NewsArticlePage ({ params }) {
+export default function NewsArticlePage ({ query=null }) {
 
-    const parm = await params
-    const id = parm.id
-
-    const article = await GetArticle(id)
-
-    if (!article) {
-        return notFound()
+    if (!query) {
+        return <p>Finner ikke artikkelinformasjon for å visualisere endringer</p>
     }
 
-    const v = article?.versions?.[0]
-    const components = v.components
+    const id = query.id
+
+    const components = query.components
 
     return (
         <div className={styles.c}>
             <div className={styles.article}>
             <div className={styles.context}>
-                {article.categories.map((tag) => {
+                {query.categories.map((tag) => {
                     return (
                         <p key={tag.id}>{tag.name}</p>
                     )
                 })}
             </div>
                 <header className={styles.header}>
-                    <h1>{v.title}</h1>
-                    <p>{v.subtitle}</p>
+                    <h1>{query.title}</h1>
+                    <p>{query.subtitle}</p>
                 </header>
                 <div className={styles["lead"]}>
                     <div className={styles["lead-media"]}>
-                        <Image alt="lead-media" src={v.image} width={1280} height={720} />
+                        <Image alt="lead-media" src={query.image} width={1280} height={720} />
                     </div>
                     <div className={styles.sidebar}>
                         <div className={styles.authors}>
-                            {article.authors.map((author) => {
+                            {query.authors.map((author) => {
                                 return (
                                     <div key={author.id} className={styles.author}>
-                                        {article.authors.length < 3 && <Image alt={`${author.name}'s image`} src={author.image} height={128} width={128}/>}
+                                        {query.authors.length < 3 && <Image alt={`${author.name}'s image`} src={author.image} height={128} width={128}/>}
                                         <div className={styles.body}>
                                             <p>{author.name}</p>
                                             <p>{author.title || "Journalist"}</p>
@@ -55,7 +46,7 @@ export default async function NewsArticlePage ({ params }) {
                                 )
                             })}
                         </div>
-                        <p className={styles.date}>Sist oppdatert {formatRelativeDate(new Date(article.createdAt))}</p>
+                        <p className={styles.date}>Sist oppdatert {formatRelativeDate(new Date())}</p>
                     </div>
                 </div>
                 <div className={styles.m}>

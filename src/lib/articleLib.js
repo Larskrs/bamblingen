@@ -84,6 +84,12 @@ export async function GetArticle (id) {
     
             // Fetch data from the database with the constructed query
             const data = await db.article.findUnique(query);
+
+            data.versions.map((v) => {
+                const _ = v
+                _.components = JSON.parse(_.components)
+                return _
+            })
     
             return data
         } catch (err) {

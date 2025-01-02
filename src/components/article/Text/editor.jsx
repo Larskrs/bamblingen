@@ -3,7 +3,8 @@ import styles from "./style.module.css"
 import React, { useEffect, useState } from "react";
 import Editor from "./editor"
 import MarkdownFormatter from "@/components/common/MarkdownText";
-import TextArea from "@/components/common/input/TextArea";
+import TextArea from "@/components/editor/input/TextArea";
+import DraggableResort from "@/components/editor/input/DraggableResort";
 
 export default function TextComponent({
     id,
@@ -59,12 +60,20 @@ export default function TextComponent({
 
     return (
         <div className={styles.c}>
-            <p className={styles.details}>Lines: {_lines.length}</p>
+            {/* <DraggableResort items={_lines} onChange={(newOrder) => setLines(newOrder)} onRender={(item, index) => {
+                if (current === index) {
+                    return <LineEditor key={index} id={i} line={_lines[index]} onSubmit={SubmitLine} onUpdate={(v) => {UpdateLine(i, v)}} onDelete={DeleteLine}/>
+                }
+                return (<div key={index+"edit"} style={{color: "white"}} className={styles.line} onClick={() => {Select(i)}}>
+                            <MarkdownFormatter key={index+_lines[index]} text={_lines[index]} />
+                        </div>)
+                
+            }} ></DraggableResort> */}
             {_lines.map((line, i) => {
                 if (current === i) {
                     return <LineEditor key={i} id={i} line={line} onSubmit={SubmitLine} onUpdate={(v) => {UpdateLine(i, v)}} onDelete={DeleteLine}/>
                 }
-                return (<div className={styles.line} key={i} onClick={() => {Select(i)}}>
+                return (<div  key={i+"edit"} style={{color: "white"}} className={styles.line} onClick={() => {Select(i)}}>
                             <MarkdownFormatter key={i+line} text={line} />
                         </div>)
             })}
@@ -77,7 +86,7 @@ function LineEditor ({line, id, onUpdate, onDelete, onSubmit}) {
 
     return (
         <div className={styles.editor}>
-            <TextArea className={styles.editing} onEnter={onSubmit} defaultValue={line} onChange={onUpdate}></TextArea>
+            <TextArea placeholder="Ny linje" defaultValue={line} description="" className={styles.editing} onEnter={onSubmit} onChange={onUpdate}></TextArea>
             <button onClick={() => onDelete(id)}>Slett Linje</button>
         </div>
     )

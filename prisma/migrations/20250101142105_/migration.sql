@@ -93,9 +93,9 @@ CREATE TABLE `ArticleVersion` (
     `location` VARCHAR(191) NOT NULL DEFAULT '',
     `components` LONGTEXT NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `ArticleId` VARCHAR(191) NOT NULL,
+    `articleId` VARCHAR(191) NOT NULL,
+    `visibility` ENUM('HIDDEN', 'DRAFT', 'PUBLIC') NOT NULL DEFAULT 'DRAFT',
 
-    UNIQUE INDEX `ArticleVersion_ArticleId_key`(`ArticleId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -114,9 +114,8 @@ CREATE TABLE `ComponentPageVersion` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `components` LONGTEXT NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `ComponentPageId` VARCHAR(191) NOT NULL,
+    `componentPageId` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `ComponentPageVersion_ComponentPageId_key`(`ComponentPageId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -142,7 +141,6 @@ CREATE TABLE `Batch` (
     `updatedAt` DATETIME(3) NOT NULL,
 
     UNIQUE INDEX `Batch_id_key`(`id`),
-    UNIQUE INDEX `Batch_userId_key`(`userId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -157,8 +155,6 @@ CREATE TABLE `File` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     UNIQUE INDEX `File_id_key`(`id`),
-    UNIQUE INDEX `File_batchId_key`(`batchId`),
-    UNIQUE INDEX `File_userId_key`(`userId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -199,10 +195,10 @@ ALTER TABLE `Session` ADD CONSTRAINT `Session_userId_fkey` FOREIGN KEY (`userId`
 ALTER TABLE `Authenticator` ADD CONSTRAINT `Authenticator_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `ArticleVersion` ADD CONSTRAINT `ArticleVersion_ArticleId_fkey` FOREIGN KEY (`ArticleId`) REFERENCES `Article`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `ArticleVersion` ADD CONSTRAINT `ArticleVersion_articleId_fkey` FOREIGN KEY (`articleId`) REFERENCES `Article`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `ComponentPageVersion` ADD CONSTRAINT `ComponentPageVersion_ComponentPageId_fkey` FOREIGN KEY (`ComponentPageId`) REFERENCES `ComponentPage`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `ComponentPageVersion` ADD CONSTRAINT `ComponentPageVersion_componentPageId_fkey` FOREIGN KEY (`componentPageId`) REFERENCES `ComponentPage`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Batch` ADD CONSTRAINT `Batch_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

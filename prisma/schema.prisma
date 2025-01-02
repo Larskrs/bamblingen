@@ -108,17 +108,24 @@ model Article {
 }
 
 model ArticleVersion {
-  id         Int      @id @default(autoincrement())
-  title      String   @db.MediumText
-  subtitle   String   @default("")
-  image      String   @db.LongText
-  location   String   @default("")
+  id          Int      @id @default(autoincrement())
+  title       String   @db.MediumText
+  subtitle    String   @default("")
+  image       String   @db.LongText
+  location    String   @default("")
 
-  components String   @db.LongText
-  createdAt  DateTime @default(now())
+  components  String   @db.LongText
+  createdAt   DateTime @default(now())
 
-  Article   Article @relation(fields: [ArticleId], references: [id])
-  ArticleId String  @unique
+  article     Article @relation(fields: [articleId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  articleId   String
+
+  visibility  ArticleVisibility @default(DRAFT)
+}
+enum ArticleVisibility {
+  HIDDEN
+  DRAFT
+  PUBLIC
 }
 
 model ComponentPage {
@@ -133,8 +140,8 @@ model ComponentPageVersion {
   components      String   @db.LongText
   createdAt       DateTime @default(now())
 
-  ComponentPage   ComponentPage @relation(fields: [ComponentPageId], references: [id])
-  ComponentPageId String  @unique
+  componentPage   ComponentPage @relation(fields: [componentPageId], references: [id])
+  componentPageId String
 }
 model Category {
   name            String            @unique

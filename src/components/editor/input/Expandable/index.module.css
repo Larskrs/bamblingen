@@ -1,0 +1,35 @@
+.c {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    background-color: inherit;
+    border-radius: 0.25rem;
+}
+.header {
+    background-color: inherit;
+    padding: 1rem;
+    width: 100%;
+    color: white;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    cursor: pointer;
+}
+.row > span {
+    font-size: 0.8rem;
+    color: var(--white-400);
+}
+.header img {
+    height: 2em;
+    width: 2em;
+}
+.content {
+    padding: 0.5rem;
+    background-color: var(--secondary-50);
+}
+.c:hover {
+    background: var(--secondary-75);
+}

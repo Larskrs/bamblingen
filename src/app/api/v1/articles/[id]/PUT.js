@@ -2,10 +2,33 @@ import { ConnectOrCreateCategoryTags, MAX_PER_PAGE } from "@/lib/articleLib";
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 
-export default async function GET(req, params) {
+export default async function PUT(req, params) {
 
     const parm = await params
     const id = parm.id
+
+    const body = await req.json()
+
+    console.log(body)
+
+    if (!body.title) {
+        return ErrorMessage("Title argument is missing")
+    }
+    if (!body.subtitle) {
+        return ErrorMessage("Subtitle argument is missing")
+    }
+    if (!body.image) {
+        return ErrorMessage("Image argument is missing")
+    }
+    if (body.components) {
+        body.components = JSON.stringify(body.components)
+        console.log(body.components)
+    } else {
+        return ErrorMessage("Components argument is missing")
+    }
+    if (!body.authors) {
+        return ErrorMessage("Authors argument is missing")
+    }
 
     try {
         if (!id) {
@@ -24,21 +47,40 @@ export default async function GET(req, params) {
                     set: [], // Clear all current relationships
                     connectOrCreate: ConnectOrCreateCategoryTags(["Skogbrann"]), // Add or create the new categories
                 },
+                versions: {
+                    create: {
+                        title: body.title,
+                        subtitle: body.subTitle,
+                        components: body.components,
+                        image: body.image
+                    }
+                }
             },
             include: {
                 categories: true
             }
         });
 
+        console.log(data)
+
 
         return NextResponse.json( data );
     } catch (err) {
         return NextResponse.json(
             {
-                message: "Could not retrieve articles due to an error",
+                message: "Service Error",
                 error: err.message || err,
             },
             { status: 500 }
         );
     }
+}
+
+function ErrorMessage (err) {
+    return NextResponse.json(
+    {
+        error: err,
+    },
+    { status: 400 }
+    )
 }

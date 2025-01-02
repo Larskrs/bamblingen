@@ -11,3 +11,15 @@ export async function GetUser (id) {
 
     return data
 }
+export async function GetUsers (array) {
+    if (!array) { return null; }
+    if (!array.length) { return null; }
+
+    const data = await db.user.findMany({
+        where: {
+            id: { in: array }
+        }
+    })
+
+    return data
+}

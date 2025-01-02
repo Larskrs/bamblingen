@@ -2,9 +2,9 @@
 import React, { useRef, useEffect, useState } from "react";
 import styles from "./style.module.css";
 
-const TextArea = ({ onChange = () => {}, onEnter = () => {}, defaultValue="", value="" }) => {
+const TextArea = ({ onChange = () => {}, onEnter = () => {}, required=false, defaultValue="", description="Dette er et ubestemt tekstfelt", placeholder="Ubestemt felt" }) => {
   const textareaRef = useRef(null);
-  const [currentValue, setCurrentValue] = useState(value || defaultValue)
+  const [currentValue, setCurrentValue] = useState(defaultValue)
 
   // Adjust the height of the textarea dynamically
   const adjustHeight = () => {
@@ -18,33 +18,25 @@ const TextArea = ({ onChange = () => {}, onEnter = () => {}, defaultValue="", va
 
   useEffect(() => {
     adjustHeight(); // Adjust height when the component is mounted or value changes
-  }, [currentValue, value]);
+  }, [currentValue, defaultValue]);
 
   return (
+    <div>
+    {description && <pre className={styles.description}>{description}</pre> }
     <textarea
       ref={textareaRef}
       defaultValue={defaultValue}
-      value={currentValue}
+      placeholder={placeholder}
       onKeyDown={(e) => {
         if (e.key === "Enter") {
           e.preventDefault();
           onEnter(e.target.value);
         }
       }}
-      onInput={(e) => {setCurrentValue(e.target.value); onChange(e.target.value)}}
-      className={className}
-      style={{
-        resize: "none",
-        fontWeight: "inherit",
-        fontSize: "inherit",
-        overflow: "hidden",
-        width: "100%",
-        background: "var(--white-700)",
-        minHeight: "2em",
-        padding: "0.5em",
-        border: "1px solid var(--white-600)",
-      }} // Enable manual resizing while hiding scrollbars
-    />
+      className={styles.field}
+      onChange={(e) => {onChange(e.target.value)}}
+      />
+    </div>
   );
 };
 

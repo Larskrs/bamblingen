@@ -14,6 +14,8 @@ export default function NewsArticlePage ({ userId, defaultArticle }) {
     
     const v = defaultArticle.versions?.[0]
 
+    console.log(v)
+
     const [title, setTitle] = useState(v.title)
     const [subTitle, setSubTitle] = useState(v.subtitle)
     const [image, setImage] = useState(v.image)
@@ -28,7 +30,8 @@ export default function NewsArticlePage ({ userId, defaultArticle }) {
             subtitle: subTitle,
             authors,
             image,
-            components
+            components,
+            id: defaultArticle.id
         }
         return _
     }
@@ -41,12 +44,15 @@ export default function NewsArticlePage ({ userId, defaultArticle }) {
         setComponents(_)
     }
 
-    const handleUpload = async () => {
-    
+    const handleUpdate = async () => {
+        
+        const q = query()
+        console.log(q)
+
         try {
-          const res = await fetch('/api/v1/articles', {
-            method: 'POST',
-            body: JSON.stringify(query()),
+          const res = await fetch(`/api/v1/articles/${article.id}`, {
+            method: 'PUT',
+            body: JSON.stringify(q),
           });
     
           if (!res.ok) {
@@ -55,6 +61,32 @@ export default function NewsArticlePage ({ userId, defaultArticle }) {
           }
     
           const json = await res.json()
+          console.log(json)
+
+        } catch (error) {
+          
+        } finally {
+            
+        }
+      };
+    const handleCreate = async () => {
+        
+        const q = query()
+        console.log(q)
+
+        try {
+          const res = await fetch(`/api/v1/articles/`, {
+            method: 'POST',
+            body: JSON.stringify(q),
+          });
+    
+          if (!res.ok) {
+            const json = await res.json()
+            throw new Error('Upload failed: ' + json.message);
+          }
+    
+          const json = await res.json()
+          console.log(json)
 
         } catch (error) {
           
@@ -102,13 +134,13 @@ export default function NewsArticlePage ({ userId, defaultArticle }) {
                 <div className={styles.m}>
                     {/* <p>Article for {await id}</p> */}
                     <div className={styles.body}>
-                        <ArticleContent editor={true} components={components} onUpdateComponent={UpdateComponents}/>
+                        <ArticleContent editor components={components} onUpdateComponent={UpdateComponents}/>
                     </div>
                 </div>
             </div>
             <pre>{JSON.stringify(query(), null, 2)}</pre>
 
-            <button onClick={handleUpload}>Skap Artikkel</button>
+            <button onClick={handleCreate}>Skap Artikkel</button>
         </div>
 
     )

@@ -1,0 +1,29 @@
+.c {
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1em;
+    color: var(--white-900);
+    background-color: var(--secondary-50);
+    display: flex;
+    width: 100%;
+    border: none;
+    min-height: 2.25em;
+}
+.c > p {
+    padding: 0.5rem;
+    height: 100%;
+    z-index: 2;
+}
+.progress {
+    background-color: var(--secondary-400);
+    max-width: 100%;
+    min-width: 0px;
+    height: 100%;
+    opacity: 0.7;
+    position: absolute;
+    box-shadow: 0px 0px 2rem var(--secondary-400);
+    transition: all 250ms var(--curve-1);
+}
