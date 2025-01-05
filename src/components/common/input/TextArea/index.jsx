@@ -14,8 +14,6 @@ const TextArea = ({ onChange = () => {}, onEnter = () => {}, defaultValue="", va
     }
   };
 
-  console.log()
-
   useEffect(() => {
     adjustHeight(); // Adjust height when the component is mounted or value changes
   }, [currentValue, value]);

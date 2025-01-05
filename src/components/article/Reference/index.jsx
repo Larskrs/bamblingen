@@ -21,15 +21,16 @@ export function ReferenceComponent ({id, title="*Referanse mangler*"}) {
     const url = `/api/v1/articles/${id}`
     const { data, error, loading } = useFetch(url)
 
-    
-    console.log(url)
-    console.log(data)
     if (loading) {
-        return <p>Laster inn artikkel...</p>
+        return <Link className={styles.c} href={`/n/${id}`}>
+        <div className={styles.text}>
+            <small>Les Også</small>
+            <p className={styles.title}>Laster inn...</p>
+        </div>
+    </Link>
     }
 
     let v = data?.versions?.[0]
-    console.log({v, error})
 
     return (
         <Link className={styles.c} href={`/n/${id}`}>
@@ -38,7 +39,7 @@ export function ReferenceComponent ({id, title="*Referanse mangler*"}) {
                 <p className={styles.title}>{v?.title || id}</p>
             </div>
             <div className={styles.thumbnail}>
-                <Image className={styles.overlay} src={"/icons/article_reference_overlay.svg"} width={360} height={720}/>
+                <Image className={styles.overlay} src={"/icons/article_reference_overlay.svg"} alt="reference-overlay" width={360} height={720}/>
                 <Image className={styles.img} src={v?.image || "/images/langesund.jpeg"} alt={v?.title || "alt-not-figured"} quality={75} width={240} height={120} />
             </div>
         </Link>

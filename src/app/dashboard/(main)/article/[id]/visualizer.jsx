@@ -19,7 +19,6 @@ export default function NewsArticlePage ({ query=null }) {
             <div className={styles.article}>
             <div className={styles.context}>
                 {query.categories.map((tag) => {
-                    console.log(tag)
                     return (
                         <p key={tag.id || tag.toString()}>{tag.name}</p>
                     )

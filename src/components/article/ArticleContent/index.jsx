@@ -24,7 +24,6 @@ export function GetComponentPreviewText (data) {
 }
 export function ArticleRenderer({ components, editor=false, onUpdateComponent }) {
     // Define the component mapping
-    console.log(components)
 
     return (
         <div>

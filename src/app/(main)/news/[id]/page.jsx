@@ -1,12 +1,14 @@
 "use server"
 import { GetArticle } from "@/lib/articleLib"
 import Client from "./client"
+import { auth } from "@/auth"
 export default async function Page ({params}) {
 
     const parm = await params
     const id = parm.id
 
     const article = await GetArticle(id)
+    const session = await auth()
 
     if (!article) {
         return notFound()
@@ -18,7 +20,7 @@ export default async function Page ({params}) {
 
     return (
         <div>
-            <Client article={article} version={v} />
+            <Client article={article} version={v} session={session} />
         </div>
     );
 }

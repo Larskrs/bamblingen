@@ -14,8 +14,6 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
     
     const v = defaultArticle.versions?.[0]
 
-    console.log(v)
-
     const [title, setTitle] = useState(v.title)
     const [subTitle, setSubTitle] = useState(v.subtitle)
     const [image, setImage] = useState(v.image)
@@ -53,37 +51,31 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
     }
 
     const UpdateComponents = (line, newValue) => {
-        console.log("Updating components")
-        console.log({newValue})
         const _ = [...components]
         _[line] = newValue
         setComponents(_)
     }
 
     const handleUpdate = async () => {
-        
         setLoading(true)
         setError(false)
 
         const q = query()
-        console.log(q)
 
         try {
           const res = await fetch(`/api/v1/articles/${article.id}`, {
             method: 'PUT',
             body: JSON.stringify(q),
           });
-    
+
           if (!res.ok) {
             const json = await res.json()
-            console.log(json.error)
             setErrorMessage(json.error)
             setError(true)
             setLoading(false)
           }
-    
+
           const json = await res.json()
-          console.log(json)
 
         } catch (error) {
 
@@ -92,9 +84,8 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
         }
       };
     const handleCreate = async () => {
-        
+
         const q = query()
-        console.log(q)
 
         setLoading(true)
         setError(false)
@@ -104,16 +95,15 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
             method: 'POST',
             body: JSON.stringify(q),
           });
-    
+
           if (!res.ok) {
             const json = await res.json()
             throw new Error('Upload failed: ' + json.message);
           }
           const json = await res.json()
-          
+
 
         } catch (error) {
-          console.log({error})
           setErrorMessage(error)
           setError(true)
           setLoading(false)

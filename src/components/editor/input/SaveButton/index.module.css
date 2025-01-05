@@ -28,7 +28,7 @@
     transition: all 250ms var(--curve-1);
 }
 .error {
-    height: auto;
+    height: 5em;
     color: var(--red-500);
     overflow: hidden;
     transition: all 250ms var(--curve-1);

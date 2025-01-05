@@ -9,6 +9,7 @@
     position: relative; /* Ensure positioning context for children */
     margin-bottom: 2rem;
     background-color: var(--white-900);
+    height: 125px;
 }
 .c:hover .text p {
     text-decoration: underline;
@@ -55,6 +56,7 @@
     flex-shrink: 0;          /* Prevent image from shrinking */
     position: absolute;
     margin-left: auto;
+    transition: all 150ms var(--curve-1);
 }
 .overlay {
     position: absolute;
@@ -67,4 +69,12 @@
     aspect-ratio: 1/2;
     z-index: 2;
     object-fit: cover;
+    transition: all 150ms var(--curve-1);
+}
+.c:hover .overlay {
+    scale: 3;
+}
+.c:hover .img {
+    scale: 1.25;
+    translate: 25% 0px;
 }

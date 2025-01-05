@@ -3,14 +3,21 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import { formatRelativeDate } from "@/lib/timeLib";
 import { ArticleRenderer } from "@/components/article/ArticleContent";
+import Link from "next/link";
 
-export default function NewsArticlePage ({ version, article }) {
+export default function NewsArticlePage ({ version, article, session }) {
 
     const components = version.components
 
     return (
         <div className={styles.c}>
             <div className={styles.article}>
+            <nav className={styles.nav}>
+                {session?.user?.role && <>
+                    <Link href={`/dashboard/article/${article.id}`}>Rediger Artikkel</Link>
+                    <Link href={"/dashboard"} >{session?.user?.role}</Link> 
+                </>}
+            </nav>
             <div className={styles.context}>
                 {article.categories.map((tag) => {
                     return (

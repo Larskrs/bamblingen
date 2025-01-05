@@ -37,7 +37,7 @@ export default function SaveButton ({onClick, disabled=false, cooldownTime=250, 
                     }}></div>
                 <p style={{opacity: disabled || error ? 0.25 : 1}}>{children}</p>
             </div>
-            <p style={{height: error ? "1.2em" : "0px"}} className={styles.error}>{errorMessage?.message}</p>
+            <p style={{minHeight: error ? "fit-content" : "0px"}} className={styles.error}>{errorMessage?.message}</p>
     </>
     )
 }

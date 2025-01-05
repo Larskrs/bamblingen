@@ -26,8 +26,6 @@ export default function TextComponent({
 
     const query = () => {
 
-        console.log(_lines)
-
         return {
             type: "text",
             lines: _lines
