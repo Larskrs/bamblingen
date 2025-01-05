@@ -22,8 +22,14 @@
     max-width: 100%;
     min-width: 0px;
     height: 100%;
-    opacity: 0.7;
+    opacity: 1;
     position: absolute;
     box-shadow: 0px 0px 2rem var(--secondary-400);
+    transition: all 250ms var(--curve-1);
+}
+.error {
+    height: auto;
+    color: var(--red-500);
+    overflow: hidden;
     transition: all 250ms var(--curve-1);
 }

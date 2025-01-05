@@ -22,7 +22,7 @@ const TextArea = ({ onChange = () => {}, onEnter = () => {}, required=false, def
 
   return (
     <div>
-    {description && <pre className={styles.description}>{description}</pre> }
+    {description && <p className={styles.description}>{description}</p> }
     <textarea
       ref={textareaRef}
       defaultValue={defaultValue}
@@ -34,7 +34,7 @@ const TextArea = ({ onChange = () => {}, onEnter = () => {}, required=false, def
         }
       }}
       className={styles.field}
-      onChange={(e) => {onChange(e.target.value)}}
+      onChange={(e) => {adjustHeight(); onChange(e.target.value)}}
       />
     </div>
   );

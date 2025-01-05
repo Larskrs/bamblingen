@@ -1,6 +1,6 @@
 import localFont from "next/font/local";
 import googleFont from "next/font/google"
-import { Inter } from "next/font/google";
+import { Inter, Domine, Roboto_Serif, Roboto_Slab } from "next/font/google";
 
 import { SessionProvider } from "next-auth/react"
 
@@ -18,13 +18,18 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
-const domine = localFont({
-  src: "./fonts/Domine-VariableFont_wght.ttf",
+const domine = Domine({
   variable: "--font-domine",
-  weight: "400 500 600 700" 
+  weight: ["400", "500", "600", "700"],
+  subsets: ['latin'],
 })
 const inter = Inter({
   variable: "--font-inter",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  subsets: ['latin']
+})
+const roboto_slab = Roboto_Slab({
+  variable: "--font-roboto-slab",
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ['latin']
 })
@@ -39,7 +44,7 @@ export default async function RootLayout({ children }) {
   return (
     <SessionProvider>
       <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable} ${domine.variable} ${inter.variable}`}>
+        <body className={`${geistSans.variable} ${roboto_slab.variable} ${geistMono.variable} ${domine.variable} ${inter.variable}`}>
           {children}
         </body>
       </html>

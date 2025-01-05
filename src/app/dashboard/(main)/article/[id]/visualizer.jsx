@@ -2,7 +2,7 @@
 import Image from "next/image";
 import styles from "./visualizer.module.css";
 import { formatRelativeDate } from "@/lib/timeLib";
-import ArticleContent from "@/components/article/ArticleContent";
+import ArticleContent, { ArticleRenderer } from "@/components/article/ArticleContent";
 
 export default function NewsArticlePage ({ query=null }) {
 
@@ -19,8 +19,9 @@ export default function NewsArticlePage ({ query=null }) {
             <div className={styles.article}>
             <div className={styles.context}>
                 {query.categories.map((tag) => {
+                    console.log(tag)
                     return (
-                        <p key={tag.id}>{tag.name}</p>
+                        <p key={tag.id || tag.toString()}>{tag.name}</p>
                     )
                 })}
             </div>
@@ -37,7 +38,7 @@ export default function NewsArticlePage ({ query=null }) {
                             {query.authors.map((author) => {
                                 return (
                                     <div key={author.id} className={styles.author}>
-                                        {query.authors.length < 3 && <Image alt={`${author.name}'s image`} src={author.image} height={128} width={128}/>}
+                                        {query.authors.length < 3 && <Image alt={`${author.name}'s image`} src={author.image || "/icons/icon_file_image.svg"} height={128} width={128}/>}
                                         <div className={styles.body}>
                                             <p>{author.name}</p>
                                             <p>{author.title || "Journalist"}</p>
@@ -52,11 +53,7 @@ export default function NewsArticlePage ({ query=null }) {
                 <div className={styles.m}>
                     {/* <p>Article for {await id}</p> */}
                     <div className={styles.body}>
-                        <ArticleContent components={components} EditorRender={() => {
-                            return <>
-                                <h1>Editor</h1>
-                            </>
-                        }}/>
+                        <ArticleRenderer components={components} />
                     </div>
                 </div>
             </div>

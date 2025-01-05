@@ -3,24 +3,45 @@ import Image from "../Image";
 import Reference from "../Reference";
 import Heading from "../Heading";
 
-export default function ArticleContent({ components, editor=false, onUpdateComponent }) {
+export const ArticleComponents = {
+    text: Text,
+    image: Image,
+    reference: Reference,
+    heading: Heading,
+};
+
+export function GetArticleComponent (type) {
+    const Component = ArticleComponents[type]
+    return Component
+}
+export function GetComponentPreviewText (data) {
+    const component = GetArticleComponent(data.type)
+    if (component?.previewText) {
+        return component?.previewText(data)
+    }
+
+    return "Error"
+}
+export function ArticleRenderer({ components, editor=false, onUpdateComponent }) {
     // Define the component mapping
-    const componentMap = {
-        text: Text,
-        image: Image,
-        reference: Reference,
-        heading: Heading,
-    };
+    console.log(components)
 
     return (
         <div>
             {components.map(({ type, ...props }, i) => {
+                if (editor == true) {
+                    const EditorRenderer = ArticleComponents[type].editor;
+                    if (!EditorRenderer) return null; // If type is unsupported, skip
+
+                    return <EditorRenderer onChange={(value) => {onUpdateComponent(i, value)}} key={i} {...props} />
+                }
+
                 // Select the appropriate component based on the type
-                const Component = componentMap[type];
-                if (!Component) return null; // If type is unsupported, skip
+                const Renderer = ArticleComponents[type].renderer;
+                if (!Renderer) return null; // If type is unsupported, skip
 
                 // Render the component with the remaining props
-                return <Component editor={editor} onChange={(value) => {onUpdateComponent(i, value)}} key={i} {...props} />
+                return <Renderer editor={editor} onChange={(value) => {onUpdateComponent(i, value)}} key={i} {...props} />
                 
             })}
         </div>

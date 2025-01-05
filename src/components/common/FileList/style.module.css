@@ -30,6 +30,7 @@
     animation: item forwards 125ms var(--curve-1);
     text-overflow: clip;
     cursor: pointer;
+    background-color: var(--secondary-50);
 }
 .file p {
     width: 100%;

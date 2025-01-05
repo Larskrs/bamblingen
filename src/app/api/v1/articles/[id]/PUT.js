@@ -50,7 +50,7 @@ export default async function PUT(req, params) {
                 versions: {
                     create: {
                         title: body.title,
-                        subtitle: body.subTitle,
+                        subtitle: body.subtitle,
                         components: body.components,
                         image: body.image
                     }

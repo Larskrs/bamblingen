@@ -16,15 +16,7 @@ export default function ImageComponent ({
     const [_src, setSource] = useState(src)
     const [_alt, setAlt] = useState(alt)
     const [_credit, setCredit] = useState(credit)
-
-    useEffect(() => {
-        onChange(query())
-    }, [_src, _credit, _alt])
-
-    if (!_src) {
-        return <></>
-    }
-
+    
     const query = () => {
         return {
             type: "image",
@@ -33,13 +25,36 @@ export default function ImageComponent ({
             credit: _credit
         }
     }
+    
+        useEffect(() => {
+            onChange(query())
+        }, [_src, _credit, _alt])
+    
+        if (!_src) {
+            return <></>
+        }
 
     return (
 
         <>
-                    <TextArea placeholder="Bildeaddresse" description={`Bildeadressa skal kun være fra bamblingen.no \ntrykk på enter for å velge bildet.`} defaultValue={src}  onEnter={(value) => { setSource(value) }} />
-                    <TextArea onChange={(value) => { setAlt(value) }} defaultValue={alt}></TextArea>
-                    <TextArea onChange={(value) => { setCredit(value) }} defaultValue={credit}></TextArea>
+                    <TextArea
+                        placeholder="Bildeaddresse"
+                        description={`Bildeadressa skal kun være fra bamblingen.no. Trykk på enter for å velge bildet`}
+                        defaultValue={src}
+                        onEnter={(value) => { setSource(value) }}
+                        />
+                    <TextArea
+                        placeholder="Bildetekst"
+                        description={`Alternativ tekst eller og beskrivelse på handling i bildet`}
+                        onChange={(value) => { setAlt(value) }}
+                        defaultValue={alt}
+                        />
+                    <TextArea
+                        placeholder="Kilde"
+                        description={`Kilde til bildet, hvem står bak? Hvem har copyright?`}
+                        onChange={(value) => { setCredit(value) }}
+                        defaultValue={credit}
+                        />
         </>
     );
 }

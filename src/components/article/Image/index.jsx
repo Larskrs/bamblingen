@@ -3,7 +3,21 @@ import styles from "./style.module.css"
 import ZoomableElement from "@/components/wrappers/ZoomInWrapper";
 import Editor from "./editor"
 
-export default function TextComponent ({id, src, alt, credit, editor, onChange=()=>{}}) {
+const config = {
+    icon: "/icons/icon_file_image.svg",
+    renderer: ImageComponent,
+    name: "bilde",
+    previewText: (data) => {return data.alt || data.src},
+    editor: Editor,
+    default: {
+        type: "image",
+        src: "/images/langesund.jpeg",
+        alt: "Bildetekst",
+        credit: "Foto: Bamblingen.no"
+    }
+}
+
+export function ImageComponent ({id, src, alt, credit, editor, onChange=()=>{}}) {
 
     if (editor) {
         return <Editor id={id} src={src} alt={alt} credit={credit} onChange={onChange}/>
@@ -20,3 +34,4 @@ export default function TextComponent ({id, src, alt, credit, editor, onChange=(
     );
 }
 
+export default config

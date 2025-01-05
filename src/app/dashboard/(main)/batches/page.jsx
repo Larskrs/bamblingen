@@ -1,9 +1,10 @@
 "use client"
-import SimpleFileDropper from "@/components/common/input/SimpleFileDropper";
+
 import Image from "next/image";
 import styles from "./page.module.css"
 import { FileList } from "@/components/common/FileList";
 import useInfiniteFetch from "@/hooks/useInfiniteFetch";
+import SimpleFileDropper from "@/components/editor/input/SimpleFileDropper";
 
 const url = (page) =>
     `/api/v1/files/list`;

@@ -14,9 +14,17 @@ export function FileList ({files}) {
 
     return <div className={styles.c}>
         {files.map((f, i) => {
+                const url = `/api/v1/files?fileId=${f.id}`
+                const fileType = f.type.split("/").shift()
+                let image = `/icons/icon_file_${fileType}.svg`
+
+                if (fileType == "image") {
+                    image = url
+                }
+
                 return (
-                    <div style={{animationDelay: `${i*50}ms`}} className={styles.file} onClick={() => {router.push(`/api/v1/files?fileId=${f.id}`)}} key={f.id}>
-                        <Image alt={f.name} width={256} height={256} src={`/api/v1/files?fileId=${f.id}`} />
+                    <div style={{animationDelay: `${i*50}ms`}} className={styles.file} onClick={() => {router.push(url)}} key={f.id}>
+                        <Image alt={f.name} width={256} height={256} src={image} />
                     </div>
                 )
             })}

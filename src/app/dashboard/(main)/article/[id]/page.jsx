@@ -11,7 +11,6 @@ import { GetUsers } from "@/lib/userLib";
 export default async function NewsArticlePage ({ params }) {
 
     const id = (await params).id
-    console.log(id)
 
     const session = await auth()
     if (!session) {

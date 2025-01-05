@@ -6,8 +6,9 @@ import TextArea from "@/components/editor/input/TextArea";
 import Visualizer from "./visualizer"
 import SaveButton from "@/components/editor/input/SaveButton";
 import DraggableResort from "@/components/editor/input/DraggableResort";
-import ArticleContent from "@/components/article/ArticleContent";
+import ArticleContent, { ArticleComponents, ArticleRenderer, GetArticleComponent, GetComponentPreviewText } from "@/components/article/ArticleContent";
 import Expandable from "@/components/editor/input/Expandable";
+import GridIconSelector from "@/components/editor/input/GridIconSelector";
 
 export default function NewsArticlePage ({ articleId, userId, defaultArticle }) {
     
@@ -24,6 +25,8 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
     const [categories, setCategories] = useState(["Ingen", "Kategorier"])
 
     const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
 
     
     const query = () => {
@@ -37,6 +40,17 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
             id: defaultArticle.id
         }
     }
+    const visualizerQuery = () => {
+      return {
+        title: title,
+        subtitle: subTitle,
+        authors: authors,
+        image,
+        components,
+        categories: categories,
+        id: defaultArticle.id
+      }
+    }
 
     const UpdateComponents = (line, newValue) => {
         console.log("Updating components")
@@ -48,6 +62,9 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
 
     const handleUpdate = async () => {
         
+        setLoading(true)
+        setError(false)
+
         const q = query()
         console.log(q)
 
@@ -59,22 +76,28 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
     
           if (!res.ok) {
             const json = await res.json()
-            throw new Error('Upload failed: ' + json.message);
+            console.log(json.error)
+            setErrorMessage(json.error)
+            setError(true)
+            setLoading(false)
           }
     
           const json = await res.json()
           console.log(json)
 
         } catch (error) {
-          
+
         } finally {
-            
+          setLoading(false)
         }
       };
     const handleCreate = async () => {
         
         const q = query()
         console.log(q)
+
+        setLoading(true)
+        setError(false)
 
         try {
           const res = await fetch(`/api/v1/articles/`, {
@@ -86,14 +109,16 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
             const json = await res.json()
             throw new Error('Upload failed: ' + json.message);
           }
-    
           const json = await res.json()
-          console.log(json)
+          
 
         } catch (error) {
-          
+          console.log({error})
+          setErrorMessage(error)
+          setError(true)
+          setLoading(false)
         } finally {
-            
+          setLoading(false)
         }
       };
 
@@ -105,29 +130,42 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
         }
       }
 
+      const AddComponent = (type) => {
+          const component = GetArticleComponent(type)
+          setComponents([...components, component.default])
+      }
+      const RemoveComponent = (index) => {
+          let _ = [...components]
+          _ = _.filter((c, i) => index != i)
+          setComponents(_)
+      }
+
     return (
         <div className={styles.c}>
             <nav className={styles.nav}>
                 <TextArea placeholder={"Overskrift"} description={"Skriv inn overskriften på artikkelen."} onChange={(v) => setTitle(v)} defaultValue={v.title}></TextArea>
                 <TextArea placeholder={"Undertittel"} description={"Skiv inn undertittelen her"} onChange={setSubTitle} defaultValue={v.subtitle}></TextArea>
 
-                <Expandable title={"Ledende Bilde"}>
+                <Expandable icon={"/icons/icon_file_image.svg"} title={"Ledende Bilde"}>
                     <TextArea placeholder={"Bildeaddresse"} description={"Skiv inn undertittelen her"} onEnter={(value) => setImage(value)} defaultValue={v.image}></TextArea>
-                </Expandable> 
+                </Expandable>
                 <h2>Innhold</h2>
 
                 <DraggableResort items={components} onChange={(newOrder) => setComponents(newOrder)} onRender={(item, index, isDragged) => {
                     return (<div style={isDragged ? {background: "var(--secondary-100)"} : {background: "var(--secondary-200)"}} className={styles.component}>
-                        <Expandable key={index} title={item.type}>
-                            <ArticleContent editor components={[components[index]]} onUpdateComponent={(line, newValue) => UpdateComponents(index, newValue)} />
-                        </Expandable> 
+                        <Expandable icon={GetArticleComponent(item.type).icon} key={index} title={GetComponentPreviewText(components[index])}>
+                            <ArticleRenderer editor components={[components[index]]} onUpdateComponent={(line, newValue) => UpdateComponents(index, newValue)} />
+                            <button className={styles.delete} onClick={() => RemoveComponent(index)}>Fjern objekt</button>
+                        </Expandable>
                     </div>)
                 }} />
 
-                <SaveButton onClick={handleSubmit} progress={100}>{"Lagre"}</SaveButton>
+                <GridIconSelector onChange={AddComponent} items={ArticleComponents} />
+
+                <SaveButton onClick={handleSubmit} error={error} errorMessage={{message: errorMessage}} disabled={loading} progress={loading ? 0 : 100}>{"Lagre"}</SaveButton>
             </nav>
             <div className={styles.main}>
-                <Visualizer query={query()} />
+                <Visualizer query={visualizerQuery()} />
             </div>
         </div>
 

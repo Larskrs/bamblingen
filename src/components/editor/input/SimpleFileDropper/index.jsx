@@ -2,7 +2,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { FileList } from '../../FileList';
+import { FileList } from '@/components/common/FileList';
+import SaveButton from '../SaveButton';
+import axios from 'axios';
 
 const SimpleFileDropper = () => {
   const [files, setFiles] = useState(null);
@@ -10,6 +12,7 @@ const SimpleFileDropper = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const [uploaded, SetUploaded] = useState([])
+  const [progress, setProgress] = useState(100)
 
   const handleFileChange = (e) => {
     setFiles(e.target.files);
@@ -34,17 +37,20 @@ const SimpleFileDropper = () => {
     setSuccess(false);
 
     try {
-      const res = await fetch('/api/v1/files', {
+      const res = await axios('/api/v1/files', {
         method: 'POST',
-        body: formData,
+        data: formData,
+        onUploadProgress: (e) => {
+          setProgress(Math.round(e.progress*100))
+        }
       });
-
-      if (!res.ok) {
-        const json = await res.json()
+      if (!res.data) {
+        const json = await res.data
         throw new Error('Upload failed: ' + json.message);
       }
 
-      const json = await res.json()
+      const json = await res.data
+      console.log(json)
       SetUploaded(json.data)
 
       setSuccess(true);
@@ -60,15 +66,15 @@ const SimpleFileDropper = () => {
     <div>
       <h2>File Upload</h2>
       <input type="file" multiple onChange={handleFileChange} />
-      <button onClick={handleUpload} disabled={uploading}>
-        {uploading ? 'Uploading...' : 'Upload'}
-      </button>
+      <SaveButton onClick={handleUpload} progress={progress} error={error}>
+        {uploading ? `Uploading... ${progress}%` : 'Upload'}
+      </SaveButton>
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {success && <p style={{ color: 'green' }}>Upload successful!</p>}
 
       {success && <div style={{display: 'flex', flexDirection: 'row', flexFlow: "wrap", gap: '.5rem', padding: '1rem'}}>
-            <FileList files={uploaded.files} />
+            <FileList files={uploaded.files.map((f) => f.dbEntry)} />
         </div>}
     </div>
   );

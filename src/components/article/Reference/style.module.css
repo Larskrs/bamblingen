@@ -34,29 +34,37 @@
 
 /* Title styling */
 .title {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     font-weight: 500;
     font-family: var(--font-inter);
 }
 
+.thumbnail {
+    display: flex;
+    position: relative;
+    width: 40%;
+    height: 125px;
+    object-fit: cover;
+    margin-left: auto;
+}
 /* Image styling */
 .img {
-    width: 40vw;
-    max-width: 200px;         /* Fixed width for image column */
-    height: auto;            /* Let the container height determine image height */
+    width: 100%;     /* Fixed width for image column */
+    height: 100%;            /* Let the container height determine image height */
     object-fit: cover;       /* Crops and centers the image within its container */
     flex-shrink: 0;          /* Prevent image from shrinking */
-    position: relative;
-}
-.img::after {
-    content: "";
     position: absolute;
-    top: 0;
-    right: -20px; /* Slightly overlaps with the main container */
-    width: 0;
-    height: 0;
-    border-top: 60px solid transparent; /* Adjust height to match image height */
-    border-bottom: 60px solid transparent;
-    border-left: 20px solid var(--secondary-100); /* Match background color */
-    z-index: 90;
+    margin-left: auto;
+}
+.overlay {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    translate: -1px 1px;
+    scale: 1.1;
+    height: 100%;
+    width: auto;
+    aspect-ratio: 1/2;
+    z-index: 2;
+    object-fit: cover;
 }

@@ -35,11 +35,11 @@ const MarkdownFormatter = ({ text, }) => {
 
         // Recursively format the remaining text
         return (
-          <>
+          <p key={before+content+after}>
             {formatText(before)}
             {formatter(content)}
             {formatText(after)}
-          </>
+          </p>
         );
       }
     }

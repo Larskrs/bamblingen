@@ -1,5 +1,5 @@
 //     Components
-import ArticleContent from "@/components/article/ArticleContent"
+import { ArticleRenderer } from "@/components/article/ArticleContent"
 //     Local
 import styles from "./page.module.css"
 
@@ -8,7 +8,7 @@ export default function TestArticle () {
     return (
         <div className={styles.c}>
             <div className={styles.m}>
-                    <ArticleContent components={[
+                    <ArticleRenderer components={[
                         {
                             type: "heading",
                             level: 1,
