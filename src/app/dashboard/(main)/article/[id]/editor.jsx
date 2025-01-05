@@ -9,10 +9,13 @@ import DraggableResort from "@/components/editor/input/DraggableResort";
 import ArticleContent, { ArticleComponents, ArticleRenderer, GetArticleComponent, GetComponentPreviewText } from "@/components/article/ArticleContent";
 import Expandable from "@/components/editor/input/Expandable";
 import GridIconSelector from "@/components/editor/input/GridIconSelector";
+import { useRouter } from "next/navigation";
 
 export default function NewsArticlePage ({ articleId, userId, defaultArticle }) {
     
     const v = defaultArticle.versions?.[0]
+
+    const isCreating = articleId === 'new'
 
     const [title, setTitle] = useState(v.title)
     const [subTitle, setSubTitle] = useState(v.subtitle)
@@ -22,10 +25,12 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
     const [authors, setAuthors] = useState(defaultArticle.authors)
     const [categories, setCategories] = useState(["Ingen", "Kategorier"])
 
+    const [uploaded, setUploaded] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
 
+    const router = useRouter()
     
     const query = () => {
         return {
@@ -76,6 +81,7 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
           }
 
           const json = await res.json()
+          setUploaded(json)
 
         } catch (error) {
 
@@ -98,22 +104,31 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
 
           if (!res.ok) {
             const json = await res.json()
-            throw new Error('Upload failed: ' + json.message);
+            setErrorMessage(json.error)
+            setError(true)
+            setLoading(false)
           }
-          const json = await res.json()
 
+          const json = await res.json()
+          setUploaded(json)
 
         } catch (error) {
-          setErrorMessage(error)
-          setError(true)
-          setLoading(false)
+
         } finally {
-          setLoading(false)
+            
         }
       };
 
+      useEffect(() => {
+        if (!isCreating) { return; }
+        if (uploaded?.id) {
+          router.push(`/dashboard/article/${uploaded.id}`)
+          router.refresh()
+        }
+      }, [uploaded])
+
       const handleSubmit = async () => {
-        if (articleId=="new") {
+        if (isCreating) {
             await handleCreate()
         } else {
             await handleUpdate()
@@ -133,26 +148,32 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
     return (
         <div className={styles.c}>
             <nav className={styles.nav}>
-                <TextArea placeholder={"Overskrift"} description={"Skriv inn overskriften på artikkelen."} onChange={(v) => setTitle(v)} defaultValue={v.title}></TextArea>
-                <TextArea placeholder={"Undertittel"} description={"Skiv inn undertittelen her"} onChange={setSubTitle} defaultValue={v.subtitle}></TextArea>
+                <div className={styles.navContent}>
+                    <TextArea placeholder={"Overskrift"} description={"Skriv inn overskriften på artikkelen."} onChange={(v) => setTitle(v)} defaultValue={v.title}></TextArea>
+                    <TextArea placeholder={"Undertittel"} description={"Skiv inn undertittelen her"} onChange={setSubTitle} defaultValue={v.subtitle}></TextArea>
 
-                <Expandable icon={"/icons/icon_file_image.svg"} title={"Ledende Bilde"}>
-                    <TextArea placeholder={"Bildeaddresse"} description={"Skiv inn undertittelen her"} onEnter={(value) => setImage(value)} defaultValue={v.image}></TextArea>
-                </Expandable>
-                <h2>Innhold</h2>
+                    <Expandable icon={"/icons/icon_file_image.svg"} title={"Ledende Bilde"}>
+                        <TextArea placeholder={"Bildeaddresse"} description={"Skiv inn undertittelen her"} onEnter={(value) => setImage(value)} defaultValue={v.image}></TextArea>
+                    </Expandable>
+                    <h2>Innhold</h2>
 
-                <DraggableResort items={components} onChange={(newOrder) => setComponents(newOrder)} onRender={(item, index, isDragged) => {
-                    return (<div style={isDragged ? {background: "var(--secondary-100)"} : {background: "var(--secondary-200)"}} className={styles.component}>
-                        <Expandable icon={GetArticleComponent(item.type).icon} key={index} title={GetComponentPreviewText(components[index])}>
-                            <ArticleRenderer editor components={[components[index]]} onUpdateComponent={(line, newValue) => UpdateComponents(index, newValue)} />
-                            <button className={styles.delete} onClick={() => RemoveComponent(index)}>Fjern objekt</button>
-                        </Expandable>
-                    </div>)
-                }} />
+                    <DraggableResort items={components} onChange={(newOrder) => setComponents(newOrder)} onRender={(item, index, isDragged) => {
+                        return (<div style={isDragged ? {background: "var(--secondary-100)"} : {background: "var(--secondary-200)"}} className={styles.component}>
+                            <Expandable draggable icon={GetArticleComponent(item.type).icon} key={index} title={GetComponentPreviewText(components[index])}>
+                                <ArticleRenderer editor components={[components[index]]} onUpdateComponent={(line, newValue) => UpdateComponents(index, newValue)} />
+                                <button className={styles.delete} onClick={() => RemoveComponent(index)}>Fjern objekt</button>
+                            </Expandable>
+                        </div>)
+                    }} />
 
-                <GridIconSelector onChange={AddComponent} items={ArticleComponents} />
-
-                <SaveButton onClick={handleSubmit} error={error} errorMessage={{message: errorMessage}} disabled={loading} progress={loading ? 0 : 100}>{"Lagre"}</SaveButton>
+                    <GridIconSelector onChange={AddComponent} items={ArticleComponents} />
+                    <div className={styles.bottomSpace} />
+                </div>
+                <div className={styles.navBar}>
+                    <SaveButton onClick={handleSubmit} error={error} errorMessage={{message: errorMessage}} disabled={loading} progress={loading ? 0 : 100}>
+                      {isCreating ? "Lag ny artikkel" : "Lagre utkast"}
+                    </SaveButton>
+                </div>
             </nav>
             <div className={styles.main}>
                 <Visualizer query={visualizerQuery()} />

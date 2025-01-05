@@ -124,28 +124,28 @@ export async function DefaultArticle (authors) {
                 createdAt: "2024-12-24T01:09:49.804Z",
                 updatedAt: "2024-12-24T01:09:49.804Z",
                 components: [
-                    {
-                        type: "text",
-                        lines: [
-                            "Denne teksten må endres før den publiseres!",
-                            "Den er *skrå*, den er **fet** eller ***begge to***",
-                            "Den er *skrå*",
-                            "den er **fet**",
-                            "eller ***begge to***"
-                        ]
-                    },
-                    {
-                        type: "image",
-                        src: "https://bamblingen.no/api/files?fileId=cachedImage.png",
-                        alt: "",
-                        credit: "Foto: Bamblingen.no"
-                    },
-                    {
-                        type: "text",
-                        lines: [
-                            "Denne teksten må endres før den publiseres!",
-                        ]
-                    },
+                    // {
+                    //     type: "text",
+                    //     lines: [
+                    //         "Denne teksten må endres før den publiseres!",
+                    //         "Den er *skrå*, den er **fet** eller ***begge to***",
+                    //         "Den er *skrå*",
+                    //         "den er **fet**",
+                    //         "eller ***begge to***"
+                    //     ]
+                    // },
+                    // {
+                    //     type: "image",
+                    //     src: "https://bamblingen.no/api/files?fileId=cachedImage.png",
+                    //     alt: "",
+                    //     credit: "Foto: Bamblingen.no"
+                    // },
+                    // {
+                    //     type: "text",
+                    //     lines: [
+                    //         "Denne teksten må endres før den publiseres!",
+                    //     ]
+                    // },
                 ],
                 title: "Tittel",
                 subtitle: "Undertittel",

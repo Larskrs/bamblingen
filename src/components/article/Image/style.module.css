@@ -53,6 +53,16 @@
     font-size: .8rem;
     display: flex;
 }
+.preview {
+    width: 100%;
+    min-width: 100%;
+    min-height: 4rem;
+    border-radius: 0.5rem;
+    max-height: 12rem;
+    object-fit: cover;
+    background-color: var(--secondary-200);
+    color: white;
+}
 
 .comment {
     font-size: 0.75rem;

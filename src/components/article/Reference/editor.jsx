@@ -30,7 +30,7 @@ export default function ReferenceEditor ({
 
         <>
                     <TextArea
-                        placeholder="Bildeaddresse"
+                        placeholder="Artikkel"
                         description={`Bildeadressa skal kun være fra bamblingen.no. Trykk på enter for å velge bildet`}
                         defaultValue={_id}
                         onEnter={(value) => { setId(value) }}

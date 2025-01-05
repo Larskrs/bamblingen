@@ -1,7 +1,7 @@
 import styles from "./style.module.css"
 import React, { useState } from "react";
 
-const DraggableResort = ({ onChange, items, onRender }) => {
+const DraggableResort = ({ onChange, items, onRender, forceDraggable=false }) => {
   const [draggingIndex, setDraggingIndex] = useState(null);
 
   const handleDragStart = (index) => {
@@ -37,7 +37,7 @@ const DraggableResort = ({ onChange, items, onRender }) => {
         <div
           className={styles.item}
           key={index}
-          draggable
+          draggable={forceDraggable}
           onDragStart={() => handleDragStart(index)}
           onDragOver={(e) => handleDragOver(e, index)}
           onDrop={() => handleDrop(index)}

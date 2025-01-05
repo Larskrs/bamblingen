@@ -23,10 +23,12 @@ export default function SaveButton ({onClick, disabled=false, cooldownTime=250, 
         }
         return progress
     }
-
+    const isDisabled = () => {
+        return disabled || cooldown || (error && !allowClickWithError)
+    }
     return (<>
             <div  onClick={(e) => {
-                if (disabled || cooldown || (error && !allowClickWithError)) { return; }
+                if (isDisabled()) { return; }
                 onClick(e);
                 setCooldown(true)
             }}
@@ -35,7 +37,7 @@ export default function SaveButton ({onClick, disabled=false, cooldownTime=250, 
                 <div className={styles.progress} style={{
                     width: `${_progressed()}%`, backgroundColor: error ? "var(--red-100)" : "var(--secondary-500)"
                     }}></div>
-                <p style={{opacity: disabled || error ? 0.25 : 1}}>{children}</p>
+                <p style={{opacity: isDisabled() ? 0.25 : 1}}>{children}</p>
             </div>
             <p style={{minHeight: error ? "fit-content" : "0px"}} className={styles.error}>{errorMessage?.message}</p>
     </>

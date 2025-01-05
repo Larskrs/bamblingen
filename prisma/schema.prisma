@@ -108,24 +108,32 @@ model Article {
 }
 
 model ArticleVersion {
-  id          Int      @id @default(autoincrement())
-  title       String   @db.MediumText
-  subtitle    String   @default("")
-  image       String   @db.LongText
-  location    String   @default("")
+  id            Int      @id @default(autoincrement())
+  title         String   @db.MediumText
+  subtitle      String   @default("")
+  image         String   @db.LongText
+  location      String   @default("")
 
-  components  String   @db.LongText
-  createdAt   DateTime @default(now())
+  components    String   @db.LongText
+  createdAt     DateTime @default(now())
 
-  article     Article @relation(fields: [articleId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  articleId   String
+  article       Article @relation(fields: [articleId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  articleId     String
 
-  visibility  ArticleVisibility @default(DRAFT)
+  verification  VerificationStatus @default(PENDING)
+  visibility    ArticleVisibility @default(DRAFT)
 }
 enum ArticleVisibility {
   HIDDEN
   DRAFT
   PUBLIC
+}
+enum VerificationStatus {
+  PENDING
+  PROCESSING
+  DENIED
+  ACCEPTED
+  POSTPONED
 }
 
 model ComponentPage {

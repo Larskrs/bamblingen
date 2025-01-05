@@ -52,7 +52,7 @@ export default async function SignInPage (props) {
               ))}
             </div>
           </div>
-          <div className={styles.image}><Image alt="" fill src={"https://bamblingen.no/api/v1/files?fileId=20250103-d27c272bf4a1f1c3bcc96177ecf0cff6f9e71eb6c320ac79"} /></div>
+          <div className={styles.image}><Image alt="" fill src={"https://bamblingen.no/api/v1/files?fileId=20250105-b217d32b83c1660f3835d7b399c2794fe93e6e34c22599d6"} /></div>
         </div>
     )
 }

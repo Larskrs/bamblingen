@@ -14,6 +14,7 @@ export default function ImageComponent ({
     }
 
     const [_src, setSource] = useState(src)
+    const [_preview, setPreview] = useState(src)
     const [_alt, setAlt] = useState(alt)
     const [_credit, setCredit] = useState(credit)
     
@@ -25,6 +26,9 @@ export default function ImageComponent ({
             credit: _credit
         }
     }
+        useEffect(() => {
+            setPreview(_src)
+        }, [_src])
     
         useEffect(() => {
             onChange(query())
@@ -37,10 +41,12 @@ export default function ImageComponent ({
     return (
 
         <>
+                    <img className={styles.preview} src={_preview} alt="bildeadresse"/>
                     <TextArea
                         placeholder="Bildeaddresse"
                         description={`Bildeadressa skal kun være fra bamblingen.no. Trykk på enter for å velge bildet`}
                         defaultValue={src}
+                        onChange={(value) => { setPreview(value)}}
                         onEnter={(value) => { setSource(value) }}
                         />
                     <TextArea

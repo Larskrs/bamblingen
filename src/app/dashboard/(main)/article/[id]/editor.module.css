@@ -23,11 +23,44 @@
     min-height: 100%;
     display: flex;
     flex-direction: column;
+    overflow: overflow;
+    font-size: 1rem;
+}
+.navContent {
+    position: relative;
+    max-width: 24rem;
+    width: 100%;
+    background-color: var(--secondary-25);
+    border-radius: 0px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
     padding: 1rem;
     gap: 0.5rem;
-    border: 2px solid var(--secondary-100);
     overflow: auto;
-    font-size: 1rem;
+}
+.bottomSpace {
+    position: relative;
+    width: 100%;
+    min-height: 5rem;
+    height: 5rem;
+}
+.navBar::after {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    content: "";
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    background: linear-gradient(transparent, var(--secondary-25));
+}
+.navBar {
+    border-top: 2px solid var(--secondary-100);
+    position: relative;
+    padding: 0.5rem ;
+    margin-top: auto;
+    height: fit-content;
 }
 .main {
     overflow: auto;
