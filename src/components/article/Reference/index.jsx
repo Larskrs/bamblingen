@@ -2,7 +2,7 @@
 import Image from "next/image";
 import styles from "./style.module.css";
 import Link from "next/link";
-import Editor from "./Editor"
+import Editor from "./editor"
 import useFetch from "@/hooks/useFetch";
 
 const config = {
