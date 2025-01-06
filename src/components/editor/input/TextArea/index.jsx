@@ -2,7 +2,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import styles from "./style.module.css";
 
-const TextArea = ({ onChange = () => {}, onEnter = () => {}, required=false, defaultValue="", description="Dette er et ubestemt tekstfelt", placeholder="Ubestemt felt" }) => {
+const TextArea = ({ onChange = () => {}, onEnter = () => {}, focus=false, required=false, defaultValue="", description="Dette er et ubestemt tekstfelt", placeholder="Ubestemt felt" }) => {
   const textareaRef = useRef(null);
   const [currentValue, setCurrentValue] = useState(defaultValue)
 
@@ -14,7 +14,11 @@ const TextArea = ({ onChange = () => {}, onEnter = () => {}, required=false, def
     }
   };
 
-  console.log()
+  useEffect(() => {
+    if (focus && textareaRef.current) {
+      textareaRef.current.focus()
+    }
+  }, [textareaRef])
 
   useEffect(() => {
     adjustHeight(); // Adjust height when the component is mounted or value changes

@@ -15,7 +15,6 @@ export default function NewsArticlePage ({ version, article, session }) {
             <nav className={styles.nav}>
                 {session?.user?.role && <>
                     <Link href={`/dashboard/article/${article.id}`}>Rediger Artikkel</Link>
-                    <Link href={"/dashboard"} >{session?.user?.role}</Link> 
                 </>}
             </nav>
             <div className={styles.context}>
@@ -47,7 +46,7 @@ export default function NewsArticlePage ({ version, article, session }) {
                                 )
                             })}
                         </div>
-                        <p className={styles.date}>Sist oppdatert {formatRelativeDate(new Date(article.createdAt))}</p>
+                        <p className={styles.date}>Sist oppdatert {formatRelativeDate(new Date(version.createdAt))}</p>
                     </div>
                 </div>
                 <div className={styles.m}>

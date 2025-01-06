@@ -1,19 +1,28 @@
-import styles from "./style.module.css";
+import Image from "next/image";
+import styles from "./style.module.css"
+import ZoomableElement from "@/components/wrappers/ZoomInWrapper";
+import Editor from "./editor"
 
-export default function HeaderComponent({ level = 1, headingText = "", lowerHeadingText = "" }) {
-    const levels = {
-        1: <h1 className={styles.heading}>{headingText}</h1>,
-        2: <h2 className={styles.heading}>{headingText}</h2>,
-        3: <h3 className={styles.heading}>{headingText}</h3>,
-        4: <h4 className={styles.heading}>{headingText}</h4>,
-        5: <h5 className={styles.heading}>{headingText}</h5>,
-        6: <h6 className={styles.heading}>{headingText}</h6>,
-    };
+const config = {
+    icon: "/icons/icon_heading.svg",
+    renderer: HeadingComponent,
+    name: "overskrift",
+    previewText: (data) => {return data.alt || data.src},
+    editor: Editor,
+    default: {
+        type: "heading",
+        text: "",
+        level: 2,
+    }
+}
+
+export function HeadingComponent ({id, text, level=0, onChange=()=>{}}) {
 
     return (
-        <div className={styles.headerComponent}>
-            {levels[level]}
-            {lowerHeadingText && <p className={styles.lowerHeading}>{lowerHeadingText}</p>}
+        <div className={styles.c}>
+            <h1 className={styles[`h${level}`]}>{text}</h1>
         </div>
     );
 }
+
+export default config

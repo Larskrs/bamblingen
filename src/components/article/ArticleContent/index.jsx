@@ -2,12 +2,14 @@ import Text from "../Text";
 import Image from "../Image";
 import Reference from "../Reference";
 import Video from "../Video";
+import Heading from "../Heading"
 
 export const ArticleComponents = {
     text: Text,
     image: Image,
     video: Video,
     reference: Reference,
+    heading: Heading
 };
 
 export function GetArticleComponent (type) {

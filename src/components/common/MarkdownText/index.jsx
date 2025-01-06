@@ -1,55 +1,75 @@
 import React from 'react';
 import styles from './style.module.css';
+import Link from 'next/link';
 
-const MarkdownFormatter = ({ text, }) => {
+const MarkdownFormatter = ({ text, id }) => {
   // Functions to handle formatting cases
-  const formatBoldItalic = (content) => {
-    return <strong className={styles.boldItalic}><em>{content}</em></strong>;
-  };
+    const formatBoldItalic = (match, content) => {
+        return <strong className={styles.boldItalic}><em>{content}</em></strong>;
+    };
 
-  const formatBold = (content) => {
-    return <strong className={styles.bold}>{content}</strong>;
-  };
+    const formatBold = (match, content) => {
+        return <strong className={styles.bold}>{content}</strong>;
+    };
 
-  const formatItalic = (content) => {
-    return <em className={styles.italic}>{content}</em>;
-  };
+    const formatItalic = (match, content) => {
+        return <em className={styles.italic}>{content}</em>;
+    };
 
-  // Recursive function to process text into React elements
-  const formatText = (text) => {
-    if (!text) return text;
+    const formatLink = (match, p1="", p2="") => (
+      <Link
+        href={p2}
+        style={{ color: '#2A5DB0', textDecoration: 'none' }}
+        key={match}
+      >
+        {p1}
+      </Link>
+    )
 
-    const patterns = [
-      { regex: /\*\*\*(.*?)\*\*\*/g, formatter: formatBoldItalic }, // Bold + Italic
-      { regex: /\*\*(.*?)\*\*/g, formatter: formatBold },           // Bold
-      { regex: /\*(.*?)\*/g, formatter: formatItalic },              // Italic
-    ];
+  // Function to format text into React elements
+    const formatText = (text) => {
+        const elements = [];
+        let remainingText = text;
 
-    // Process each regex pattern in order of precedence
-    for (const { regex, formatter } of patterns) {
-      const match = regex.exec(text);
-      if (match) {
-        const [fullMatch, content] = match;
-        const before = text.slice(0, match.index);
-        const after = text.slice(match.index + fullMatch.length);
+        const processRegex = (regex, formatFunction) => {
+          let match;
+          while ((match = regex.exec(remainingText)) !== null) {
+              const [fullMatch, p1, p2] = match; // Destructure all groups
+              const index = match.index;
 
-        // Recursively format the remaining text
-        return (
-          <p key={before+content+after}>
-            {formatText(before)}
-            {formatter(content)}
-            {formatText(after)}
-          </p>
-        );
-      }
+              // Push plain text before the match
+              if (index > 0) {
+                  elements.push(remainingText.slice(0, index));
+              }
+
+              // Push the formatted content
+              elements.push(formatFunction(fullMatch, p1, p2));
+
+              // Update the remaining text
+              remainingText = remainingText.slice(index + fullMatch.length);
+              regex.lastIndex = 0; // Reset regex index for next iteration
+          }
+      };
+
+    // Process bold and italic (***text***)
+    processRegex(/\*\*\*(.*?)\*\*\*/g, formatBoldItalic);
+    // Process bold (**text**)
+    processRegex(/\*\*(.*?)\*\*/g, formatBold);
+    // Process italic (*text*)
+    processRegex(/\*(.*?)\*/g, formatItalic);
+    // Process hyperlink ((Shirt)[link])
+    processRegex(/\[([^\]]+)\]\(([^)]+)\)/g, formatLink)
+
+    // Push any remaining plain text
+    if (remainingText) {
+      elements.push(remainingText);
     }
 
-    // If no patterns match, return plain text
-    return text;
+    return elements;
   };
-
+  
   return (
-    <div className={styles.c} >
+    <div key={id} className={styles.container}>
       {formatText(text)}
     </div>
   );
