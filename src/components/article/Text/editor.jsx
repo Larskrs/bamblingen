@@ -84,7 +84,7 @@ function LineEditor ({line, id, onUpdate, onDelete, onSubmit}) {
 
     return (
         <div className={styles.editor}>
-            <TextArea placeholder="Ny linje" defaultValue={line} description="" className={styles.editing} onEnter={onSubmit} onChange={onUpdate}></TextArea>
+            <TextArea focus={true} placeholder="Ny linje" defaultValue={line} description="" className={styles.editing} onEnter={onSubmit} onChange={onUpdate}></TextArea>
             <button onClick={() => onDelete(id)}>Slett Linje</button>
         </div>
     )

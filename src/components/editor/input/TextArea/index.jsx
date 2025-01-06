@@ -17,6 +17,7 @@ const TextArea = ({ onChange = () => {}, onEnter = () => {}, focus=false, requir
   useEffect(() => {
     if (focus && textareaRef.current) {
       textareaRef.current.focus()
+      textareaRef.current.setSelectionRange(currentValue.length, currentValue.length)
     }
   }, [textareaRef])
 
