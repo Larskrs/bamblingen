@@ -1,15 +1,16 @@
 "use client"
 import Image from "next/image";
-import styles from "./opinion.module.css";
+import styles from "./page.module.css";
 import { formatRelativeDate } from "@/lib/timeLib";
 import { ArticleRenderer } from "@/components/article/ArticleContent";
 import Link from "next/link";
+import { GetType } from "@/lib/articleLib";
 
 export default function NewsArticlePage ({ version, article, session }) {
 
     const components = version.components
-    
-    const author = article.authors[0]
+
+    const type = GetType(article.type)
 
     return (
         <div className={styles.c}>
@@ -19,8 +20,8 @@ export default function NewsArticlePage ({ version, article, session }) {
                     <Link href={`/dashboard/article/${article.id}`}>Rediger Artikkel</Link>
                 </>}
             </nav>
-            <div className={styles.context}>
-                <p className={styles.opinion}>Mening</p>
+            <div className={styles.context} style={{borderImage: `linear-gradient(to right, ${type.color}, transparent 90%) 1`}}>
+                <p className={styles.type} style={{background: type.color}}>{type.name}</p>
                 {article.categories.map((tag) => {
                     return (
                         <p key={tag.id}>{tag.name}</p>

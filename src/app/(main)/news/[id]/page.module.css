@@ -119,10 +119,9 @@
 .c * {
     font-family: var(--font-inter);
 }
-.news {
-    padding: 0.5rem;
-    background-color: var(--secondary-500);
-    color: var(--secondary-950);
+.type {
+    padding: 0.5rem 1rem;
+    color: var(--white-900);
 }
 
 

@@ -23,18 +23,19 @@ const PreviewText = (data) => {
 const config = {
   icon: "/icons/icon_text.svg",
   name: "tekstfelt",
+  description: "Tekstfelt som støtter markdown-formatet",
   renderer: TextComponent,
   editor: Editor,
   previewText: PreviewText,
   default: {
     type: "text",
-    lines: ["Hei, dette er et nytt tekstobjekt"]
+    lines: []
   }
 }
 
 export function TextComponent({
     id,
-    lines = ["ERROR!!", "Noice", "Text Component Missing Lines Property"],
+    lines = [],
     editor,
     onChange
 }) {

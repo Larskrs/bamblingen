@@ -6,10 +6,10 @@ import Heading from "../Heading"
 
 export const ArticleComponents = {
     text: Text,
+    heading: Heading,
     image: Image,
     video: Video,
     reference: Reference,
-    heading: Heading
 };
 
 export function GetArticleComponent (type) {

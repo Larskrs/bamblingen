@@ -7,6 +7,7 @@ const config = {
     icon: "/icons/icon_heading.svg",
     renderer: HeadingComponent,
     name: "overskrift",
+    description: "Overskrifter med 4 forskjellige størrelser",
     previewText: (data) => {return data.alt || data.src},
     editor: Editor,
     default: {

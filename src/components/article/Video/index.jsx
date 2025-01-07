@@ -7,6 +7,7 @@ const config = {
     icon: "/icons/icon_file_video.svg",
     renderer: VideoComponent,
     name: "video",
+    description: "Element for å vise en rekke audiovisuelle medier, med bildetekst og bildekilde",
     previewText: (data) => {return data.alt || data.src},
     editor: Editor,
     default: {

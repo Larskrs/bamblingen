@@ -109,6 +109,38 @@ export const ConnectOrCreateCategoryTags = (_tags) => _tags.map((tagName) => ({
     },
 }));
 
+export const articleTypes = [
+    {
+        id: "NEWS",
+        name: "Nyheter",
+        color: "var(--secondary-500)",
+    },
+    {
+        id: "OPINION",
+        name: "Mening",
+        color: "var(--orange-500)",
+    },
+    {
+        id: "COMMENT",
+        name: "Kommentar",
+        color: "var(--red-500)",
+    },
+    {
+        id: "ADVERTISEMENT",
+        name: "Reklame",
+        color: "var(--secondary-100)",
+    }
+]
+export function GetType (id) {
+    for (let i = 0; i < articleTypes.length; i++) {
+        const t = articleTypes[i];
+        if (t.id === id) {
+            return t
+        }
+    }
+    return articleTypes[0]
+}
+
 export async function DefaultArticle (authors) {
 
     const _authors = await Promise.all(authors.map(async (a) => {

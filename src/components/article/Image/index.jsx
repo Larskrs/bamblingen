@@ -7,6 +7,7 @@ const config = {
     icon: "/icons/icon_file_image.svg",
     renderer: ImageComponent,
     name: "bilde",
+    description: "Bilde element, med bildetekst og bildekilde",
     previewText: (data) => {return data.alt || data.src},
     editor: Editor,
     default: {

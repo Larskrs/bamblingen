@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "./editor.module.css";
 import { useEffect, useState } from "react"
 import TextArea from "@/components/editor/input/TextArea";
-import Visualizer from "./visualizer"
+import Visualizer from "@/app/(main)/news/[id]/client"
 import SaveButton from "@/components/editor/input/SaveButton";
 import DraggableResort from "@/components/editor/input/DraggableResort";
 import ArticleContent, { ArticleComponents, ArticleRenderer, GetArticleComponent, GetComponentPreviewText } from "@/components/article/ArticleContent";
@@ -33,7 +33,7 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
     const [errorMessage, setErrorMessage] = useState("")
 
     const router = useRouter()
-    
+
     const query = () => {
         return {
             title: title,
@@ -48,14 +48,20 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
     }
     const visualizerQuery = () => {
       return {
-        title: title,
-        subtitle: subTitle,
-        authors: authors,
-        image,
-        components,
-        categories: categories,
-        id: defaultArticle.id,
-        type: type || article.type,
+        article: {
+          id: defaultArticle.id,
+          type: type || article.type,
+          authors: authors,
+          categories: categories,
+        },
+        version: {
+          title: title,
+          subtitle: subTitle,
+          image,
+          createdAt: new Date().toString(),
+          updatedAt: new Date().toString(),
+          components
+        },
       }
     }
 
@@ -188,7 +194,7 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
                 </div>
             </nav>
             <div className={styles.main}>
-                <Visualizer query={visualizerQuery()} />
+                <Visualizer {...visualizerQuery()} />
             </div>
         </div>
 

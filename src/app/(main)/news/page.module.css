@@ -18,14 +18,14 @@
 }
 .body {
     padding: 1rem;
-    margin-left: 1rem;
     font-size: .9rem;
+    position: relative;
+    width: 100%;
+    padding-bottom: 1.5rem;
 }
 .body p {
     margin-top: .5rem;
-}
-.body > p:last-child {
-    float: right;
+    font-size: 0.8rem;
 }
 .thumbnail {
     width: 30%;
@@ -51,4 +51,20 @@
     color: var(--secondary-100);
     border: 2px solid var(--secondary-100);
     cursor: pointer;
+}
+.createdAt {
+    font-size: 0.8rem;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    align-items: center;
+}
+.type {
+    z-index: 2;
+    color: white;
+    padding: 0.25em 0.5em;
+    font-size: 0.8rem;
+    width: fit-content;
 }

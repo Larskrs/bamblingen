@@ -9,6 +9,7 @@ const config = {
     icon: "/icons/icon_article_reference.svg",
     name: "reference",
     renderer: ReferenceComponent,
+    description: "En lenke til en annen artikkel",
     editor: Editor,
     previewText: (data) => {return data.title},
     default: {

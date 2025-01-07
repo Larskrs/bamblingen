@@ -8,7 +8,7 @@ import DraggableResort from "@/components/editor/input/DraggableResort";
 
 export default function TextComponent({
     id,
-    lines = ["ERROR!!", "Noice", "Text Component Missing Lines Property"],
+    lines = [],
     editor,
     onChange=()=>{}
 }) {    
@@ -47,7 +47,7 @@ export default function TextComponent({
         setLines(_)
     }
     const AddLine = () => {
-        setLines([..._lines, `Ny linje (${_lines.length + 1})`])
+        setLines([..._lines, ``])
         Select(_lines.length)
     }
 
@@ -58,15 +58,6 @@ export default function TextComponent({
 
     return (
         <div className={styles.c}>
-            {/* <DraggableResort items={_lines} onChange={(newOrder) => setLines(newOrder)} onRender={(item, index) => {
-                if (current === index) {
-                    return <LineEditor key={index} id={i} line={_lines[index]} onSubmit={SubmitLine} onUpdate={(v) => {UpdateLine(i, v)}} onDelete={DeleteLine}/>
-                }
-                return (<div key={index+"edit"} style={{color: "white"}} className={styles.line} onClick={() => {Select(i)}}>
-                            <MarkdownFormatter key={index+_lines[index]} text={_lines[index]} />
-                        </div>)
-                
-            }} ></DraggableResort> */}
             {_lines.map((line, i) => {
                 if (current === i) {
                     return <LineEditor key={i} id={i} line={line} onSubmit={SubmitLine} onUpdate={(v) => {UpdateLine(i, v)}} onDelete={DeleteLine}/>

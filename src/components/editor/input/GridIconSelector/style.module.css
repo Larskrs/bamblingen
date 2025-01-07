@@ -1,4 +1,9 @@
 .c {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+.grid {
     gap: 0.25rem;
 
     display: grid;
@@ -25,28 +30,37 @@
     width: 100%;
 }
 
+.details {
+    display: flex;
+    color: var(--white-300);
+    padding: 0.5rem;
+    background-color: var(--secondary-50);
+    border: 2px solid var(--secondary-75);
+    min-height: 2.5em;
+}
+
 
 /* Media Queries */
 @media (min-width: 300px) {
-    .c {
+    .grid {
         grid-template-columns: repeat(2, 1fr); /* 1 item per row */
     }
 }
 
 @media (min-width: 400px) {
-    .c {
+    .grid {
         grid-template-columns: repeat(3, 1fr); /* 2 items per row */
     }
 }
 
 @media (min-width: 600px) {
-    .c {
+    .grid {
         grid-template-columns: repeat(5, 1fr); /* 3 items per row */
     }
 }
 
 @media (min-width: 1000px) {
-    .c {
+    .grid {
         grid-template-columns: repeat(6, 1fr); /* 5 items per row */
     }
 }
