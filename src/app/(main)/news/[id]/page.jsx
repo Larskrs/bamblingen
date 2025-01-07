@@ -1,6 +1,7 @@
 "use server"
 import { GetArticle } from "@/lib/articleLib"
-import Client from "./client"
+import Client from "./news"
+import Opinion from "./opinion"
 import { auth } from "@/auth"
 export default async function Page ({params}) {
 
@@ -18,6 +19,13 @@ export default async function Page ({params}) {
     const components = v.components
 
 
+    if (article.type == "OPINION") {
+      return (
+        <div>
+            <Opinion article={article} version={v} session={session} />
+        </div>
+      );
+    }
     return (
         <div>
             <Client article={article} version={v} session={session} />

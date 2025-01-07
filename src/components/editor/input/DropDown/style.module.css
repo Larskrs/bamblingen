@@ -1,0 +1,38 @@
+.c {
+    border-radius: 1em;
+    background-color: var(--secondary-75);
+    position: relative;
+    min-height: 2em;
+    max-height: 2em;
+}
+.button:hover {
+    background-color: var(--secondary-200) !important;
+}
+.button {
+    color: white;
+    height: 2em;
+    min-height: 2em;
+    background-color: var(--secondary-75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-bottom: 2px solid var(--secondary-50);
+}
+.items {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    border-radius: 1em;
+    overflow: hidden;
+}
+.description {
+    margin-top: 0.25rem;
+    font-size: 0.8rem !important;
+    font-family: var(--font-inter);
+    color: var(--white-400) !important;
+    padding: 0px !important;
+}

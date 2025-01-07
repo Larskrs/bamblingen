@@ -16,6 +16,7 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
+    color: white;
 }
 .selected {
     background-color: var(--secondary-200) !important;

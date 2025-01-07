@@ -105,6 +105,7 @@ model Article {
   authors         User[]
   createdAt       DateTime          @default(now())
   categories      Category[]
+  type            ArticleType @default(NEWS)
 }
 
 model ArticleVersion {
@@ -127,6 +128,12 @@ enum ArticleVisibility {
   HIDDEN
   DRAFT
   PUBLIC
+}
+enum ArticleType {
+  NEWS
+  OPINION
+  COMMENT
+  ADVERTISEMENT
 }
 enum VerificationStatus {
   PENDING

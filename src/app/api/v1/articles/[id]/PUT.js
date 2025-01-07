@@ -29,6 +29,9 @@ export default async function PUT(req, params) {
     if (!body.authors) {
         return ErrorMessage("Authors argument is missing")
     }
+    if (!body.type) {
+        return ErrorMessage("Type argument is missing")
+    }
 
     try {
         if (!id) {
@@ -47,6 +50,7 @@ export default async function PUT(req, params) {
                     set: [], // Clear all current relationships
                     connectOrCreate: ConnectOrCreateCategoryTags(["Skogbrann"]), // Add or create the new categories
                 },
+                type: body.type,
                 versions: {
                     create: {
                         title: body.title,

@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image";
-import styles from "./page.module.css";
+import styles from "./opinion.module.css";
 import { formatRelativeDate } from "@/lib/timeLib";
 import { ArticleRenderer } from "@/components/article/ArticleContent";
 import Link from "next/link";
@@ -8,6 +8,8 @@ import Link from "next/link";
 export default function NewsArticlePage ({ version, article, session }) {
 
     const components = version.components
+    
+    const author = article.authors[0]
 
     return (
         <div className={styles.c}>
@@ -18,6 +20,7 @@ export default function NewsArticlePage ({ version, article, session }) {
                 </>}
             </nav>
             <div className={styles.context}>
+                <p className={styles.opinion}>Mening</p>
                 {article.categories.map((tag) => {
                     return (
                         <p key={tag.id}>{tag.name}</p>

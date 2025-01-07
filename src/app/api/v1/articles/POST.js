@@ -26,6 +26,9 @@ export default async function POST(req) {
             if (!body.authors) {
                 return ErrorMessage("Authors argument is missing")
             }
+            if (!body.type) {
+                return ErrorMessage("Type argument is missing")
+            }
             const authors = body.authors
 
             let query = {
@@ -33,6 +36,7 @@ export default async function POST(req) {
                     authors: {
                         connect: authors.map((a) => {return {id: a}})
                     },
+                    type: body.type,
                     versions: {
                         create: [
                             {

@@ -10,6 +10,7 @@ import ArticleContent, { ArticleComponents, ArticleRenderer, GetArticleComponent
 import Expandable from "@/components/editor/input/Expandable";
 import GridIconSelector from "@/components/editor/input/GridIconSelector";
 import { useRouter } from "next/navigation";
+import DropDown from "@/components/editor/input/DropDown";
 
 export default function NewsArticlePage ({ articleId, userId, defaultArticle }) {
     
@@ -24,6 +25,7 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
     const [article, setArticle] = useState(defaultArticle)
     const [authors, setAuthors] = useState(defaultArticle.authors)
     const [categories, setCategories] = useState(["Ingen", "Kategorier"])
+    const [type, setType] = useState("")
 
     const [uploaded, setUploaded] = useState(null)
     const [loading, setLoading] = useState(false)
@@ -40,7 +42,8 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
             image,
             components,
             categories: categories,
-            id: defaultArticle.id
+            id: defaultArticle.id,
+            type: type || article.type,
         }
     }
     const visualizerQuery = () => {
@@ -51,7 +54,8 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
         image,
         components,
         categories: categories,
-        id: defaultArticle.id
+        id: defaultArticle.id,
+        type: type || article.type,
       }
     }
 
@@ -145,10 +149,18 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
           setComponents(_)
       }
 
+      const articleTypes = [
+        {title: "Nyhetsartikkel", id: "NEWS"},
+        {title: "Mening", id: "OPINION"},
+        {title: "Kommentar", id: "COMMENT"},
+        {title: "Reklame", id: "ADVERTISEMENT"},
+        ]
+
     return (
         <div className={styles.c}>
             <nav className={styles.nav}>
                 <div className={styles.navContent}>
+                    <DropDown items={articleTypes} defaultValue={type || article.type} description={"Hva slags type artikkel lager du?"} onChange={(v) => {setType(v)}}></DropDown>
                     <TextArea placeholder={"Overskrift"} description={"Skriv inn overskriften på artikkelen."} onChange={(v) => setTitle(v)} defaultValue={v.title}></TextArea>
                     <TextArea placeholder={"Undertittel"} description={"Skiv inn undertittelen her"} onChange={setSubTitle} defaultValue={v.subtitle}></TextArea>
 
