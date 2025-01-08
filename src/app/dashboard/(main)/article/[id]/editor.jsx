@@ -8,6 +8,7 @@ import SaveButton from "@/components/editor/input/SaveButton";
 import DraggableResort from "@/components/editor/input/DraggableResort";
 import ArticleContent, { ArticleComponents, ArticleRenderer, GetArticleComponent, GetComponentPreviewText } from "@/components/article/ArticleContent";
 import Expandable from "@/components/editor/input/Expandable";
+import CategoryInput from "@/components/editor/input/CategoryInput"
 import GridIconSelector from "@/components/editor/input/GridIconSelector";
 import { useRouter } from "next/navigation";
 import DropDown from "@/components/editor/input/DropDown";
@@ -41,7 +42,7 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
             authors: authors.map((a) => a.id),
             image,
             components,
-            categories: categories,
+            categories: categories.map((c) => String(c).charAt(0).toUpperCase() + String(c).slice(1).toLowerCase()),
             id: defaultArticle.id,
             type: type || article.type,
         }
@@ -52,7 +53,7 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
           id: defaultArticle.id,
           type: type || article.type,
           authors: authors,
-          categories: categories,
+          categories: categories.map((c) =>  {return { name: String(c).charAt(0).toUpperCase() + String(c).slice(1).toLowerCase(), id: c}}),
         },
         version: {
           title: title,
@@ -60,7 +61,7 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
           image,
           createdAt: new Date().toString(),
           updatedAt: new Date().toString(),
-          components
+          components,
         },
       }
     }
@@ -169,6 +170,8 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
                     <DropDown items={articleTypes} defaultValue={type || article.type} description={"Hva slags type artikkel lager du?"} onChange={(v) => {setType(v)}}></DropDown>
                     <TextArea placeholder={"Overskrift"} description={"Skriv inn overskriften på artikkelen."} onChange={(v) => setTitle(v)} defaultValue={v.title}></TextArea>
                     <TextArea placeholder={"Undertittel"} description={"Skiv inn undertittelen her"} onChange={setSubTitle} defaultValue={v.subtitle}></TextArea>
+                    
+                    <CategoryInput onChange={(value) => setCategories(value)} defaultValues={article.categories.map((tag) => tag.id)}/>
 
                     <Expandable icon={"/icons/icon_file_image.svg"} title={"Ledende Bilde"}>
                         <TextArea placeholder={"Bildeaddresse"} description={"Skiv inn undertittelen her"} onEnter={(value) => setImage(value)} defaultValue={v.image}></TextArea>

@@ -33,12 +33,12 @@
   --red-700: rgb(255, 162, 151); /* Lighter */
   --red-600: rgb(255, 134, 121); /* Slightly lighter */
   --red-500: rgb(255, 77, 53);  /* Base color */
-  --red-400: rgb(229, 104, 87);  /* Slightly darker */
+  --red-400: rgb(234, 27, 0);  /* Slightly darker */
   --red-300: rgb(204, 91, 77);   /* Darker */
   --red-200: rgb(153, 68, 58);   /* Deeper dark */
-  --red-100: rgb(115, 51, 43);   /* Very deep dark */
-  --red-50:  rgb(76, 34, 29);    /* Very deep dark */
-  --red-25:  rgb(51, 22, 19);    /* Very deep dark */
+  --red-100: rgb(105, 25, 14);   /* Very deep dark */
+  --red-50:  rgb(77, 12, 4);    /* Very deep dark */
+  --red-25:  rgb(44, 6, 1);    /* Very deep dark */
 
 
   --orange-950: rgb(255, 244, 231); /* Very light */

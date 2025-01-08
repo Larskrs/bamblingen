@@ -36,6 +36,10 @@ export default async function POST(req) {
                     authors: {
                         connect: authors.map((a) => {return {id: a}})
                     },
+                    categories: {
+                        set: [], // Clear all current relationships
+                        connectOrCreate: ConnectOrCreateCategoryTags(body.categories), // Add or create the new categories
+                    },
                     type: body.type,
                     versions: {
                         create: [

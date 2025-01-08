@@ -48,7 +48,7 @@ export default async function PUT(req, params) {
             data: {
                 categories: {
                     set: [], // Clear all current relationships
-                    connectOrCreate: ConnectOrCreateCategoryTags(["Skogbrann"]), // Add or create the new categories
+                    connectOrCreate: ConnectOrCreateCategoryTags(body.categories), // Add or create the new categories
                 },
                 type: body.type,
                 versions: {

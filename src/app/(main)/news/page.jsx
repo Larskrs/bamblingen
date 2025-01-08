@@ -19,6 +19,7 @@ export default function News () {
 
     return (
         <div className={styles.c}>
+            <h2>Obs! Ingen saker er redaksjonelle nå</h2>
             { loading && <h1>Loading...</h1> }
             { error && <h1>{error}</h1> }
 
