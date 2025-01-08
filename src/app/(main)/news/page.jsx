@@ -34,6 +34,9 @@ export default function News () {
                 const type = GetType(article.type)
 
                 const shortenText = (text, limit) => {
+                    if (text.length <= limit) {
+                        return text
+                    }
                     let t = text.substring(0,limit)
                     if (text.length > limit) {
                         return t + "..."
