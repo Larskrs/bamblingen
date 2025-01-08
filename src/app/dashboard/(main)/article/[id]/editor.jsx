@@ -42,7 +42,7 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
             authors: authors.map((a) => a.id),
             image,
             components,
-            categories: categories.map((c) => String(c).charAt(0).toUpperCase() + String(c).slice(1).toLowerCase()),
+            categories: categories.map((c) => c),
             id: defaultArticle.id,
             type: type || article.type,
         }
@@ -53,7 +53,7 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
           id: defaultArticle.id,
           type: type || article.type,
           authors: authors,
-          categories: categories.map((c) =>  {return { name: String(c).charAt(0).toUpperCase() + String(c).slice(1).toLowerCase(), id: c}}),
+          categories: categories.map((c) =>  {return { name: c, id: c}}),
         },
         version: {
           title: title,

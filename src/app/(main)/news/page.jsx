@@ -47,6 +47,9 @@ export default function News () {
                     <div className={styles.body}>
                         <h3>{v.title}</h3>
                         <p>{shortenText(v.subtitle, 120)}</p>
+                        <div className={styles.tags}>
+                            {article.categories.map((tag) => <span>{tag.name}</span>)}
+                        </div>
                         <div className={styles.row}>
                             <p className={styles.type} style={{background: type.color}}>{type.name}</p>
                             <p className={styles.createdAt}>{formatRelativeDate(new Date(v.createdAt))}</p>
