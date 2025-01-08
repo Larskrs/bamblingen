@@ -48,7 +48,7 @@ export default function News () {
                         <h3>{v.title}</h3>
                         <p>{shortenText(v.subtitle, 120)}</p>
                         <div className={styles.tags}>
-                            {article.categories.map((tag) => <span>{tag.name}</span>)}
+                            {article.categories.map((tag) => <span key={tag.id}>{tag.name}</span>)}
                         </div>
                         <div className={styles.row}>
                             <p className={styles.type} style={{background: type.color}}>{type.name}</p>
