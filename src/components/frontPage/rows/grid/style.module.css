@@ -112,7 +112,7 @@
 .G_LARGE {
     display: grid;
     grid-template-columns: 1fr;
-    height: 70vh;
+    height: 500px;
     position: relative;
 }
 .G_LARGE section {
