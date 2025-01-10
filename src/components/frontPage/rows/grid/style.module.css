@@ -62,63 +62,60 @@
 .G_1 {
     display: flex;  
     width: 100%;
-    max-height: 400px;
+}
+.G_1 img {
+    max-height: 50vh;
+    min-height: 300px;
+}
+.G_1 section {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 .G_1_1 {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    max-height: 400px;
+    
 }
 .G_1_1_1 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    max-height: 400px;
+    
 }
 .G_1_2 {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    max-height: 400px;
+    
 }
 .G_2_1 {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    max-height: 400px;
+    
 }
 .G_3_2_1 {
     display: grid;
     grid-template-columns: 3fr 2fr 1fr;
-    max-height: 400px;
+    
 }
 .G_3_1 {
     display: grid;
     grid-template-columns: 3fr 1fr;
-    max-height: 400px;
+    
 }
 .G_1_3 {
     display: grid;
     grid-template-columns: 1fr 3fr;
-    max-height: 400px;
+    
 }
 .G_1_2_1 {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
-    max-height: 400px;
+    
 }
 .G_2_1_2 {
     display: grid;
     grid-template-columns: 2fr 1fr 2fr;
-    max-height: 400px;
-}
-.G_LARGE {
-    display: grid;
-    grid-template-columns: 1fr;
-    height: 500px;
-    position: relative;
-}
-.G_LARGE section {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    
 }
 @media only screen and (max-width: 800px) {
     .G_1_2, .G_2_1 {

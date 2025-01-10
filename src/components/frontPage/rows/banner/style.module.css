@@ -39,7 +39,8 @@
 .header .img {
     object-fit: cover;
     overflow: hidden;
-    width: 200px;
+    width: 300px;
+    max-width: 70vw;
     height: 100%;
 }
 .header p {
@@ -52,7 +53,7 @@
 }
 .header h1 {
     font-family: var(--font-inter);
-    font-size: 1.75rem;
+    font-size: 2rem;
 }
 
 @media screen and (max-width: 500px) {

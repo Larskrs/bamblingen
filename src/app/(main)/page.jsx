@@ -102,31 +102,14 @@ export default function TestArticle () {
             <div className={styles.m}>
             <FrontPageContent rows={[
                     {
-                        type: "grid",
-                        layout: "G_LARGE",
-                        priority: "normal",
-                        items: [
-                            {
-                                id: "V1StGXR8_Z5jdHi6Aaw",
-                                type: "article",
-                                priority: "priority",
-                                priorityPrefix: true,
-                                fullImage: false,
-                                context: "Bøytralist-partiet blir satt inn i med 100% av setene i stortinget",
-                                title: "«Nå er det bare bøytralister her»",
-                                image: "http://aktuelt.tv/api/files?fileId=6781124bd222fb15c503bc7a"
-                            },
-                        ],
-                    },
-                    {
                         type: "banner",
                         priority: "normal",
                         items: [
                             {
                                 id: "V1StGXR8_Z5jdHi6Baef",
                                 type: "article",
-                                priority: "priority",
-                                priorityPrefix: true,
+                                priority: "normal",
+                                priorityPrefix: false,
                                 context: "Artikler er ikke redaksjonelle",
                                 title: `Denne nettavisen er ikke i drift!`,
                                 image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
@@ -135,29 +118,48 @@ export default function TestArticle () {
                     },
                     {
                         type: "grid",
-                        layout: "G_2_1",
-                        priority: "none",
+                        layout: "G_1",
+                        priority: "normal",
                         items: [
-                            // {
-                            //     id: "V1StGXR8_Z5jdHi6Aaw",
-                            //     type: "article",
-                            //     priority: "normal",
-                            //     priorityPrefix: false,
-                            //     fullImage: true,
-                            //     context: "Oslo",
-                            //     title: "Vil Carl finne kjærligheten i Oslo?",
-                            //     image: "http://aktuelt.tv/api/files?fileId=675c531fd222fb15c503bc6b"
-                            // },
                             {
                                 id: "V1StGXR8_Z5jdHi6Aaw",
                                 type: "article",
                                 priority: "priority",
-                                priorityPrefix: true,
+                                priorityPrefix: false,
                                 fullImage: false,
                                 context: "Bøytralist-partiet blir satt inn i med 100% av setene i stortinget",
                                 title: "«Nå er det bare bøytralister her»",
-                                image: "http://aktuelt.tv/api/files?fileId=6781124bd222fb15c503bc7a"
+                                image: "http://aktuelt.tv/api/files?fileId=6781124bd222fb15c503bc7a",
+                                fontSize: 4,
                             },
+                        ],
+                    },
+                    {
+                        type: "grid",
+                        layout: "G_2_1",
+                        priority: "none",
+                        items: [
+                            {
+                                id: "V1StGXR8_Z5jdHi6A",
+                                type: "article",
+                                priority: "normal",
+                                priorityPrefix: false,
+                                fullImage: false,
+                                context: "Langesund",
+                                title: "Mangler artikkel",
+                                image: "/images/langesund.jpeg",
+                                fontSize: 3,
+                            },
+                            // {
+                            //     id: "V1StGXR8_Z5jdHi6Aaw",
+                            //     type: "article",
+                            //     priority: "priority",
+                            //     priorityPrefix: true,
+                            //     fullImage: false,
+                            //     context: "Bøytralist-partiet blir satt inn i med 100% av setene i stortinget",
+                            //     title: "«Nå er det bare bøytralister her»",
+                            //     image: "http://aktuelt.tv/api/files?fileId=6781124bd222fb15c503bc7a"
+                            // },
                             {
                                 id: "V1StGXR8_Z5jdHi6Aaw",
                                 type: "article",
@@ -181,7 +183,7 @@ export default function TestArticle () {
                                 priorityPrefix: false,
                                 fullImage: false,
                                 context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Kunstustilling i Porsgrunn",
+                                title: "Mangler Artikkel",
                                 image: "/api/image/join?bg=black&images=http%3A%2F%2Faktuelt.tv%2Fapi%2Ffiles%3FfileId%3D67576d48d222fb15c503bc60,http://aktuelt.tv/api/files?fileId=675766acd222fb15c503bc57"
                             },
                         ],

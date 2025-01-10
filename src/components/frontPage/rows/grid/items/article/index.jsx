@@ -3,14 +3,14 @@ import styles from "./style.module.css"
 import Pulse from "@/components/details/pulse"
 import ZoomInWrapper from "@/components/wrappers/ZoomInWrapper"
 
-export default function FullGrid ({id, context, title, image, priority, priorityPrefix=false, fullImage}) {
+export default function FullGrid ({id, context, title, image, priority, priorityPrefix=false, fullImage, fontSize=2}) {
     return (
         <>
             <section key={id} className={`${styles.section} ${styles[priority]}`}>
-                    <Image  alt="Image" src={image} className={`${styles.img} ${fullImage && styles.fullImage}`} width={1000} height={500} />
+                    <Image  alt="Image" src={image} className={`${styles.img} ${fullImage && styles.fullImage}`} quality={100} width={1000} height={500} />
                     <div className={`${styles.details} ${fullImage && styles.overlay}`}>
                         <p>{context}</p>
-                        <h1>
+                        <h1 style={{fontSize: `${fontSize}rem`}}>
                             {priorityPrefix && <span className={styles.latest}>
                                 <Pulse />
                                 <span>SISTE:</span>
