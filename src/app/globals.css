@@ -180,6 +180,10 @@ h3 {
   display: grid;
   grid-template-columns: 3fr 2fr 1fr;
 }
+.G-LARGE {
+  display: grid;
+  grid-template-columns: 1fr;
+}
 @media only screen and (max-width: 600px) {
   .G-1,
   .G-1-1,

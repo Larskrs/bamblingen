@@ -102,19 +102,20 @@ export default function TestArticle () {
             <div className={styles.m}>
             <FrontPageContent rows={[
                     {
-                        type: "countdown",
-                        layout: "G_1",
+                        type: "grid",
+                        layout: "G_LARGE",
                         priority: "normal",
                         items: [
                             {
-                                id: "V1StGXR8_Z5jdHi6B",
+                                id: "V1StGXR8_Z5jdHi6Aaw",
                                 type: "article",
                                 priority: "priority",
-                                priorityPrefix: false,
-                                context: "Nettavisen til bamblingene",
-                                title: `Velkommen til Bamblingen.no`,
-                                image: "http://aktuelt.tv/api/files?fileId=675c5320d222fb15c503bc6c"
-                            }
+                                priorityPrefix: true,
+                                fullImage: false,
+                                context: "Bøytralist-partiet blir satt inn i med 100% av setene i stortinget",
+                                title: "«Nå er det bare bøytralister her»",
+                                image: "http://aktuelt.tv/api/files?fileId=6781124bd222fb15c503bc7a"
+                            },
                         ],
                     },
                     {
@@ -134,39 +135,39 @@ export default function TestArticle () {
                     },
                     {
                         type: "grid",
-                        layout: "G_1_2",
+                        layout: "G_2_1",
                         priority: "none",
                         items: [
+                            // {
+                            //     id: "V1StGXR8_Z5jdHi6Aaw",
+                            //     type: "article",
+                            //     priority: "normal",
+                            //     priorityPrefix: false,
+                            //     fullImage: true,
+                            //     context: "Oslo",
+                            //     title: "Vil Carl finne kjærligheten i Oslo?",
+                            //     image: "http://aktuelt.tv/api/files?fileId=675c531fd222fb15c503bc6b"
+                            // },
                             {
                                 id: "V1StGXR8_Z5jdHi6Aaw",
                                 type: "article",
-                                priority: "normal",
+                                priority: "priority",
+                                priorityPrefix: true,
+                                fullImage: false,
+                                context: "Bøytralist-partiet blir satt inn i med 100% av setene i stortinget",
+                                title: "«Nå er det bare bøytralister her»",
+                                image: "http://aktuelt.tv/api/files?fileId=6781124bd222fb15c503bc7a"
+                            },
+                            {
+                                id: "V1StGXR8_Z5jdHi6Aaw",
+                                type: "article",
+                                priority: "priority",
                                 priorityPrefix: false,
                                 fullImage: true,
                                 context: "Oslo",
                                 title: "Vil Carl finne kjærligheten i Oslo?",
                                 image: "http://aktuelt.tv/api/files?fileId=675c531fd222fb15c503bc6b"
                             },
-                            {
-                                id: "V1StGXR8_Z5jdHi6Aaw",
-                                type: "article",
-                                priority: "normal",
-                                priorityPrefix: false,
-                                fullImage: false,
-                                context: "Oslo",
-                                title: "Er du avhengig av froskebein? Julian har svaret!",
-                                image: "/api/files?fileId=JulianHolder.jpg"
-                            },
-                            // {
-                            //     id: "V1StGXR8_Z5jdHi6Aaw",
-                            //     type: "article",
-                            //     priority: "priority",
-                            //     priorityPrefix: false,
-                            //     fullImage: false,
-                            //     context: "Oslo",
-                            //     title: "Vil Carl finne kjærligheten i Oslo?",
-                            //     image: "http://aktuelt.tv/api/files?fileId=675c531fd222fb15c503bc6b"
-                            // },
                         ],
                     },
                     {

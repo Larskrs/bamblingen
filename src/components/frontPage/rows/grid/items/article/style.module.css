@@ -1,10 +1,13 @@
 .section {
     cursor: pointer;
     width: 100%;
+    height: 100%;
+
 
     position: relative;
     cursor: pointer;
     display: flex;
+    overflow: hidden;
     flex-direction: column;
 }
 .section > * {
@@ -14,7 +17,7 @@
     translate: 0px -16px;
 }
 .full .img {
-    height: 400px !important;
+    height: 100%;
 }
 .priority {
     background-color: var(--priority);
@@ -48,13 +51,12 @@
     margin-right: 0.3rem; /* Optional spacing between elements */
 }
 .section .img {
-    width: 100%;
-    height: auto;
-    max-height: 300px;
-    /* aspect-ratio: 16/9; */
-    object-fit: cover;
     overflow: hidden;
+    display: flex;
+    height: 100%;
     flex-grow: 1;
+    object-fit: cover;
+    width: 100%;
 }
 .section p {
     letter-spacing: 1px;
