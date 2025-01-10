@@ -22,12 +22,12 @@ export default async function Layout({ children }) {
     {
       href: "/dashboard/article",
       name: "Innhold",
-      icon: "/icons/article_content.png",
+      icon: "/icons/icon_articles.svg",
     },
     {
       href: "/dashboard/batches",
       name: "Filmaterialer",
-      icon: "/logo/bamblingen/logo-yellow-symbol.png",
+      icon: "/icons/icon_folder.svg",
     },
   ];
 
