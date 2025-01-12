@@ -118,7 +118,7 @@ export default function TestArticle () {
                     },
                     {
                         type: "grid",
-                        layout: "G_1",
+                        layout: "G_FULL",
                         priority: "normal",
                         items: [
                             {
