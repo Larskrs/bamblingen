@@ -113,7 +113,7 @@ model ArticleVersion {
   title         String   @db.MediumText
   subtitle      String   @default("")
   image         String   @db.LongText
-  location      String   @default("")
+  location      String   @default("Bamble")
 
   components    String   @db.LongText
   createdAt     DateTime @default(now())

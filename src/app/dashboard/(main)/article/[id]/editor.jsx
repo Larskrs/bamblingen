@@ -171,7 +171,7 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
                     <TextArea placeholder={"Overskrift"} description={"Skriv inn overskriften på artikkelen."} onChange={(v) => setTitle(v)} defaultValue={v.title}></TextArea>
                     <TextArea placeholder={"Undertittel"} description={"Skiv inn undertittelen her"} onChange={setSubTitle} defaultValue={v.subtitle}></TextArea>
                     
-                    <CategoryInput onChange={(value) => setCategories(value)} defaultValues={article.categories.map((tag) => tag.id)}/>
+                    <CategoryInput onChange={(value) => setCategories(value)} defaultCategories={article.categories}/>
 
                     <Expandable icon={"/icons/icon_file_image.svg"} title={"Ledende Bilde"}>
                         <TextArea placeholder={"Bildeaddresse"} description={"Skiv inn undertittelen her"} onEnter={(value) => setImage(value)} defaultValue={v.image}></TextArea>
