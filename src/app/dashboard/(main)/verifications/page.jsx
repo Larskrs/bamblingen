@@ -20,8 +20,7 @@ export default function Verifications () {
     
     return (
         <div className={styles.c} >
-            <h2>Versjonslogg</h2>
-
+            {/* <h1>Versjonslogg</h1> */}
             <VerificationList verifications={data} />
         </div>
     );

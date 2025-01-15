@@ -8,6 +8,12 @@ const useFetch = (url) => {
   const [error, setError] = useState(null);
 
   const fetchData = async () => {
+
+    if (url == "" || undefined) {
+      setLoading(false)
+      return;
+    }
+
     setLoading(true);
     try {
       const response = await axios.get(url);

@@ -54,8 +54,10 @@
 }
 .thumbnail {
     position: relative;
-    height: 100%;
-    width: 5em;
+    height: 4em;
+    width: 6em;
+    overflow: hidden;
+    border-radius: 0.25rem;
 }
 .thumbnail img {
     position: absolute;
@@ -97,8 +99,9 @@
     padding: 0.25rem 0.5rem;
     border-radius: 0.25rem;
     color: white;
-    font-weight: 600;
+    font-weight: 500;
     margin-top: 0.25rem;
+    width: fit-content;
 }
 .time {
     font-size: 0.8em;

@@ -39,7 +39,7 @@ return (
 
 function NavItem ({l,i, pathname}) {
 
-            const { data, error, loading, loadMore } = useFetch(l.countAPI)
+            const { data, error, loading, loadMore } = useFetch(l.countAPI || "")
 
             let isActive = false
             const noDashPrefix = (n) => n.split("/dashboard").pop()
@@ -58,7 +58,7 @@ function NavItem ({l,i, pathname}) {
                         height={128}
                         />
                     <p>{l.name}</p>
-                    {l.countAPI && data && <span className={styles.counter}>{data}</span>}
+                    {l.countAPI && data != NaN && !loading && !error && <span className={styles.counter}>{data}</span>}
                 </Link>
             )
 }
