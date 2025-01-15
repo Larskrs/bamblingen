@@ -3,10 +3,12 @@ import Image from "../Image";
 import Reference from "../Reference";
 import Video from "../Video";
 import Heading from "../Heading"
+import Quote from "../Quote"
 
 export const ArticleComponents = {
     text: Text,
     heading: Heading,
+    quote: Quote,
     image: Image,
     video: Video,
     reference: Reference,

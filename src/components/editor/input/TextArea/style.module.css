@@ -25,3 +25,6 @@
     color: var(--white-400) !important;
     padding: 0px !important;
 }
+.field:focus + .description {
+    color: var(--white-900) !important;
+}

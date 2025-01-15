@@ -92,3 +92,18 @@
 .component:hover {
     background-color: red;
 }
+
+@media screen and (max-width: 900px) {
+    .c {
+        flex-direction: column-reverse;
+        height: auto;
+        max-height: unset;
+    }
+    .nav {
+        height: auto;
+        flex-grow: 1;
+    }
+    .main {
+        overflow-x: hidden;
+    }
+}

@@ -11,9 +11,9 @@ export default function TextComponent({
     lines = [],
     editor,
     onChange=()=>{}
-}) {    
+}) {
 
-    const [current, setCurrent] = useState(-1)
+    const [current, setCurrent] = useState(lines.length - 1)
 
     const [_lines, setLines] = useState(lines)
 
@@ -34,6 +34,9 @@ export default function TextComponent({
 
     useEffect(() => {
         onChange(query())
+        if (_lines.length <= 1) {
+            setCurrent(0)
+        }
     }, [_lines])
 
     const UpdateLine = (index, newValue) => {
@@ -44,6 +47,10 @@ export default function TextComponent({
     }
     const DeleteLine = (index) => {
         const _ = _lines.filter((_, i) => i !== index);
+        if (_ <= 1) {
+            setLines([""])
+            return
+        }
         setLines(_)
     }
     const AddLine = () => {
@@ -62,11 +69,10 @@ export default function TextComponent({
                 if (current === i) {
                     return <LineEditor key={i} id={i} line={line} onSubmit={SubmitLine} onUpdate={(v) => {UpdateLine(i, v)}} onDelete={DeleteLine}/>
                 }
-                return (<div  key={i+"edit"} style={{color: "white"}} className={styles.line} onClick={() => {Select(i)}}>
+                return (<div key={i+"edit"} style={{color: "white"}} className={styles.line} onClick={() => {Select(i)}}>
                             <MarkdownFormatter key={i+line} text={line} />
                         </div>)
             })}
-            <div onClick={AddLine} className={styles.createLine}>Legg til linje</div>
         </div>
     );
 

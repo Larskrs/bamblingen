@@ -6,18 +6,23 @@ import MarkdownFormatter from "@/components/common/MarkdownText";
 
 
 const PreviewText = (data) => {
+  let txt = ""
   if (data.lines?.length > 0) {
     if (!data?.lines?.[0]) {
-      return "(tomt)"
+      txt = "(tomt)"
     }
     let t = data.lines[0].substring(0,48)
     if (data.lines[0].length > 48) {
-      return t + "..."
+      txt = t + "..."
     }
-    return t
+    txt = t
   } else {
-    return "(tomt)"
+    txt = "(tomt tekstfelt)"
   }
+  if (txt == "") {
+    txt = "(tomt tekstfelt)"
+  }
+  return txt + ` (${data.lines.length})`
 }
 
 const config = {
@@ -29,7 +34,7 @@ const config = {
   previewText: PreviewText,
   default: {
     type: "text",
-    lines: []
+    lines: [""]
   }
 }
 

@@ -8,8 +8,16 @@ const QUERY = async (req, userId) => {
 
     const query = {
         data: {
-            applicantId: userId,
-            articleVersionId: json.id  
+            applicant: {
+                connect: {
+                    id: userId
+                }
+            },
+            articleVersion: {
+                connect: {
+                    id: json.id
+                }
+            }
         },
         include: {
             articleVersion: true,

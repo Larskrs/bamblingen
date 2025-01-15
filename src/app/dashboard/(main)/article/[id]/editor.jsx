@@ -220,11 +220,11 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
                     <div className={styles.bottomSpace} />
                 </div>
                 <div className={styles.navBar}>
-                    <SaveButton onClick={handleSubmit} error={error} errorMessage={{message: errorMessage}} disabled={loading} progress={loading ? 0 : 100}>
+                    <SaveButton onClick={handleSubmit} background="var(--white-100)" error={error} errorMessage={{message: errorMessage}} disabled={loading} progress={loading ? 0 : 100}>
                       {isCreating ? "Lag ny artikkel" : "Lagre utkast"}
                     </SaveButton>
                     {!isCreating && <SaveButton onClick={handleSubmitAndVerify} error={error} errorMessage={{message: errorMessage}} disabled={loading} progress={loading ? 0 : 100}>
-                      {"Lagre & send til godkjenning"}
+                      {"Send"}
                     </SaveButton>}
                 </div>
             </nav>

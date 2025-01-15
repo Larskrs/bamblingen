@@ -16,6 +16,7 @@
     gap: 0.5rem;
     align-items: center;
     cursor: pointer;
+    user-select: none;
 }
 .row > span {
     font-size: 0.8rem;

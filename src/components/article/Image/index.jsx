@@ -8,13 +8,13 @@ const config = {
     renderer: ImageComponent,
     name: "bilde",
     description: "Bilde element, med bildetekst og bildekilde",
-    previewText: (data) => {return data.alt || data.src},
+    previewText: (data) => {return data.alt || "(bilde uten bildetekst)"},
     editor: Editor,
     default: {
         type: "image",
         src: "/images/langesund.jpeg",
-        alt: "Bildetekst",
-        credit: "Foto: Bamblingen.no"
+        alt: "",
+        credit: ""
     }
 }
 

@@ -127,9 +127,36 @@ export const articleTypes = [
     },
     {
         id: "ADVERTISEMENT",
-        name: "Reklame",
+        name: "Arrangement",
         color: "var(--secondary-100)",
     }
+]
+export const verificationStatuses = [
+    {
+        id: "PENDING",
+        name: "Ikke vurdert",
+        color: "var(--orange-500)"
+    },
+    {
+        id: "PROCESSING",
+        name: "Vurderes",
+        color: "var(--orange-500)"
+    },
+    {
+        id: "DENIED",
+        name: "Avslått",
+        color: "var(--red-500)"
+    },
+    {
+        id: "ACCEPTED",
+        name: "Godkjent",
+        color: "var(--secondary-500)"
+    },
+    {
+        id: "POSTPONED",
+        name: "Satt på vent",
+        color: "var(--white-100)"
+    },
 ]
 export function GetType (id) {
     for (let i = 0; i < articleTypes.length; i++) {
@@ -139,6 +166,15 @@ export function GetType (id) {
         }
     }
     return articleTypes[0]
+}
+export function GetVerificationStatus (id) {
+    for (let i = 0; i < verificationStatuses.length; i++) {
+        const t = verificationStatuses[i];
+        if (t.id === id) {
+            return t
+        }
+    }
+    return verificationStatuses[0]
 }
 
 export async function DefaultArticle (authors) {

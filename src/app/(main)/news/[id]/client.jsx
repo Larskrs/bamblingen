@@ -8,7 +8,12 @@ import { GetType } from "@/lib/articleLib";
 
 export default function NewsArticlePage ({ version, article, session }) {
 
-    const components = version.components
+    let components = version.components
+
+    if (typeof components === 'string' || components instanceof String) {
+        components = JSON.parse(components)
+    }
+    console.log(components)
 
     const type = GetType(article.type)
 

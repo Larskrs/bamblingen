@@ -26,7 +26,7 @@ const TextArea = ({ onChange = () => {}, onEnter = () => {}, focus=false, requir
   }, [currentValue, defaultValue]);
 
   return (
-    <div>
+    <div className={styles.c}>
     {description && <p className={styles.description}>{description}</p> }
     <textarea
       ref={textareaRef}

@@ -59,6 +59,9 @@
     flex-direction: column;
     /* gap: 0.25rem; */
 }
+.editor textarea {
+    margin-bottom: 0px;
+}
 .editor button {
     width: fit-content;
     padding: 0.25rem 0.75rem;

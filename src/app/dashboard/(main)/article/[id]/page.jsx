@@ -27,7 +27,7 @@ export default async function NewsArticlePage ({ params }) {
     }
     const defaultArticle = await GetArticle(id)
 
-    if (!defaultArticle) {
+    if (!defaultArticle.authors) {
         return notFound()
     }
 

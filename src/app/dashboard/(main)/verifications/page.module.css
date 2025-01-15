@@ -1,0 +1,115 @@
+
+.c {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+}
+.c {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+}
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+.table {
+    border-collapse: collapse;
+}
+.verification {
+    background-color: var(--white-800);
+    border: 1px solid var(--white-700);
+    width: 100%;
+    color: var(--secondary-75);
+    cursor: pointer;
+    position: relative;
+    border-bottom: 1px solid var(--white-600);
+}
+.verification:hover {
+    background-color: var(--white-700);
+}
+.header {
+    width: 100%;
+    cursor: pointer;
+    height: 100%;
+    padding-right: 0.5rem;
+    width: 100%;
+    border-bottom: 1px solid var(--white-600);
+    display: table-row;
+    vertical-align:bottom;
+    unicode-bidi: isolate;
+}
+.header h4 {
+    font-size: .85rem;
+}
+.header p {
+    font-size: .7rem;
+    font-weight: 500;
+}
+.thumbnail {
+    position: relative;
+    height: 100%;
+    width: 5em;
+}
+.thumbnail img {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.col {
+    text-align: left;
+    gap: 0.5rem;
+    padding: 0.5rem;
+}
+.expandedHeader {
+    background-color: var(--white-600) !important;
+    border-top: 1px solid var(--white-500);
+    border-bottom: none;
+}
+.b {
+    padding: 0.5rem;
+    background-color: var(--white-700);
+    border-bottom: 1px solid var(--white-500);
+    border-top: none;
+    width: 100%;
+}
+.body {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 1em;
+}
+.type {
+    width: fit-content;
+    font-size: 0.7em;
+    color: white;
+}
+.status {
+    font-size: 0.8em;
+}
+.time {
+    font-size: 0.8em;
+}
+.userCol {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8em;
+}
+.userCol img {
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+}
+.verifyField {
+    padding: 0.25rem;
+}

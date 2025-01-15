@@ -8,7 +8,7 @@ const config = {
     renderer: HeadingComponent,
     name: "overskrift",
     description: "Overskrifter med 4 forskjellige størrelser",
-    previewText: (data) => {return data.alt || data.src},
+    previewText: (data) => {return data.text || "(overskrift)"},
     editor: Editor,
     default: {
         type: "heading",
