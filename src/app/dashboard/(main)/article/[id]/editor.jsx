@@ -26,7 +26,7 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
     const [article, setArticle] = useState(defaultArticle)
     const [authors, setAuthors] = useState(defaultArticle.authors)
     const [categories, setCategories] = useState(["Ingen", "Kategorier"])
-    const [type, setType] = useState("")
+    const [type, setType] = useState()
 
     const [uploaded, setUploaded] = useState(null)
     const [loading, setLoading] = useState(false)
@@ -93,6 +93,7 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
 
           const json = await res.json()
           setUploaded(json)
+          return json
 
         } catch (error) {
 
@@ -122,6 +123,7 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
 
           const json = await res.json()
           setUploaded(json)
+          return json
 
         } catch (error) {
 
@@ -140,11 +142,38 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
 
       const handleSubmit = async () => {
         if (isCreating) {
-            await handleCreate()
+            return await handleCreate()
         } else {
-            await handleUpdate()
+            return await handleUpdate()
         }
       }
+      const handleSubmitAndVerify = async () => {
+          const article = await handleUpdate()
+          const version = article?.versions?.[0]
+          console.log(version.id)
+          const q = {
+            id: version.id
+          }
+
+          try {
+
+            const res = await fetch(`/api/v1/articles/verifications`, {
+              method: 'POST',
+              body: JSON.stringify(q),
+            });
+
+            if (!res.ok) {
+            const json = await res.json()
+            setErrorMessage(json.error)
+            setError(true)
+            setLoading(false)
+          }
+        } catch (err) {
+          setErrorMessage(err.message)
+          setError(true)
+          setLoading(false)
+        }
+      } 
 
       const AddComponent = (type) => {
           const component = GetArticleComponent(type)
@@ -194,6 +223,9 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
                     <SaveButton onClick={handleSubmit} error={error} errorMessage={{message: errorMessage}} disabled={loading} progress={loading ? 0 : 100}>
                       {isCreating ? "Lag ny artikkel" : "Lagre utkast"}
                     </SaveButton>
+                    {!isCreating && <SaveButton onClick={handleSubmitAndVerify} error={error} errorMessage={{message: errorMessage}} disabled={loading} progress={loading ? 0 : 100}>
+                      {"Lagre & send til godkjenning"}
+                    </SaveButton>}
                 </div>
             </nav>
             <div className={styles.main}>

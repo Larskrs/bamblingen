@@ -33,9 +33,11 @@ model User {
   role Role @default(USER)
 
   // Joined Data
-  articles Article[]
+  articles Article[] @relation("ArticleAuthors")
   files    File[]
   batches  Batch[]
+  articlereview ArticleVerification[] @relation("ArticleVerificationReviewer")
+  articleapplicant ArticleVerification[] @relation("ArticleVerificationApplicant")
 }
 
 model Account {
@@ -102,7 +104,7 @@ model Authenticator {
 model Article {
   id              String            @id @default(cuid())
   versions        ArticleVersion[]
-  authors         User[]
+  authors         User[] @relation("ArticleAuthors")
   createdAt       DateTime          @default(now())
   categories      Category[]
   type            ArticleType @default(NEWS)
@@ -121,8 +123,10 @@ model ArticleVersion {
   article       Article @relation(fields: [articleId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   articleId     String
 
-  verification  VerificationStatus @default(PENDING)
   visibility    ArticleVisibility @default(DRAFT)
+
+  verification  ArticleVerification? @relation
+  verificationId Int?               // Fremmednøkkel referert i ArticleVerification
 }
 enum ArticleVisibility {
   HIDDEN
@@ -141,6 +145,19 @@ enum VerificationStatus {
   DENIED
   ACCEPTED
   POSTPONED
+}
+model ArticleVerification {
+  id                    Int      @id @default(autoincrement())
+  status                VerificationStatus @default(PENDING)
+  applicant             User @relation("ArticleVerificationApplicant", fields: [applicantId], references: [id], onDelete: Cascade)
+  applicantId           String
+  reviewer              User? @relation("ArticleVerificationReviewer", fields: [reviewerId], references: [id], onDelete: Cascade)
+  reviewerId            String?
+  articleVersion        ArticleVersion     @relation(fields: [articleVersionId], references: [id], onDelete: Cascade)
+  articleVersionId      Int                @unique
+
+  reviewedAt            DateTime?
+  createdAt             DateTime @default(now())
 }
 
 model ComponentPage {
@@ -169,7 +186,7 @@ model Category {
 }
 model Batch {
   name            String
-  id              String            @id @unique @default(cuid())
+  id              String            @id @default(cuid())
   files           File[]
   categories      Category[]
 
@@ -184,6 +201,7 @@ model File {
   name            String
   address         String
   type            String
+  data            String?  @db.LongText
 
   batch           Batch @relation(fields: [batchId], references: [id])
   batchId         String

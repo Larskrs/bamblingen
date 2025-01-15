@@ -61,7 +61,13 @@ export default async function PUT(req, params) {
                 }
             },
             include: {
-                categories: true
+                categories: true,
+                versions: {
+                    take: 1, // Fetch only one version
+                    orderBy: {
+                        createdAt: "desc", // Ensure it's the most recent one
+                    },
+                },
             }
         });
 
