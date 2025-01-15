@@ -135,7 +135,7 @@ export const verificationStatuses = [
     {
         id: "PENDING",
         name: "Ikke vurdert",
-        color: "var(--orange-500)"
+        color: "var(--white-100)"
     },
     {
         id: "PROCESSING",

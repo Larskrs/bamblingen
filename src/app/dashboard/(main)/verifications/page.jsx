@@ -73,7 +73,7 @@ function TableRow ({v}) {
                 </td>
                 <td className={styles.col}>
                     <p className={styles.time}>{TimeAgo(new Date(v.articleVersion.createdAt))}</p>
-                    <div className={styles.status}>{GetVerificationStatus(v.status).name}</div>
+                    {/* <div className={styles.status}>{GetVerificationStatus(v.status).name}</div> */}
                     <div className={styles.type} style={{color: GetType(v.articleVersion.article.type).color}}>{GetType(v.articleVersion.article.type).name}</div>
                 </td>
                 <td className={styles.col}>
@@ -83,10 +83,13 @@ function TableRow ({v}) {
                     </div>
                 </td>
                 <td className={styles.col}>
-                    {v.reviwerId
+                    {v.reviewerId
                     ? <div className={styles.userCol}>
-                        <Image width={64} height={64} alt="reviwer-avatar" src={v.reviwer.image} />
-                        <p>{v.reviwer.name}</p>
+                        <Image width={64} height={64} alt="reviwer-avatar" src={v.reviewer.image} />
+                        <div className={styles.col}>
+                            <p>{v.reviewer.name}</p>
+                            <div className={styles.status} style={{background: GetVerificationStatus(v.status).color}}>{GetVerificationStatus(v.status).name}</div>
+                        </div>
                     </div>
                     : <div className={styles.userCol}>
                         <p>Ikke vurdert</p>

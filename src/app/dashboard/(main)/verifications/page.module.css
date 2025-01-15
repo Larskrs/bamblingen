@@ -94,6 +94,11 @@
 }
 .status {
     font-size: 0.8em;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    color: white;
+    font-weight: 600;
+    margin-top: 0.25rem;
 }
 .time {
     font-size: 0.8em;
