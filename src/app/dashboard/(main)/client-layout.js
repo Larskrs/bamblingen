@@ -24,6 +24,23 @@ return (
 
         {links.map((l, i) => {
             
+            <NavItem key={l.href + i} l={l} i={i} />
+
+        })}
+        </nav>
+
+        <main>
+            <div className={styles.child}>
+                {children}
+            </div>
+        </main>
+    </div>
+    );
+}
+
+
+function NavItem ({l,i}) {
+
             const { data, error, loading, loadMore } = useFetch(l.countAPI)
 
             let isActive = false
@@ -35,7 +52,7 @@ return (
             if (l.href.endsWith("/dashboard/")) { isActive = false }
 
             return (
-                <Link key={l.href + i} className={`${styles.link} ${isActive ? styles.active : styles.inactive}`} href={l.href}>
+                <Link className={`${styles.link} ${isActive ? styles.active : styles.inactive}`} href={l.href}>
                     <Image
                         alt={`link-icon-${l.name.toLowerCase()}`}
                         src={l.icon}
@@ -46,14 +63,4 @@ return (
                     {l.countAPI && data && <span className={styles.counter}>{data}</span>}
                 </Link>
             )
-        })}
-        </nav>
-
-        <main>
-            <div className={styles.child}>
-                {children}
-            </div>
-        </main>
-    </div>
-    );
 }
