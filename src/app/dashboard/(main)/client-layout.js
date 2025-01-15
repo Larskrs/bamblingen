@@ -22,11 +22,9 @@ return (
                 />
             </div>
 
-        {links.map((l, i) => {
-            
+        {links.map((l, i) => 
             <NavItem key={l.href + i} l={l} i={i} />
-
-        })}
+        )}
         </nav>
 
         <main>
