@@ -22,8 +22,8 @@ return (
                 />
             </div>
 
-        {links.map((l, i) => 
-            <NavItem key={l.href + i} l={l} i={i} />
+        {links.map((l, i) =>
+            <NavItem key={l.href + i} l={l} pathname={pathname} i={i} />
         )}
         </nav>
 
@@ -37,7 +37,7 @@ return (
 }
 
 
-function NavItem ({l,i}) {
+function NavItem ({l,i, pathname}) {
 
             const { data, error, loading, loadMore } = useFetch(l.countAPI)
 
