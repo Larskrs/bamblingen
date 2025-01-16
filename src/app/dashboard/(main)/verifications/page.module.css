@@ -20,6 +20,7 @@
     width: 100%;
 }
 .table {
+    border-radius: 8px;
     border-collapse: collapse;
 }
 .verification {
@@ -83,6 +84,9 @@
     border-bottom: 1px solid var(--white-500);
     border-top: none;
     width: 100%;
+}
+.thead td {
+    padding-left: 0.5rem;
 }
 .body {
     display: flex;

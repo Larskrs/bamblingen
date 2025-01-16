@@ -8,6 +8,7 @@ import { formatRelativeDate } from "@/lib/timeLib";
 import Link from "next/link";
 import { GetType } from "@/lib/articleLib";
 import SocketMessageList from "@/components/common/SocketMessageList";
+import CountdownTimer from "@/components/common/CountdownTimer";
 
     const per_page = 10
 
@@ -23,6 +24,7 @@ export default function News () {
             <h2>Obs! Ingen saker er redaksjonelle nå</h2>
 
             <SocketMessageList />
+            {/* <CountdownTimer targetDate={new Date('2025-02-06T00:00:00Z')} /> */}
 
 
             { loading && <h1>Loading...</h1> }

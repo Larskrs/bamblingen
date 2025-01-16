@@ -37,7 +37,7 @@ function VerificationList ({verifications}) {
 
             <table className={styles.table}>
 
-                <thead>
+                <thead className={styles.thead}>
                     <tr>
                         <td></td>
                         <td>Tittel</td>
@@ -57,12 +57,11 @@ function VerificationList ({verifications}) {
 
 function TableRow ({v}) {
 
-    const [isExpanded, setIsExpanded] = useState(false)
     const version = v.articleVersion
 
     return (
         <>
-            <tr onClick={() => {setIsExpanded(!isExpanded)}} className={`${styles.verification} ${isExpanded && styles.expandedHeader}`}>
+            <tr className={`${styles.verification}`}>
                 <td className={styles.thumbnail}>
                     <Image alt="artikkelVersionBilde" width={256} height={256} src={v.articleVersion.image} />
                 </td>
@@ -96,24 +95,6 @@ function TableRow ({v}) {
                     }
                 </td>
             </tr>
-            {isExpanded &&
-                <tr className={styles.b} key={v.id+"body"}>
-                    <td colSpan={5}>
-                        <div className={styles.body}>
-                            {/* <h3>{v.articleVersion.title}</h3> */}
-                            <div className={styles.type} style={{padding: "0.5rem, 0.25rem", background: GetType(v.articleVersion.article.type).color}}>{GetType(v.articleVersion.article.type).name}</div>
-
-                            <select className={styles.verifyField}>
-                                <option></option>
-                                <option></option>
-                                <option></option>
-                            </select>
-
-                            {/* <NewsArticlePage version={version} session={null} article={v.articleVersion.article} /> */}
-                        </div>
-                    </td>
-                </tr>
-            }
         </>
     )
 

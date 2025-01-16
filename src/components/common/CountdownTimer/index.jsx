@@ -1,5 +1,6 @@
 
 "use client"
+import FlowNumber from "../FlowNumberDigit";
 import styles from "./style.module.css"
 import React, { useEffect, useState } from "react";
 
@@ -47,24 +48,5 @@ const CountdownTimer = ({ targetDate }) => {
     </div>
   );
 };
-
-function FlowNumber ({number}) {
-    return (
-        <div className={styles.flow}>
-            <div className={styles.shifter} style={{translate: `0px -${number}em`}}>
-                <span>9</span>
-                <span>8</span>
-                <span>7</span>
-                <span>6</span>
-                <span>5</span>
-                <span>4</span>
-                <span>3</span>
-                <span>2</span>
-                <span>1</span>
-                <span>0</span>
-            </div>
-        </div>
-    )
-}
 
 export default CountdownTimer;

@@ -1,0 +1,23 @@
+.flow {
+    display: flex;
+    flex-direction: column;
+    height: 1em;
+    /* outline: 1px solid red; */
+    overflow: hidden;
+    width: .75em;
+    position: relative;
+    font-size: 3rem;
+}
+.shifter { 
+    display: flex;
+    flex-direction: column-reverse;
+    transition: 250ms var(--curve-1);
+    /* overflow: hidden; */
+    font-size: inherit;
+    position: relative;
+}
+.shifter span {
+    max-height: 1em;
+    font-size: inherit;
+    position: absolute;
+}
