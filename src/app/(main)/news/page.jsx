@@ -7,6 +7,7 @@ import Article from "@/components/frontPage/rows/grid/items/article";
 import { formatRelativeDate } from "@/lib/timeLib";
 import Link from "next/link";
 import { GetType } from "@/lib/articleLib";
+import SocketMessageList from "@/components/common/SocketMessageList";
 
     const per_page = 10
 
@@ -20,6 +21,10 @@ export default function News () {
     return (
         <div className={styles.c}>
             <h2>Obs! Ingen saker er redaksjonelle nå</h2>
+
+            <SocketMessageList />
+
+
             { loading && <h1>Loading...</h1> }
             { error && <h1>{error}</h1> }
 

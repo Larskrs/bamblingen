@@ -48,7 +48,7 @@ const QUERY = async (req) => {
                             title: true,
                             subtitle: true,
                             image: true,
-                            components: true,
+                            components: false,
                             location: true,
                             createdAt: true,
                             article: {
@@ -80,6 +80,8 @@ const QUERY = async (req) => {
 const GET_OWN = async (req) => {
 
     try {
+        const q = await QUERY(req)
+        q.where = { applicantId: { in: [req.auth.user.id]}}
         const data = await db.articleVerification.findMany(await QUERY(req))   
         return NextResponse.json( data , { status: 200 })
     } catch (err) {

@@ -64,6 +64,20 @@ export default function AI({
                 </div>
             </section>
             <section>
+                <Image alt="background" className={styles.background} src={"http://aktuelt.tv/api/files?fileId=6788cd01d222fb15c503bc7c"} width={1920} height={1080} />
+                <div className={styles.bottom}>
+                  <TypingEffect
+                      textStyle={{fontSize: "3rem", color: "var(--primary-500)", background: "var(--secondary-25)", fontFamily: "var(--font-domine)"}}
+                      prefix="Er prompting nok" prompts={["", "?"]}
+                  />
+                  <TextHighlight 
+                      pauseTime={4000}
+                      typingSpeed={5}
+                      textStyle={{fontSize: "1.5rem", color: "var(--white-900)", background: "var(--secondary-25)", fontFamily: "var(--font-domine)"}}
+                      text={`Det var spørsmålet under saken: i 2023, da Kris Kashtanova's novelle brukte KI-genererte bilder. Originalt fikk hun fult copyright, men ble fratatt etter det ble visst at KI-en lagde bildet for henne. Ved sakens ende ble det bestemt, at prompting ikke påvirker resultatet nok, til at det kan bli sett på som et kunstnerisk verktøy.`} />
+                </div>
+            </section>
+            <section>
                 <Image alt="background" className={styles.background} src={"http://aktuelt.tv/api/files?fileId=67576551d222fb15c503bc52"} width={1920} height={1080} />
                 <div className={styles.bottom}>
                   <TypingEffect
