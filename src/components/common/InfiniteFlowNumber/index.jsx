@@ -8,7 +8,7 @@ export default function InfiniteFlowNumber ({number}) {
 
     return (
         <div className={styles.digits}>
-            {digits.map((d) => <FlowNumber key={d} number={parseInt(d)} />)}
+            {digits.map((d, i) => <FlowNumber key={i} number={parseInt(d)} />)}
         </div>
     )
 }
