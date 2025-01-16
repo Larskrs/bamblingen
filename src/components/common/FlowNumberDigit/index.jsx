@@ -6,7 +6,7 @@ export default function FlowNumber ({number}) {
     return (
         <div className={styles.flow}>
             <div className={styles.shifter} style={{translate: `0px ${number}em`}}>
-                {digits.map((d) => <span style={{bottom: `${d-1}em`}}>{d}</span>)}
+                {digits.map((d) => <span key={d} style={{bottom: `${d-1}em`}}>{d}</span>)}
             </div>
         </div>
     )
