@@ -29,7 +29,6 @@
     animation: item forwards 125ms var(--curve-1);
     text-overflow: clip;
     cursor: pointer;
-    max-width: 10rem;
 }
 .item:hover {
     text-decoration: underline;
@@ -41,8 +40,10 @@
     height: 2.5em;
     font-size: 0.75em;
     overflow: hidden;
+    max-width: 100%;
 }
 .image {
+    width: 100%;
     opacity: 0;
     display: flex;
     justify-content: center;
@@ -56,6 +57,7 @@
     text-overflow: clip;
     cursor: pointer;
     aspect-ratio: 1/1;
+    background-color: var(--secondary-50);
 }
 .image p {
     width: 100%;

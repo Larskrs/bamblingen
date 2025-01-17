@@ -4,6 +4,7 @@ import styles from "./files.module.css"
 import Image from "next/image";
 import Link from "next/link";
 import { GetFileFallbackIcon } from "@/lib/fileLib";
+import { useState } from "react";
 
 const url = (page) => `/api/v1/files/list?per_page=10&page=${page}`
 export default function Batches ({onOpenBatch=()=>{}}) {
@@ -20,24 +21,29 @@ export default function Batches ({onOpenBatch=()=>{}}) {
 
     return (
         <div className={styles.c}>
-            {data.map((f, i) => {
-                const url = `/api/v1/files?fileId=${f.id}`
-                const fileType = f.type.split("/").shift()
-                let image = GetFileFallbackIcon(fileType)
-
-                if (fileType == "image") {
-                    image = url
-                }
-
-                return (
-                    <Link className={styles.item} href={url} key={f.id}>
-                        <div style={{animationDelay: `${i*50}ms`}} className={styles.image}>
-                            <Image alt={f.name} width={256} height={256} src={image} />
-                        </div>
-                        <p>{f.name}</p>
-                    </Link>
-                )
-            })}
+            {data.map((f, i) =>
+                <FileDisplay key={f.id} file={f} index={i} />
+            )}
         </div>
     );
+    function FileDisplay ({file, index}) {
+
+            const [imageFailed, setFailed] = useState(false)
+
+            const url = `/api/v1/files?fileId=${file.id}`
+            const fileType = file.type.split("/").shift()
+            let fallbackImage = GetFileFallbackIcon(fileType)
+            let image = fallbackImage
+            if (fileType == "image") {
+                image = url
+            }
+            return (
+                <Link className={styles.item} href={url}>
+                    <div style={{animationDelay: `${index*50}ms`}} className={styles.image}>
+                        {<Image onError={() => setFailed(true)} alt={"file-thumbnail"} width={256} height={256} src={imageFailed ? fallbackImage : image} />}
+                    </div>
+                    <p>{file.name}</p>
+                </Link>
+            )
+    }
 }
