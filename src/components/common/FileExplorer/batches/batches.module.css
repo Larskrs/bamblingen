@@ -83,7 +83,9 @@
 /* Media Queries */
 @media (min-width: 400px) and (max-width: 500px) {
     .c {
-        grid-template-columns: repeat(1, 1fr); /* 1 item per row */
+        grid-template-columns: repeat(2, 1fr); /* 1 item per row */
+        align-items: center;
+        justify-content: center;
     }
 }
 
