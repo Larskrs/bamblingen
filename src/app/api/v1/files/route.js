@@ -178,11 +178,11 @@ async function UploadFileToDB (id, name, address, batch, type, userId) {
             batch: {
                 connectOrCreate: {
                     where: {
-                      id: 'debug',
+                      id: cleanFilename(batch),
                     },
                     create: {
-                      id: 'debug',
-                      name: "Debug Batch",
+                      id: cleanFilename(batch),
+                      name: batch,
                       categories: { connectOrCreate: ConnectOrCreateCategoryTags(["debug", "testing", "development"]) },
                       user: {
                         connect: {
@@ -218,7 +218,7 @@ export const POST = auth(async function POST(req) {
             return NextResponse.json({ message: "No 'batchId', provided" }, { status: 401 })
         }
 
-        const batchId = cleanFilename(formData.get('batchId'))
+        const batchId = cleanFilename(formData.get('batchId') || "debug")
         const userId = auth.user.id
 
         const fileCount = formData.getAll('files').length
