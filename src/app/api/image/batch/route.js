@@ -1,6 +1,9 @@
 import { db } from '@/lib/db';
+import sharp from 'sharp';
 import { notFound } from 'next/navigation';
 import { ImageResponse } from 'next/og';
+import { readFileSync } from 'fs';
+import { NextResponse } from 'next/server';
 
 // Image metadata
 export const alt = 'Batch image';
@@ -12,6 +15,20 @@ export const size = {
 export const contentType = 'image/jpeg';
 export const fonts = {
 
+}
+
+async function getCompressedImageBase64(filePath, width = 300, height = 300, quality = 80) {
+  try {
+    const imageBuffer = await sharp(filePath)
+      .resize(width, height, { fit: 'inside' }) // Resize image to fit within specified dimensions
+      .jpeg({ quality }) // Compress the image with specified quality (default: 80%)
+      .toBuffer(); // Convert the image to a buffer
+
+    return imageBuffer.toString('base64'); // Return Base64 encoded string
+  } catch (error) {
+    console.error('Error compressing image:', error);
+    throw error;
+  }
 }
 
 // Image generation
@@ -30,7 +47,7 @@ export async function GET(req) {
             type: { contains: "image" }
           },
           orderBy: {
-            createdAt: "asc"
+            createdAt: "desc"
           }
         }
       }
@@ -39,6 +56,12 @@ export async function GET(req) {
     console.error(err)
     return notFound()
   }
+
+  await Promise.all(batch.files.map(async (f) => {
+    const _ = f
+    _.image = await getCompressedImageBase64(f.address, 256, 256, 50)
+    return _
+  }))
 
   return new ImageResponse(
     (
@@ -53,30 +76,21 @@ export async function GET(req) {
         }}
       >
         {batch.files.map((f) => {
-          
-          const url = `http://localhost:3000/api/v1/files?fileId=${f.id}`
-          const fileType = f.type.split("/").shift()
-          let image = `/icons/icon_file_${fileType}.svg`
-          
-          if (fileType == "image") {
-            image = url
-          }
-          
           return (
-              <img
-              key={image}
-              src={image}
-              alt={`Image ${image}`}
-              width={size.width/4}
-              height={size.height/4}
+            <img
+              key={f.id}
+              src={`data:image/jpeg;base64, ${f.image}`}
+              alt={`Image ${f.id}`}
+              width={256}
+              height={256}
               style={{
                 width: 256, // Full width
                 height: 256,
                 objectFit: 'cover', // Ensure images cover their space
               }}
-              />
-              )
-            })}
+            />
+            )
+          })}
         <div style={{ display: "flex", position: "absolute", ...size, alignItems: "center", justifyContent: "center"}}>
           <p style={{width: 450, wordBreak: "break-all", borderRadius: 8, background: "black", display: "flex", textAlign: "center", padding: 16, lineHeight: 1,fontSize: 64, fontWeight: "900", color: "white"}}>{batch.name}</p>
         </div>
