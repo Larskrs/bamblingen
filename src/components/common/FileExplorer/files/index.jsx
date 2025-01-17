@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { GetFileFallbackIcon } from "@/lib/fileLib";
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const url = (page) => `/api/v1/files/list?per_page=10&page=${page}`
 export default function Batches ({onOpenBatch=()=>{}}) {
