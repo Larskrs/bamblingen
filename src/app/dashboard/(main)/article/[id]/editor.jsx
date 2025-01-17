@@ -196,6 +196,7 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
         <div className={styles.c}>
             <nav className={styles.nav}>
                 <div className={styles.navContent}>
+
                     <DropDown items={articleTypes} defaultValue={type || article.type} description={"Hva slags type artikkel lager du?"} onChange={(v) => {setType(v)}}></DropDown>
                     <TextArea placeholder={"Overskrift"} description={"Skriv inn overskriften på artikkelen."} onChange={(v) => setTitle(v)} defaultValue={v.title}></TextArea>
                     <TextArea placeholder={"Undertittel"} description={"Skiv inn undertittelen her"} onChange={setSubTitle} defaultValue={v.subtitle}></TextArea>
@@ -205,6 +206,7 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
                     <Expandable icon={"/icons/icon_file_image.svg"} title={"Ledende Bilde"}>
                         <TextArea placeholder={"Bildeaddresse"} description={"Skiv inn undertittelen her"} onEnter={(value) => setImage(value)} defaultValue={v.image}></TextArea>
                     </Expandable>
+                    
                     <h2>Innhold</h2>
 
                     <DraggableResort items={components} onChange={(newOrder) => setComponents(newOrder)} onRender={(item, index, isDragged) => {
@@ -219,6 +221,7 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
                     <GridIconSelector onChange={AddComponent} items={ArticleComponents} />
                     <div className={styles.bottomSpace} />
                 </div>
+                <pre className={styles.error}>{errorMessage}</pre>
                 <div className={styles.navBar}>
                     <SaveButton onClick={handleSubmit} background="var(--white-100)" error={error} errorMessage={{message: errorMessage}} disabled={loading} progress={loading ? 0 : 100}>
                       {isCreating ? "Lag ny artikkel" : "Lagre utkast"}

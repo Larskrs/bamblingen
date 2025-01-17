@@ -6,7 +6,7 @@ import { ArticleRenderer } from "@/components/article/ArticleContent";
 import Link from "next/link";
 import { GetType } from "@/lib/articleLib";
 
-export default function NewsArticlePage ({ version, article, session }) {
+export default function NewsArticlePage ({ version, article, session, hideTools=true }) {
 
     let components = version.components
 
@@ -20,11 +20,11 @@ export default function NewsArticlePage ({ version, article, session }) {
     return (
         <div className={styles.c}>
             <div className={styles.article}>
-            <nav className={styles.nav}>
-                {session?.user?.role && <>
+            {session?.user?.role || !hideTools && <nav className={styles.nav}>
+                <>
                     <Link href={`/dashboard/article/${article.id}`}>Rediger Artikkel</Link>
-                </>}
-            </nav>
+                </>
+            </nav>}
             <div className={styles.context} style={{borderImage: `linear-gradient(to right, ${type.color}, transparent 90%) 1`}}>
                 <p className={styles.type} style={{background: type.color}}>{type.name}</p>
                 {article.categories.map((tag) => {

@@ -39,7 +39,7 @@ export default function SaveButton ({onClick, background="var(--secondary-500)",
                     }}></div>
                 <p style={{opacity: isDisabled() ? 0.25 : 1}}>{children}</p>
             </div>
-            <pre style={{minHeight: error ? "fit-content" : "0px"}} className={styles.error}>{errorMessage?.message}</pre>
+            {showError && <pre style={{minHeight: error ? "fit-content" : "0px"}} className={styles.error}>{errorMessage?.message}</pre>}
     </>
     )
 }
