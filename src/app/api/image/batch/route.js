@@ -47,7 +47,7 @@ export async function GET(req) {
             type: { contains: "image" }
           },
           orderBy: {
-            createdAt: "desc"
+            createdAt: "asc"
           }
         }
       }
