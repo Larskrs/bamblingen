@@ -4,3 +4,25 @@
     width: 100%;
     margin: 0 auto;
 }
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    width: fit-content;
+    gap: 0.5rem;
+}
+.button {
+    border-radius: 1em;
+    padding: 0.25em 1em;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    background-color: var(--white-700);
+    border: 1px solid var(--white-500);
+}
+.button:hover, .button:focus {
+    background-color: var(--white-500);
+}
+.button:disabled {
+    background-color: var(--white-600);
+    color: var(--white-400);
+}

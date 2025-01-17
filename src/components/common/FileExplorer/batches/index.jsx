@@ -3,10 +3,10 @@ import useInfiniteFetch from "@/hooks/useInfiniteFetch";
 import styles from "./batches.module.css"
 import Image from "next/image";
 
-const url = (page) => `/api/v1/files/batches?per_page=10&page=${page}`
+const url = (page) => `/api/v1/files/batches?per_page=100&page=${page}`
 export default function Batches ({onOpenBatch=()=>{}}) {
 
-    const { data, error, loading } = useInfiniteFetch(url)
+    const { data, error, loading, loadMore } = useInfiniteFetch(url)
 
     if (loading) {
         return <h3>Laster inn...</h3>

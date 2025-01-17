@@ -5,7 +5,7 @@ import { db } from "./db";
 
 export function cleanFilename(filename) {
     // Step 1: Remove any characters not allowed in filenames.
-    let cleaned = filename.replace(/[\/\\:*?"<>|]/g, '');
+    let cleaned = filename.replace(/[^a-zA-Z0-9.]/g, '');
   
     // Step 2: Trim any leading or trailing whitespace.
     cleaned = cleaned.trim();
@@ -22,12 +22,27 @@ export function cleanFilename(filename) {
     }
   
     // Step 6: Optionally truncate filename to a specific length, e.g., 255 characters for most filesystems.
-    const maxLength = 255;
+    const maxLength = 10;
     if (cleaned.length > maxLength) {
       cleaned = cleaned.substring(0, maxLength);
     }
-  
+
     return cleaned;
+  }
+  export function cleanBatchname(batch) {
+        // Step 1: Remove any characters not allowed in filenames.
+        let cleaned = batch.replace(/[^a-zA-Z0-9. ]/g, '');
+
+        if (cleaned.length === 0) {
+          return new Error("cleaned batchname was null, use normal characters please");
+        }
+
+        const maxLength = 10;
+        if (cleaned.length > maxLength) {
+          cleaned = cleaned.substring(0, maxLength);
+        }
+
+        return cleaned;
   }
 
 

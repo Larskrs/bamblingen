@@ -8,7 +8,7 @@ import { pipeline } from 'stream';
 import { promisify } from 'util';
 const pump = promisify(pipeline);
 import { stat } from 'fs/promises';
-import { cleanFilename, GenerateUniqueIdentifier } from "@/lib/fileLib"
+import { cleanBatchname, cleanFilename, GenerateUniqueIdentifier } from "@/lib/fileLib"
 import { auth } from '@/auth';
 import { ConnectOrCreateCategoryTags } from '@/lib/articleLib';
 import { db } from '@/lib/db';
@@ -178,10 +178,10 @@ async function UploadFileToDB (id, name, address, batch, type, userId) {
             batch: {
                 connectOrCreate: {
                     where: {
-                      id: cleanFilename(batch),
+                      id: cleanBatchname(batch.toLowerCase()),
                     },
                     create: {
-                      id: cleanFilename(batch),
+                      id: cleanBatchname(batch.toLowerCase()),
                       name: batch,
                       categories: { connectOrCreate: ConnectOrCreateCategoryTags(["debug", "testing", "development"]) },
                       user: {
@@ -218,7 +218,7 @@ export const POST = auth(async function POST(req) {
             return NextResponse.json({ message: "No 'batchId', provided" }, { status: 401 })
         }
 
-        const batchId = cleanFilename(formData.get('batchId') || "debug")
+        const batchId = cleanBatchname(formData.get('batchId') || "debug")
         const userId = auth.user.id
 
         const fileCount = formData.getAll('files').length

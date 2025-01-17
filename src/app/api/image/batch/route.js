@@ -92,7 +92,7 @@ export async function GET(req) {
             )
           })}
         <div style={{ display: "flex", position: "absolute", ...size, alignItems: "center", justifyContent: "center"}}>
-          <p style={{width: 450, wordBreak: "break-all", borderRadius: 8, background: "black", display: "flex", textAlign: "center", padding: 16, lineHeight: 1,fontSize: 64, fontWeight: "900", color: "white"}}>{batch.name}</p>
+            <p style={{maxWidth: 450, width: "auto", wordBreak: "break-all", borderRadius: 8, background: "black", display: "flex", textAlign: "center", padding: 16, lineHeight: 1,fontSize: 64, fontWeight: "900", color: "white"}}>{batch.name}</p>
         </div>
 
       </div>

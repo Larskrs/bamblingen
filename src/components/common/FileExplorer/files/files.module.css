@@ -29,6 +29,7 @@
     animation: item forwards 125ms var(--curve-1);
     text-overflow: clip;
     cursor: pointer;
+    min-width: 100%;
 }
 .item:hover {
     text-decoration: underline;
@@ -44,7 +45,7 @@
 }
 .image {
     width: 100%;
-    opacity: 0;
+    opacity: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -53,7 +54,6 @@
     border-radius: 0.5rem;
     overflow: hidden;
     transition: all 125ms var(--curve-1);
-    animation: item forwards 125ms var(--curve-1);
     text-overflow: clip;
     cursor: pointer;
     aspect-ratio: 1/1;
@@ -86,8 +86,6 @@
 @media (min-width: 400px) and (max-width: 500px) {
     .c {
         grid-template-columns: repeat(2, 1fr); /* 1 item per row */
-        align-items: center;
-        justify-content: center;
     }
 }
 
@@ -117,6 +115,16 @@
 /* Single Row Layout */
 @media (min-width: 1201px) {
     .c {
-        grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); /* Single row with items auto-scaled */
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+    .item {
+        max-width: 10rem;
+        width: 100%;
+        min-width: 8rem;
     }
 }

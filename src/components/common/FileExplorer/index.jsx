@@ -14,6 +14,11 @@ export function FileExplorer () {
     const [batch, setBatch] = useState(null)
 
     return (<div className={styles.c}>
+
+        <nav className={styles.nav}>
+            <button onClick={() => setBatch(null)} disabled={!batch} className={styles.button}>Tilbake</button>
+        </nav>
+
         <ListRenderer />
     </div>)
 
@@ -42,6 +47,6 @@ export function FileExplorer () {
             return <Batches onOpenBatch={(id) => setBatch(id)}/>
         }
 
-        return <Files />
+        return <Files batch={batch} />
     }
 }

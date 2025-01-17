@@ -10,7 +10,7 @@ export const GET = auth(async function GET(req) {
 
     const url = new URL(req.url); // Parse the URL to extract query parameters
     const id = url.searchParams.get("id"); // Article ID
-    let per_page = url.searchParams.get("per_page") || 10
+    let per_page = url.searchParams.get("per_page") || 50
     let page = url.searchParams.get("page") || 1
 
     let authorIds = url.searchParams.get("authorIds") || [] // List of author IDs (comma-separated or multiple query params)

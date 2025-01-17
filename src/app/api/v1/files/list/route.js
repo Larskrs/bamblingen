@@ -10,19 +10,10 @@ export const GET = auth(async function GET(req) {
 
         const auth = req.auth
 
-        const userId = auth.user.id
 
-        const files = await db.file.findMany({
-            // where: {
-            //     user: {
-            //         id: userId
-            //     }
-            // },
-            orderBy: {
-                createdAt: "desc"
-            }
-        })        
+        
 
+        const files = await db.file.findMany(QUERY(req))
 
         return NextResponse.json(
             files,
@@ -34,6 +25,22 @@ export const GET = auth(async function GET(req) {
             status: 505
         })
     }
-            
 }
 )
+
+const QUERY = (req) => {
+    const url = new URL(req.url); // Parse the URL to extract query parameters
+    const batchId = url.searchParams.get("batch"); // Article ID
+
+    const q = {
+        where: { },
+        orderBy: {
+            createdAt: "desc"
+        }
+    }
+
+    if (batchId) {
+        q.where.batchId = batchId
+    }
+    return q
+}

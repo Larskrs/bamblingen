@@ -7,10 +7,12 @@ import { GetFileFallbackIcon } from "@/lib/fileLib";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const url = (page) => `/api/v1/files/list?per_page=10&page=${page}`
-export default function Batches ({onOpenBatch=()=>{}}) {
-
-    const { data, error, loading } = useInfiniteFetch(url)
+let searchBatch = "debug"
+const url = (page) => `/api/v1/files/list?batch=${searchBatch}&per_page=100&page=${page}`
+export default function Batches ({onOpenBatch=()=>{}, batch="debug"}) {
+    
+    searchBatch = batch
+    const { data, error, loading, loadMore } = useInfiniteFetch(url)
     const router = useRouter()
 
     if (loading) {
@@ -26,6 +28,7 @@ export default function Batches ({onOpenBatch=()=>{}}) {
             {data.map((f, i) =>
                 <FileDisplay key={f.id} file={f} index={i} onSelect={(file) => {router.push(`/api/v1/files?fileId=${file.id}`)}} />
             )}
+            {/* <button onClick={() => loadMore()}>Load More</button> */}
         </div>
     );
     function FileDisplay ({file, index, onSelect}) {
@@ -40,9 +43,9 @@ export default function Batches ({onOpenBatch=()=>{}}) {
                 image = url
             }
             return (
-                <div className={styles.item} href={url} onClick={() => onSelect(file)}>
-                    <div style={{animationDelay: `${index*50}ms`}} className={styles.image}>
-                        {<Image onError={() => setFailed(true)} alt={"file-thumbnail"} width={256} height={256} src={imageFailed ? fallbackImage : image} />}
+                <div style={{animationDelay: `${index*50}ms`}} className={styles.item} href={url} onClick={() => onSelect(file)}>
+                    <div className={styles.image}>
+                        {<Image  onError={() => setFailed(true)} alt={"file-thumbnail"} width={256} height={256} src={imageFailed ? fallbackImage : image} />}
                     </div>
                     <p>{file.name}</p>
                 </div>

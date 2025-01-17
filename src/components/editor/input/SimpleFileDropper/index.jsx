@@ -5,6 +5,8 @@ import React, { useState } from 'react';
 import { FileList } from '@/components/common/FileList';
 import SaveButton from '../SaveButton';
 import axios from 'axios';
+import TextArea from '@/components/editor/input/TextArea';
+import styles from "./style.module.css"
 
 const SimpleFileDropper = () => {
   const [files, setFiles] = useState(null);
@@ -13,6 +15,7 @@ const SimpleFileDropper = () => {
   const [success, setSuccess] = useState(false);
   const [uploaded, SetUploaded] = useState([])
   const [progress, setProgress] = useState(100)
+  const [batchName, setBatchName] = useState("")
 
   const handleFileChange = (e) => {
     setFiles(e.target.files);
@@ -23,9 +26,13 @@ const SimpleFileDropper = () => {
       alert('Please select files first');
       return;
     }
+    if (!batchName) {
+      alert('Mangler mappenavn')
+      return;
+    }
 
     const formData = new FormData();
-    formData.set('batchId', "debug")
+    formData.set('batchId', batchName)
     for (let i = 0; i < files.length; i++) {
       formData.append('files', files[i]);
     }
@@ -63,12 +70,13 @@ const SimpleFileDropper = () => {
   };
 
   return (
-    <div>
+    <div className={styles.c}>
       <h2>File Upload</h2>
       <input type="file" multiple onChange={handleFileChange} />
       <SaveButton onClick={handleUpload} progress={progress} error={error}>
         {uploading ? `Uploading... ${progress}%` : 'Upload'}
       </SaveButton>
+      <TextArea placeholder='Mappenavn...' onChange={(v) => setBatchName(v)} description='' />
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {success && <p style={{ color: 'green' }}>Upload successful!</p>}

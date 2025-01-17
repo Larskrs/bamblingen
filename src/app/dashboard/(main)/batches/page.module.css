@@ -4,6 +4,7 @@
     flex-direction: column;
     align-items: center;
     padding: 1rem;
+    gap: 1rem;
 }
 .context {
     width: 100%;
