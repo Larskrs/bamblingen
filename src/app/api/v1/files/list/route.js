@@ -13,11 +13,11 @@ export const GET = auth(async function GET(req) {
         const userId = auth.user.id
 
         const files = await db.file.findMany({
-            where: {
-                user: {
-                    id: userId
-                }
-            },
+            // where: {
+            //     user: {
+            //         id: userId
+            //     }
+            // },
             orderBy: {
                 createdAt: "desc"
             }

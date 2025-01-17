@@ -5,6 +5,7 @@ import styles from "./page.module.css"
 import { FileList } from "@/components/common/FileList";
 import useInfiniteFetch from "@/hooks/useInfiniteFetch";
 import SimpleFileDropper from "@/components/editor/input/SimpleFileDropper";
+import { FileExplorer } from "@/components/common/FileExplorer";
 
 const url = (page) =>
     `/api/v1/files/list`;
@@ -19,7 +20,8 @@ export default function Batches () {
 
             <SimpleFileDropper />
 
-            <FileList files={data} />
+            <FileExplorer />
+            {/* <FileList files={data} /> */}
         </div>
     );
 }

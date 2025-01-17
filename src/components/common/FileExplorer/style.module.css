@@ -1,0 +1,6 @@
+.c {
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+    margin: 0 auto;
+}
