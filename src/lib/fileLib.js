@@ -64,3 +64,18 @@ export async function GenerateUniqueIdentifier(creationDate) {
 
         return uniqueIdentifier;
     }
+
+
+
+export const FileTypeIcons = {
+  image: "/icons/icon_file_image.svg",
+  video: "/icons/icon_file_video.svg",
+}
+
+export const GetFileFallbackIcon = (contentType) => {
+  if (Object.keys(FileTypeIcons).includes(contentType)) {
+    return FileTypeIcons[contentType]
+  } else {
+    return "/icons/icon_text.svg"
+  }
+}

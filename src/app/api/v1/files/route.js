@@ -163,7 +163,7 @@ export const POST = auth(async (req) => {
 })
 */
 
-async function UploadFileToDB (id, name, address, type, userId) {
+async function UploadFileToDB (id, name, address, batch, type, userId) {
     const query = {
         data: {
             id,
@@ -257,15 +257,16 @@ export const POST = auth(async function POST(req) {
 
             const dbEntry = await UploadFileToDB(
                 identifier,
-                `${filename}.${extension}`,
+                `${cleanFileName}.${extension}`,
                 filePath,
+                batchId,
                 mimeType,
                 auth.user.id
             )
 
             const data = {
                 file,
-                name: filename,
+                name: cleanFileName,
                 mimeType,
                 dbEntry,
                 url

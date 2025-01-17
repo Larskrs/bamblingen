@@ -3,6 +3,7 @@ import useInfiniteFetch from "@/hooks/useInfiniteFetch";
 import styles from "./files.module.css"
 import Image from "next/image";
 import Link from "next/link";
+import { GetFileFallbackIcon } from "@/lib/fileLib";
 
 const url = (page) => `/api/v1/files/list?per_page=10&page=${page}`
 export default function Batches ({onOpenBatch=()=>{}}) {
@@ -22,7 +23,7 @@ export default function Batches ({onOpenBatch=()=>{}}) {
             {data.map((f, i) => {
                 const url = `/api/v1/files?fileId=${f.id}`
                 const fileType = f.type.split("/").shift()
-                let image = `/icons/icon_file_${fileType}.svg`
+                let image = GetFileFallbackIcon(fileType)
 
                 if (fileType == "image") {
                     image = url
