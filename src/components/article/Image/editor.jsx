@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import MarkdownFormatter from "@/components/common/MarkdownText";
 import Image from "next/image";
 import TextArea from "@/components/editor/input/TextArea";
+import { FileExplorer } from "@/components/common/FileExplorer";
 
 export default function ImageComponent ({
     id, src, alt, credit, onChange=()=>{}
@@ -41,14 +42,16 @@ export default function ImageComponent ({
     return (
 
         <>
+                <FileExplorer onFileSelected={(f) => {setSource(`/api/v1/files?fileId=${f.id}`)}} >
                     <img className={styles.preview} src={_preview} alt="bildeadresse"/>
-                    <TextArea
+                </FileExplorer>
+                    {/* <TextArea
                         placeholder="Bildeaddresse"
                         description={`Bildeadressa skal kun være fra bamblingen.no. Trykk på enter for å velge bildet`}
                         defaultValue={src}
                         onChange={(value) => { setPreview(value)}}
                         onEnter={(value) => { setSource(value) }}
-                        />
+                        /> */}
                     <TextArea
                         placeholder="Bildetekst"
                         description={`Alternativ tekst eller og beskrivelse på handling i bildet`}

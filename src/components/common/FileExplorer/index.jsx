@@ -6,40 +6,27 @@ import { useRouter } from 'next/navigation'
 import { useState } from "react"
 import Batches from "./batches"
 import Files from "./files"
+import { Modal } from "./modal"
 
-export function FileExplorer () {
-
-    const router = useRouter()
+export function FileExplorer ({onFileSelected=()=>{}, children}) {
 
     const [batch, setBatch] = useState(null)
+    const [open, setOpen] = useState(false)
 
-    return (<div className={styles.c}>
+        return (<>
+            <div onClick={() => setOpen(true)}>{children}</div>
+            {open && <Modal>
+                <div className={styles.c}>
 
-        <nav className={styles.nav}>
-            <button onClick={() => setBatch(null)} disabled={!batch} className={styles.button}>Tilbake</button>
-        </nav>
+                    {!batch && <Batches onOpenBatch={(id) => setBatch(id)}/>}
+                    {batch && <Files batch={batch} onFileSelect={onFileSelected} />}
 
-        <ListRenderer />
-    </div>)
-
-    return <div className={styles.c}>
-        {files.map((f, i) => {
-                const url = `/api/v1/files?fileId=${f.id}`
-                const fileType = f.type.split("/").shift()
-                let image = `/icons/icon_file_${fileType}.svg`
-
-                if (fileType == "image") {
-                    image = url
-                }
-
-                return (
-                    <div style={{animationDelay: `${i*50}ms`}} className={styles.file} onClick={() => {router.push(url)}} key={f.id}>
-                        <Image alt={f.name} width={256} height={256} src={image} />
-                    </div>
-                )
-            })}
-    </div>
-
+                </div>
+                <nav className={styles.nav}>
+                    <button onClick={() => {setBatch(null); if (batch==null) {setOpen(false)}}} className={styles.button}>Tilbake</button>
+                </nav>
+            </Modal>}
+        </>)
 
     function ListRenderer ({}) {
 
@@ -47,6 +34,6 @@ export function FileExplorer () {
             return <Batches onOpenBatch={(id) => setBatch(id)}/>
         }
 
-        return <Files batch={batch} />
+        return <Files batch={batch} onFileSelect={onFileSelected} />
     }
 }

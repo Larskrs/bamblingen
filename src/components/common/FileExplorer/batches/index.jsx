@@ -2,18 +2,30 @@
 import useInfiniteFetch from "@/hooks/useInfiniteFetch";
 import styles from "./batches.module.css"
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
-const url = (page) => `/api/v1/files/batches?per_page=100&page=${page}`
 export default function Batches ({onOpenBatch=()=>{}}) {
 
-    const { data, error, loading, loadMore } = useInfiniteFetch(url)
+    const [data, setData] = useState([])
 
-    if (loading) {
-        return <h3>Laster inn...</h3>
-    }
-    if (error) {
-        return <pre>{error}</pre>
-    }
+    useEffect(() => {
+        async function fetchBatches () {
+            let res
+            try {
+                res = await fetch(`/api/v1/files/batches?per_page=100&page=${1}`)
+                const json = await res.json()
+                console.log(json)
+                if (json) {
+                    setData(json)
+                }
+            } catch (err) {
+                console.error("Error fetching category: " + err)
+            }
+        }
+        fetchBatches()
+
+    }, [])
+
     if (!data) { return <p>No Data</p>}
 
     return (

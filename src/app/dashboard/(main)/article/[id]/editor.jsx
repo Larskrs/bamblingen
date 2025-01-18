@@ -12,6 +12,8 @@ import CategoryInput from "@/components/editor/input/CategoryInput"
 import GridIconSelector from "@/components/editor/input/GridIconSelector";
 import { useRouter } from "next/navigation";
 import DropDown from "@/components/editor/input/DropDown";
+import { FileExplorer } from "@/components/common/FileExplorer";
+import ImageEditor from "@/components/article/Image/editor"
 
 export default function NewsArticlePage ({ articleId, userId, defaultArticle }) {
     
@@ -204,7 +206,9 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
                     <CategoryInput onChange={(value) => setCategories(value)} defaultCategories={article.categories}/>
 
                     <Expandable icon={"/icons/icon_file_image.svg"} title={"Ledende Bilde"}>
-                        <TextArea placeholder={"Bildeaddresse"} description={"Skiv inn undertittelen her"} onEnter={(value) => setImage(value)} defaultValue={v.image}></TextArea>
+                        <ImageEditor src={v.image} onChange={(value) => setImage(value.src)} />
+                        {/* return <Editor id={id} src={src} alt={alt} credit={credit} onChange={onChange}/> */}
+                        {/* <TextArea placeholder={"Bildeaddresse"} description={"Skiv inn undertittelen her"} onEnter={(value) => setImage(value)} defaultValue={v.image}></TextArea> */}
                     </Expandable>
                     
                     <h2>Innhold</h2>
