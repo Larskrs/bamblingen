@@ -20,7 +20,7 @@ export default function Batches () {
 
             <SimpleFileDropper />
 
-            <FileExplorer />
+            <FileExplorer  modal={false} />
             {/* <FileList files={data} /> */}
         </div>
     );

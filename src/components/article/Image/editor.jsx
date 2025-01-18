@@ -54,7 +54,7 @@ export default function ImageComponent ({
                         /> */}
                     <TextArea
                         placeholder="Bildetekst"
-                        description={`Alternativ tekst eller og beskrivelse på handling i bildet`}
+                        description={`Alternativ bildetekst`}
                         onChange={(value) => { setAlt(value) }}
                         defaultValue={alt}
                         />

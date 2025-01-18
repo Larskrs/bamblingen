@@ -8,14 +8,28 @@ import Batches from "./batches"
 import Files from "./files"
 import { Modal } from "./modal"
 
-export function FileExplorer ({onFileSelected=()=>{}, children}) {
+export function FileExplorer ({onFileSelected=()=>{}, children, modal=true}) {
 
     const [batch, setBatch] = useState(null)
     const [open, setOpen] = useState(false)
 
+    if (modal == false) {
+        return (<>
+                <div className={styles.c}>
+
+                    {!batch && <Batches onOpenBatch={(id) => setBatch(id)}/>}
+                    {batch && <Files batch={batch} onFileSelect={onFileSelected} />}
+
+                </div>
+                <nav className={styles.nav}>
+                    <button onClick={() => {setBatch(null); if (batch==null) {setOpen(false)}}} className={styles.button}>Tilbake</button>
+                </nav>
+            </>)
+    }
+
         return (<>
             <div onClick={() => setOpen(true)}>{children}</div>
-            {open && <Modal>
+            {open && <Modal onClose={() => setOpen(false)}>
                 <div className={styles.c}>
 
                     {!batch && <Batches onOpenBatch={(id) => setBatch(id)}/>}

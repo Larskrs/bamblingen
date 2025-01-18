@@ -2,11 +2,14 @@
 import Link from "next/link"
 import styles from "./style.module.css"
 
-export function Modal ({children}) {
+export function Modal ({onClose=()=>{}, children}) {
 
     return (
-        <div className={styles.c}>
-            {children}
-        </div>
+        <>
+            <div onClick={onClose} className={styles.background}></div>
+            <div className={styles.c}>
+                {children}
+            </div>
+        </>
     )
 }

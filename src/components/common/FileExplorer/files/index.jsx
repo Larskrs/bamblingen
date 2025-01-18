@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 export default function Batches ({onFileSelect=()=>{}, batch="debug"}) {
     
     const [data, setData] = useState([])
+    const [selected, setSelected] = useState(null)
 
     useEffect(() => {
         async function fetchFiles () {
@@ -34,12 +35,12 @@ export default function Batches ({onFileSelect=()=>{}, batch="debug"}) {
     return (
         <div className={styles.c}>
             {data.map((f, i) =>
-                <FileDisplay key={f.id} file={f} index={i} onSelect={onFileSelect} />
+                <FileDisplay selected={selected == f.id} key={f.id} file={f} index={i} onSelect={onFileSelect} />
             )}
             {/* <button onClick={() => loadMore()}>Load More</button> */}
         </div>
     );
-    function FileDisplay ({file, index, onSelect}) {
+    function FileDisplay ({file, index, onSelect, selected}) {
 
             const url = `/api/v1/files?fileId=${file.id}`
             const fileType = file.type.split("/").shift()
@@ -49,8 +50,8 @@ export default function Batches ({onFileSelect=()=>{}, batch="debug"}) {
                 image = url
             }
             return (
-                <div className={styles.item} href={url} onClick={() => onSelect(file)}>
-                    <div className={styles.image}>
+                <div className={styles.item} href={url} onClick={() => {onSelect(file); setSelected(file.id)}}>
+                    <div style={{outline: `2px solid ${selected ? "white" : "transparent"}`}} className={styles.image}>
                         <Image alt={"file-thumbnail"} width={256} height={256} src={image} />
                     </div>
                     <p>{file.name}</p>
