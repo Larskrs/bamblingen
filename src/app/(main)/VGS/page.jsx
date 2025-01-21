@@ -65,7 +65,7 @@ export default function VGS() {
         // Optionally, set up an interval to keep checking for the next event
         const interval = setInterval(() => {
             updateNextEvent();
-        }, 60000); // Check every minute
+        }, 1000); // Check every second
 
         // Cleanup interval on component unmount
         return () => clearInterval(interval);
