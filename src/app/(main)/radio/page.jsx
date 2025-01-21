@@ -6,6 +6,7 @@ export default function RadioPage ({}) {
         <div className={styles.c}>
             <div className={styles.background}>
                 <Image alt="background" src={`/images/audio.JPG`} width={1296} height={864} quality={75} />
+                
             </div>
         </div>
     );

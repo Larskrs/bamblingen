@@ -93,30 +93,30 @@
 import FrontPageContent from "@/components/frontPage/rows"
 //     Local
 import styles from "./page.module.css"
+import MaxWidthWrapper from "@/components/wrappers/MaxWidthWrapper";
 
 
 export default function TestArticle () {
 
     return (
+                <MaxWidthWrapper>
         <div className={styles.c}>
             <div className={styles.m}>
+
             <FrontPageContent rows={[
-                    {
-                        type: "banner",
-                        priority: "normal",
-                        items: [
-                            {
-                                id: "V1StGXR8_Z5jdHi6Baef",
-                                type: "article",
-                                priority: "normal",
-                                priorityPrefix: false,
-                                context: "Artikler er ikke redaksjonelle",
-                                title: `Denne nettavisen er ikke i drift!`,
-                                image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
-                            }
-                        ],
-                    },
-                    {
+                {
+                    type: "banner",
+                    id: "V1StGXR8_Z5jdHi6Baef",
+                    article: "20250115-ef2b3a",
+                    background: "var(--secondary-25)",
+                    color: "white",
+                    priority: false,
+                    priorityPrefix: false,
+                    context: "Artikler er ikke redaksjonelle",
+                    title: `Denne nettavisen er ikke i drift!`,
+                    image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
+                },
+                {
                         type: "grid",
                         layout: "G_FULL",
                         priority: "normal",
@@ -151,7 +151,7 @@ export default function TestArticle () {
                                 fontSize: 3,
                             },
                             // {
-                            //     id: "V1StGXR8_Z5jdHi6Aaw",
+                                //     id: "V1StGXR8_Z5jdHi6Aaw",
                             //     type: "article",
                             //     priority: "priority",
                             //     priorityPrefix: true,
@@ -229,5 +229,6 @@ export default function TestArticle () {
                 ]}/>
             </div>
         </div>
+                    </MaxWidthWrapper>
     );
 }

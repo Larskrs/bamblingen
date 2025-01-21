@@ -9,6 +9,9 @@ import Link from "next/link";
 import { GetType } from "@/lib/articleLib";
 import SocketMessageList from "@/components/common/SocketMessageList";
 import CountdownTimer from "@/components/common/CountdownTimer";
+import MaxWidthWrapper from "@/components/wrappers/MaxWidthWrapper";
+import Banner from "@/components/common/Banner";
+import NewsBanner from "@/components/frontPage/rows/banner";
 
     const per_page = 10
 
@@ -21,63 +24,74 @@ export default function News () {
 
     return (
         <div className={styles.c}>
-            <h2>Obs! Ingen saker er redaksjonelle nå</h2>
 
-            <SocketMessageList />
-            {/* <CountdownTimer targetDate={new Date('2025-02-06T00:00:00Z')} /> */}
+            <MaxWidthWrapper>
+                <div className={styles.column}>
 
+                    <NewsBanner
+                        article={"/"}
+                        priority={true}
+                        background={"var(--secondary-25)"}
+                        color="white"
+                        prefix="OBS!"
+                        pulse={true}
+                        title="Artikler her er ikke redaksjonelle"
+                        containerStyle={{background: "var(--secondary-25)", color: "white"}}
+                    />
 
-            { loading && <h1>Loading...</h1> }
-            { error && <h1>{error}</h1> }
+                    { loading && <h1>Loading...</h1> }
+                    { error && <h1>{error}</h1> }
+                
+                    {data && data.map((article) => {
 
-            {data && data.map((article) => {
+                        const v = article?.versions?.[0]
 
-                const v = article?.versions?.[0]
+                        if (!v) {
+                            return <></>
+                        }
 
-                if (!v) {
-                    return <></>
-                }
+                        const type = GetType(article.type)
 
-                const type = GetType(article.type)
+                        const shortenText = (text, limit) => {
+                            if (text.length <= limit) {
+                                return text
+                            }
+                            let t = text.substring(0,limit)
+                            if (text.length > limit) {
+                                return t + "..."
+                            }
+                        }
 
-                const shortenText = (text, limit) => {
-                    if (text.length <= limit) {
-                        return text
-                    }
-                    let t = text.substring(0,limit)
-                    if (text.length > limit) {
-                        return t + "..."
-                    }
-                }
-
-                return (<Link href={`/n/${article.id}`} className={styles.article} key={article.id}>
-                    {v?.image && <div className={styles.thumbnail}>
-                        <Image src={v.image} width={1280} height={720} alt={`${v.title} artikkel bilde`}/>
-                    </div> }
-                    <div className={styles.body}>
-                        <h3>{v.title}</h3>
-                        <p>{shortenText(v.subtitle, 120)}</p>
-                        <div className={styles.tags}>
-                            {article.categories.map((tag) => <span key={tag.id}>{tag.name}</span>)}
-                        </div>
-                        <div className={styles.row}>
-                            <p className={styles.type} style={{background: type.color}}>{type.name}</p>
-                            <p className={styles.createdAt}>{formatRelativeDate(new Date(v.createdAt))}</p>
-                        </div>
+                        return (<Link href={`/n/${article.id}`} className={styles.article} key={article.id}>
+                            {v?.image && <div className={styles.thumbnail}>
+                                <Image src={v.image} width={1280} height={720} alt={`${v.title} artikkel bilde`}/>
+                            </div> }
+                            <div className={styles.body}>
+                                <h3>{v.title}</h3>
+                                <p>{shortenText(v.subtitle, 120)}</p>
+                                <div className={styles.tags}>
+                                    {article.categories.map((tag) => <span key={tag.id}>{tag.name}</span>)}
+                                </div>
+                                <div className={styles.row}>
+                                    <p className={styles.type} style={{background: type.color}}>{type.name}</p>
+                                    <p className={styles.createdAt}>{formatRelativeDate(new Date(v.createdAt))}</p>
+                                </div>
+                            </div>
+                            {/* {article.authors.map((author) => {
+                                return <p key={author.id}>{author.name}</p>
+                                })}
+                                {article.categories.map((category) => {
+                                    return <p key={category.id}>{category.name}</p>
+                                    })}
+                                    {article.id} */}
+                        </Link>)
+                    })}
+                    <button onClick={loadMore} disabled={loading}>
+                        Last mer
+                    </button>
+                    {/* {data && data.toString()} */}
                     </div>
-                    {/* {article.authors.map((author) => {
-                        return <p key={author.id}>{author.name}</p>
-                    })}
-                    {article.categories.map((category) => {
-                        return <p key={category.id}>{category.name}</p>
-                    })}
-                    {article.id} */}
-                </Link>)
-            })}
-            <button onClick={loadMore} disabled={loading}>
-                Last mer
-            </button>
-            {/* {data && data.toString()} */}
+            </MaxWidthWrapper>
         </div>
     )
 }

@@ -1,25 +1,24 @@
-import Image from "next/image";
+import Banner from "@/components/common/Banner";
 import styles from "./style.module.css"
 import Pulse from "@/components/details/pulse";
+import Link from "next/link";
 
-export default function Banner ({items}) {
-    return Render({...items[0]})
-}
+export default function NewsBanner ({
+    title="", pulse=false, prefix="SISTE:", article, type, context="", url="", image="", background="var(--white-900)", color="var(--text-50)", priority=false
+}) {
 
-function Render ({image, context, priority, priorityPrefix=false, title}) {
     return (
-        <div className={`${styles.header}`}>
-            {image && <Image alt="Header Image" src={image} className={styles.img} width={2000} height={1000} />}
-                <div className={`${styles.details} ${styles[priority]}`}>
-                    <h1>
-                        {priorityPrefix && <span className={styles.latest}>
-                            <Pulse />
-                            <span>SISTE:</span>
-                        </span> }
-                        {title}
-                    </h1>
-                    <p>{context}</p>
-                </div>
-            </div>
+        <Link href={`/n/${article}`}>
+            <Banner containerStyle={{background: background, color: color}}>
+                <h1>
+                                <span className={styles.priority}>
+                                    {pulse && <Pulse />}
+                                    <span>{prefix}</span>
+                                </span>
+                                {title}
+                            </h1>
+                            <p>{context}</p>
+            </Banner>
+        </Link>
     )
-}
+}   
