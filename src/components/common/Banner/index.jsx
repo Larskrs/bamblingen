@@ -2,7 +2,7 @@ import Image from "next/image";
 import styles from "./style.module.css"
 import Pulse from "@/components/details/pulse";
 
-export default function ({
+export default function Banner ({
     image,
     context, 
     containerStyle={background: "var(--white-900)"},
