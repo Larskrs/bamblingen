@@ -83,7 +83,8 @@ export default function VGS() {
     
 
     function RecessDisplay () {
-        let overtime = new Date(nextEvent.date.getTime() + 15 * 60 * 1000);
+        
+        let overtime = new Date(nextEvent.date.getTime() - 30 * 60 * 1000);
     
         return (
             <>
