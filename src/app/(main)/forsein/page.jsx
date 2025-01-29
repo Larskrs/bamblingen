@@ -1,6 +1,9 @@
 "use client";
 import CountdownTimer from "@/components/common/CountdownTimer";
+import { TimeAgo } from "@/lib/timeLib";
+import Image from "next/image";
 import { useState, useEffect } from "react";
+import styles from "./page.module.css"
 
 export default function VGS() {
     const [nextEvent, setNextEvent] = useState({date: new Date()});
@@ -8,6 +11,12 @@ export default function VGS() {
     const MinutterPerTime = 45;
     const MinutterPerPause = 10;
     const minutesBase = 60 * 8; // Start time (8:00 AM)
+
+    const [schedule, setSchedule] = useState([]);
+
+    useEffect(() => {
+        setSchedule(getTodaysTimes()); // Calculate once and store in state
+    }, []);
 
     const getDateTimeFromMinutes = (minutesSinceMidnight) => {
         if (minutesSinceMidnight < 0 || minutesSinceMidnight >= 1440) {
@@ -49,27 +58,23 @@ export default function VGS() {
 
     const updateNextEvent = () => {
         const currentTime = new Date();
-        const events = getTodaysTimes();
-
-        // Find the next event that's in the future
-        const upcomingEvent = events.find(event => event.date > currentTime);
-        if (upcomingEvent) {
+        const upcomingEvent = schedule.find(event => event.date > currentTime);
+    
+        if (upcomingEvent && nextEvent.date.getTime() !== upcomingEvent.date.getTime()) {
             setNextEvent(upcomingEvent);
         }
     };
 
     // Use useEffect to update `nextEvent` whenever the component renders or the current time changes
     useEffect(() => {
-        updateNextEvent();
-
-        // Optionally, set up an interval to keep checking for the next event
+        updateNextEvent(); // Run once on mount
+    
         const interval = setInterval(() => {
             updateNextEvent();
-        }, 1000); // Check every second
-
-        // Cleanup interval on component unmount
+        }, 1000); // Update every second
+    
         return () => clearInterval(interval);
-    }, []);
+    }, [schedule, nextEvent]); // Depend only on schedule & nextEvent
 
     console.log()
 
@@ -78,21 +83,26 @@ export default function VGS() {
     
 
     function RecessDisplay () {
+        let overtime = new Date(nextEvent.date.getTime() + 15 * 60 * 1000);
+    
         return (
-        <div style={{display: "flex", flexDirection: "column", height: "100%", alignItems: "center", justifyContent: "center"}}>
-            <h2>Timen er ferdig om...</h2>
-            <div style={{padding: "1rem 2rem", background: "var(--white-900)", color: "black"}}>
-                <CountdownTimer digits={2} targetDate={nextEvent.date} />
-            </div>
-            {/* <pre>{JSON.stringify(getTodaysTimes(), null, 4)}</pre> */}
-        </div>
-    );
+            <>
+                <Image className={styles.gif} src="https://i.giphy.com/3o6gb3kkXfLvdKEZs4.webp" height={320} width={600} />
+                <div style={{zIndex: "10", display: "flex", flexDirection: "column", height: "100%", alignItems: "center", justifyContent: "center"}}>
+                    <h2>Du er forsein!</h2>
+                    <div style={{padding: "1rem 2rem", background: "black", color: "white"}}>
+                        <CountdownTimer digits={2} targetDate={overtime} />
+                    </div>
+                    <p>Du ble forsinka {TimeAgo(overtime)}</p>
+                </div>
+            </>
+        );
     }
     function SessionDisplay () {
         return (
         <div style={{display: "flex", flexDirection: "column", height: "100%", alignItems: "center", justifyContent: "center"}}>
-            <h1>Da var det pause</h1>
-            <div style={{padding: "1rem 2rem", background: "black", color: "white"}}>
+            <h1>Timen begynner om...</h1>
+            <div style={{padding: "1rem 2rem", background: "dark-gray", color: "white"}}>
                 <CountdownTimer digits={2} targetDate={nextEvent.date} />
             </div>
             {/* <pre>{JSON.stringify(getTodaysTimes(), null, 4)}</pre> */}

@@ -4,7 +4,7 @@ import FlowNumber from "../FlowNumberDigit";
 import styles from "./style.module.css"
 import React, { useEffect, useState } from "react";
 
-const CountdownTimer = ({ targetDate }) => {
+const CountdownTimer = ({ targetDate, seconds=true, minutes=true, hours=false, days=false }) => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   useEffect(() => {
@@ -34,17 +34,25 @@ const CountdownTimer = ({ targetDate }) => {
     <div style={{ fontSize: "3rem", fontWeight: "700", display: "flex" }}>
       {/* {String(timeLeft.months).padStart(2, "0")}:    */}
 
-        <FlowNumber number={String(timeLeft.days).padStart(2, "0").split("")[0]} />
-        <FlowNumber number={String(timeLeft.days).padStart(2, "0").split("")[1]} />
+        {days && <div>
+          <FlowNumber number={String(timeLeft.days).padStart(2, "0").split("")[0]} />
+          <FlowNumber number={String(timeLeft.days).padStart(2, "0").split("")[1]} />
+        </div>}
+        {hours && <>
         <span style={{marginRight: "0.25em"}}></span>
         <FlowNumber number={String(timeLeft.hours).padStart(2, "0").split("")[0]} />
         <FlowNumber number={String(timeLeft.hours).padStart(2, "0").split("")[1]} />
+        </>}
+        {minutes && <>
         <span style={{marginRight: "0.25em"}}></span>
         <FlowNumber number={String(timeLeft.minutes).padStart(2, "0").split("")[0]} />
         <FlowNumber number={String(timeLeft.minutes).padStart(2, "0").split("")[1]} />
+        </>}
+        {seconds && <>
         <span style={{marginRight: "0.25em"}}></span>
         <FlowNumber number={String(timeLeft.seconds).padStart(2, "0").split("")[0]} />
         <FlowNumber number={String(timeLeft.seconds).padStart(2, "0").split("")[1]} />
+        </>}
     </div>
   );
 };

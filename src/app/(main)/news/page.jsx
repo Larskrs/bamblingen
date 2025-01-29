@@ -29,7 +29,6 @@ export default function News () {
                 <div className={styles.column}>
 
                     <NewsBanner
-                        article={"/"}
                         priority={true}
                         background={"var(--secondary-25)"}
                         color="white"
