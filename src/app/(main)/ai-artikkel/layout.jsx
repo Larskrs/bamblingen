@@ -17,7 +17,7 @@ export default function AI({
             <section>
                 <Image alt="background-intro" className={styles.background} src={"http://aktuelt.tv/api/files?fileId=67595593d222fb15c503bc67"} width={1920} height={1080} />
                 <div className={styles.middle}>
-                  <TypingEffect prompts={["Ai Prompting", "Ai Prompting"]} textStyle={{fontSize: "4rem", color: "var(--primary-500)", background: "var(--secondary-25)", fontFamily: "var(--font-domine)"}} />
+                  <TypingEffect prompts={["KI Prompting", "KI Prompting"]} textStyle={{fontSize: "4rem", color: "var(--primary-500)", background: "var(--secondary-25)", fontFamily: "var(--font-domine)"}} />
                   <TextHighlight center={true} text={"Gjør alt det du vil på få tastetrykk"} />
                 </div>
             </section>

@@ -86,17 +86,31 @@ export default function VGS() {
         
         let overtime = new Date(nextEvent.date.getTime() - 30 * 60 * 1000);
         let isLate = new Date() > overtime
+
+        const minw = Math.abs((new Date() - overtime) / (1000 * 60)); // Difference in minutes
+        const progress = (minw / 100) * 100; // Percentage of an hour
+
+        const [sinceSession, setSinceSession] = useState(new Date())
+
+        
+          useEffect(() => {
+            const timer = setInterval(() => {
+              setSinceSession(new Date() - overtime);
+            }, 1000*1);
+        
+            return () => clearInterval(timer); // Clean up on component unmount
+          }, [sinceSession]);
     
         return (
             <>
-                <Image className={styles.gif} src="https://i.giphy.com/3o6gb3kkXfLvdKEZs4.webp" height={320} width={600} />
+                {isLate && <Image className={styles.gif} src="https://i.giphy.com/3o6gb3kkXfLvdKEZs4.webp" height={320} width={600} />}
                 <div style={{zIndex: "10", display: "flex", flexDirection: "column", height: "100%", alignItems: "center", justifyContent: "center"}}>
                     <h2>{isLate ? "Du er forsein!" : "Du er snart forsein"}</h2>
-                    {isLate && <p>Du ble forsinka {TimeAgo(overtime)}</p>}
+                    {isLate && <p>Du ble forsinka {formatRelativeDate(new Date(nextEvent.date.getTime() - 45 * 60 * 1000))}</p>}
                     {!isLate && <p>Timen startet {formatRelativeDate(new Date(nextEvent.date.getTime() - 45 * 60 * 1000))}</p>}
-                    <div className={styles.bad}>
+                    {sinceSession && <div className={styles.bad} style={{animationDuration: `${progress*75}ms`}}>
                         <CountdownTimer digits={2} targetDate={overtime} />
-                    </div>
+                    </div>}
                 </div>
             </>
         );
