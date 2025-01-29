@@ -103,7 +103,7 @@ export default function VGS() {
         return (
         <div style={{display: "flex", flexDirection: "column", height: "100%", alignItems: "center", justifyContent: "center"}}>
             <h1>Timen begynner om...</h1>
-            <div style={{padding: "1rem 2rem", background: "dark-gray", color: "white"}}>
+            <div style={{padding: "1rem 2rem", background: "white", color: "black"}}>
                 <CountdownTimer digits={2} targetDate={nextEvent.date} />
             </div>
             {/* <pre>{JSON.stringify(getTodaysTimes(), null, 4)}</pre> */}
