@@ -156,10 +156,11 @@ model ArticleVerification {
   articleVersion        ArticleVersion     @relation(fields: [articleVersionId], references: [id], onDelete: Cascade)
   articleVersionId      Int                @unique
 
+  comment               String?
+
   reviewedAt            DateTime?
   createdAt             DateTime @default(now())
 }
-
 model ComponentPage {
   id              String            @id @unique @default(cuid())
   createdAt       DateTime          @default(now())

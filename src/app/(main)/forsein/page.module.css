@@ -2,3 +2,23 @@
     z-index: 0;
     margin-inline: auto;
 }
+
+.bad {
+    background-color: black;
+    color: white;
+    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
+    animation: 1000ms run var(--curve-1) infinite;
+}
+
+@keyframes run {
+    0% {
+        scale: 1;
+    }
+    50% {
+        scale: 1.1;
+    }
+    100% {
+        scale: 1;
+    }
+}

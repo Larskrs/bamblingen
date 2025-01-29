@@ -1,6 +1,6 @@
 "use client";
 import CountdownTimer from "@/components/common/CountdownTimer";
-import { TimeAgo } from "@/lib/timeLib";
+import { formatRelativeDate, TimeAgo } from "@/lib/timeLib";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import styles from "./page.module.css"
@@ -85,16 +85,18 @@ export default function VGS() {
     function RecessDisplay () {
         
         let overtime = new Date(nextEvent.date.getTime() - 30 * 60 * 1000);
+        let isLate = new Date() > overtime
     
         return (
             <>
                 <Image className={styles.gif} src="https://i.giphy.com/3o6gb3kkXfLvdKEZs4.webp" height={320} width={600} />
                 <div style={{zIndex: "10", display: "flex", flexDirection: "column", height: "100%", alignItems: "center", justifyContent: "center"}}>
-                    <h2>Du er forsein!</h2>
-                    <div style={{padding: "1rem 2rem", background: "black", color: "white"}}>
+                    <h2>{isLate ? "Du er forsein!" : "Du er snart forsein"}</h2>
+                    {isLate && <p>Du ble forsinka {TimeAgo(overtime)}</p>}
+                    {!isLate && <p>Timen startet {formatRelativeDate(new Date(nextEvent.date.getTime() - 45 * 60 * 1000))}</p>}
+                    <div className={styles.bad}>
                         <CountdownTimer digits={2} targetDate={overtime} />
                     </div>
-                    <p>Du ble forsinka {TimeAgo(overtime)}</p>
                 </div>
             </>
         );
