@@ -8,7 +8,7 @@ export default function NewsBanner ({
 }) {
 
     return (
-        <Link href={`/n/${article}`}>
+        <Link className={styles.c} href={`/n/${article}`}>
             <Banner containerStyle={{background: background, color: color}}>
                 <h1>
                                 <span className={styles.priority}>
