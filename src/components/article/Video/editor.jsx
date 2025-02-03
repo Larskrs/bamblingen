@@ -29,7 +29,7 @@ export default function ImageComponent ({
 
         <>
                 <FileExplorer onFileSelected={(f) => {setSource(`/api/v1/files?fileId=${f.id}`)}} >
-                    <video className={styles.preview} loop autoPlay playsInline muted src={_src} alt="bildeadresse"/>
+                    <video className={styles.video} loop autoPlay playsInline muted src={_src} alt="bildeadresse"/>
                 </FileExplorer>
                     <TextArea
                         placeholder="Bildetekst"
