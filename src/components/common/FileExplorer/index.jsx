@@ -28,17 +28,20 @@ export function FileExplorer ({onFileSelected=()=>{}, children, modal=true}) {
     }
 
         return (<>
-            <div onClick={() => setOpen(true)}>{children}</div>
+            <div className={styles.selector} onClick={() => setOpen(true)}>
+                <span>Trykk her for å endre fil</span>
+                {children}
+            </div>
             {open && <Modal onClose={() => setOpen(false)}>
+                <nav className={styles.nav}>
+                    <button onClick={() => {setBatch(null); if (batch==null) {setOpen(false)}}} className={styles.button}>Tilbake</button>
+                </nav>
                 <div className={styles.c}>
 
                     {!batch && <Batches onOpenBatch={(id) => setBatch(id)}/>}
                     {batch && <Files batch={batch} onFileSelect={onFileSelected} />}
 
                 </div>
-                <nav className={styles.nav}>
-                    <button onClick={() => {setBatch(null); if (batch==null) {setOpen(false)}}} className={styles.button}>Tilbake</button>
-                </nav>
             </Modal>}
         </>)
 

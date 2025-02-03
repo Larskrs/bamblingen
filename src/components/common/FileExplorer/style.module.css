@@ -5,11 +5,9 @@
     margin: 0 auto;
     color: white;
     overflow-y: auto;
-    border-radius: 1rem;
     background-color: var(--secondary-75);
     padding: 0.5rem;
     display: flex;
-    min-height: 100%;
     flex-direction: column;
     flex: 1;
 }
@@ -18,7 +16,7 @@
     flex-wrap: wrap;
     width: fit-content;
     gap: 0.5rem;
-    padding: 1rem 0.5rem;
+    padding: 0.5rem 1rem 1rem 0.5rem;
 }
 .button {
     border-radius: 1em;
@@ -35,4 +33,30 @@
 .button:disabled {
     background-color: var(--white-600);
     color: var(--white-400);
+}
+.selector:hover {
+    opacity: 0.75;
+}
+.selector {
+    position: relative;
+}
+.selector::after {
+    content: "";
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+}
+.selector > span {
+    position: absolute;
+    z-index: 2;
+    color: white;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    width: 100%;
+    text-align: center;
 }

@@ -20,7 +20,7 @@ export default function NewsArticlePage ({ version, article, session, hideTools=
     return (
         <div className={styles.c}>
             <div className={styles.article}>
-            {session?.user?.role || !hideTools && <nav className={styles.nav}>
+            {(session?.user?.role || !hideTools) && <nav className={styles.nav}>
                 <>
                     <Link href={`/dashboard/article/${article.id}`}>Rediger Artikkel</Link>
                 </>
