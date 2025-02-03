@@ -2,6 +2,7 @@
 import styles from "./style.module.css"
 import React, { useEffect, useState } from "react";
 import TextArea from "@/components/editor/input/TextArea";
+import { FileExplorer } from "@/components/common/FileExplorer";
 
 export default function ImageComponent ({
     id, src, alt, credit, onChange=()=>{}
