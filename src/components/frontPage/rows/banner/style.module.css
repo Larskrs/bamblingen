@@ -1,3 +1,6 @@
+.c {
+    width: 100%;
+}
 .priority {
     color: var(--primary-500);
     height: 100%;
