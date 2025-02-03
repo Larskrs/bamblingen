@@ -27,12 +27,9 @@ export default function ImageComponent ({
     return (
 
         <>
-                    <TextArea
-                        placeholder="Bildeaddresse"
-                        description={`Bildeadressa skal kun være fra bamblingen.no. Trykk på enter for å velge bildet`}
-                        defaultValue={src}
-                        onEnter={(value) => { setSource(value) }}
-                        />
+                <FileExplorer onFileSelected={(f) => {setSource(`/api/v1/files?fileId=${f.id}`)}} >
+                    <video className={styles.preview} loop autoPlay playsInline muted src={_src} alt="bildeadresse"/>
+                </FileExplorer>
                     <TextArea
                         placeholder="Bildetekst"
                         description={`Alternativ tekst eller og beskrivelse på handling i bildet`}
