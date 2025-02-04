@@ -20,20 +20,20 @@
     width: 100%;
 }
 .table {
-    border-radius: 8px;
     border-collapse: collapse;
+    gap: 0px;
+    border: 0px;
 }
 .verification {
-    background-color: var(--white-800);
-    border: 1px solid var(--white-700);
+    background-color: var(--secondary-75);
     width: 100%;
-    color: var(--secondary-75);
+    color: var(--secondary-950);
     cursor: pointer;
     position: relative;
-    border-bottom: 1px solid var(--white-600);
+    border-bottom: 4px solid var(--secondary-50);
 }
 .verification:hover {
-    background-color: var(--white-700);
+    background-color: var(--secondary-200);
 }
 .header {
     width: 100%;
@@ -71,7 +71,7 @@
 .col {
     text-align: left;
     gap: 0.5rem;
-    padding: 0.5rem;
+    padding: 0.25rem 0.5rem;
 }
 .expandedHeader {
     background-color: var(--white-600) !important;
@@ -97,6 +97,7 @@
     width: fit-content;
     font-size: 0.7em;
     color: white;
+    padding: 0.25rem 0.5rem;
 }
 .status {
     font-size: 0.8em;

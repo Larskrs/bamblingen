@@ -4,6 +4,10 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    background-color: var(--white-800);
+    color: var(--secondary-50);
+    max-width: 100%;
+    overflow-x: hidden;
 }
 .nav {
     display: flex;

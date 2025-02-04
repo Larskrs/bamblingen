@@ -72,7 +72,7 @@ function TableRow ({v}) {
                 <td className={styles.col}>
                     <p className={styles.time}>{TimeAgo(new Date(v.articleVersion.createdAt))}</p>
                     {/* <div className={styles.status}>{GetVerificationStatus(v.status).name}</div> */}
-                    <div className={styles.type} style={{color: GetType(v.articleVersion.article.type).color}}>{GetType(v.articleVersion.article.type).name}</div>
+                    <div className={styles.type} style={{backgroundColor: GetType(v.articleVersion.article.type).color}}>{GetType(v.articleVersion.article.type).name}</div>
                 </td>
                 <td className={styles.col}>
                     <div className={styles.userCol}>

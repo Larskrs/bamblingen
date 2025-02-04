@@ -79,7 +79,8 @@
     border-radius: 0.5rem;
     overflow: hidden;
     width: 100%;
-    background-color: var(--white-800);
+    color: white;
+    background-color: var(--secondary-50);
 }
 .active img {
     filter: brightness(0) saturate(100%) invert(83%) sepia(52%) saturate(2328%) hue-rotate(2deg) brightness(104%) contrast(111%);

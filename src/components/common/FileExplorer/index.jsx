@@ -7,23 +7,32 @@ import { useState } from "react"
 import Batches from "./batches"
 import Files from "./files"
 import { Modal } from "./modal"
+import SelectedView from "./selected"
 
 export function FileExplorer ({onFileSelected=()=>{}, children, modal=true}) {
 
     const [batch, setBatch] = useState(null)
     const [open, setOpen] = useState(false)
+    const [selected, setSelected] = useState()
+
+    const handleFileSelection = (file) => {
+        setSelected(file)
+        onFileSelected(file)
+        // `/api/v1/files?fileId=${f.id}`
+    }
 
     if (modal == false) {
         return (<>
+                <nav className={styles.nav}>
+                    <button onClick={() => {setBatch(null); if (batch==null) {setOpen(false)}}} className={styles.button}>Tilbake</button>
+                    <p>{batch}</p>
+                </nav>
                 <div className={styles.c}>
 
                     {!batch && <Batches onOpenBatch={(id) => setBatch(id)}/>}
-                    {batch && <Files batch={batch} onFileSelect={onFileSelected} />}
+                    {batch && <Files batch={batch} onFileSelect={handleFileSelection} />}
 
                 </div>
-                <nav className={styles.nav}>
-                    <button onClick={() => {setBatch(null); if (batch==null) {setOpen(false)}}} className={styles.button}>Tilbake</button>
-                </nav>
             </>)
     }
 
@@ -38,9 +47,13 @@ export function FileExplorer ({onFileSelected=()=>{}, children, modal=true}) {
                 </nav>
                 <div className={styles.c}>
 
-                    {!batch && <Batches onOpenBatch={(id) => setBatch(id)}/>}
-                    {batch && <Files batch={batch} onFileSelect={onFileSelected} />}
+                    <div className={styles.list}>
 
+                        {!batch && <Batches onOpenBatch={(id) => setBatch(id)}/>}
+                        {batch && <Files batch={batch} onFileSelect={handleFileSelection} />}
+
+                    </div>
+                    <SelectedView file={selected} />
                 </div>
             </Modal>}
         </>)
@@ -51,6 +64,6 @@ export function FileExplorer ({onFileSelected=()=>{}, children, modal=true}) {
             return <Batches onOpenBatch={(id) => setBatch(id)}/>
         }
 
-        return <Files batch={batch} onFileSelect={onFileSelected} />
+        return <Files batch={batch} onFileSelect={handleFileSelection} />
     }
 }

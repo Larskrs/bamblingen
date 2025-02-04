@@ -8,15 +8,34 @@
     background-color: var(--secondary-75);
     padding: 0.5rem;
     display: flex;
+    min-height: 100%;
+    flex-direction: row;
+    align-items: flex-start;
+    cursor: default;
+}
+
+.list {
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+    margin: 0 auto;
+    color: white;
+    overflow-y: auto;
+    background-color: var(--secondary-75);
+    padding: 0.5rem;
+    display: flex;
     flex-direction: column;
     flex: 1;
 }
 .nav {
     display: flex;
     flex-wrap: wrap;
-    width: fit-content;
+    align-items: center;
+    text-align: center;
+    justify-content: flex-start;
+    width: 100%;
     gap: 0.5rem;
-    padding: 0.5rem 1rem 1rem 0.5rem;
+    padding: 0.75rem 1rem 0.75rem 0.5rem;
 }
 .button {
     border-radius: 1em;
@@ -24,14 +43,14 @@
     font-size: 1rem;
     border: none;
     cursor: pointer;
-    background-color: var(--white-700);
-    border: 1px solid var(--white-500);
+    background-color: var(--secondary-400);
+    border: 1px solid var(--secondary-400);
 }
 .button:hover, .button:focus {
-    background-color: var(--white-500);
+    background-color: var(--secondary-500);
 }
 .button:disabled {
-    background-color: var(--white-600);
+    background-color: var(--secondary-75);
     color: var(--white-400);
 }
 .selector:hover {

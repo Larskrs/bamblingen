@@ -5,6 +5,9 @@
     align-items: center;
     padding: 1rem;
     gap: 1rem;
+    min-height: 100%;
+    border-radius: 8px;
+    background-color: var(--secondary-25);
 }
 .context {
     width: 100%;
