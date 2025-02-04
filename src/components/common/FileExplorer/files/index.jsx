@@ -81,3 +81,4 @@ const ImageView = memo(({file}) => {
     </>
 
 })
+ImageView.displayName = "ImageView" // 👈 Scuffed ass fix.
