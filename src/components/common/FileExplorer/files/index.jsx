@@ -4,7 +4,7 @@ import styles from "./files.module.css"
 import Image from "next/image";
 import Link from "next/link";
 import { GetFileFallbackIcon } from "@/lib/fileLib";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Batches ({onFileSelect=()=>{}, batch="debug"}) {
@@ -13,22 +13,17 @@ export default function Batches ({onFileSelect=()=>{}, batch="debug"}) {
     const [selected, setSelected] = useState(null)
 
     useEffect(() => {
-        async function fetchFiles () {
-            let res
+        async function fetchFiles() {
             try {
-                res = await fetch(`/api/v1/files/list?batch=${batch}&per_page=100&page=1`)
-                const json = await res.json()
-                console.log(json)
-                if (json) {
-                    setData(json)
-                }
+                const res = await fetch(`/api/v1/files/list?batch=${batch}&per_page=100&page=1`);
+                const json = await res.json();
+                setData(prevData => (JSON.stringify(prevData) === JSON.stringify(json) ? prevData : json));
             } catch (err) {
-                console.error("Error fetching category: " + err)
+                console.error("Error fetching category:", err);
             }
         }
-        fetchFiles()
-
-    }, [batch])
+        fetchFiles();
+    }, [batch]);
 
     if (!data) { return <p>No Data</p>}
 
@@ -40,22 +35,49 @@ export default function Batches ({onFileSelect=()=>{}, batch="debug"}) {
             {/* <button onClick={() => loadMore()}>Load More</button> */}
         </div>
     );
-    function FileDisplay ({file, index, onSelect, selected}) {
-
-            const url = `/api/v1/files?fileId=${file.id}`
-            const fileType = file.type.split("/").shift()
-            let fallbackImage = GetFileFallbackIcon(fileType)
-            let image = fallbackImage
-            if (fileType == "image") {
-                image = url
-            }
-            return (
-                <div className={styles.item} href={url} onClick={() => {onSelect(file); setSelected(file.id)}}>
-                    <div style={{outline: `2px solid ${selected ? "white" : "transparent"}`}} className={styles.image}>
-                        <Image alt={"file-thumbnail"} width={256} height={256} src={image} />
-                    </div>
-                    <p>{file.name}</p>
-                </div>
-            )
-    }
 }
+
+function FileDisplay ({file, index, onSelect, selected}) {
+
+    const handleClick = () => {
+        onSelect(file);
+    };
+
+    const url = `/api/v1/files?fileId=${file.id}`
+    return (
+        <div className={styles.item} href={url} onClick={handleClick}>
+            <div style={{outline: `2px solid ${selected ? "white" : "transparent"}`}} className={styles.image}>
+                {/* <Image alt={"file-thumbnail"} width={256} height={256} src={image} /> */}
+                <ImageView key={index} file={file} />
+            </div>
+            <p>{file.name}</p>
+        </div>
+    )
+}
+
+const ImageView = memo(({file}) => {
+
+    const size = {width: 128, height: 128}
+
+    const url = `/api/v1/files?fileId=${file.id}`
+    const fileType = file.type.split("/").shift()
+
+    if (fileType == "video") {
+        let fallbackImage = GetFileFallbackIcon("video")
+        return <>
+            <Image className={styles.source} alt={"file-thumbnail"} {...size} src={fallbackImage} />
+            <video className={styles.source} src={`${url}#t=0.1`} {...size} />
+        </>
+    }
+
+    let fallbackImage = GetFileFallbackIcon(fileType)
+    let image = fallbackImage
+    if (fileType == "image") {
+        image = url
+    }
+
+    return <>
+        <Image className={styles.source} alt={"file-thumbnail"} {...size} src={image} />
+    </>
+
+})

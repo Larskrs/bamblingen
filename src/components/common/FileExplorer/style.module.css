@@ -6,12 +6,12 @@
     color: white;
     overflow-y: auto;
     background-color: var(--secondary-75);
-    padding: 0.5rem;
     display: flex;
     min-height: 100%;
     flex-direction: row;
     align-items: flex-start;
     cursor: default;
+    position: relative;
 }
 
 .list {
@@ -36,15 +36,17 @@
     width: 100%;
     gap: 0.5rem;
     padding: 0.75rem 1rem 0.75rem 0.5rem;
+    min-height: 4rem;
+    background-color: var(--secondary-75);
 }
 .button {
-    border-radius: 1em;
+    border-radius: 0.25em;
     padding: 0.25em 1em;
     font-size: 1rem;
     border: none;
     cursor: pointer;
-    background-color: var(--secondary-400);
-    border: 1px solid var(--secondary-400);
+    background-color: var(--secondary-200);
+    border: 1px solid var(--secondary-200);
 }
 .button:hover, .button:focus {
     background-color: var(--secondary-500);
@@ -58,6 +60,7 @@
 }
 .selector {
     position: relative;
+    cursor: pointer;
 }
 .selector::after {
     content: "";
@@ -78,4 +81,22 @@
     translate: -50% -50%;
     width: 100%;
     text-align: center;
+}
+
+.nav .batch {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    background-color: var(--secondary-50);
+    padding: 0.45rem 1rem 0.5rem 2.5rem;
+    position: relative;
+    min-width: 9rem;
+}
+.nav .batch img {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    max-height: 100%;
+    width: auto;
 }

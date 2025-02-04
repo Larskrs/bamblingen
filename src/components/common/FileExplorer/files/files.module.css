@@ -4,6 +4,7 @@
     row-gap: 0.5rem;
     width: 100%;
     margin: 0 auto;
+    padding: 0.5rem;
 }
 .item {
     display: flex;
@@ -14,7 +15,7 @@
     align-items: center;
     flex-direction: column;
     border-radius: 0.5rem;
-    transition: all 125ms var(--curve-1);
+    transition: opacity 125ms var(--curve-1);
     animation: item forwards 125ms var(--curve-1);
     text-overflow: clip;
     cursor: pointer;
@@ -41,11 +42,12 @@
     flex-direction: column;
     border-radius: 0.5rem;
     overflow: hidden;
-    transition: all 125ms var(--curve-1);
+    transition: opacity 125ms var(--curve-1);
     text-overflow: clip;
     cursor: pointer;
     aspect-ratio: 1/1;
     background-color: var(--secondary-50);
+    position: relative;
 }
 .image p {
     width: 100%;
@@ -53,9 +55,12 @@
     font-size: 0.75rem;
     word-break: break-all;
 }
-.image img {
+.image .source {
     height: 100%;
     width: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
     max-height: 100%;
     object-fit: cover;
 }
@@ -68,35 +73,36 @@
 
 
 
-/* Media Queries */
-@media (min-width: 400px) and (max-width: 500px) {
+
+@media (min-width: 501px) and (max-width: 700px) {
     .c {
-        grid-template-columns: repeat(2, 1fr); /* 1 item per row */
+        grid-template-columns: repeat(2, 1fr); /* 2 items per row */
     }
 }
 
-@media (min-width: 501px) and (max-width: 600px) {
+@media (min-width: 701px) and (max-width: 900px) {
     .c {
-        grid-template-columns: repeat(3, 1fr); /* 2 items per row */
+        grid-template-columns: repeat(3, 1fr); /* 3 items per row */
     }
 }
 
-@media (min-width: 601px) and (max-width: 900px) {
-    .c {
-        grid-template-columns: repeat(4, 1fr); /* 3 items per row */
-    }
-}
-
-@media (min-width: 901px) and (max-width: 1200px) {
-    .c {
-        grid-template-columns: repeat(5, 1fr); /* 5 items per row */
-    }
-}
-@media (min-width: 901px) and (max-width: 1201px) {
+@media (min-width: 901px) and (max-width: 1000px) {
     .c {
         grid-template-columns: repeat(4, 1fr); /* 5 items per row */
     }
 }
+@media (min-width: 1001px) and (max-width: 1200px) {
+    .c {
+        grid-template-columns: repeat(5, 1fr); /* 5 items per row */
+    }
+}
+/* Media Queries */
+@media (min-width: 400px) and (max-width: 500px) {
+    .c {
+        grid-template-columns: repeat(1 , 1fr); /* 1 item per row */
+    }
+}
+
 
 /* Single Row Layout */
 @media (min-width: 1201px) {
@@ -109,8 +115,9 @@
         justify-content: flex-start;
     }
     .item {
-        max-width: 10rem;
+        max-width: 6rem;
         width: 100%;
-        min-width: 8rem;
+        min-width: 6rem;
+        font-size: 0.85rem;
     }
 }

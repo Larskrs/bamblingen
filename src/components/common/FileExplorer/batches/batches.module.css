@@ -4,6 +4,7 @@
     row-gap: 0.5rem;
     width: 100%;
     margin: 0 auto;
+    padding: 0.5rem;
 }
 .item {
     display: flex;

@@ -23,10 +23,7 @@ export function FileExplorer ({onFileSelected=()=>{}, children, modal=true}) {
 
     if (modal == false) {
         return (<>
-                <nav className={styles.nav}>
-                    <button onClick={() => {setBatch(null); if (batch==null) {setOpen(false)}}} className={styles.button}>Tilbake</button>
-                    <p>{batch}</p>
-                </nav>
+                <Navigation />
                 <div className={styles.c}>
 
                     {!batch && <Batches onOpenBatch={(id) => setBatch(id)}/>}
@@ -42,9 +39,7 @@ export function FileExplorer ({onFileSelected=()=>{}, children, modal=true}) {
                 {children}
             </div>
             {open && <Modal onClose={() => setOpen(false)}>
-                <nav className={styles.nav}>
-                    <button onClick={() => {setBatch(null); if (batch==null) {setOpen(false)}}} className={styles.button}>Tilbake</button>
-                </nav>
+                <Navigation />
                 <div className={styles.c}>
 
                     <div className={styles.list}>
@@ -65,5 +60,17 @@ export function FileExplorer ({onFileSelected=()=>{}, children, modal=true}) {
         }
 
         return <Files batch={batch} onFileSelect={handleFileSelection} />
+    }
+
+    function Navigation ({}) {
+        return (
+            <nav className={styles.nav}>
+                <button onClick={() => {setBatch(null); if (batch==null) {setOpen(false)}}} className={styles.button}>Tilbake</button>
+                {batch && <div className={styles.batch}>
+                    <Image alt={batch} width={64} height={64} src={`/api/image/batch?b=${batch}`} />
+                    <p>{batch}</p>
+                </div>}
+            </nav>
+        )
     }
 }
