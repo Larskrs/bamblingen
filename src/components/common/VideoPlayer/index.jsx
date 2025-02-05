@@ -10,7 +10,7 @@ export default function VideoPlayer({ src, className }, props) {
         if (videoRef.current) {
             if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
                 // Safari støtter HLS direkte
-                videoRef.current.src = videoUrl;
+                videoRef.current.src = src;
             } else if (Hls.isSupported()) {
                 // For andre nettlesere, bruk hls.js
                 const hls = new Hls();
