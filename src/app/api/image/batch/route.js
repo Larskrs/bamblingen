@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import { ImageResponse } from 'next/og';
 import { readFileSync } from 'fs';
 import { NextResponse } from 'next/server';
+import path from 'path';
+import logger from 'logger.mjs';
 
 // Image metadata
 export const alt = 'Batch image';
@@ -43,9 +45,6 @@ export async function GET(req) {
       include: {
         files: {
           take: 4,
-          where: {
-            type: { contains: "image" }
-          },
           orderBy: {
             createdAt: "asc"
           }
@@ -57,9 +56,24 @@ export async function GET(req) {
     return notFound()
   }
 
+  if (!batch || !batch?.files) {
+    return NextResponse.json({error: "Batch not found"}, {status: 400})
+  }
+
   await Promise.all(batch.files.map(async (f) => {
     const _ = f
-    _.image = await getCompressedImageBase64(f.address, 256, 256, 50)
+    let address = null
+    logger.info(f)
+    if (f.type.startsWith("video")) {
+        address = path.posix.join(process.cwd(),`files`, `batch-${batch.id}`, "_video", f.id, "thumb")
+        address = path.posix.join(address, `thumbnail-1.png`)
+    }
+    if (f.type.startsWith("image")) {
+        address = path.posix.join(process.cwd(),`files`, `batch-${batch.id}`, "_video", f.id, "thumb")
+        address = path.posix.join(address, `thumbnail-1.png`)
+    }
+    if (address == null) { return; }
+    _.image = await getCompressedImageBase64(address, 256, 256, 50)
     return _
   }))
 
@@ -76,6 +90,7 @@ export async function GET(req) {
         }}
       >
         {batch.files.map((f) => {
+
           return (
             <img
               key={f.id}

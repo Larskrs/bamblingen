@@ -1,6 +1,4 @@
-const testPath = "http://localhost:3000/api/v1/files/video?fileId=20250204-a6db1a594077c3c1"
-
-
+"use client"
 import { useEffect, useRef } from 'react';
 import Hls from 'hls.js';
 import classNames from 'classnames';

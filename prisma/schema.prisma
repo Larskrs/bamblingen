@@ -210,5 +210,16 @@ model File {
   user            User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId          String 
 
+  videoStreams    VideoStream[]
+
   createdAt       DateTime          @default(now())
+}
+model VideoStream {
+    createdAt       DateTime          @default(now())
+
+    id              String            @id @unique @default(cuid())
+    address         String
+    
+    file            File @relation(fields: [fileId], references: [id], onDelete: Cascade)
+    fileId          String
 }

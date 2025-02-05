@@ -65,8 +65,8 @@ const ImageView = memo(({file}) => {
     if (fileType == "video") {
         let fallbackImage = GetFileFallbackIcon("video")
         return <>
-            <Image className={styles.source} alt={"file-thumbnail"} {...size} src={fallbackImage} />
-            <video className={styles.source} src={`${url}#t=0.1`} {...size} />
+            <Image className={styles.source} alt={"file-thumbnail"} {...size} src={`/api/v1/files/video/thumbnail?v=${file.id}`} />
+            {/* <video className={styles.source} src={`${url}#t=0.1`} {...size} /> */}
         </>
     }
 

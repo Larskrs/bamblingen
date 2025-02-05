@@ -26,9 +26,13 @@ export function FileExplorer ({onFileSelected=()=>{}, children, modal=true}) {
                 <Navigation />
                 <div className={styles.c}>
 
-                    {!batch && <Batches onOpenBatch={(id) => setBatch(id)}/>}
-                    {batch && <Files batch={batch} onFileSelect={handleFileSelection} />}
+                    <div className={styles.list}>
 
+                        {!batch && <Batches onOpenBatch={(id) => setBatch(id)}/>}
+                        {batch && <Files batch={batch} onFileSelect={handleFileSelection} />}
+
+                    </div>
+                    <SelectedView file={selected} />
                 </div>
             </>)
     }

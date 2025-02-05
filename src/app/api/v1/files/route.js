@@ -410,30 +410,13 @@ export const POST = auth(async function POST(req) {
 
                 await pump(file.stream(), createWriteStream(filePath));
 
-                const ffmpeg_path = process.env.FFMPEG_PATH
-
-                const command = new Ffmpeg()
-
-                command.setFfmpegPath(ffmpeg_path)
-                .input(filePath)
-                .outputOptions([
-                    '-preset veryfast',
-                    '-g 48',
-                    '-sc_threshold 0',
-                    '-hls_time 10', // 10 sek segmenter
-                    '-hls_list_size 0',
-                    '-hls_segment_filename', `${path.posix.join(streamPath, "segment_%03d.ts")}`,
-                    "-hls_base_url", `/api/v1/files/video?v=${identifier}&s=`
-                ])
-                .output(playlistPath)
-                .on('end', async () => {
-                    // await unlink(filePath); // Slett originalfilen etter konvertering
-                    // res.json({ url: `/videos/${req.file.filename}/playlist.m3u8` });
+                await CreateVideoPlaylistFile({
+                    filePath, streamPath, playlistPath, identifier, fileName: filename
                 })
-                .on('error', (err) => {
-                    logger.error(err.message);
+                await CreateVideoThumbnails({
+                    filePath, directoryPath
                 })
-                .run();
+
 
                 console.log(data)
                 // console.log(auth.user)
@@ -443,6 +426,68 @@ export const POST = auth(async function POST(req) {
 }
 )
 
+async function CreateVideoThumbnails ({
+    filePath, directoryPath
+}) {
+
+    const thumbnailPath = path.join(directoryPath, "thumb")
+    if (!existsSync(thumbnailPath)) {
+        mkdirSync(thumbnailPath, { recursive: true })
+    }
+
+    const ffmpeg_path = process.env.FFMPEG_PATH
+    const command = new Ffmpeg()
+
+    command.input(filePath)
+        .on('end', () => {
+            console.log('Thumbnails generated successfully!');
+        })
+        .on('error', (err) => {
+            console.error('Error generating thumbnails:', err);
+        })
+        .screenshots({
+            count: 1, // Number of thumbnails
+            folder: thumbnailPath,
+            size: '480x270', // Thumbnail size
+            filename: 'thumbnail-%i.png' // %i will be replaced with index
+        });
+}
+
+async function CreateVideoPlaylistFile ({
+    filePath, streamPath, playlistPath, identifier,
+    fileName,
+}) {
+    const ffmpeg_path = process.env.FFMPEG_PATH
+    const command = new Ffmpeg()
+
+        command.setFfmpegPath(ffmpeg_path)
+        .input(filePath)
+        .outputOptions([
+            '-preset veryfast',
+            '-g 48',
+            '-sc_threshold 0',
+            '-hls_time 10', // 10 sek segmenter
+            '-hls_list_size 0',
+            '-hls_segment_filename', `${path.posix.join(streamPath, "segment_%03d.ts")}`,
+            "-hls_base_url", `/api/v1/files/video?v=${identifier}&s=`
+        ])
+        .output(playlistPath)
+        .on('end', async () => {
+            // await unlink(filePath); // Slett originalfilen etter konvertering
+            // res.json({ url: `/videos/${req.file.filename}/playlist.m3u8` });
+        })
+        .on('progress', (progress) => {
+            logger.info(progress.percent)
+            global?.io?.emit("video-compression-progress", JSON.stringify({
+                name: fileName,
+                progress: progress.percent
+            }))
+        })
+        .on('error', (err) => {
+            logger.error(err.message);
+        })
+        .run();
+}
 
 // export const POST = auth(function POST(req) {
 //     if (req.auth) return NextResponse.json(req.auth)
