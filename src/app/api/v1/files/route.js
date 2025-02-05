@@ -421,10 +421,6 @@ export const POST = auth(async function POST(req) {
                     logger.error(err)
                 }
 
-
-                console.log(data)
-                // console.log(auth.user)
-
                 return data
     }
 }
@@ -435,16 +431,17 @@ async function CreateVideoThumbnails ({
 }) {
 
     logger.info("Generating thumbnail for image")
+    try {
 
-    const thumbnailPath = path.join(directoryPath, "thumb")
-    if (!existsSync(thumbnailPath)) {
-        mkdirSync(thumbnailPath, { recursive: true })
-    }
+        const thumbnailPath = path.join(directoryPath, "thumb")
+        if (!existsSync(thumbnailPath)) {
+            mkdirSync(thumbnailPath, { recursive: true })
+        }
 
-    const ffmpeg_path = process.env.FFMPEG_PATH
-    const command = new Ffmpeg()
+        const ffmpeg_path = process.env.FFMPEG_PATH
+        const command = new Ffmpeg()
 
-    command.input(filePath)
+        command.input(filePath)
         .on('end', () => {
             console.log('Thumbnails generated successfully!');
         })
@@ -453,19 +450,23 @@ async function CreateVideoThumbnails ({
         })
         .screenshots({
             count: 1, // Number of thumbnails
-            folder: thumbnailPath,
-            size: '480x270', // Thumbnail size
-            filename: 'thumbnail-%i.png' // %i will be replaced with index
-        });
-}
+                folder: thumbnailPath,
+                size: '480x270', // Thumbnail size
+                filename: 'thumbnail-%i.png' // %i will be replaced with index
+            });
 
-async function CreateVideoPlaylistFile ({
-    filePath, streamPath, playlistPath, identifier,
-    fileName,
-}) {
-    const ffmpeg_path = process.env.FFMPEG_PATH
-    const command = new Ffmpeg()
+        } catch (err) {
+            logger.error(err)
+        }
+    }
 
+    async function CreateVideoPlaylistFile ({
+        filePath, streamPath, playlistPath, identifier,
+        fileName,
+    }) {
+        const ffmpeg_path = process.env.FFMPEG_PATH
+        const command = new Ffmpeg()
+        
         command.setFfmpegPath(ffmpeg_path)
         .input(filePath)
         .outputOptions([
