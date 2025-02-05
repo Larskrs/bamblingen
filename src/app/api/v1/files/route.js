@@ -484,7 +484,7 @@ async function CreateVideoPlaylistFile ({
             }))
         })
         .on('error', (err) => {
-            logger.error(err.message);
+            logger.error(err);
         })
         .run();
 }
