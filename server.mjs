@@ -3,6 +3,8 @@ import { parse } from "url";
 import next from "next";
 import { Server } from "socket.io"; // Import Socket.IO server
 import logger from "./logger.mjs";
+import { existsSync } from "fs"
+import path from "path"
 
 const port = parseInt(process.env.PORT || "3000", 10);
 const dev = process.env.NODE_ENV !== "production";
@@ -56,6 +58,13 @@ app.prepare().then(() => {
     logger.info("Cleared previous logger data");
     logger.info("Server started");
     logger.info("Using Database: " + process.env.DATABASE_URL);
+
+    const ffmpeg_path = path.posix.join(process.env.FFMPEG_PATH)
+    if (existsSync(ffmpeg_path)) {
+      logger.info("Found FFMPEG at: " + ffmpeg_path)
+    } else {
+      logger.error("Missing binaries, could not find ffmpeg at path: " + ffmpeg_path)
+    }
 
     const id = "20241218-903510";
     const url = `${process.env.LOCAL_ADDRESS}/api/v1/articles/${id}`;
