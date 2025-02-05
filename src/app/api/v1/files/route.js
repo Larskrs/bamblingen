@@ -413,9 +413,13 @@ export const POST = auth(async function POST(req) {
                 await CreateVideoPlaylistFile({
                     filePath, streamPath, playlistPath, identifier, fileName: filename
                 })
-                await CreateVideoThumbnails({
-                    filePath, directoryPath
-                })
+                try {
+                    await CreateVideoThumbnails({
+                        filePath, directoryPath
+                    })
+                } catch (err) {
+                    logger.error(err)
+                }
 
 
                 console.log(data)
@@ -429,6 +433,8 @@ export const POST = auth(async function POST(req) {
 async function CreateVideoThumbnails ({
     filePath, directoryPath
 }) {
+
+    logger.info("Generating thumbnail for image")
 
     const thumbnailPath = path.join(directoryPath, "thumb")
     if (!existsSync(thumbnailPath)) {
