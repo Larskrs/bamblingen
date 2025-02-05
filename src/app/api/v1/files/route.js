@@ -7,11 +7,22 @@ import { createReadStream, createWriteStream } from 'fs';
 import { pipeline } from 'stream';
 import { promisify } from 'util';
 const pump = promisify(pipeline);
-import { stat } from 'fs/promises';
+import { stat, unlink } from 'fs/promises';
 import { cleanBatchname, cleanFilename, GenerateUniqueIdentifier } from "@/lib/fileLib"
 import { auth } from '@/auth';
 import { ConnectOrCreateCategoryTags } from '@/lib/articleLib';
 import { db } from '@/lib/db';
+import logger from 'logger.mjs';
+import Ffmpeg from 'fluent-ffmpeg';
+
+
+
+const SETTINGS = {
+    defaultFolder: "_default",
+    videoFolder: "_vidoe",
+    audioFolder: "_audio"
+}
+
 
 async function GetFilePath (fileId) {
 
@@ -227,56 +238,32 @@ export const POST = auth(async function POST(req) {
 
         for (let i = 0; i < fileCount; i++) {
             const file = formData.getAll('files')[i]
-            
+
             const extension = file.name.split('.').pop()
 
             const cleanFileName = cleanFilename(file.name.split('.').shift())
             const identifier = await GenerateUniqueIdentifier(new Date())
             const filename = `${identifier}-${cleanFileName}`
-            
-            const directoryPath = path.posix.join(process.cwd(),`files`, `batch-${batchId}`)
-            const filePath = path.join(`${directoryPath}`,`${filename}.${extension}`)
-            const mimeType = mime.lookup(filePath) || 'application/octet-stream';
-            
 
             try {
-                if (!existsSync(directoryPath)) {
-                    mkdirSync(directoryPath);
-                    console.log(`Group Directory '${directoryPath}' created.`);
-                } else {
-                    // console.log(`Group Directory: '${directoryPath}'`);
+                let uploaded = null
+
+                if (mime.lookup(extension).startsWith("video")) {
+                    uploaded = await VideoFileUpload({
+                        file, batchId, auth
+                    })
                 }
+                else {
+                    uploaded = await DefaultFileUpload({
+                        file, batchId, auth
+                    })
+                }
+
+                files = [uploaded, ...files]
             } catch (err) {
-                console.log("Received error creating directory", {directoryPath, filePath})
-                return  NextResponse.json({status:"fail",data:err})
+                logger.error("Error uploading file with default uploader. ", err)
+                Response.json(err, {status: 500})
             }
-
-            // Produce File
-
-            const url = encodeURI(`/api/v1/files?fileId=${identifier}`)
-
-            const dbEntry = await UploadFileToDB(
-                identifier,
-                `${cleanFileName}.${extension}`,
-                filePath,
-                batchId,
-                mimeType,
-                auth.user.id
-            )
-
-            const data = {
-                file,
-                name: cleanFileName,
-                mimeType,
-                dbEntry,
-                url
-            }
-
-            await pump(file.stream(), createWriteStream(filePath));
-            console.log(data)
-            // console.log(auth.user)
-
-            files = [...files, data]
         }
 
 
@@ -294,7 +281,165 @@ export const POST = auth(async function POST(req) {
             status: 505
         })
     }
-            
+    
+    
+    async function DefaultFileUpload ({
+        file,
+        batchId,
+        auth
+    }) {
+
+                logger.info("Uploading with default uplaoder...")
+
+
+                const extension = file.name.split('.').pop()
+
+                const cleanFileName = cleanFilename(file.name.split('.').shift())
+                const identifier = await GenerateUniqueIdentifier(new Date())
+                const filename = `${identifier}-${cleanFileName}`
+
+                const defaultDirectory = "_default"
+
+                const directoryPath = path.posix.join(process.cwd(),`files`, `batch-${batchId}`, defaultDirectory)
+                const filePath = path.join(`${directoryPath}`,`${filename}.${extension}`)
+                const mimeType = mime.lookup(filePath) || 'application/octet-stream';
+                
+    
+                try {
+                    if (!existsSync(directoryPath)) {
+                        mkdirSync(directoryPath, { recursive: true });
+                        console.log(`Group Directory '${directoryPath}' created.`);
+                    } else {
+                        // console.log(`Group Directory: '${directoryPath}'`);
+                    }
+                } catch (err) {
+                    console.log("Received error creating directory", {directoryPath, filePath})
+                    return  NextResponse.json({status:"fail",data:err})
+                }
+    
+                // Produce File
+    
+                const url = encodeURI(`/api/v1/files?fileId=${identifier}`)
+    
+                const dbEntry = await UploadFileToDB(
+                    identifier,
+                    `${cleanFileName}.${extension}`,
+                    filePath,
+                    batchId,
+                    mimeType,
+                    auth.user.id
+                )
+    
+                const data = {
+                    file,
+                    name: cleanFileName,
+                    mimeType,
+                    dbEntry,
+                    url
+                }
+    
+                await pump(file.stream(), createWriteStream(filePath));
+    
+                console.log(data)
+                // console.log(auth.user)
+    
+                return data
+    }
+
+    async function VideoFileUpload ({
+        file,
+        batchId,
+        auth
+    }) {
+
+                logger.info("Uploading with video uplaoder...")
+
+
+                const extension = file.name.split('.').pop()
+
+                const cleanFileName = cleanFilename(file.name.split('.').shift())
+                const identifier = await GenerateUniqueIdentifier(new Date())
+                const filename = `${identifier}-${cleanFileName}`
+
+                const defaultDirectory = "_video"
+
+                const directoryPath = path.posix.join(process.cwd(),`files`, `batch-${batchId}`, defaultDirectory, identifier)
+                const filePath = path.join(`${directoryPath}`,`original.${extension}`)
+                const mimeType = mime.lookup(filePath) || 'application/octet-stream';
+
+                const streamPath = path.posix.join(directoryPath, 'stream')
+                if (!existsSync(streamPath)) {
+                    mkdirSync(streamPath, { recursive: true })
+                }
+                const playlistPath = path.join(streamPath, 'playlist.m3u8');
+
+
+
+                try {
+                    if (!existsSync(directoryPath)) {
+                        mkdirSync(directoryPath, { recursive: true });
+                        console.log(`Group Directory '${directoryPath}' created.`);
+                    } else {
+                        // console.log(`Group Directory: '${directoryPath}'`);
+                    }
+                } catch (err) {
+                    console.log("Received error creating directory", {directoryPath, filePath})
+                    return  NextResponse.json({status:"fail",data:err})
+                }
+
+                // Produce File
+
+                const url = encodeURI(`/api/v1/files?fileId=${identifier}`)
+
+                const dbEntry = await UploadFileToDB(
+                    identifier,
+                    `${cleanFileName}.${extension}`,
+                    filePath,
+                    batchId,
+                    mimeType,
+                    auth.user.id
+                )
+
+                const data = {
+                    file,
+                    name: cleanFileName,
+                    mimeType,
+                    dbEntry,
+                    url
+                }
+
+                await pump(file.stream(), createWriteStream(filePath));
+
+                const ffmpeg_path = process.env.FFMPEG_PATH
+
+                const command = new Ffmpeg()
+
+                command.setFfmpegPath(ffmpeg_path)
+                .input(filePath)
+                .outputOptions([
+                    '-preset veryfast',
+                    '-g 48',
+                    '-sc_threshold 0',
+                    '-hls_time 10', // 10 sek segmenter
+                    '-hls_list_size 0',
+                    '-hls_segment_filename', `${path.posix.join(streamPath, "segment_%03d.ts")}`,
+                    "-hls_base_url", `/api/v1/files/video?v=${identifier}&s=`
+                ])
+                .output(playlistPath)
+                .on('end', async () => {
+                    // await unlink(filePath); // Slett originalfilen etter konvertering
+                    // res.json({ url: `/videos/${req.file.filename}/playlist.m3u8` });
+                })
+                .on('error', (err) => {
+                    logger.error(err.message);
+                })
+                .run();
+
+                console.log(data)
+                // console.log(auth.user)
+
+                return data
+    }
 }
 )
 

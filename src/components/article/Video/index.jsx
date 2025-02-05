@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./style.module.css"
 import ZoomableElement from "@/components/wrappers/ZoomInWrapper";
 import Editor from "./editor"
+import VideoPlayer from "@/components/common/VideoPlayer";
 
 const config = {
     icon: "/icons/icon_file_video.svg",
@@ -22,7 +23,7 @@ export function VideoComponent ({id, src, alt, credit, editor, onChange=()=>{}})
 
     return (
         <div className={styles.c}>
-            <video controls className={styles.video} src={src} alt={alt} width={500} height={500} />
+            <VideoPlayer controls className={styles.video} src={src} alt={alt} width={500} height={500} />
             <div>
             <p className={styles.alt}>{alt}</p>
             <p className={styles.credit}>{credit}</p>

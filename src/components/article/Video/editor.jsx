@@ -3,6 +3,7 @@ import styles from "./style.module.css"
 import React, { useEffect, useState } from "react";
 import TextArea from "@/components/editor/input/TextArea";
 import { FileExplorer } from "@/components/common/FileExplorer";
+import VideoPlayer from "@/components/common/VideoPlayer";
 
 export default function ImageComponent ({
     id, src, alt, credit, onChange=()=>{}
@@ -28,8 +29,8 @@ export default function ImageComponent ({
     return (
 
         <>
-                <FileExplorer onFileSelected={(f) => {setSource(`/api/v1/files?fileId=${f.id}`)}} >
-                    <video className={styles.video} loop autoPlay playsInline muted src={_src} alt="bildeadresse"/>
+                <FileExplorer onFileSelected={(f) => {setSource(`/api/v1/files/video?v=${f.id}`)}} >
+                    <VideoPlayer className={styles.video} loop autoPlay playsInline muted src={_src} alt="bildeadresse"/>
                 </FileExplorer>
                     <TextArea
                         placeholder="Bildetekst"

@@ -55,7 +55,7 @@ export async function GenerateUniqueIdentifier(creationDate) {
 
         // Retry mechanism in case of collisions
         while (true) {
-            const randomPart = crypto.randomBytes(24).toString('hex'); // 6-character random string
+            const randomPart = crypto.randomBytes(8).toString('hex'); // 6-character random string
             uniqueIdentifier = `${datePart}-${randomPart}`;
 
             // Check if the identifier is unique in the database
