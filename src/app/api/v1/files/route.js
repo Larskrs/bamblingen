@@ -485,7 +485,10 @@ async function CreateVideoThumbnails ({
         ])
         .output(playlistPath)
         .on('end', async () => {
-            // await unlink(filePath); // Slett originalfilen etter konvertering
+            await unlink(filePath);
+            logger.info({
+                message: "Finished video compression"
+            })
             // res.json({ url: `/videos/${req.file.filename}/playlist.m3u8` });
         })
         .on('progress', (progress) => {
