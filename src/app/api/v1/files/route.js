@@ -418,7 +418,7 @@ export const POST = auth(async function POST(req) {
                         filePath, directoryPath
                     })
                 } catch (err) {
-                    logger.error(err)
+                    logger.error("Error generting thumbnails: " + err)
                 }
 
                 return data
@@ -444,10 +444,10 @@ async function CreateVideoThumbnails ({
         command.setFfmpegPath(ffmpeg_path)
         command.input(filePath)
         .on('end', () => {
-            console.log('Thumbnails generated successfully!');
+            logger.info('Thumbnails generated successfully!');
         })
         .on('error', (err) => {
-            console.error('Error generating thumbnails:', err);
+            logger.error('Error generating thumbnails:', err.message);
         })
         .screenshots({
             count: 1, // Number of thumbnails
