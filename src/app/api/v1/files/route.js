@@ -447,9 +447,9 @@ async function CreateVideoThumbnails ({
             logger.info('Thumbnails generated successfully!');
         })
         .on('error', (err, stdout, stderr) => {
-            console.error('Error generating thumbnails:', err);
-            console.error('FFmpeg stdout:', stdout);
-            console.error('FFmpeg stderr:', stderr);
+            logger.error('Error generating thumbnails:', err);
+            logger.error('FFmpeg stdout:', stdout);
+            logger.error('FFmpeg stderr:', stderr);
             logger.error("FFmpeg Error: " + JSON.stringify(err, null, 2));
             logger.error("FFmpeg stderr: " + stderr);
         })        
