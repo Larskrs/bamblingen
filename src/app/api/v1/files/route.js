@@ -489,7 +489,13 @@ async function CreateVideoThumbnails ({
             // res.json({ url: `/videos/${req.file.filename}/playlist.m3u8` });
         })
         .on('progress', (progress) => {
-            logger.log(`Percent: ${progress.percent} Frame: ${progress.frames}, FPS: ${progress.currentFps}, Time: ${progress.timemark}`);
+            logger.info({
+                message: "FFmpeg Progress",
+                percent: progress.percent,
+                frame: progress.frames,
+                fps: progress.currentFps,
+                time: progress.timemark
+            });
         })
         .on('error', (err) => {
             logger.error(err);

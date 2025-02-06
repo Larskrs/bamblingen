@@ -17,8 +17,15 @@ export function ClearLogs() {
 }
 
 // Custom log format
-const logFormat = format.printf(({ level, message, timestamp }) => {
-  return `${timestamp} [${level}]: ${message}`;
+const logFormat = format.printf(({ level, message, timestamp, ...meta }) => {
+  let metaString = '';
+
+  // If there are additional meta properties, stringify them
+  if (Object.keys(meta).length > 0) {
+    metaString = ` ${JSON.stringify(meta)}`;
+  }
+
+  return `${timestamp} [${level}]: ${message}${metaString}`;
 });
 
 // Create the logger
@@ -26,7 +33,7 @@ const logger = createLogger({
   level: 'info',
   format: format.combine(
     format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-    logFormat
+    logFormat,
   ),
   transports: [
     // File transport (single log file)
