@@ -441,6 +441,7 @@ async function CreateVideoThumbnails ({
         const ffmpeg_path = process.env.FFMPEG_PATH
         const command = new Ffmpeg()
 
+        command.setFfmpegPath(ffmpeg_path)
         command.input(filePath)
         .on('end', () => {
             console.log('Thumbnails generated successfully!');
