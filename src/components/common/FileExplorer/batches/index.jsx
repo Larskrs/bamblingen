@@ -3,6 +3,7 @@ import useInfiniteFetch from "@/hooks/useInfiniteFetch";
 import styles from "./batches.module.css"
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import CreateBatch from "@/components/files/CreateBatch";
 
 export default function Batches ({onOpenBatch=()=>{}}) {
 
@@ -36,10 +37,10 @@ export default function Batches ({onOpenBatch=()=>{}}) {
                         <div style={{animationDelay: `${i*50}ms`}} className={styles.image}>
                             <Image alt={b.name} width={512} height={512} src={`/api/image/batch?b=${b.id}`} />
                         </div>
-                        <p>{b.name}</p>
                     </div>
                 )
             })}
         </div>
     );
+
 }

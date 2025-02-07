@@ -8,6 +8,7 @@ import Batches from "./batches"
 import Files from "./files"
 import { Modal } from "./modal"
 import SelectedView from "./selected"
+import CreateBatch from "@/components/files/CreateBatch"
 
 export function FileExplorer ({onFileSelected=()=>{}, children, modal=true}) {
 
@@ -69,6 +70,7 @@ export function FileExplorer ({onFileSelected=()=>{}, children, modal=true}) {
     function Navigation ({}) {
         return (
             <nav className={styles.nav}>
+                {!batch && <CreateBatch />}
                 <button onClick={() => {setBatch(null); if (batch==null) {setOpen(false)}}} className={styles.button}>Tilbake</button>
                 {batch && <div className={styles.batch}>
                     <Image alt={batch} width={64} height={64} src={`/api/image/batch?b=${batch}`} />

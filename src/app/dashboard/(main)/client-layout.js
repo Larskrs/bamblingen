@@ -5,25 +5,42 @@ import styles from "./layout.module.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import useFetch from "@/hooks/useFetch";
+import { useState } from "react";
 
 export default function Layout({ links, session, children }) {
 
+    const [collapsed, setCollapsed] = useState(false)
     const pathname = usePathname()
 
+    const handleCollapseToggle = () => {
+        setCollapsed(!collapsed)
+    }
+
 return (
-    <div className={styles.c}>
-        <nav>
+    <div className={styles.c} style={{gridTemplateColumns: collapsed ? "3.75rem 1fr" : ""}}>
             <div className={styles.user}>
-                <Image
-                    alt="user-avatar"
-                    src={session.user.image}
-                    width={1080}
-                    height={1080}
-                />
+                <div className={styles.avatar}>
+                    <Image
+                        alt="user-avatar"
+                        src={session.user.image}
+                        width={128}
+                        height={128}
+                    />
+                </div>
+                {!collapsed && <>
+                    <div className={styles.col}>
+                        <h3>{session.user.name}</h3>
+                        <p>{session.user.role}</p>
+                    </div>
+                    <div className={styles.toggle} onClick={handleCollapseToggle}>
+                        <Image alt="toggle side icon" width={64} height={64} src={"/icons/symbol_side_switch.svg"} />
+                    </div>
+                </>}
             </div>
+        <nav className={styles.side}>
 
         {links.map((l, i) =>
-            <NavItem key={l.href + i} l={l} pathname={pathname} i={i} />
+            <NavItem collapsed={collapsed} key={l.href + i} l={l} pathname={pathname} i={i} />
         )}
         </nav>
 
@@ -37,7 +54,7 @@ return (
 }
 
 
-function NavItem ({l,i, pathname}) {
+function NavItem ({collapsed, l,i, pathname}) {
 
             const { data, error, loading, loadMore } = useFetch(l.countAPI || "")
 
@@ -57,8 +74,10 @@ function NavItem ({l,i, pathname}) {
                         width={128}
                         height={128}
                         />
-                    <p>{l.name}</p>
-                    {l.countAPI && data != NaN && !loading && !error && <span className={styles.counter}>{data}</span>}
+                    {!collapsed && <>
+                        <p>{l.name}</p>
+                        {l.countAPI && data != NaN && !loading && !error && <span className={styles.counter}>{data}</span>}
+                    </>}
                 </Link>
             )
 }

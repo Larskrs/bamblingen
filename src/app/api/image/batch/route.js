@@ -5,7 +5,9 @@ import { ImageResponse } from 'next/og';
 import { readFileSync } from 'fs';
 import { NextResponse } from 'next/server';
 import path from 'path';
+import fs from "fs"
 import logger from 'logger.mjs';
+
 
 // Image metadata
 export const alt = 'Batch image';
@@ -60,22 +62,52 @@ export async function GET(req) {
     return NextResponse.json({error: "Batch not found"}, {status: 400})
   }
 
+  let previews = []
   await Promise.all(batch.files.map(async (f) => {
     const _ = f
     let address = null
-    logger.info(f)
     if (f.type.startsWith("video")) {
         address = path.posix.join(process.cwd(),`files`, `batch-${batch.id}`, "_video", f.id, "thumb")
         address = path.posix.join(address, `thumbnail-1.png`)
-    }
-    if (f.type.startsWith("image")) {
-        address = path.posix.join(process.cwd(),`files`, `batch-${batch.id}`, "_video", f.id, "thumb")
-        address = path.posix.join(address, `thumbnail-1.png`)
-    }
-    if (address == null) { return; }
-    _.image = await getCompressedImageBase64(address, 256, 256, 50)
-    return _
+      }
+      if (f.type.startsWith("image")) {
+        address = path.posix.join(f.address)
+      }
+      if (address == null) { return; }
+      if (!fs.existsSync(address)) {
+        return;
+      }
+      const prev = {
+        title: f.title,
+        id: f.id,
+        image: await getCompressedImageBase64(address, 256, 256, 50)
+      }
+      previews = [...previews, prev]
   }))
+
+  let amount = previews.length
+  amount = Math.max(1, Math.min(4, amount))
+
+  const style = [
+    {
+      height: 512,
+      width: 512
+    },
+    {
+      height: 256,
+      width: 512
+    },
+    {
+      height: 256,
+      width: 512
+    },
+    {
+      height: 256,
+      width: 256
+    }
+  ]
+
+  const title = batch.name + " " + amount
 
   return new ImageResponse(
     (
@@ -86,10 +118,9 @@ export async function GET(req) {
           flexWrap: "wrap",
           flexDirection: "row",
           position: "relative",
-          ...size,
         }}
       >
-        {batch.files.map((f) => {
+        {previews.map((f) => {
 
           return (
             <img
@@ -102,12 +133,20 @@ export async function GET(req) {
                 width: 256, // Full width
                 height: 256,
                 objectFit: 'cover', // Ensure images cover their space
+                ...style[amount-1]
               }}
             />
             )
           })}
+
         <div style={{ display: "flex", position: "absolute", ...size, alignItems: "center", justifyContent: "center"}}>
-            <p style={{maxWidth: 450, width: "auto", wordBreak: "break-all", borderRadius: 8, background: "black", display: "flex", textAlign: "center", padding: 16, lineHeight: 1,fontSize: 64, fontWeight: "900", color: "white"}}>{batch.name}</p>
+            <div style={{maxWidth: 300, width: "auto", wordBreak: "break-all", borderRadius: 8, background: "black", display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "center", padding: 16, lineHeight: 1,fontSize: 64, fontWeight: "900", color: "white"}}>
+              {title.split().map((c, ci) => {
+                return (
+                  <span key={ci}>{c}</span>
+                )
+              })}
+            </div>
         </div>
 
       </div>

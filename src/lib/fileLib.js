@@ -31,7 +31,7 @@ export function cleanFilename(filename) {
   }
   export function cleanBatchname(batch) {
         // Step 1: Remove any characters not allowed in filenames.
-        let cleaned = batch.replace(/[^a-zA-Z0-9. ]/g, '');
+        let cleaned = batch.replace(/[^a-zA-Z0-9 ]/g, '');
 
         if (cleaned.length === 0) {
           return new Error("cleaned batchname was null, use normal characters please");
@@ -44,6 +44,35 @@ export function cleanFilename(filename) {
 
         return cleaned;
   }
+
+
+export async function GenerateBatchID () {
+
+    let uniqueIdentifier;
+    let collisions = 0
+
+    while (true) {
+        const randomPart = crypto.randomBytes(16).toString('hex');
+        uniqueIdentifier = `${randomPart}`;
+
+        // Check if the identifier is unique in the database
+        const existingItem = await db.batch.findUnique({
+            where: {
+                id: uniqueIdentifier
+            },
+        });
+        if (existingItem) {
+          collisions++
+        }
+
+        if (!existingItem) {
+            break; // Exit the loop if the identifier is unique
+        }
+    }
+
+    return uniqueIdentifier;
+}
+
 
 
 export async function GenerateUniqueIdentifier(creationDate) {

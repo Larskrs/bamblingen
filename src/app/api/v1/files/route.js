@@ -68,10 +68,10 @@ export async function GET(req, ctx) {
     const fileName = dbFile.name
     // let { filePath } = await GetNewFilePath(fileId, batchId, fileName)
     const filePath = dbFile.address
-    
+
     const [id, extension] = fileId.split(".");
     const mimeType = mime.lookup(filePath) || 'application/octet-stream';
-    
+
     let fileStat;
 
     try {
@@ -80,16 +80,16 @@ export async function GET(req, ctx) {
         console.log("An error occurred while reading file with fsstat: " + err)
         return NextResponse.json({ error: `File not found + ${err}` }, { status: 404 });
     }
-    
+
     const fileSize = fileStat.size;
     const range = req.headers.get("range");
 
-    
+
     if (range) {
         const parts = range.replace(/bytes=/, "").split("-");
         const start = parseInt(parts[0], 10);
         const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
-        
+
         if (start >= fileSize || end >= fileSize) {
             return new Response(null, {
                 status: 416,
@@ -103,7 +103,7 @@ export async function GET(req, ctx) {
                 },
             });
         }
-        
+
         const chunkSize = (end - start) + 1;
         const stream = createReadStream(filePath, { start, end });
 
@@ -136,44 +136,6 @@ export async function GET(req, ctx) {
     }
 }
 
-
-/*
-export const POST = auth(async (req) => {
-
-    try{
-        const formData = await req.formData();
-
-        // const groupId = formData.getAll('group')[0]
-
-        // const group = await db.group.findUnique({
-        //     where: {
-        //         id: groupId
-        //     }
-        // })
-
-        // const directoryPath = `./files/${groupId}`;;
-
-        // if (!fs.existsSync(directoryPath)) {
-        //     fs.mkdirSync(directoryPath);
-        //     console.log(`Directory '${directoryPath}' created.`);
-        // } else {
-        //     console.log(`Directory '${directoryPath}' already exists.`);
-        // }
-
-
-
-        const file = formData.getAll('files')[0]
-        const filePath = `./files/${file.name}`;
-        await pump(file.stream(), fs.createWriteStream(filePath));
-        return NextResponse.json({status:"success",data:file.size})
-    }
-    catch (e) {
-        return  NextResponse.json({status:"fail",data:e})
-    }
-    
-})
-*/
-
 async function UploadFileToDB (id, name, address, batch, type, userId) {
     const query = {
         data: {
@@ -189,17 +151,17 @@ async function UploadFileToDB (id, name, address, batch, type, userId) {
             batch: {
                 connectOrCreate: {
                     where: {
-                      id: cleanBatchname(batch.toLowerCase()),
+                        id: cleanBatchname(batch.toLowerCase()),
                     },
                     create: {
-                      id: cleanBatchname(batch.toLowerCase()),
-                      name: batch,
-                      categories: { connectOrCreate: ConnectOrCreateCategoryTags(["debug", "testing", "development"]) },
-                      user: {
-                        connect: {
-                            id: userId
-                        }
-                      },
+                        id: cleanBatchname(batch.toLowerCase()),
+                        name: batch,
+                        categories: { connectOrCreate: ConnectOrCreateCategoryTags(["debug", "testing", "development"]) },
+                        user: {
+                            connect: {
+                                id: userId
+                            }
+                        },
                     },
                 },
             }
@@ -229,7 +191,7 @@ export const POST = auth(async function POST(req) {
             return NextResponse.json({ message: "No 'batchId', provided" }, { status: 401 })
         }
 
-        const batchId = cleanBatchname(formData.get('batchId') || "debug")
+        const batchId = cleanBatchname(formData.get('batchId') || "debug").replace(" ", "")
         const userId = auth.user.id
 
         const fileCount = formData.getAll('files').length
@@ -281,8 +243,7 @@ export const POST = auth(async function POST(req) {
             status: 505
         })
     }
-    
-    
+
     async function DefaultFileUpload ({
         file,
         batchId,
@@ -303,8 +264,7 @@ export const POST = auth(async function POST(req) {
                 const directoryPath = path.posix.join(process.cwd(),`files`, `batch-${batchId}`, defaultDirectory)
                 const filePath = path.join(`${directoryPath}`,`${filename}.${extension}`)
                 const mimeType = mime.lookup(filePath) || 'application/octet-stream';
-                
-    
+
                 try {
                     if (!existsSync(directoryPath)) {
                         mkdirSync(directoryPath, { recursive: true });
@@ -316,11 +276,11 @@ export const POST = auth(async function POST(req) {
                     console.log("Received error creating directory", {directoryPath, filePath})
                     return  NextResponse.json({status:"fail",data:err})
                 }
-    
+
                 // Produce File
-    
+
                 const url = encodeURI(`/api/v1/files?fileId=${identifier}`)
-    
+
                 const dbEntry = await UploadFileToDB(
                     identifier,
                     `${cleanFileName}.${extension}`,
@@ -329,7 +289,7 @@ export const POST = auth(async function POST(req) {
                     mimeType,
                     auth.user.id
                 )
-    
+
                 const data = {
                     file,
                     name: cleanFileName,
@@ -337,12 +297,12 @@ export const POST = auth(async function POST(req) {
                     dbEntry,
                     url
                 }
-    
+
                 await pump(file.stream(), createWriteStream(filePath));
-    
+
                 console.log(data)
                 // console.log(auth.user)
-    
+
                 return data
     }
 
@@ -452,7 +412,7 @@ async function CreateVideoThumbnails ({
             logger.error('FFmpeg stderr:', stderr);
             logger.error("FFmpeg Error: " + JSON.stringify(err, null, 2));
             logger.error("FFmpeg stderr: " + stderr);
-        })        
+        })
         .screenshots({
             count: 1, // Number of thumbnails
                 folder: thumbnailPath,
@@ -471,7 +431,7 @@ async function CreateVideoThumbnails ({
     }) {
         const ffmpeg_path = process.env.FFMPEG_PATH
         const command = new Ffmpeg()
-        
+
         command.setFfmpegPath(ffmpeg_path)
         .input(filePath)
         .outputOptions([
