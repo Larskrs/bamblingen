@@ -9,6 +9,62 @@
     max-height: 100%;
     overflow: hidden;
 }
+.nav {
+    display: flex;
+    border-bottom: 1px solid var(--secondary-75);
+
+    grid-row-start:     1;
+    grid-row-end:       2;
+
+    grid-column-start:  2;
+    grid-column-end:    3;
+}
+.landscape.expanded {
+    grid-template-columns: 15rem 1fr;
+}
+.landscape.collapsed {
+    grid-template-columns: 3.5rem 1fr;
+}
+.portrait {
+    grid-template-columns: 3.5rem 1fr;
+    grid-template-rows: 3.5rem 1fr;
+    height: 100dvh;
+    position: relative;
+}
+.portrait .side {
+    position: fixed;
+    top: 3.5rem;
+    left: 0px;
+    bottom: 0px;
+}
+.landscape .side {
+    position: relative;
+    inset: unset;
+}
+.expanded.portrait .side {
+    box-shadow: 0px 0px 100px black;
+}
+.expanded.side, .expanded.user {
+    width: 15rem;
+}
+.collapsed.side, .collapsed.user {
+    width: 3.5rem;
+}
+.collapsed.side {
+    width: 3.5rem;
+}
+.collapsed .link {
+    margin: 0px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding: 0.25rem;
+}
+.collapsed .link img {
+    margin: 0px;
+    width:  1.75rem;
+    height: 1.75rem;
+}
 .user .toggle {
     height: 1.5rem;
     width:  1.5rem;
@@ -32,6 +88,12 @@
     align-items: center;
     justify-content: center;
     padding: 0.5rem 1rem;
+    position: relative;
+    z-index: 105;
+    height: 3.5rem;
+}
+.expanded.user {
+    width: 15rem;
 }
 .user .col {
     margin-left: 1.25rem;
@@ -76,49 +138,60 @@
     color: white !important;
 }
 .c .side {
-    width: 3.5rem;
-    display: flex;
+    display: flex; 
     flex-direction: column;
     color: white;
-    padding: 0.5rem;
-    gap: 0.25rem;
     overflow: hidden;
     border: 1px solid var(--secondary-100);
+    border-top: none;
     align-items: center;
     font-size: 0.85rem;
     background-color: var(--secondary-25);
     grid-column-start: 1;
     grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    z-index: 100;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+}
+.side .links {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 0.5rem;
+    gap: 0.5rem;
+}
+.collapsed.side .links {
+    padding: 0.25rem;
+}
+.collapsed .link {
+    height: 3rem;
 }
 .link:first-child {
     border: none;
 }
 .link {
-    width: 2.5rem;
-    height: 2.5rem;
-    padding: 0.25rem;
+    width: 100%;
     border-radius: 0.25rem;
     display: flex;
     flex-direction: row;
     align-items: center;
     transition: all 100ms var(--curve-1);
     user-select: none;
+    padding: 0.25rem 0.25rem 0.25rem 0.75rem;
 }
 .link:hover {
     background-color: var(--secondary-100);
     box-shadow: 0px 0px 50px inset var(--secondary-50);
 }
 .link img {
-    width: 2rem;
-    height: 2rem;
-    margin-right: 1rem;
-}
-.c main {
-    border-radius: 0.5rem;
-    overflow: hidden;
     width: 100%;
-    color: white;
-    background-color: var(--secondary-50);
+    height: 100%;
+    max-width: 2rem;
+    margin-right: 1rem;
 }
 .active img {
     filter: brightness(0) saturate(100%) invert(83%) sepia(52%) saturate(2328%) hue-rotate(2deg) brightness(104%) contrast(111%);
@@ -137,56 +210,10 @@
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
+    overflow: hidden;
+    width: 100%;
+    color: white;
+    background-color: var(--secondary-50);
 }
-@media screen and (max-width: 700px) {
-    .c > .side {
-        width: 3.5rem;
-        border-radius: 0px;
-        margin-right: 0px;
-        margin-top: 0.5crem;
-        padding: 0.25rem;
-        min-width: 3.5rem;
-        border: none;
-    }
-    .c {
-        padding: 0px;
-        border-radius: 0px;
-        grid-template-columns: 3.5rem 1fr;
-    }
-    .user .col {
-        display: none;
-    }
-    .user .toggle {
-        display: none;
-    }
-    .user .avatar {
-        width:  2.5rem;
-        height: 2.5rem;
-        border-radius: 0px;
-    }
-    .user {
-        padding: 0px;
-    }
-    .c main {
-        border-radius: 0px;
-    }
-}
-@media screen and (min-width: 701px) {
-    .c > .side {
-        width: auto;
-        align-items: flex-start;
-    }
-    .link {
-        width: 100%;
-        padding-right: 4rem;
-    }
-    .link img {
-        padding: 0.25rem;
-        width: 2rem;
-        height: 2rem;
-    }
-    .user img {
-        max-width: 8rem;
-        max-height: 8rem;
-    }
-}
+
+

@@ -5,20 +5,32 @@ import styles from "./layout.module.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import useFetch from "@/hooks/useFetch";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import classNames from "classnames";
+import useViewportSize from "@/hooks/useViewportSize";
 
 export default function Layout({ links, session, children }) {
 
-    const [collapsed, setCollapsed] = useState(false)
     const pathname = usePathname()
+    const dimensions = useViewportSize()
+    const [collapsed, setCollapsed] = useState(false)
+
+    useEffect(() => {
+        console.log(innerWidth + " is the width")
+        setCollapsed(window.innerWidth <= 900)
+    }, [])
 
     const handleCollapseToggle = () => {
         setCollapsed(!collapsed)
     }
 
 return (
-    <div className={styles.c} style={{gridTemplateColumns: collapsed ? "3.75rem 1fr" : ""}}>
-            <div className={styles.user}>
+    <div className={classNames(styles.c, dimensions.width <= 900 ? styles.portrait : styles.landscape, collapsed ? styles.collapsed : styles.expanded)}>
+
+        <nav className={classNames(styles.side, collapsed ? styles.collapsed : styles.expanded)}>
+
+            <div className={classNames(styles.user, collapsed ? styles.collapsed : styles.expanded)}>
+                    {!collapsed && <>
                 <div className={styles.avatar}>
                     <Image
                         alt="user-avatar"
@@ -27,31 +39,33 @@ return (
                         height={128}
                     />
                 </div>
-                {!collapsed && <>
                     <div className={styles.col}>
                         <h3>{session.user.name}</h3>
                         <p>{session.user.role}</p>
                     </div>
+                </>}
                     <div className={styles.toggle} onClick={handleCollapseToggle}>
                         <Image alt="toggle side icon" width={64} height={64} src={"/icons/symbol_side_switch.svg"} />
                     </div>
-                </>}
             </div>
-        <nav className={styles.side}>
 
-        {links.map((l, i) =>
-            <NavItem collapsed={collapsed} key={l.href + i} l={l} pathname={pathname} i={i} />
-        )}
+            <div className={styles.links}>
+                {links.map((l, i) =>
+                    <NavItem collapsed={collapsed} key={l.href + i} l={l} pathname={pathname} i={i} />
+                )}
+            </div>
         </nav>
 
-        <main>
-            <div className={styles.child}>
-                {children}
-            </div>
+        <nav className={styles.nav}>
+        </nav>
+
+        <main className={styles.child}>
+            {children}
         </main>
     </div>
     );
 }
+
 
 
 function NavItem ({collapsed, l,i, pathname}) {
