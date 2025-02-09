@@ -1,0 +1,34 @@
+.c {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: var(--secondary-50);
+    padding: 1rem;
+}
+.video {
+    width: fit-content;
+    height: 100%;
+    max-width: 100%;
+    border-radius: .75rem;
+    max-height: fit-content;
+    overflow: hidden;
+}
+.videoContainer {
+    height: auto;
+    width: 100%;
+    border-radius: .75rem;
+    overflow: hidden;
+    max-height: 80%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.bar {
+    padding: 0.5rem 1rem;
+    background-color: var(--secondary-100);
+    margin-top: 1rem;
+}

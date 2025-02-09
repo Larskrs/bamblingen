@@ -13,8 +13,8 @@ export const GET = auth(async function GET(req) {
     let per_page = url.searchParams.get("per_page") || 50
     let page = url.searchParams.get("page") || 1
 
-    let authorIds = url.searchParams.get("authorIds") || [] // List of author IDs (comma-separated or multiple query params)
-    let showAuthors = (url.searchParams.get("showAuthors") == "true")
+    // let authorIds = url.searchParams.get("authorIds") || [] // List of author IDs (comma-separated or multiple query params)
+    // let showAuthors = (url.searchParams.get("showAuthors") == "true")
 
     let categories = url.searchParams.get("categories") || []
     let showCategories = (url.searchParams.get("showCategories") == "true")
@@ -50,18 +50,23 @@ export const GET = auth(async function GET(req) {
             if (isNaN(page)) { return ArgumentError('The (page) parameter is not a valid number', 'Use a generic integer number') }
             query.skip = (parseInt(page-1) * parseInt(per_page))
         }
-        if (authorIds && authorIds.length > 0) {
+        // if (authorIds && authorIds.length > 0) {
 
-            authorIds = authorIds.split(",")
+        //     authorIds = authorIds.split(",")
 
-            query.where.authors = {
-                some: {
-                    id: {
-                        in: authorIds, // Ensure the IDs are numbers (or keep as strings if needed)
-                    },
-                }
-            }
+        //     query.where.authors = {
+        //         some: {
+        //             id: {
+        //                 in: authorIds, // Ensure the IDs are numbers (or keep as strings if needed)
+        //             },
+        //         }
+        //     }
+        // }
+
+        query.where.user = {
+            id: auth.user.id
         }
+
         if (categories && categories.length > 0) {
             categories = categories.split(",")
 

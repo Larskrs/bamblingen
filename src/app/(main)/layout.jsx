@@ -10,7 +10,7 @@ export default async function MainLayout ({children}) {
 
     return (
         <>
-            {session && <div style={{background: "var(--secondary-100)", color: "white", padding: "0.25rem"}}>
+            {session && <div style={{background: "var(--secondary-200)", color: "white", padding: "0.25rem"}}>
             Du er logget inn som {session.user.name}, <Link style={{color: "var(--primary-500)"}} href={"/dashboard"}>åpne skrivesenteret</Link>
             </div>}
 

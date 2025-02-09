@@ -123,3 +123,13 @@ export const GetFileFallbackIcon = (contentType) => {
     return "/icons/icon_text.svg"
   }
 }
+
+export async function GetUniqueFile (id) {
+  const f = await db.file.findUnique({
+    where: {
+        id: id
+    },
+  })
+
+  return f
+}
