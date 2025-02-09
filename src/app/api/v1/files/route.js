@@ -13,13 +13,13 @@ import { auth } from '@/auth';
 import { ConnectOrCreateCategoryTags } from '@/lib/articleLib';
 import { db } from '@/lib/db';
 import logger from 'logger.mjs';
-import Ffmpeg from 'fluent-ffmpeg';
+import Ffmpeg, { FfmpegCommand, ffprobe } from 'fluent-ffmpeg';
 
 
 
 const SETTINGS = {
     defaultFolder: "_default",
-    videoFolder: "_vidoe",
+    videoFolder: "_video",
     audioFolder: "_audio"
 }
 
@@ -324,8 +324,6 @@ export const POST = auth(async function POST(req) {
                 }
                 const playlistPath = path.join(streamPath, 'playlist.m3u8');
 
-
-
                 try {
                     if (!existsSync(directoryPath)) {
                         mkdirSync(directoryPath, { recursive: true });
@@ -361,9 +359,12 @@ export const POST = auth(async function POST(req) {
 
                 await pump(file.stream(), createWriteStream(filePath));
 
+                const probed = await ProbeVideo(filePath)
+
                 try {
                     await CreateVideoThumbnails({
-                        filePath, directoryPath
+                        filePath, directoryPath,
+                        size: ScaleDimensions(probed.size.width, probed.size.height, 720)
                     })
                 } catch (err) {
                     logger.error("Error generting thumbnails: " + err)
@@ -377,8 +378,37 @@ export const POST = auth(async function POST(req) {
 }
 )
 
+function ScaleDimensions(width, height, maxWidth) {
+    if (width <= maxWidth) {
+        return { width, height }; // No scaling needed
+    }
+
+    const aspectRatio = height / width;
+    const newWidth = maxWidth;
+    const newHeight = Math.round(newWidth * aspectRatio);
+
+    return { width: newWidth, height: newHeight };
+}
+
+async function ProbeVideo(path) {
+    return new Promise((resolve, reject) => {
+        Ffmpeg.ffprobe(path, (err, metadata) => {
+            if (err) {
+                return reject(err);
+            }
+
+            const size = {
+                width: metadata?.streams[0]?.width || null,
+                height: metadata?.streams[0]?.height || null
+            };
+
+            resolve({ size });
+        });
+    });
+}
+
 async function CreateVideoThumbnails ({
-    filePath, directoryPath
+    filePath, directoryPath, size
 }) {
 
     logger.info("Generating thumbnail for image")
@@ -407,7 +437,7 @@ async function CreateVideoThumbnails ({
         .screenshots({
             count: 1, // Number of thumbnails
                 folder: thumbnailPath,
-                size: '480x270', // Thumbnail size
+                size: `${size.width}x${size.height}`, // Thumbnail size
                 filename: 'thumbnail-%i.png' // %i will be replaced with index
             });
 
