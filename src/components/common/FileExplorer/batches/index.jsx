@@ -4,6 +4,7 @@ import styles from "./batches.module.css"
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import CreateBatch from "@/components/files/CreateBatch";
+import BatchImage from "@/components/files/BatchImage";
 
 export default function Batches ({onOpenBatch=()=>{}}) {
 
@@ -35,7 +36,7 @@ export default function Batches ({onOpenBatch=()=>{}}) {
                 return (
                     <div key={b.id} className={styles.item} onClick={() => onOpenBatch(b.id)}>
                         <div style={{animationDelay: `${i*50}ms`}} className={styles.image}>
-                            <Image alt={b.name} width={512} height={512} src={`/api/image/batch?b=${b.id}`} />
+                            <BatchImage size={256} id={b.id} name={b.name} files={b._count.files}/>
                         </div>
                     </div>
                 )

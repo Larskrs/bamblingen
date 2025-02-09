@@ -7,15 +7,15 @@ import SaveButton from '../SaveButton';
 import axios from 'axios';
 import TextArea from '@/components/editor/input/TextArea';
 import styles from "./style.module.css"
+import classNames from "classnames"
 
-const SimpleFileDropper = () => {
+const SimpleFileDropper = ({batch, className, onUploaded=()=>{}}) => {
   const [files, setFiles] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const [uploaded, SetUploaded] = useState([])
   const [progress, setProgress] = useState(100)
-  const [batchName, setBatchName] = useState("")
 
   const handleFileChange = (e) => {
     setFiles(e.target.files);
@@ -26,13 +26,9 @@ const SimpleFileDropper = () => {
       alert('Please select files first');
       return;
     }
-    if (!batchName) {
-      alert('Mangler mappenavn')
-      return;
-    }
 
     const formData = new FormData();
-    formData.set('batchId', batchName)
+    formData.set('batchId', batch)
     for (let i = 0; i < files.length; i++) {
       formData.append('files', files[i]);
     }
@@ -59,6 +55,7 @@ const SimpleFileDropper = () => {
       const json = await res.data
       console.log(json)
       SetUploaded(json.data)
+      await onUploaded()
 
       setSuccess(true);
       setFiles(null);
@@ -70,19 +67,19 @@ const SimpleFileDropper = () => {
   };
 
   return (
-    <div className={styles.c}>
+    <div className={classNames(styles.c, className)}>
       <h2>File Upload</h2>
       <input type="file" multiple onChange={handleFileChange} />
       <SaveButton onClick={handleUpload} progress={progress} error={error}>
         {uploading ? `Uploading... ${progress}%` : 'Upload'}
       </SaveButton>
-      <TextArea placeholder='Mappenavn...' onChange={(v) => setBatchName(v)} description='' />
+      {/* <TextArea placeholder='Mappenavn...' onChange={(v) => setBatchName(v)} description='' /> */}
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {success && <p style={{ color: 'green' }}>Upload successful!</p>}
 
       {success && <div style={{display: 'flex', flexDirection: 'row', flexFlow: "wrap", gap: '.5rem', padding: '1rem'}}>
-            <FileList files={uploaded.files.map((f) => f.dbEntry)} />
+            {/* <FileList files={uploaded.files.map((f) => f.dbEntry)} /> */}
         </div>}
     </div>
   );

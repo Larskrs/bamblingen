@@ -22,7 +22,7 @@ export function cleanFilename(filename) {
     }
   
     // Step 6: Optionally truncate filename to a specific length, e.g., 255 characters for most filesystems.
-    const maxLength = 10;
+    const maxLength = 32;
     if (cleaned.length > maxLength) {
       cleaned = cleaned.substring(0, maxLength);
     }
@@ -52,7 +52,7 @@ export async function GenerateBatchID () {
     let collisions = 0
 
     while (true) {
-        const randomPart = crypto.randomBytes(16).toString('hex');
+        const randomPart = crypto.randomBytes(8).toString('hex');
         uniqueIdentifier = `${randomPart}`;
 
         // Check if the identifier is unique in the database
@@ -126,6 +126,15 @@ export const GetFileFallbackIcon = (contentType) => {
 
 export async function GetUniqueFile (id) {
   const f = await db.file.findUnique({
+    where: {
+        id: id
+    },
+  })
+
+  return f
+}
+export async function GetUniqueBatch (id) {
+  const f = await db.batch.findUnique({
     where: {
         id: id
     },

@@ -22,7 +22,7 @@ export default async function WatchPage ({params, searchParams}) {
                 <VideoPlayer
                     className={styles.video}
                     poster={`/api/v1/files/video/thumbnail?v=${v}`}
-                    src={`/api/v1/files/video?v=${v}`}
+                    src={`/api/v1/files/video?v=${v}#t=1`}
                     />
             </div>
             <nav className={styles.bar}>

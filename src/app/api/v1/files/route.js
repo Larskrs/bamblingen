@@ -8,7 +8,7 @@ import { pipeline } from 'stream';
 import { promisify } from 'util';
 const pump = promisify(pipeline);
 import { stat, unlink } from 'fs/promises';
-import { cleanBatchname, cleanFilename, GenerateUniqueIdentifier } from "@/lib/fileLib"
+import { cleanBatchname, cleanFilename, GetUniqueBatch, GenerateUniqueIdentifier } from "@/lib/fileLib"
 import { auth } from '@/auth';
 import { ConnectOrCreateCategoryTags } from '@/lib/articleLib';
 import { db } from '@/lib/db';
@@ -136,7 +136,7 @@ export async function GET(req, ctx) {
     }
 }
 
-async function UploadFileToDB (id, name, address, batch, type, userId) {
+async function UploadFileToDB ({id, name, address, batchId, type, userId}) {
     const query = {
         data: {
             id,
@@ -149,21 +149,9 @@ async function UploadFileToDB (id, name, address, batch, type, userId) {
                 }
             },
             batch: {
-                connectOrCreate: {
-                    where: {
-                        id: cleanBatchname(batch.toLowerCase()),
-                    },
-                    create: {
-                        id: cleanBatchname(batch.toLowerCase()),
-                        name: batch,
-                        categories: { connectOrCreate: ConnectOrCreateCategoryTags(["debug", "testing", "development"]) },
-                        user: {
-                            connect: {
-                                id: userId
-                            }
-                        },
-                    },
-                },
+                connect: {
+                    id: batchId
+                }
             }
         }
     }
@@ -191,8 +179,11 @@ export const POST = auth(async function POST(req) {
             return NextResponse.json({ message: "No 'batchId', provided" }, { status: 401 })
         }
 
-        const batchId = cleanBatchname(formData.get('batchId') || "debug").replace(" ", "")
-        const userId = auth.user.id
+        const batchId = formData.get('batchId')
+        const batch = await GetUniqueBatch(batchId)
+        if (!batch) {
+            return NextResponse.json({ message: `Did not find batch with id: '${batchId}'` }, { status: 404 })
+        }
 
         const fileCount = formData.getAll('files').length
 
@@ -205,7 +196,7 @@ export const POST = auth(async function POST(req) {
 
             const cleanFileName = cleanFilename(file.name.split('.').shift())
             const identifier = await GenerateUniqueIdentifier(new Date())
-            const filename = `${identifier}-${cleanFileName}`
+            const filename = `${identifier}`
 
             try {
                 let uploaded = null
@@ -238,7 +229,7 @@ export const POST = auth(async function POST(req) {
         })
     } catch (err) {
         return NextResponse.json({
-            message: "Error: " + err
+            error: err.message
         }, {
             status: 505
         })
@@ -254,15 +245,15 @@ export const POST = auth(async function POST(req) {
 
 
                 const extension = file.name.split('.').pop()
-
-                const cleanFileName = cleanFilename(file.name.split('.').shift())
+                const name = file.name.split('.').shift()
+                const cleanFileName = cleanFilename(name)
                 const identifier = await GenerateUniqueIdentifier(new Date())
-                const filename = `${identifier}-${cleanFileName}`
+                const storedName = `${identifier}.${extension}`
 
                 const defaultDirectory = "_default"
 
                 const directoryPath = path.posix.join(process.cwd(),`files`, `batch-${batchId}`, defaultDirectory)
-                const filePath = path.join(`${directoryPath}`,`${filename}.${extension}`)
+                const filePath = path.join(`${directoryPath}`,storedName)
                 const mimeType = mime.lookup(filePath) || 'application/octet-stream';
 
                 try {
@@ -281,14 +272,14 @@ export const POST = auth(async function POST(req) {
 
                 const url = encodeURI(`/api/v1/files?fileId=${identifier}`)
 
-                const dbEntry = await UploadFileToDB(
-                    identifier,
-                    `${cleanFileName}.${extension}`,
-                    filePath,
-                    batchId,
-                    mimeType,
-                    auth.user.id
-                )
+                const dbEntry = await UploadFileToDB({
+                    id: identifier,
+                    name: `${cleanFileName}.${extension}`,
+                    address: filePath,
+                    batchId: batchId,
+                    type: mimeType,
+                    userId: auth.user.id
+                })
 
                 const data = {
                     file,
@@ -316,10 +307,10 @@ export const POST = auth(async function POST(req) {
 
 
                 const extension = file.name.split('.').pop()
-
-                const cleanFileName = cleanFilename(file.name.split('.').shift())
+                const name = file.name.split('.').shift()
+                const cleanFileName = cleanFilename(name)
                 const identifier = await GenerateUniqueIdentifier(new Date())
-                const filename = `${identifier}-${cleanFileName}`
+                const storedName = `${identifier}.${extension}`
 
                 const defaultDirectory = "_video"
 
@@ -351,14 +342,14 @@ export const POST = auth(async function POST(req) {
 
                 const url = encodeURI(`/api/v1/files?fileId=${identifier}`)
 
-                const dbEntry = await UploadFileToDB(
-                    identifier,
-                    `${cleanFileName}.${extension}`,
-                    filePath,
-                    batchId,
-                    mimeType,
-                    auth.user.id
-                )
+                const dbEntry = await UploadFileToDB({
+                    id: identifier,
+                    name: `${cleanFileName}.${extension}`,
+                    address: filePath,
+                    batchId: batchId,
+                    type: mimeType,
+                    userId: auth.user.id
+                })
 
                 const data = {
                     file,
@@ -370,9 +361,6 @@ export const POST = auth(async function POST(req) {
 
                 await pump(file.stream(), createWriteStream(filePath));
 
-                await CreateVideoPlaylistFile({
-                    filePath, streamPath, playlistPath, identifier, fileName: filename
-                })
                 try {
                     await CreateVideoThumbnails({
                         filePath, directoryPath
@@ -380,6 +368,9 @@ export const POST = auth(async function POST(req) {
                 } catch (err) {
                     logger.error("Error generting thumbnails: " + err)
                 }
+                await CreateVideoPlaylistFile({
+                    filePath, streamPath, playlistPath, identifier, fileName: storedName
+                })
 
                 return data
     }

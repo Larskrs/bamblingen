@@ -6,22 +6,24 @@ import Link from "next/link";
 import { GetFileFallbackIcon } from "@/lib/fileLib";
 import { memo, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import SimpleFileDropper from "@/components/editor/input/SimpleFileDropper";
 
 export default function Batches ({onFileSelect=()=>{}, batch="debug"}) {
     
     const [data, setData] = useState([])
     const [selected, setSelected] = useState(null)
 
-    useEffect(() => {
-        async function fetchFiles() {
-            try {
-                const res = await fetch(`/api/v1/files/list?batch=${batch}&per_page=100&page=1`);
-                const json = await res.json();
-                setData(prevData => (JSON.stringify(prevData) === JSON.stringify(json) ? prevData : json));
-            } catch (err) {
-                console.error("Error fetching category:", err);
-            }
+    async function fetchFiles() {
+        try {
+            const res = await fetch(`/api/v1/files/list?batch=${batch}&per_page=100&page=1`);
+            const json = await res.json();
+            setData(prevData => (JSON.stringify(prevData) === JSON.stringify(json) ? prevData : json));
+        } catch (err) {
+            console.error("Error fetching category:", err);
         }
+    }
+
+    useEffect(() => {
         fetchFiles();
     }, [batch]);
 
@@ -29,10 +31,13 @@ export default function Batches ({onFileSelect=()=>{}, batch="debug"}) {
 
     return (
         <div className={styles.c}>
-            {data.map((f, i) =>
-                <FileDisplay selected={selected == f.id} key={f.id} file={f} index={i} onSelect={onFileSelect} />
-            )}
-            {/* <button onClick={() => loadMore()}>Load More</button> */}
+            <SimpleFileDropper batch={batch} className={styles.uploader} onUploaded={async () => {await fetchFiles()}} />
+            <div className={styles.grid}>
+                {data.map((f, i) =>
+                    <FileDisplay selected={selected == f.id} key={f.id} file={f} index={i} onSelect={onFileSelect} />
+                    )}
+                {/* <button onClick={() => loadMore()}>Load More</button> */}
+            </div>
         </div>
     );
 }

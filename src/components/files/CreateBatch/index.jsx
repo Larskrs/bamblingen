@@ -1,23 +1,42 @@
 "use client"
 import styles from "./style.module.css"
 import Image from "next/image";
+import { useState } from "react"
 
-export default function CreateBatch ({}) {
+export default function CreateBatch ({onCreated=(id)=>{}}) {
 
-
-
+    const [cooldown, setCooldown] = useState(false)
+    
     async function handleCreateBatch () {
+
+        if (cooldown) {
+            return;
+        }
+        setCooldown(true)
+
         const formData = new FormData();
+        formData.append('name', "new_batch")
+
+        let res = null
 
         try {
-            const res = await fetch('/api/v1/files', {
+            res = await fetch('/api/v1/files/batches', {
                 method: 'POST',
                 body: formData,
             });
 
         } catch (err) {
-
+            return;
         }
+
+        if (!res.ok) {
+            return;
+        }
+
+        const json = await res.json()
+        const batchId = json.data.id
+        console.log(json)
+        onCreated(batchId)
     }
 
     return (

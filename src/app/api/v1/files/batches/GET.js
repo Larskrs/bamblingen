@@ -14,7 +14,6 @@ export const GET = auth(async function GET(req) {
     let page = url.searchParams.get("page") || 1
 
     // let authorIds = url.searchParams.get("authorIds") || [] // List of author IDs (comma-separated or multiple query params)
-    // let showAuthors = (url.searchParams.get("showAuthors") == "true")
 
     let categories = url.searchParams.get("categories") || []
     let showCategories = (url.searchParams.get("showCategories") == "true")
@@ -78,7 +77,6 @@ export const GET = auth(async function GET(req) {
                 }
             }
         }
-
         // Fetch data from the database with the constructed query
         const data = await db.batch.findMany(query);
 
