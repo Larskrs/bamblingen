@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import Hls from 'hls.js';
 import classNames from 'classnames';
 
-export default function VideoPlayer({ src, className }, props) {
+export default function VideoPlayer({ poster, src, className }, props) {
     const videoRef = useRef(null);
 
     useEffect(() => {
@@ -20,5 +20,5 @@ export default function VideoPlayer({ src, className }, props) {
         }
     }, [src]);
 
-    return <video {...props} className={classNames(className)} ref={videoRef} controls  />;
+    return <video {...props} poster={poster} className={classNames(className)} ref={videoRef} controls  />;
 }

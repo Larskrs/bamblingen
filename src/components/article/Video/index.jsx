@@ -14,16 +14,17 @@ const config = {
     default: {
         type: "video",
         src: "/images/langesund.jpeg",
+        poster: "/images/langesund.jpeg",
         alt: "Bildetekst",
         credit: "Foto: Bamblingen.no"
     }
 }
 
-export function VideoComponent ({id, src, alt, credit, editor, onChange=()=>{}}) {
+export function VideoComponent ({id, poster, src, alt, credit, editor, onChange=()=>{}}) {
 
     return (
         <div className={styles.c}>
-            <VideoPlayer controls className={styles.video} src={src} alt={alt} width={500} height={500} />
+            <VideoPlayer poster={poster} controls className={styles.video} src={src} alt={alt} width={500} height={500} />
             <div>
             <p className={styles.alt}>{alt}</p>
             <p className={styles.credit}>{credit}</p>

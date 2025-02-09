@@ -107,7 +107,7 @@ export async function GET(req) {
     }
   ]
 
-  const title = batch.name + " " + amount
+  const title = batch.name
 
   return new ImageResponse(
     (

@@ -6,9 +6,10 @@ import { FileExplorer } from "@/components/common/FileExplorer";
 import VideoPlayer from "@/components/common/VideoPlayer";
 
 export default function ImageComponent ({
-    id, src, alt, credit, onChange=()=>{}
+    id, src, alt, credit, poster, onChange=()=>{}
 }) {
 
+    const [_poster, setPoster] = useState(poster)
     const [_src, setSource] = useState(src)
     const [_alt, setAlt] = useState(alt)
     const [_credit, setCredit] = useState(credit)
@@ -18,19 +19,20 @@ export default function ImageComponent ({
             type: "video",
             src: _src,
             alt: _alt,
-            credit: _credit
+            credit: _credit,
+            poster: _poster,
         }
     }
     
         useEffect(() => {
             onChange(query())
-        }, [_src, _credit, _alt])
+        }, [_src, _credit, _alt, _poster])
 
     return (
 
         <>
-                <FileExplorer onFileSelected={(f) => {setSource(`/api/v1/files/video?v=${f.id}`)}} >
-                    <VideoPlayer className={styles.video} loop autoPlay playsInline muted src={_src} alt="bildeadresse"/>
+                <FileExplorer onFileSelected={(f) => {setSource(`/api/v1/files/video?v=${f.id}`); setPoster(`/api/v1/files/video/thumbnail?v=${f.id}`)}} >
+                    <VideoPlayer poster={_poster} className={styles.video} loop autoPlay playsInline muted src={_src} alt="bildeadresse"/>
                 </FileExplorer>
                     <TextArea
                         placeholder="Bildetekst"
@@ -44,6 +46,7 @@ export default function ImageComponent ({
                         onChange={(value) => { setCredit(value) }}
                         defaultValue={credit}
                         />
+                        <p>{}]</p>
         </>
     );
 }
