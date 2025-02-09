@@ -21,8 +21,10 @@ export default function SelectedView ({file}) {
                 <p><b>Navn</b>{file.name}</p>
                 <p><b>Id</b>{file.id}</p>
                 <div className={styles.row}>
+                {!file.type.includes("video") && <>
                     <Link className={styles.download} target="_blank" download={true} href={`${url}`}>Last ned</Link>
                     <Link className={styles.link} target="_blank" href={`${url}`}>Åpne lenke</Link>
+                </>}
                 </div>
                 {file.type.includes("video") &&
                     <Link className={styles.download} href={`/watch?v=${file.id}`}>Åpne videospiller</Link>
@@ -33,7 +35,7 @@ export default function SelectedView ({file}) {
 }
 
 function FileImage ({id, type}) {
-    
+
     if (type.includes("image")) {
         const url = `/api/v1/files?fileId=${id}`
         return <div className={styles.thumbnail}>
