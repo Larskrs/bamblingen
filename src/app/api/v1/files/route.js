@@ -136,7 +136,7 @@ export async function GET(req, ctx) {
     }
 }
 
-async function UploadFileToDB ({id, name, address, batchId, type, userId}) {
+async function UploadFileToDB ({id, name, address, batchId, type, userId, metadata}) {
     const query = {
         data: {
             id,
@@ -152,8 +152,13 @@ async function UploadFileToDB ({id, name, address, batchId, type, userId}) {
                 connect: {
                     id: batchId
                 }
-            }
+            },
+
         }
+    }
+
+    if (metadata) {
+        query.data.data = JSON.stringify(metadata)
     }
 
     console.log(query.data.batch)
@@ -339,6 +344,10 @@ export const POST = auth(async function POST(req) {
                 // Produce File
 
                 const url = encodeURI(`/api/v1/files?fileId=${identifier}`)
+                await pump(file.stream(), createWriteStream(filePath));
+                
+                const probed = await ProbeVideo(filePath)
+                logger.info(probed)
 
                 const dbEntry = await UploadFileToDB({
                     id: identifier,
@@ -346,7 +355,10 @@ export const POST = auth(async function POST(req) {
                     address: filePath,
                     batchId: batchId,
                     type: mimeType,
-                    userId: auth.user.id
+                    userId: auth.user.id,
+                    metadata: {
+                        size: probed.size
+                    }
                 })
 
                 const data = {
@@ -357,9 +369,7 @@ export const POST = auth(async function POST(req) {
                     url
                 }
 
-                await pump(file.stream(), createWriteStream(filePath));
 
-                const probed = await ProbeVideo(filePath)
 
                 try {
                     await CreateVideoThumbnails({

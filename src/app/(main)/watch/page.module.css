@@ -4,6 +4,7 @@
     color: white;
     align-items: center;
     justify-content: center;
+    min-height: 90dvh;
     height: 100%;
     background-color: var(--secondary-50);
     padding: 1rem;

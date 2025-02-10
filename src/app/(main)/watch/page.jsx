@@ -11,14 +11,24 @@ export default async function WatchPage ({params, searchParams}) {
 
     try {
         file = await GetUniqueFile(v)
+        file.data = JSON.parse(file.data)
     } catch (err) {
         logger.error(err)
         return notFound()
     }
 
+    const size = {
+        width: file.data?.size?.width,
+        height: file.data?.size?.height
+    }
+    const aspectRatio = size?.width/size?.height
+    
+
+    logger.info(JSON.stringify(file, null, 4))
+
     return (
         <div className={styles.c}>
-            <div className={styles.videoContainer}>
+            <div className={styles.videoContainer} style={{aspectRatio: aspectRatio, width: "100%", height: "auto"}}>
                 <VideoPlayer
                     className={styles.video}
                     poster={`/api/v1/files/video/thumbnail?v=${v}`}
