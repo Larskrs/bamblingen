@@ -346,8 +346,15 @@ export const POST = auth(async function POST(req) {
                 const url = encodeURI(`/api/v1/files?fileId=${identifier}`)
                 await pump(file.stream(), createWriteStream(filePath));
                 
-                const probed = await ProbeVideo(filePath)
-                logger.info(probed)
+                let probed
+                try {   
+                    probed = await ProbeVideo(filePath)
+                } catch (err) {
+                    logger.error("Error caused when probing")
+                    await unlink(filePath)
+                    return;
+                }
+                logger.info(JSON.stringify(probed, null, 4))
 
                 const dbEntry = await UploadFileToDB({
                     id: identifier,
@@ -383,6 +390,8 @@ export const POST = auth(async function POST(req) {
                     filePath, streamPath, playlistPath, identifier, fileName: storedName
                 })
 
+                await unlink(filePath)
+
                 return data
     }
 }
@@ -404,12 +413,26 @@ async function ProbeVideo(path) {
     return new Promise((resolve, reject) => {
         Ffmpeg.ffprobe(path, (err, metadata) => {
             if (err) {
-                return reject(err);
+                logger.error("FFprobe error:", err);
+                return reject(new Error("Failed to probe video metadata"));
+            }
+
+            if (!metadata || !metadata.streams || metadata.streams.length === 0) {
+                logger.error("No valid streams found in metadata:", metadata);
+                return reject(new Error("No valid video streams found"));
+            }
+
+            // Find the first video stream with valid dimensions
+            const videoStream = metadata.streams.find(stream => stream.width && stream.height);
+
+            if (!videoStream) {
+                logger.error("No video stream with valid width/height found");
+                return reject(new Error("No valid video stream with resolution data"));
             }
 
             const size = {
-                width: metadata?.streams[0]?.width || null,
-                height: metadata?.streams[0]?.height || null
+                width: videoStream.width,
+                height: videoStream.height
             };
 
             resolve({ size });
@@ -417,85 +440,99 @@ async function ProbeVideo(path) {
     });
 }
 
-async function CreateVideoThumbnails ({
-    filePath, directoryPath, size
-}) {
 
-    logger.info("Generating thumbnail for image")
-    try {
+async function CreateVideoThumbnails({ filePath, directoryPath, size }) {
+    return new Promise((resolve, reject) => {
+        logger.info("Generating thumbnail for video");
 
-        const thumbnailPath = path.join(directoryPath, "thumb")
-        if (!existsSync(thumbnailPath)) {
-            mkdirSync(thumbnailPath, { recursive: true })
-        }
+        try {
+            const thumbnailPath = path.join(directoryPath, "thumb");
+            if (!existsSync(thumbnailPath)) {
+                mkdirSync(thumbnailPath, { recursive: true });
+            }
 
-        const ffmpeg_path = process.env.FFMPEG_PATH
-        const command = new Ffmpeg()
+            const ffmpeg_path = process.env.FFMPEG_PATH;
+            const command = new Ffmpeg();
 
-        command.setFfmpegPath(ffmpeg_path)
-        command.input(filePath)
-        .on('end', () => {
-            logger.info('Thumbnails generated successfully!');
-        })
-        .on('error', (err, stdout, stderr) => {
-            logger.error('Error generating thumbnails:', err);
-            logger.error('FFmpeg stdout:', stdout);
-            logger.error('FFmpeg stderr:', stderr);
-            logger.error("FFmpeg Error: " + JSON.stringify(err, null, 2));
-            logger.error("FFmpeg stderr: " + stderr);
-        })
-        .screenshots({
-            count: 1, // Number of thumbnails
-                folder: thumbnailPath,
-                size: `${size.width}x${size.height}`, // Thumbnail size
-                filename: 'thumbnail-%i.png' // %i will be replaced with index
-            });
+            command.setFfmpegPath(ffmpeg_path);
+            command.input(filePath)
+                .on('end', () => {
+                    logger.info('Thumbnails generated successfully!');
+                    resolve(thumbnailPath); // Resolve the promise with the thumbnail path
+                })
+                .on('error', (err, stdout, stderr) => {
+                    logger.error('Error generating thumbnails:', err);
+                    logger.error('FFmpeg stdout:', stdout);
+                    logger.error('FFmpeg stderr:', stderr);
+                    reject(err); // Reject the promise with the error
+                })
+                .screenshots({
+                    count: 1, // Number of thumbnails
+                    folder: thumbnailPath,
+                    size: `${size.width}x${size.height}`, // Thumbnail size
+                    filename: 'thumbnail-%i.png' // %i will be replaced with index
+                });
 
         } catch (err) {
-            logger.error(err)
-        }
-    }
-
-    async function CreateVideoPlaylistFile ({
-        filePath, streamPath, playlistPath, identifier,
-        fileName,
-    }) {
-        const ffmpeg_path = process.env.FFMPEG_PATH
-        const command = new Ffmpeg()
-
-        command.setFfmpegPath(ffmpeg_path)
-        .input(filePath)
-        .outputOptions([
-            '-preset veryfast',
-            '-g 48',
-            '-sc_threshold 0',
-            '-hls_time 10', // 10 sek segmenter
-            '-hls_list_size 0',
-            '-hls_segment_filename', `${path.posix.join(streamPath, "segment_%03d.ts")}`,
-            "-hls_base_url", `/api/v1/files/video?v=${identifier}&s=`
-        ])
-        .output(playlistPath)
-        .on('end', async () => {
-            await unlink(filePath);
-            logger.info({
-                message: "Finished video compression"
-            })
-            // res.json({ url: `/videos/${req.file.filename}/playlist.m3u8` });
-        })
-        .on('progress', (progress) => {
-            logger.info({
-                message: "FFmpeg Progress",
-                percent: progress.percent,
-                frame: progress.frames,
-                fps: progress.currentFps,
-                time: progress.timemark
-            });
-        })
-        .on('error', (err) => {
             logger.error(err);
-        })
-        .run();
+            reject(err);
+        }
+    });
 }
+
+
+async function CreateVideoPlaylistFile({
+    filePath, streamPath, playlistPath, identifier, fileName
+}) {
+    return new Promise((resolve, reject) => {
+        logger.info("Generating video playlist");
+
+        try {
+            const ffmpeg_path = process.env.FFMPEG_PATH;
+            const command = new Ffmpeg();
+
+            if (!ffmpeg_path) {
+                logger.error("FFmpeg path is not set in environment variables.");
+                return reject(new Error("FFmpeg path is not configured"));
+            }
+
+            command.setFfmpegPath(ffmpeg_path)
+                .input(filePath)
+                .outputOptions([
+                    '-preset veryfast',
+                    '-g 48',
+                    '-sc_threshold 0',
+                    '-hls_time 10', // 10-second segments
+                    '-hls_list_size 0',
+                    '-hls_segment_filename', `${path.posix.join(streamPath, "segment_%03d.ts")}`,
+                    "-hls_base_url", `/api/v1/files/video?v=${identifier}&s=`
+                ])
+                .output(playlistPath)
+                .on('end', () => {
+                    logger.info("Finished video compression");
+                    resolve({ message: "Playlist created successfully", playlistPath });
+                })
+                .on('progress', (progress) => {
+                    logger.info({
+                        message: "FFmpeg Progress",
+                        percent: progress.percent,
+                        frame: progress.frames,
+                        fps: progress.currentFps,
+                        time: progress.timemark
+                    });
+                })
+                .on('error', (err) => {
+                    logger.error("FFmpeg Error:", JSON.stringify(err, null, 4));
+                    reject(new Error(`FFmpeg failed: ${err.message}`));
+                })
+                .run();
+        } catch (err) {
+            logger.error("Unexpected error:", err);
+            reject(err);
+        }
+    });
+}
+
 
 // export const POST = auth(function POST(req) {
 //     if (req.auth) return NextResponse.json(req.auth)
