@@ -18,10 +18,20 @@
     background-color: var(--secondary-75);
     padding: .5rem 1rem;
 }
-.nav .logo img {
-    animation: logoRotate 50s linear infinite;
+.nav .logo .image {
+    height: 2.5rem;
+    width: 2.5rem;
+    position: relative;
+}
+.nav .logo .image img {
     height: 2.5rem;
     width: auto;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+.nav .logo img:first-child {
+    animation: logoRotate 50s linear infinite;
 }
 .nav h3 {
     font-size: 1.5rem;

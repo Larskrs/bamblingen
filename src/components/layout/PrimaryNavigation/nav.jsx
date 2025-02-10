@@ -23,7 +23,10 @@ export default function Navigation () {
     return (
         <nav className={styles.nav}>
                 <Link href={"/"} className={styles.logo}>
-                    <Image src={"/logo/bamblingen/logo-yellow-symbol.png"} alt="bambl2ngen logo" quality={50} width={64} height={64} />
+                    <div className={styles.image}>
+                        <Image src={"/logo/logo_phoneless.svg"} alt="bambl2ngen logo" quality={50} width={64} height={64} />
+                        <Image src={"/logo/logo_megaphone_border.svg"} alt="bambl2ngen logo" quality={50} width={64} height={64} />
+                    </div>
                     <h3>Bamblingen</h3>
                 </Link>
                 <div className={styles.links}>

@@ -124,7 +124,7 @@ export default function AI({
       </div>
       <nav className={styles.nav}>
         <Link href={"/"}>
-          <Image alt="logo-link" src={"/logo/white_logo.png"} width={64} height={64} />
+          <Image alt="logo-link" src={"/logo/logo_white.svg"} width={64} height={64} />
         </Link>
       </nav>
     </main>

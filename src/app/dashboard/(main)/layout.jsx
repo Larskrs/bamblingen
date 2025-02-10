@@ -18,7 +18,7 @@ export default async function Layout({ children }) {
     {
       href: "/dashboard/",
       name: "Kontrollpanel",
-      icon: "/logo/bamblingen/logo-yellow-symbol.png",
+      icon: "/logo/logo.svg",
     },
     {
       href: "/dashboard/article",
