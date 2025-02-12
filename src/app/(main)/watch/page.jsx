@@ -4,6 +4,60 @@ import logger from "logger.mjs";
 import { GetUniqueFile } from "@/lib/fileLib"
 import { notFound } from "next/navigation";
 
+import { Metadata } from "next";
+
+export async function NoVideoFoundMetadata () {
+    return {
+        title: "(Invalid URL) Unknown Video",
+        description: `This url is not valid`
+    }
+}
+
+export async function generateMetadata({params, searchParams}) {
+    
+    const { v } = await searchParams
+    if (!v) {
+        return await NoVideoFoundMetadata()
+    }
+
+    let video
+    try {
+        video = await GetUniqueFile(v)
+        video.data = JSON.parse(video.data)
+    } catch (err) {
+        logger.error({message: err})
+        return notFound()
+    }
+
+    const videoTitle = `Watch Video ${video.name}`;
+    const videoThumbnail = `https://bamblingen.no/api/v1/files/video/thumbnail?v=${v}`;
+
+    return {
+        title: videoTitle,
+        description: `Enjoy watching video ${v}`,
+        openGraph: {
+                title: videoTitle,
+                description: `Check out this video: ${video.name}`,
+                url: `https://bamblingen.no/watch?v=${v}`,
+                images: [
+                    {
+                        url: videoThumbnail,
+                        width: video?.data?.size?.width || 720,
+                        height: video?.data?.size?.height || 405,
+                        alt: `Thumbnail for video ${video.name}`,
+                    },
+                ],
+                type: "video.other",
+            },
+            twitter: {
+                card: "summary_large_image",
+                title: videoTitle,
+                description: `Watch video ${v}`,
+                images: [videoThumbnail],
+            },
+    };
+}
+
 export default async function WatchPage ({params, searchParams}) {
 
     const { v } = await searchParams
