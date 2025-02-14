@@ -9,9 +9,7 @@ export default function RadioPage ({}) {
         <div className={styles.c}>
             <div className={styles.background}>
                 <Image alt="background" src={`/images/audio.JPG`} width={1296} height={864} quality={75} />
-                
             </div>
-            <VideoPlayer src={"/api/v1/files/video?v=20250205-2cabbe2cd51b93d8"} />
         </div>
     );
 }

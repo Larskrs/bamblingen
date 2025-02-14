@@ -1,5 +1,5 @@
 "use client"
-import Image from "next/image";
+import Image from "@/components/common/LocalImage";
 import styles from "./page.module.css";
 import FullPageVerticalSnap from "@/components/wrappers/FullPageVerticalSnap"
 import TextHighlight from "@/components/common/TextHighlight/page";

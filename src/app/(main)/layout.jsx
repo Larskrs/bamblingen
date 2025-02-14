@@ -10,8 +10,8 @@ export default async function MainLayout ({children}) {
 
     return (
         <>
-            {session && <div style={{background: "var(--secondary-200)", color: "white", padding: "0.25rem"}}>
-            Du er logget inn som {session.user.name}, <Link style={{color: "var(--primary-500)"}} href={"/dashboard"}>åpne skrivesenteret</Link>
+            {session && <div style={{background: "var(--secondary-25)", color: "white", padding: "0.25rem 1rem"}}>
+            Hei {session.user.name}, <Link style={{color: "var(--primary-500)"}} href={"/dashboard"}>åpne skrivesenteret</Link>
             </div>}
 
             <ClientLayout>

@@ -1,0 +1,143 @@
+.c {
+    position: absolute;
+    left: 0px;
+    top: 100%;
+    right: 0px;
+    height: 0px;
+    background: var(--secondary-50);
+    z-index: 100;
+    transition: 500ms var(--curve-1);
+    overflow: hidden;
+    color: white;
+    max-height: 0px;
+    height: 100vh;
+}
+.expanded {
+    max-height: fit-content;
+}
+
+/* Content */
+
+.content {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    padding-top: 0px;
+    height: 100%;
+    justify-content: flex-end;
+    background: var(--secondary-50);
+    height: fit-content;
+}
+.content p {
+    color: var(--white-700);
+    margin-bottom: 0.25rem;
+}
+
+/* Content Row */
+
+.row {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+/* Links */
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-left: 2px solid var(--white-400);
+    padding-left: 0.5rem;
+}
+
+.links a {
+    color: var(--white-700);
+    width: 100%;
+    padding: 0.25rem 0.5rem;
+}
+.links a:hover {
+    color: var(--primary-600);
+}
+.links .space {
+    margin-top: auto;
+}
+
+
+/* CARD */
+
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    width: 16rem; /* Ensuring the container matches the image width */
+    cursor: pointer;
+    max-width: 30%;
+}
+.card:hover img {
+    border: 2px solid white;
+}
+.card:hover p {
+    color: var(--white-800);
+}
+.card img {
+    width: 100%;
+    height: 10rem;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background-color: var(--secondary-75);
+    border: 2px solid var(--secondary-200);
+    transition: 125ms var(--curve-1);
+}
+.card p {
+    color: var(--white-500);
+    font-size: 0.8em;
+    width: 100%;
+    margin-top: 0.5rem;
+    transition: 125ms var(--curve-1);
+}
+
+
+@media only screen and (max-width: 700px) {
+    .card:nth-child(1) {
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 1;
+        grid-column-end: 2;
+        width: 100%;
+        max-width: 100%;
+    }
+    .card:nth-child(2) {
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        width: 100%;
+        max-width: 100%;
+    }
+    .card img {
+        width: 100%;
+        max-width: 100%;
+    }
+    .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+    .links {
+        grid-row-start: 2;
+        grid-row-end: 3;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        flex-direction: column;
+        font-size: 1.2rem;
+    }
+    .links a {
+        line-break: strict;
+        width: fit-content;
+    }
+    .links .space {
+        margin: 0px;
+    }
+}

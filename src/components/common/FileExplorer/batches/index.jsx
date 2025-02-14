@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import CreateBatch from "@/components/files/CreateBatch";
 import BatchImage from "@/components/files/BatchImage";
+import Spinner from "@/components/details/spinner";
 
 export default function Batches ({onOpenBatch=()=>{}}) {
 
@@ -30,18 +31,24 @@ export default function Batches ({onOpenBatch=()=>{}}) {
 
     if (!data) { return <p>No Data</p>}
 
-    return (
-        <div className={styles.c}>
-            {data.map((b, i) => {
-                return (
-                    <div key={b.id} className={styles.item} onClick={() => onOpenBatch(b.id)}>
-                        <div style={{animationDelay: `${i*50}ms`}} className={styles.image}>
-                            <BatchImage size={256} id={b.id} name={b.name} files={b._count.files}/>
-                        </div>
-                    </div>
-                )
-            })}
+    if (data?.length <= 0) {
+        return  <div className={styles.c} style={{fontSize: "2.5rem"}}>
+                <Spinner />
         </div>
+    }
+
+    return (
+            <div className={styles.grid}>
+                {data.map((b, i) => {
+                    return (
+                        <div key={b.id} className={styles.item} onClick={() => onOpenBatch(b.id)}>
+                            <div style={{animationDelay: `${i*50}ms`}} className={styles.image}>
+                                <BatchImage className={styles.source} size={256} id={b.id} name={b.name} files={b._count.files}/>
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
     );
 
 }
