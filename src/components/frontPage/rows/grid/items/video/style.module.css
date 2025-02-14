@@ -35,19 +35,20 @@
 }
 .videoSection .details h2 {
     letter-spacing: 1px;
-    font-family: var(--font-domine);
-    font-weight: 900;
-    background-color: var(--white-900);
+    font-family: var(--font-inter);
+    font-weight: 700;
+    color: var(--white-900);
+    background-color: var(--secondary-50);
     padding: .25rem;
     z-index: 8;
     width: fit-content;
 }
 .videoSection .details p {
     letter-spacing: 1px;
-    font-family: var(--font-domine);
-    font-weight: 600;
-    background-color: var(--primary-900);
-    color: var(--secondary-25);
+    font-family: var(--font-inter);
+    font-weight: 700;
+    color: var(--white-25);
+    background-color: var(--primary-700);
     padding: .25rem;
     z-index: 8;
     width: fit-content;

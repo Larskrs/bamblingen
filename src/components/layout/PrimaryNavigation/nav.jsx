@@ -20,7 +20,7 @@ export default function Navigation () {
         // { href: "/calendar", display: "Kalender"},
     ]
 
-    const [expanded, setExpanded] = useState(true)
+    const [expanded, setExpanded] = useState(false)
     const pathname = usePathname()
 
     return (

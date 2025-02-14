@@ -114,7 +114,7 @@ export default function TestArticle () {
                     priorityPrefix: false,
                     context: "Artikler er ikke redaksjonelle",
                     title: `Denne nettavisen er ikke i drift!`,
-                    image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc"
+                    image: "https://bamblingen.no/api/v1/files?fileId=20250110-c8e464892340fcf52ead4c0eb810f8a5fad39c38abe58d06"
                 },
                 {
                         type: "grid",
@@ -129,14 +129,15 @@ export default function TestArticle () {
                                 fullImage: true,
                                 context: "Bøytralist-partiet blir satt inn i med 100% av setene i stortinget",
                                 title: "«Nå er det bare bøytralister her»",
-                                image: "http://aktuelt.tv/api/files?fileId=6781124bd222fb15c503bc7a",
+                                image: "https://bamblingen.no/api/v1/files?fileId=20250110-c8e464892340fcf52ead4c0eb810f8a5fad39c38abe58d06",
                                 fontSize: 4,
                             },
                         ],
                     },
+                    
                     {
                         type: "grid",
-                        layout: "G_2_1",
+                        layout: "G_1_2",
                         priority: "none",
                         items: [
                             {
@@ -148,18 +149,36 @@ export default function TestArticle () {
                                 context: "Langesund",
                                 title: "Mangler artikkel",
                                 image: "/images/langesund.jpeg",
-                                fontSize: 3,
+                                fontSize: 2,
                             },
-                            // {
-                                //     id: "V1StGXR8_Z5jdHi6Aaw",
-                            //     type: "article",
-                            //     priority: "priority",
-                            //     priorityPrefix: true,
-                            //     fullImage: false,
-                            //     context: "Bøytralist-partiet blir satt inn i med 100% av setene i stortinget",
-                            //     title: "«Nå er det bare bøytralister her»",
-                            //     image: "http://aktuelt.tv/api/files?fileId=6781124bd222fb15c503bc7a"
-                            // },
+                            {
+                                id: "V1StGXR8_Z5jdHi6Aaw",
+                                type: "article",
+                                priority: "normal",
+                                priorityPrefix: false,
+                                fullImage: false,
+                                context: "Oppmøtet på langesund på 17.mai i 2023",
+                                title: "«Mindre enn forventet»",
+                                image: "https://bamblingen.no/api/v1/files?fileId=20250105-b217d32b83c1660f3835d7b399c2794fe93e6e34c22599d6"
+                            },
+                        ],
+                    },
+                    {
+                        type: "grid",
+                        layout: "G_2_1",
+                        priority: "none",
+                        items: [
+                            {
+                                id: "V1StGXR8_Z5jdHi6A",
+                                type: "video",
+                                priority: "priority",
+                                priorityPrefix: false,
+                                fullImage: false,
+                                context: "Skjærkøyveien, Ragn-Sells",
+                                title: "Mangler Artikkel",
+                                poster: "https://bamblingen.no/api/v1/files/video/thumbnail?v=20250214-27b37df91a4e4627",
+                                video: "https://bamblingen.no/api/v1/files/video?v=20250214-27b37df91a4e4627"
+                            },
                             {
                                 id: "V1StGXR8_Z5jdHi6Aaw",
                                 type: "article",
@@ -168,62 +187,8 @@ export default function TestArticle () {
                                 fullImage: true,
                                 context: "Oslo",
                                 title: "Vil Carl finne kjærligheten i Oslo?",
-                                image: "http://aktuelt.tv/api/files?fileId=675c531fd222fb15c503bc6b"
+                                image: "https://bamblingen.no/api/v1/files?fileId=20250103-d27c272bf4a1f1c3bcc96177ecf0cff6f9e71eb6c320ac79"
                             },
-                        ],
-                    },
-                    {
-                        type: "grid",
-                        layout: "G_1",
-                        items: [
-                            {
-                                id: "V1StGXR8_Z5jdHi6A",
-                                type: "article",
-                                priority: "priority",
-                                priorityPrefix: false,
-                                fullImage: false,
-                                context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Mangler Artikkel",
-                                image: "/api/image/join?bg=black&images=http%3A%2F%2Faktuelt.tv%2Fapi%2Ffiles%3FfileId%3D67576d48d222fb15c503bc60,http://aktuelt.tv/api/files?fileId=675766acd222fb15c503bc57"
-                            },
-                        ],
-                    },
-                    {
-                        type: "grid",
-                        layout: "G_1_1",
-                        priority: "normal",
-                        items: [
-                            {
-                                id: "V1StGXR8_Z5jdHi6Dzxv",
-                                type: "article",
-                                priority: "normal",
-                                title: "Er vi for opptatt av å filme det vi gjør?",
-                                image: "http://aktuelt.tv/api/files?fileId=67576551d222fb15c503bc51"
-                            },
-                            {
-                                id: "V1StGXR8_Z5jdHi6D",
-                                type: "article",
-                                fullImage: true,
-                                priority: "normal",
-                                context: "Skjærkøyveien, Ragn-Sells",
-                                title: "Enda en fakkel lyser opp himmelen",
-                                image: "http://aktuelt.tv/api/files?fileId=66b2aa2e2f345ee36279cd88"
-                            },
-                        ],
-                    },
-                    {
-                        type: "banner",
-                        priority: "normal",
-                        items: [
-                            {
-                                id: "V1StGXR8_Z5jdHi6Baef",
-                                type: "article",
-                                priority: "normal",
-                                priorityPrefix: false,
-                                context: "Artikler er ikke redaksjonelle",
-                                title: `Denne nettavisen er ikke i drift!`,
-                                image: "/api/image/join?bg=black&images=http%3A%2F%2Faktuelt.tv%2Fapi%2Ffiles%3FfileId%3D67576d48d222fb15c503bc60,http://aktuelt.tv/api/files?fileId=675766acd222fb15c503bc56"
-                            }
                         ],
                     },
                 ]}/>
