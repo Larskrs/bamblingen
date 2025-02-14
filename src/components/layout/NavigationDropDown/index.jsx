@@ -58,7 +58,7 @@ export default function NavigationDropDown ({
     }) {
         return (
             <Link href={link} className={styles.card}>
-                <LocalImage alt={""} src={image} width={720} height={512} />
+                <LocalImage alt={"card image"} src={image} width={720} height={512} />
                 {title && <p>{title}</p>}
             </Link>
         )
