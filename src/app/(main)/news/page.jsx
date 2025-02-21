@@ -12,6 +12,7 @@ import CountdownTimer from "@/components/common/CountdownTimer";
 import MaxWidthWrapper from "@/components/wrappers/MaxWidthWrapper";
 import Banner from "@/components/common/Banner";
 import NewsBanner from "@/components/frontPage/rows/banner";
+import Navigation from "@/components/layout/PrimaryNavigation/nav";
 
     const per_page = 10
 
@@ -23,12 +24,14 @@ export default function News () {
     const { data, error, loading, loadMore } = useInfiniteFetch(url)
 
     return (
+        <>
+            <Navigation />
         <div className={styles.c}>
-
             <MaxWidthWrapper>
                 <div className={styles.column}>
 
-                    <NewsBanner
+                    <NewsBanner.Page
+                        
                         priority={true}
                         background={"var(--secondary-25)"}
                         color="white"
@@ -36,21 +39,21 @@ export default function News () {
                         pulse={true}
                         title="Artikler her er ikke redaksjonelle"
                         containerStyle={{background: "var(--secondary-25)", color: "white"}}
-                    />
+                        />
 
                     { loading && <h1>Loading...</h1> }
                     { error && <h1>{error}</h1> }
                 
                     {data && data.map((article) => {
-
+                        
                         const v = article?.versions?.[0]
-
+                        
                         if (!v) {
                             return <></>
                         }
-
+                        
                         const type = GetType(article.type)
-
+                        
                         const shortenText = (text, limit) => {
                             if (text.length <= limit) {
                                 return text
@@ -92,5 +95,6 @@ export default function News () {
                     </div>
             </MaxWidthWrapper>
         </div>
+        </>
     )
 }

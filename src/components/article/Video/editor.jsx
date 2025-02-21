@@ -46,7 +46,6 @@ export default function ImageComponent ({
                         onChange={(value) => { setCredit(value) }}
                         defaultValue={credit}
                         />
-                        <p>{}]</p>
         </>
     );
 }

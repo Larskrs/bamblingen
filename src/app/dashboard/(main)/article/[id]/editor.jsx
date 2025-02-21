@@ -217,7 +217,6 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
                         return (<div style={isDragged ? {background: "var(--secondary-100)"} : {background: "var(--secondary-200)"}} className={styles.component}>
                             <Expandable draggable icon={GetArticleComponent(item.type).icon} key={index} title={GetComponentPreviewText(components[index])}>
                                 <ArticleRenderer editor components={[components[index]]} onUpdateComponent={(line, newValue) => UpdateComponents(index, newValue)} />
-                                <button className={styles.delete} onClick={() => RemoveComponent(index)}>Fjern objekt</button>
                             </Expandable>
                         </div>)
                     }} />

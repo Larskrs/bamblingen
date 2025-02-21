@@ -4,6 +4,7 @@ import Pulse from "@/components/details/pulse";
 
 export default function Banner ({
     image,
+    imageLayout="contain",
     context, 
     containerStyle={background: "var(--white-900)"},
     priorityPrefix=false,
@@ -12,10 +13,14 @@ export default function Banner ({
 }) {
     return (
         <div style={containerStyle} className={`${styles.header}`}>
-            {image && <Image alt="Header Image" src={image} className={styles.img} width={2000} height={1000} />}
-                <div className={styles.details}>
-                    {children}
-                </div>
+            <div className={styles.content}>
+                {image && <div className={styles.img}>
+                    <img style={{objectFit: imageLayout}} alt="Header Image" src={image} />
+                </div>}
+                <div className={styles.details} style={{gridColumnEnd: 3, gridColumnStart: 
+                    image ? 2 : 1
+                }}>{children}</div>
             </div>
+        </div>
     )
 }

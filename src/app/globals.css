@@ -7,6 +7,7 @@
   --secondary-500: rgb(0, 136, 204);
   --secondary-400: rgb(0, 122, 183); /* Slightly darker */
   --secondary-300: rgb(0, 108, 163); /* Darker */
+  --secondary-250: rgb(0, 65, 98);  /* Deep dark */
   --secondary-200: rgb(0, 44, 66);  /* Deep dark */
   --secondary-100: rgb(0, 36, 56);  /* Very deep dark */
   --secondary-75: rgb(0, 28, 43);  /* Very deep dark */
@@ -23,7 +24,7 @@
   --primary-400: rgb(228, 202, 0);   /* Slightly darker */
   --primary-300: rgb(203, 180, 0);   /* Darker */
   --primary-200: rgb(153, 135, 0);   /* Deeper dark */
-  --primary-100: rgb(115, 101, 0);   /* Very deep dark */
+  --primary-100: rgb(148, 137, 52);   /* Very deep dark */
   --primary-50: rgb(76, 67, 0);      /* Very deep dark */
   --primary-25: rgb(51, 44, 0);      /* Very deep dark */
 

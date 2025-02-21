@@ -1,0 +1,54 @@
+.c {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 1rem;
+    width: 100%;
+    background-color: var(--secondary-75);
+    cursor: pointer;
+    color: var(--white-400);
+    border-radius: 0.5em;
+    align-items: center;
+    height: 2.5em;
+}
+.c:hover {
+    background-color: var(--secondary-100);
+}
+.c p {
+    margin-left: 1rem;
+}
+.s {
+    width: 2.75em;
+    height: 1.5em;
+    margin-right: 0.5em;
+    border-radius: 1em;
+    background-color: var(--secondary-200);
+    position: relative;
+    transition: all 125ms var(--curve-1);
+}
+.dot {
+    position: absolute;
+    height: 1.25em;
+    width: 1.25em;
+    border-radius: 1.25em;
+    background-color: var(--secondary-300);
+    display: block;
+    left: 0px;
+    top: 50%;
+    translate: 0px -50%;
+    transition: all 125ms var(--curve-1);
+}
+.dot.active {
+    translate: 1.375em -50%;
+    background-color: var(--white-800);
+}
+.s.active {
+    background-color: var(--secondary-400);
+}
+.dot.inactive {
+    background-color: var(--white-400);
+    translate: 0.125em -50%;
+}
+.s.inactive {
+    background-color: var(--secondary-200);
+}

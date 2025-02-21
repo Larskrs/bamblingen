@@ -3,30 +3,41 @@ import styles from "./style.module.css"
 
 import Grid from "./grid";
 import Header from "./header";
-import Countdown from "./countdown"
 import NewsBanner from "./banner";
 
-export default function FrontPageRow ({rows}) {
+export const rowMap = {
+    "grid": Grid,
+    "header": Header,
+    "banner": NewsBanner,
+};
 
-    const rowMap = {
-        "grid": Grid,
-        "header": Header,
-        "banner": NewsBanner,
-        "countdown": Countdown
-    };
+export default function FrontPageRow ({rows, isEditor, onRowUpdate}) {
 
         return (
             <div className={styles.c}>
                 {rows.map((row, i) => {
                     // Select the appropriate component based on the type
                     const Row = rowMap[row.type];
-                    console.log(row.type)
+                    
                     if (!Row) return null; // If type is unsupported, skip
-
+                    
+                    if (isEditor) {
+                        const Editor = Row.Editor
+                        return (
+                            <Editor key={i} {...row} onChange={(value) => onRowUpdate(i, value)} />
+                        )
+                    }
+                    
+                    const Page = Row.Page
                     return (
-                            <Row key={i} {...row} />
+                        <Page key={i} {...row} />
                     )
                 })}
             </div>
         )
-    }
+}
+
+export function GetRow (row) {
+    const Row = rowMap[row.type];
+    return { config: Row.config }
+}

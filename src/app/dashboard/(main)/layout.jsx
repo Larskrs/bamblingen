@@ -14,7 +14,7 @@ export default async function Layout({ children }) {
     return notFound();
   }
 
-  const links = [
+  let links = [
     {
       href: "/dashboard/",
       name: "Kontrollpanel",
@@ -30,13 +30,24 @@ export default async function Layout({ children }) {
       name: "Filmaterialer",
       icon: "/icons/icon_folder.svg",
     },
-    {
-      href: "/dashboard/verifications",
-      name: "Søknadder",
-      icon: "/icons/icon_verifications.svg",
-      countAPI: "/api/v1/articles/verifications/count?status=PENDING"
-    },
   ];
+
+  if (["ADMIN", "DIRECTOR"].includes(session.user.role)) {
+    links = [...links, ...[
+        {
+            href: "/dashboard/verifications",
+            name: "Søknadder",
+            icon: "/icons/icon_verifications.svg",
+            countAPI: "/api/v1/articles/verifications/count?status=PENDING"
+        },
+        {
+            href: "/dashboard/frontpage",
+            name: "Rediger Forsiden",
+            icon: "/icons/icon_article.svg",
+        }
+      ]
+    ]
+  }
 
   return (
     <Client links={links} session={session}>{children}</Client>

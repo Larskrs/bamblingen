@@ -26,10 +26,6 @@
 .normal {
     background-color: var(--white-900);
 }
-.row h1 {
-    margin-bottom: 1rem;
-    font-size: 2rem;
-}
 .row {
     display: flex;
     flex-direction: row;
@@ -61,11 +57,19 @@
     display: flex;  
     width: 100%;
     max-width: 1300px;
+    min-height: 45rem;
+}
+.G_FULL img {
+    max-height: 100% !important;
+}
+.g {
+    contain: inline-size;
+}
+.g img {
+    max-height: 25rem;
 }
 .G_FULL img {
     height: 200px;
-    max-height: 500px;
-    min-height: 100px;
 }
 .G_1 section {
     height: 100%;
@@ -75,6 +79,7 @@
 .G_1_1 {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    max-height: 40rem;
 }
 .G_1_1_1 {
     display: grid;
@@ -125,15 +130,68 @@
         overflow: hidden; 
     }
 }
-@media only screen and (max-width: 500px) {
-    .G_FULL
-    .G_1,
-    .G_1_1,
-    .G_1_1_1,
-    .G_1_2,
-    .G_2_1
-    {
+@media (max-width: 600px) {
+    .g {
         display: flex;
         flex-direction: column;
     }
+    
+}
+
+
+
+/* EDITOR */
+
+.editor {
+    width: 100%;
+}
+.seperator {
+    padding-bottom: 0.25em;
+    border-bottom: 1px solid var(--secondary-300);
+    margin-bottom: 0.5em;
+}
+.preview {
+    width: 100%;
+    min-width: 100%;
+    min-height: 4rem;
+    border-radius: 0.5rem;
+    max-height: 12rem;
+    object-fit: cover;
+    background-color: var(--secondary-200);
+    color: white;
+}
+.expandable {
+    border: 2px solid var(--secondary-200);
+    background-color: var(--secondary-100);
+}
+.editor .item {
+    position: relative;
+}
+.editor .remove {
+    position: absolute;
+    top: 0px;
+    right: 0.5em;
+    width: 3em;
+    height: 3em;
+    padding: 0.25em;
+    z-index: 1;
+    border-radius: 1em;
+    translate: 50% -50%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.editor .remove:hover img {
+    background-color: red;
+    scale: 1.1;
+}
+.editor .remove img {
+    width: 1.5em;
+    height: 1.5em;
+    rotate: 45deg;
+    background-color: var(--red-500);
+    padding: 0.25em;
+    border-radius: 50%;
+    transition: 125ms var(--curve-1);
 }

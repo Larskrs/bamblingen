@@ -5,17 +5,20 @@
     font-family: var(--font-inter);
     overflow: hidden;
     width: 100%;
-    background: var(--secondary-100);
+    background: var(--secondary-50);
     min-height: 2em;
     padding: 0.5em;
     color: var(--white-900);
     border-radius: 0.5rem;
     border: none;
-    outline: 2px solid transparent;
+    outline: 1px solid var(--secondary-200);
     transition: 125ms all var(--curve-1);
+    color: var(--white-600);
 }
 .field:focus {
-    outline: 2px solid var(--secondary-400);
+    color: var(--white-900);
+    outline: 2px solid var(--secondary-600);
+    background: var(--secondary-25);
 }
 .description {
     margin-bottom: 0.5rem !important;

@@ -4,6 +4,9 @@
     display: flex;
     flex-direction: column;
     background-color: inherit;
+    border: 2px solid var(--secondary-100);
+    border-radius: 0.5em;
+    overflow: hidden;
 }
 .header {
     background-color: inherit;
@@ -17,6 +20,35 @@
     align-items: center;
     cursor: pointer;
     user-select: none;
+    position: relative;
+    overflow: hidden;
+    background: var(--secondary-100);
+}
+.header:hover {
+    background-color: var(--secondary-200);
+}
+.background {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    object-fit: cover;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 0 !important;
+    opacity: 0.25;
+    scale: 1.25;
+    filter: blur(2px);
+}
+.c:hover .background {
+    opacity: .5;
+}
+.c:hover {
+    background: var(--secondary-100);
+}
+.row {
+    z-index: 1;
 }
 .row > span {
     font-size: 0.8rem;
@@ -25,11 +57,9 @@
 .header img {
     height: 2em;
     width: 2em;
+    z-index: 1;
 }
 .content {
     padding: 0.5rem;
     background-color: var(--secondary-50);
-}
-.c:hover {
-    background: var(--secondary-75);
 }

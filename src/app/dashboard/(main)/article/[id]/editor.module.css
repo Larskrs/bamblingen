@@ -91,7 +91,7 @@
 }
 .component {
     overflow: hidden;
-    border: 0.15rem solid var(--secondary-200);
+    border-radius: 0.5rem;
 }
 .component:hover {
     background-color: red;

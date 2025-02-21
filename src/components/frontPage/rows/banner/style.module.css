@@ -3,7 +3,11 @@
 }
 .priority {
     color: var(--primary-500);
-    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.priority span:last-child {
+    margin-right: 1rem;
 }
 .priority {
     display: inline-block;
@@ -12,4 +16,32 @@
     display: inline-block;
     vertical-align: top;
     margin-right: 0.3rem; /* Optional spacing between elements */
+}
+.c h1 {
+    font-size: 1em;
+    font-family: var(--font-inter);
+}
+.c p {
+    font-size: 0.5em;
+}
+
+/* EDITOR */
+
+.editor {
+    width: 100%;
+}
+.seperator {
+    padding-bottom: 0.25em;
+    border-bottom: 1px solid var(--secondary-300);
+    margin-bottom: 0.5em;
+}
+.preview {
+    width: 100%;
+    min-width: 100%;
+    min-height: 4rem;
+    border-radius: 0.5rem;
+    max-height: 12rem;
+    object-fit: cover;
+    background-color: var(--secondary-200);
+    color: white;
 }

@@ -3,3 +3,41 @@
     flex-direction: column;
     gap: 0.5rem;
 }
+.delete {
+    height: 0px;
+    border: 2px dashed var(--red-300);
+    border-radius: 0.5rem;
+    background: repeating-linear-gradient(45deg, 
+        #99000025, #99000025 20px, 
+        #ff2c2c27 21px, #ff2c2c27 40px);
+    box-shadow: inset 0px 0px 1rem #99000025;
+    cursor: move;
+    transition: 250ms var(--curve-1) all;
+}
+.dragPreview {
+    animation: 250ms var(--curve-1) preview infinite;
+    z-index: 999;
+}
+.item {
+    transition: 125ms var(--curve-1) all;
+}
+.dragging {
+    scale: 0.9;
+    opacity: 0.25 !important;
+}
+.draggingOver {
+    scale: 1.025;
+    opacity: 0.75;
+}
+
+@keyframes preview {
+    0% {
+        rotate: 6deg;
+    }
+    50% {
+        rotate: -6deg;
+    }
+    100% {
+        rotate: 6deg;
+    }
+}
