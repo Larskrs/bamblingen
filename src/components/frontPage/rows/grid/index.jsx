@@ -4,7 +4,6 @@ export { Page, Editor }
 
 export default {
     config: (data) => {
-        console.log(data)
         const layout = data.layout.split("G_").pop()
         return {
             icon: `/icons/grid_${layout}.svg`,

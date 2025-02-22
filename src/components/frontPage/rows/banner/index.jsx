@@ -4,7 +4,7 @@ export { Page, Editor }
 
 export default {
     config: (data) => {return{
-        icon: "/icons/article_content.png",
+        icon: data.image,
         title: data.title,
         previewImage: data.image
     }},

@@ -9,6 +9,7 @@ const config = {
     name: "bilde",
     description: "Bilde element, med bildetekst og bildekilde",
     previewText: (data) => {return data.alt || "(bilde uten bildetekst)"},
+    previewBackground: (data) => { return data.src || null },
     editor: Editor,
     default: {
         type: "image",

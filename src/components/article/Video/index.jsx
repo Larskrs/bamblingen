@@ -10,6 +10,7 @@ const config = {
     name: "video",
     description: "Element for å vise en rekke audiovisuelle medier, med bildetekst og bildekilde",
     previewText: (data) => {return data.alt || data.src},
+    previewBackground: (data) => { return null },
     editor: Editor,
     default: {
         type: "video",

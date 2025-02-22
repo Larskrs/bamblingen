@@ -1,11 +1,13 @@
 import classNames from "classnames";
 import styles from "./style.module.css"
 import React, { useEffect, useState } from "react";
+import Margin from "@/components/common/Margin";
 
 const DraggableResort = ({ onChange, disabled,  items, onRender, forceDraggable=false }) => {
   const [draggingIndex, setDraggingIndex] = useState(null);
   const [draggingOverIndex, setDraggingOverIndex] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [draggingTweenIndex, setDraggingTweenIndex] = useState(null)
 
   useEffect(() => {
     const updateMousePos = (e) => {
@@ -33,11 +35,20 @@ const DraggableResort = ({ onChange, disabled,  items, onRender, forceDraggable=
     e.preventDefault();
     if (disabled) {return;}
 
+    setDraggingTweenIndex(null)
     setDraggingOverIndex(index)
   };
 
-  const handleDrop = (index) => {
+  const handleDragOverTween = (e, index) => {
+    e.preventDefault();
     if (disabled) {return;}
+
+    setDraggingTweenIndex(index)
+    setDraggingOverIndex(null)
+  }
+
+  const handleDrop = (index) => {
+    if (disabled) {return;} 
     
     if (draggingIndex !== null && draggingIndex !== index) {
       const newOrder = reorderItems(items, draggingIndex, index);
@@ -61,10 +72,26 @@ const DraggableResort = ({ onChange, disabled,  items, onRender, forceDraggable=
     setDraggingOverIndex(null)
   }
 
+  const handleDropSpace = (e, index) => {
+    if (disabled) { return }
+    
+    console.log(index, draggingIndex)
+    console.log(`Moving from ${draggingIndex} to ${index}`)
+
+    if (index == draggingIndex) { console.log("Its already here"); return; }
+
+    let newOrder = items.filter((_, i) => i !== draggingIndex); // Remove the dragged item
+    newOrder.splice(index, 0, items[draggingIndex]); // Insert at new position
+    
+    onChange(newOrder)
+    console.table(newOrder)
+  }
+
   const handleDragEnd = (e, index) => {
     if (disabled) {return;}
     setDraggingIndex(null);
     setDraggingOverIndex(null)
+    setDraggingTweenIndex(null)
   };
 
   const reorderItems = (items, oldIndex, newIndex) => {
@@ -77,25 +104,42 @@ const DraggableResort = ({ onChange, disabled,  items, onRender, forceDraggable=
 
   return (
     <>
-        <div className={styles.c}>
+        <div className={classNames(styles.c, draggingIndex !== null ? styles.isDragging : null)}>
           {items.map((item, index) => (
-            <div
-            className={classNames(
-              styles.item,
-              !disabled && draggingIndex == index ? styles.dragging : "",
-              !disabled && draggingOverIndex == index ? styles.draggingOver : ""
-            )}
-            key={index}
-            onDragStart={(e) => handleDragStart(e, index)}
-            onDragOver={(e) => handleDragOver(e, index)}
-            onDrop={() => handleDrop(index)}
-            onDragEnd={(e) => handleDragEnd(e, index)}
-            >
-              {onRender(item, index, draggingIndex === index)}
+            <div key={index} className={styles.holder}>
+                {index == 0 && <div
+                    onDrop={(e) => handleDropSpace(e, index)}
+                    onDragOver={(e) => handleDragOverTween(e, 0)}
+                    className={classNames(styles.tween, styles.bottom, 
+                      draggingTweenIndex == index ? styles.visible : styles.hidden,
+                      draggingIndex !== null ? styles.isDragging : styles.notDragging
+                  )}></div>
+                }
+                <div
+                className={classNames(
+                  styles.item,
+                  !disabled && draggingIndex == index ? styles.dragging : "",
+                  !disabled && draggingOverIndex == index ? styles.draggingOver : ""
+                )}
+                onDragStart={(e) => handleDragStart(e, index)}
+                onDragOver={(e) => handleDragOver(e, index)}
+                onDrop={() => handleDrop(index)}
+                onDragEnd={(e) => handleDragEnd(e, index)}
+                >
+                  {onRender(item, index, draggingIndex === index)}
+                </div>
+                <div
+                    onDrop={(e) => handleDropSpace(e, index + 1)}
+                    onDragOver={(e) => handleDragOverTween(e, index + 1)}
+                    className={classNames(styles.tween, styles.bottom, 
+                        draggingTweenIndex == index + 1 ? styles.visible : styles.hidden,
+                        draggingIndex !== null ? styles.isDragging : styles.notDragging
+                    )}></div>
             </div>
           ))}
+
           {/* Delete Item */}
-          
+
           {!disabled && <div
             onDrop={handleDelete}
             onDragOver={(e) => handleDragOver(e, draggingIndex)}

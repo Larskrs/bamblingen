@@ -27,7 +27,6 @@ export default function Editor ({ onChange=()=>{}, ...data}) {
 
 
     const UpdateItems = (index, newValue) => {
-        console.log(newValue)
         const _ = [...items]
         _[index] = newValue
         setItems(_)

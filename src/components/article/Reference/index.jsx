@@ -12,6 +12,7 @@ const config = {
     description: "En lenke til en annen artikkel",
     editor: Editor,
     previewText: (data) => {return data.title},
+    previewBackground: (data) => { return null },
     default: {
       type: "reference",
       id: "testArticle"

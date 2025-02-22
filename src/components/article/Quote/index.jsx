@@ -9,6 +9,7 @@ const config = {
     name: "sitat med innrykk",
     description: "Sitat med innrykk",
     previewText: (data) => {return data.text || "(sitat)"},
+    previewBackground: (data) => { return null },
     editor: Editor,
     default: {
         type: "quote",

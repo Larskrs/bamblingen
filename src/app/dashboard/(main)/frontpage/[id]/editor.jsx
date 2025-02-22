@@ -23,14 +23,12 @@ export default function NewsArticlePage ({ pageId, userId, defaultRows }) {
         const _ = [...rows]
         _[line] = newValue
         setRows(_)
-        console.log(line, newValue)
     }
     const SetRows = (newRows) => {
         setRows(newRows)
     }
     const SetEditingIndex = (i) => {
         if (editingIndex == i) { SetEditingIndex(null); return; }
-        console.log(editingIndex, i)
         setEditingIndex(i)
     }
 
@@ -54,7 +52,6 @@ function RowList ({rows, SetEditingIndex, editingIndex, UpdateRows=()=>{}, SetRo
         <div className={styles.rows}>
             <DraggableResort disabled={editingIndex !== null} forceDraggable={false} items={rows} onChange={(newOrder) => SetRows(newOrder)} onRender={(item, i, isDragged) => {
                 const config = GetRow(item)?.config(item)
-                console.log(config.icon)
 
                 return (
                         <Expandable onToggle={() => {SetEditingIndex(i)}} mode="FORCE" forceExpanded={editingIndex === i} key={i} title={config.title} icon={config.icon} className={styles.rowItem}>

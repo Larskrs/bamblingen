@@ -32,6 +32,7 @@ const config = {
   renderer: TextComponent,
   editor: Editor,
   previewText: PreviewText,
+  previewBackground: (data) => { return null },
   default: {
     type: "text",
     lines: [""]

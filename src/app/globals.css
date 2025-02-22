@@ -41,6 +41,18 @@
   --red-50:  rgb(77, 12, 4);    /* Very deep dark */
   --red-25:  rgb(44, 6, 1);    /* Very deep dark */
 
+  --lime-950: rgb(235, 255, 231); /* Very light */
+  --lime-900: rgb(217, 255, 211); /* Very light */
+  --lime-800: rgb(190, 255, 181); /* Light */
+  --lime-700: rgb(162, 255, 151); /* Lighter */
+  --lime-600: rgb(134, 255, 121); /* Slightly lighter */
+  --lime-500: rgb(77, 255, 53);  /* Base color */
+  --lime-400: rgb(27, 234, 0);   /* Slightly darker */
+  --lime-300: rgb(91, 204, 77);   /* Darker */
+  --lime-200: rgb(68, 153, 58);   /* Deeper dark */
+  --lime-100: rgb(25, 105, 14);   /* Very deep dark */
+  --lime-50:  rgb(12, 77, 4);    /* Very deep dark */
+  --lime-25:  rgb(6, 44, 1);    /* Very deep dark */
 
   --orange-950: rgb(255, 244, 231); /* Very light */
   --orange-900: rgb(255, 220, 188); /* Very light */

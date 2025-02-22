@@ -9,6 +9,7 @@ const config = {
     name: "overskrift",
     description: "Overskrifter med 4 forskjellige størrelser",
     previewText: (data) => {return data.text || "(overskrift)"},
+    previewBackground: (data) => { return null },
     editor: Editor,
     default: {
         type: "heading",

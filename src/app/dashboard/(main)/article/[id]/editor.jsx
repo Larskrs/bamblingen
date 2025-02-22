@@ -6,7 +6,7 @@ import TextArea from "@/components/editor/input/TextArea";
 import Visualizer from "@/app/(main)/news/[id]/client"
 import SaveButton from "@/components/editor/input/SaveButton";
 import DraggableResort from "@/components/editor/input/DraggableResort";
-import ArticleContent, { ArticleComponents, ArticleRenderer, GetArticleComponent, GetComponentPreviewText } from "@/components/article/ArticleContent";
+import ArticleContent, { ArticleComponents, ArticleRenderer, GetArticleComponent, GetComponentPreviewBackground, GetComponentPreviewText } from "@/components/article/ArticleContent";
 import Expandable from "@/components/editor/input/Expandable";
 import CategoryInput from "@/components/editor/input/CategoryInput"
 import GridIconSelector from "@/components/editor/input/GridIconSelector";
@@ -215,7 +215,7 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
 
                     <DraggableResort items={components} onChange={(newOrder) => setComponents(newOrder)} onRender={(item, index, isDragged) => {
                         return (<div style={isDragged ? {background: "var(--secondary-100)"} : {background: "var(--secondary-200)"}} className={styles.component}>
-                            <Expandable draggable icon={GetArticleComponent(item.type).icon} key={index} title={GetComponentPreviewText(components[index])}>
+                            <Expandable draggable background={GetComponentPreviewBackground(components[index])} icon={GetArticleComponent(item.type).icon} key={index} title={GetComponentPreviewText(components[index])}>
                                 <ArticleRenderer editor components={[components[index]]} onUpdateComponent={(line, newValue) => UpdateComponents(index, newValue)} />
                             </Expandable>
                         </div>)

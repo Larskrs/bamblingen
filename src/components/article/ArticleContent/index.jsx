@@ -26,6 +26,14 @@ export function GetComponentPreviewText (data) {
 
     return "Error"
 }
+export function GetComponentPreviewBackground (data) {
+    const component = GetArticleComponent(data.type)
+    if (component?.previewBackground) {
+        return component?.previewBackground(data)
+    }
+
+    return null
+}
 export function ArticleRenderer({ components, editor=false, onUpdateComponent }) {
     // Define the component mapping
 
