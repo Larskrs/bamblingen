@@ -142,13 +142,13 @@ const DraggableResort = ({ onChange, disabled,  items, onRender, forceDraggable=
 
           {!disabled && <div
             onDrop={handleDelete}
-            onDragOver={(e) => handleDragOver(e, draggingIndex)}
-            className={styles.delete}
-            style={{
-                height: draggingIndex !== null ? "3.5rem" : "0rem",
-                opacity: draggingIndex !== null ? 1 : 0,
-            }}
+            onDragOver={(e) => handleDragOver(e, "DELETE")}
+            className={classNames(styles.delete,
+                draggingOverIndex === "DELETE" ? styles.visible : styles.hidden,
+                draggingIndex !== null ? styles.isDragging : styles.notDragging
+            )}
             >
+              Slett
           </div>}
         </div>
 

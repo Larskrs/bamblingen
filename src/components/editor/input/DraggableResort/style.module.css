@@ -16,7 +16,28 @@
         #ff2c2c27 21px, #ff2c2c27 40px);
     box-shadow: inset 0px 0px 1rem #99000025;
     cursor: move;
-    transition: 250ms var(--curve-1) all;
+    transition: 250ms var(--curve-1) opacity;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--red-700);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+.delete.isDragging {
+    height: 3rem;
+}
+.delete.notDragging {
+    height: 0rem;
+    opacity: 0;
+}
+.delete.isDragging.hidden {
+    opacity: 0.5;
+}
+.delete.isDragging.visible {
+    font-size: 1.25rem;
+    opacity: 1;
 }
 .dragPreview {
     animation: 250ms var(--curve-1) preview infinite;
@@ -62,7 +83,6 @@
     background-color: var(--secondary-600);
     width: 100%;
     z-index: -1;
-    transition: 125ms var(--curve-1) all;
 }
 .item {
     transition: 125ms var(--curve-1) all;
