@@ -98,6 +98,7 @@
 .draggingOver {
     scale: 1 !important;
     opacity: 0.75;
+    outline: 2px solid var(--secondary-600);
 }
 
 @keyframes preview {
