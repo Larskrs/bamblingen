@@ -22,12 +22,12 @@
     width: 100%;
     font-size: .9rem;
     font-family: var(--font-inter);
-    background: var(--secondary-100);
+    background: var(--secondary-50);
+    border: 1px solid var(--secondary-200);
     min-height: 2em;
     padding: 0.5em;
     color: var(--white-900);
     border-radius: 0.5rem;
-    border: 2px solid transparent;
     transition: 125ms all var(--curve-1);
     resize: none;
     position: relative;
@@ -78,6 +78,7 @@
 }
 .field textarea:focus {
     border: 2px solid var(--secondary-400);
+    background-color: var(--secondary-25);
     outline: none;
 }
 .description {

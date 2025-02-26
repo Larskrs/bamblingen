@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "./editor.module.css";
 import { useEffect, useState } from "react"
 import TextArea from "@/components/editor/input/TextArea";
-import Visualizer from "@/app/(main)/news/[id]/client"
+import Visualizer from "@/app/(main)/(default)/news/[id]/client"
 import SaveButton from "@/components/editor/input/SaveButton";
 import DraggableResort from "@/components/editor/input/DraggableResort";
 import ArticleContent, { ArticleComponents, ArticleRenderer, GetArticleComponent, GetComponentPreviewBackground, GetComponentPreviewText } from "@/components/article/ArticleContent";
@@ -14,6 +14,8 @@ import { useRouter } from "next/navigation";
 import DropDown from "@/components/editor/input/DropDown";
 import { FileExplorer } from "@/components/common/FileExplorer";
 import ImageEditor from "@/components/article/Image/editor"
+import Margin from "@/components/common/Margin";
+import Switch from "@/components/editor/input/Switch";
 
 export default function NewsArticlePage ({ articleId, userId, defaultArticle }) {
     
@@ -191,7 +193,7 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
         {title: "Nyhetsartikkel", id: "NEWS"},
         {title: "Mening", id: "OPINION"},
         {title: "Kommentar", id: "COMMENT"},
-        {title: "Reklame", id: "ADVERTISEMENT"},
+        {title: "Arrangement", id: "ADVERTISEMENT"},
         ]
 
     return (
@@ -199,18 +201,33 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
             <nav className={styles.nav}>
                 <div className={styles.navContent}>
 
-                    <DropDown items={articleTypes} defaultValue={type || article.type} description={"Hva slags type artikkel lager du?"} onChange={(v) => {setType(v)}}></DropDown>
+                    <div className={styles.top}>
+                        <SaveButton onClick={handleSubmit} background="var(--white-100)" error={error} errorMessage={{message: errorMessage}} disabled={loading} progress={loading ? 0 : 100}>
+                          {isCreating ? "Lag ny artikkel" : "Lagre utkast"}
+                        </SaveButton>
+                        {!isCreating && <SaveButton onClick={handleSubmitAndVerify} error={error} errorMessage={{message: errorMessage}} disabled={loading} progress={loading ? 0 : 100}>
+                          {"Send"}
+                        </SaveButton>}
+                    </div>
+
+                    <Margin.Block amount={1} />
+
+                    <DropDown items={articleTypes} defaultValue={type || article.type} description={"Artikkeltype"} onChange={(v) => {setType(v)}}></DropDown>
+                    <Margin.Block amount={1} />
                     <TextArea placeholder={"Overskrift"} description={"Skriv inn overskriften på artikkelen."} onChange={(v) => setTitle(v)} defaultValue={v.title}></TextArea>
                     <TextArea placeholder={"Undertittel"} description={"Skiv inn undertittelen her"} onChange={setSubTitle} defaultValue={v.subtitle}></TextArea>
+                    <Margin.Block amount={1} />
                     
-                    <CategoryInput onChange={(value) => setCategories(value)} defaultCategories={article.categories}/>
+                    <CategoryInput description="" onChange={(value) => setCategories(value)} defaultCategories={article.categories}/>
+                    <Margin.Block amount={1} />
 
-                    <Expandable icon={"/icons/icon_file_image.svg"} title={"Ledende Bilde"}>
+                    <Expandable icon={"/icons/icon_file_image.svg"} title={"Bilde"}>
                         <ImageEditor src={v.image} onChange={(value) => setImage(value.src)} />
                         {/* return <Editor id={id} src={src} alt={alt} credit={credit} onChange={onChange}/> */}
                         {/* <TextArea placeholder={"Bildeaddresse"} description={"Skiv inn undertittelen her"} onEnter={(value) => setImage(value)} defaultValue={v.image}></TextArea> */}
                     </Expandable>
                     
+                    <Margin.Block amount={1} />
                     <h2>Innhold</h2>
 
                     <DraggableResort items={components} onChange={(newOrder) => setComponents(newOrder)} onRender={(item, index, isDragged) => {

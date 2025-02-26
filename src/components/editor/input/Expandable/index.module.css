@@ -6,7 +6,7 @@
     background-color: inherit;
     border: 2px solid var(--secondary-100);
     border-radius: 0.5em;
-    overflow: hidden;
+    overflow: visible;
 }
 .header {
     background-color: inherit;
@@ -24,6 +24,13 @@
     overflow: hidden;
     background: var(--secondary-100);
 }
+.expanded .header {
+    border-radius: 0.5em 0.5em 0em 0em;
+}
+.condensed .header {
+    border-radius: 0.25em 0.25em 0.25em 0.25em;
+}
+
 .header:hover {
     background-color: var(--secondary-200);
 }
@@ -62,4 +69,7 @@
 .content {
     padding: 0.5rem;
     background-color: var(--secondary-50);
+}
+.expanded .content {
+    border-radius: 0em 0em 0.5em 0.5em;
 }

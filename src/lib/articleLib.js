@@ -215,21 +215,17 @@ export async function DefaultArticle (authors) {
                     //     ]
                     // },
                 ],
-                title: "Tittel",
-                subtitle: "Undertittel",
-                image: "http://aktuelt.tv/api/files?fileId=673d07611d55014bbbb5dcfc",
+                title: "",
+                subtitle: "",
+                image: "/images/langesund.jpeg",
                 location: "Herre"
             },
         ],
         categories: [
             {
-                name: "Herre",
-                id: "herre"
+                name: "Bamble",
+                id: "bamble"
             },
-            {
-                name: "Pistolran",
-                id: "pistolran"
-            }
         ]
     }
 }

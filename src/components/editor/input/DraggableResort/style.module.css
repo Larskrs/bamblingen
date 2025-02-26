@@ -95,10 +95,13 @@
     scale: 0.95;
     opacity: 0.1 !important;
 }
+.c.isDragging .item {
+    opacity: 0.8;
+    scale: 0.95;
+}
 .draggingOver {
     scale: 1 !important;
-    opacity: 0.75;
-    outline: 2px solid var(--secondary-600);
+    opacity: 1 !important;
 }
 
 @keyframes preview {

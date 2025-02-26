@@ -60,8 +60,8 @@
     border-radius: 0.5rem;
     max-height: 12rem;
     object-fit: cover;
-    background-color: var(--secondary-200);
     color: white;
+    opacity: 0.5;
 }
 
 .comment {

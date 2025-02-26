@@ -102,6 +102,18 @@
     z-index: 10;
 }
 
+.top {
+    border: 1px solid var(--secondary-100);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
 @media screen and (max-width: 900px) {
     .c {
         flex-direction: column-reverse;

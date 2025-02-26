@@ -2,10 +2,11 @@
 import React, { useRef, useEffect, useState } from "react";
 import styles from "./style.module.css";
 import useInfiniteFetch from "@/hooks/useInfiniteFetch";
+import TextArea from "@/components/common/input/TextArea";
 
 const MAX = 5
 
-const TextArea = ({ onChange = () => {}, onEnter = () => {}, focus=false, required=false, defaultCategories=["Kategori"], description="Dette er et ubestemt tekstfelt", placeholder="Ubestemt felt" }) => {
+const CategorySelector = ({ onChange = () => {}, onEnter = () => {}, focus=false, required=false, defaultCategories=["Kategori"], description="Dette er et ubestemt tekstfelt", placeholder="Ubestemt felt" }) => {
   const textareaRef = useRef(null);
   const [tags, setTags] = useState(defaultCategories.map((v) => v.name))
 
@@ -60,7 +61,7 @@ const TextArea = ({ onChange = () => {}, onEnter = () => {}, focus=false, requir
               )}
             </div>
             <textarea
-            maxLength={24}
+              maxLength={24}
               ref={textareaRef}
               disabled={TagsLeft() < 1}
               onKeyDown={(e) => {
@@ -113,4 +114,4 @@ function TagItem ({id, title, index, onClick, onUpdateLine}) {
 }
 
 
-export default TextArea;
+export default CategorySelector;

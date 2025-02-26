@@ -1,15 +1,14 @@
 "use server"
 import { auth } from "@/auth";
-import ClientLayout from "./client"
+import ClientLayout from "./page"
 import Link from "next/link";
-import { DefaultRows } from "@/lib/componentPageLib";
+import Navigation from "@/components/layout/PrimaryNavigation/nav";
+import Cookies from "@/components/layout/Cookies";
 
 
 export default async function MainLayout ({children}) {
 
     const session = await auth()
-
-    const rows = await DefaultRows()
 
     return (
         <>
@@ -17,7 +16,10 @@ export default async function MainLayout ({children}) {
             Hei {session.user.name}, <Link style={{color: "var(--primary-500)"}} href={"/dashboard"}>åpne skrivesenteret</Link>
             </div>}
 
-            <ClientLayout rows={rows}/>
+            <Navigation />
+            <Cookies policyId={"0.0.1"} />
+
+            {children}
         </>
     );
 }

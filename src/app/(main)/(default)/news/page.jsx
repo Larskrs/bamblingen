@@ -3,16 +3,11 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import useInfiniteFetch from "@/hooks/useInfiniteFetch";
-import Article from "@/components/frontPage/rows/grid/items/article";
 import { formatRelativeDate } from "@/lib/timeLib";
 import Link from "next/link";
 import { GetType } from "@/lib/articleLib";
-import SocketMessageList from "@/components/common/SocketMessageList";
-import CountdownTimer from "@/components/common/CountdownTimer";
 import MaxWidthWrapper from "@/components/wrappers/MaxWidthWrapper";
-import Banner from "@/components/common/Banner";
 import NewsBanner from "@/components/frontPage/rows/banner";
-import Navigation from "@/components/layout/PrimaryNavigation/nav";
 
     const per_page = 10
 
@@ -25,7 +20,6 @@ export default function News () {
 
     return (
         <>
-            <Navigation />
         <div className={styles.c}>
             <MaxWidthWrapper>
                 <div className={styles.column}>

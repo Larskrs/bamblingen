@@ -12,10 +12,11 @@
 }
 .item {
     padding: 0.5rem;
-    background-color: var(--secondary-50);
+    background-color: var(--secondary-75);
     border: 2px solid var(--secondary-75);
     cursor: pointer;
     transition: 125ms var(--curve-1);
+    border-radius: 0.5rem;
 }
 .item:hover {
     border: 2px solid var(--secondary-200);

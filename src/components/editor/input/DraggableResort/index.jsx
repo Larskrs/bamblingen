@@ -8,6 +8,7 @@ const DraggableResort = ({ onChange, disabled,  items, onRender, forceDraggable=
   const [draggingOverIndex, setDraggingOverIndex] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [draggingTweenIndex, setDraggingTweenIndex] = useState(null)
+  const [lastIndex, setLastIndex] = useState(null)
 
   useEffect(() => {
     const updateMousePos = (e) => {
@@ -54,6 +55,7 @@ const DraggableResort = ({ onChange, disabled,  items, onRender, forceDraggable=
       const newOrder = reorderItems(items, draggingIndex, index);
       onChange(newOrder);
     }
+    setLastIndex(index)
     setDraggingIndex(null);
     setDraggingOverIndex(null)
   };
@@ -119,8 +121,9 @@ const DraggableResort = ({ onChange, disabled,  items, onRender, forceDraggable=
                 className={classNames(
                   styles.item,
                   !disabled && draggingIndex == index ? styles.dragging : "",
-                  !disabled && draggingOverIndex == index ? styles.draggingOver : ""
+                  !disabled && draggingOverIndex == index ? styles.draggingOver : styles.notDragging
                 )}
+                style={{transitionDuration: draggingIndex === null && lastIndex !== index ? "0s" : ""}}
                 onDragStart={(e) => handleDragStart(e, index)}
                 onDragOver={(e) => handleDragOver(e, index)}
                 onDrop={() => handleDrop(index)}

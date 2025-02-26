@@ -7,7 +7,7 @@ import Expandable from "@/components/editor/input/Expandable";
 import { TimeAgo } from "@/lib/timeLib";
 import { useState } from "react";
 import { GetType, GetVerificationStatus } from "@/lib/articleLib";
-import NewsArticlePage from "@/app/(main)/news/[id]/client";
+import NewsArticlePage from "@/app/(main)/(default)/news/[id]/client";
 
 const url = (page) =>
     `/api/v1/articles/verifications`;

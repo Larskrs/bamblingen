@@ -1,5 +1,6 @@
 import { useState } from "react"
 import styles from "./style.module.css"
+import classNames from "classnames"
 
 export default function DropDown ({items, description="", defaultValue="", onChange=()=>{}}) {
 
@@ -14,14 +15,13 @@ export default function DropDown ({items, description="", defaultValue="", onCha
                 return index
             }
         }
-        console.log(i)
         return null
     }
 
     return (
-        <>
+        <div className={styles.row}>
             {description && <p className={styles.description}>{description}</p> }
-            <div className={styles.c} style={{overflow: expanded ? "unset" : "hidden"}}>
+            <div className={classNames(styles.c, expanded ? styles.expanded : styles.condensed)}>
                 <div className={styles.items} style={{minHeight: height, maxHeight: height}} >
                     {items.map((item, index) => {
                         return <div onClick={() => {
@@ -32,12 +32,12 @@ export default function DropDown ({items, description="", defaultValue="", onCha
                             } else {
                                 setExpanded(true)
                             }
-                        }} key={item?.id} className={styles.button} style={{background: expanded ? "var(--secondary-75)" : "var(--secondary-200)"}}>
+                        }} key={item?.id} className={classNames(styles.button, expanded ? styles.expanded : styles.condensed)}>
                             {expanded ? item.title : items[findIndex(current || defaultValue || items[0].id)].title }
                         </div>
                     })}
                 </div>
             </div>
-        </>
+        </div>
     )
 }
