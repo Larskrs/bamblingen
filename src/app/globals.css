@@ -15,12 +15,16 @@
   --secondary-25: rgb(0, 16, 23);  /* Very deep dark */
   --secondary-0:  rgb(0,8,12);
 
+  --secondary-hue: 200;
+  --text-color-t: hsl(var(--secondary-hue), 50%, 90%);
+  --text-color-p: hsl(var(--secondary-hue), 20%, 80%);
+
   --primary-950: rgb(255, 246, 187); /* Very light */
   --primary-900: rgb(255, 239, 128); /* Very light */
   --primary-800: rgb(255, 235, 77);  /* Light */
   --primary-700: rgb(255, 230, 26);  /* Lighter */
   --primary-600: rgb(229, 202, 0);   /* Slightly lighter */
-  --primary-500: rgb(253, 224, 0);   /* Base color */
+  --primary-500: hsl(53, 100%, 50%);   /* Base color */
   --primary-400: rgb(228, 202, 0);   /* Slightly darker */
   --primary-300: rgb(203, 180, 0);   /* Darker */
   --primary-200: rgb(153, 135, 0);   /* Deeper dark */
@@ -33,13 +37,18 @@
   --red-800: rgb(255, 190, 181); /* Light */
   --red-700: rgb(255, 162, 151); /* Lighter */
   --red-600: rgb(255, 134, 121); /* Slightly lighter */
-  --red-500: rgb(255, 77, 53);  /* Base color */
+  --red-500: hsl(7, 100%, 60%);  /* Base color */
   --red-400: rgb(234, 27, 0);  /* Slightly darker */
   --red-300: rgb(204, 91, 77);   /* Darker */
   --red-200: rgb(153, 68, 58);   /* Deeper dark */
   --red-100: rgb(105, 25, 14);   /* Very deep dark */
   --red-50:  rgb(77, 12, 4);    /* Very deep dark */
   --red-25:  rgb(44, 6, 1);    /* Very deep dark */
+
+  --primary-hue: 53;
+  --red-hue: 10;
+  --orange-hue: 30;
+  --lime-hue: 140;
 
   --lime-950: rgb(235, 255, 231); /* Very light */
   --lime-900: rgb(217, 255, 211); /* Very light */

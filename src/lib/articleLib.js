@@ -83,11 +83,16 @@ export async function GetArticle (id) {
             };
     
             // Fetch data from the database with the constructed query
-            const data = await db.article.findUnique(query);
+            let data = await db.article.findUnique(query);
 
             data.versions.map((v) => {
                 const _ = v
                 _.components = JSON.parse(_.components)
+                try {
+                    _.image = JSON.parse(_.image)
+                } catch {
+                    _.image = {src: _.image, credit: "", alt: "", type: "image"}
+                }
                 return _
             })
     
@@ -114,48 +119,67 @@ export const articleTypes = [
         id: "NEWS",
         name: "Nyheter",
         color: "var(--secondary-500)",
+        hue: "var(--secondary-hue)"
     },
     {
         id: "OPINION",
         name: "Mening",
         color: "var(--orange-500)",
+        hue: "var(--orange-hue)"
     },
     {
         id: "COMMENT",
         name: "Kommentar",
         color: "var(--red-500)",
+        hue: "var(--red-hue)"
     },
     {
         id: "ADVERTISEMENT",
         name: "Arrangement",
         color: "var(--secondary-100)",
+        hue: "var(--red-hue)"
     }
 ]
 export const verificationStatuses = [
     {
         id: "PENDING",
         name: "Ikke vurdert",
-        color: "var(--white-100)"
+        color: {
+            text: "hsl(var(--secondary-hue), 25%, 50%)",
+            background: "hsl(var(--secondary-hue), 100%, 10%)"
+        }
     },
     {
         id: "PROCESSING",
-        name: "Vurderes",
-        color: "var(--orange-500)"
+        name: "...",
+        color: {
+            text: "hsl(var(--secondary-hue), 25%, 75%)",
+            background: "hsl(var(--secondary-hue), 100%, 7.5%)"
+        }
     },
     {
         id: "DENIED",
         name: "Avslått",
-        color: "var(--red-500)"
+        color: {
+            text: "hsl(var(--red-hue), 25%, 75%)",
+            background: "hsl(var(--red-hue), 50%, 15%)"
+        }
     },
     {
         id: "ACCEPTED",
         name: "Godkjent",
-        color: "var(--secondary-500)"
+        color: {
+            text: "hsl(var(--secondary-hue), 25%, 75%)",
+            background: "hsl(var(--secondary-hue), 100%, 15%)"
+        }
     },
     {
         id: "POSTPONED",
         name: "Satt på vent",
-        color: "var(--white-100)"
+        color: {
+            text: "hsl(var(--orange-hue), 100%, 50%)",
+            background: "hsl(var(--orange-hue), 100%, 25%)"
+        }
     },
 ]
 export function GetType (id) {

@@ -16,7 +16,7 @@ const useInfiniteFetch = (url) => {
       // Append new data to the existing data (useful for infinite scrolling)
       setData((prevData) => (currentPage > 1 ? [...prevData, ...result] : result));
     } catch (err) {
-      setError(err.message);
+      setError(err);
     } finally {
       setLoading(false);
     }

@@ -1,18 +1,27 @@
+import { auth } from "@/auth";
 import { MAX_PER_PAGE } from "@/lib/articleLib";
 import { db } from "@/lib/db";
+import logger from "logger.mjs";
 import { NextResponse } from "next/server";
 
-export default async function GET(req) {
+export const GET = auth(async function GET(req) {
+    
     const url = new URL(req.url); // Parse the URL to extract query parameters
     const id = url.searchParams.get("id"); // Article ID
     let per_page = url.searchParams.get("per_page") || 10
     let page = url.searchParams.get("page") || 1
 
-    let authorIds = url.searchParams.get("authorIds") || [] // List of author IDs (comma-separated or multiple query params)
-    let showAuthors = (url.searchParams.get("showAuthors") == "true")
+    let authorIds = url.searchParams.get("aid") || [] // List of author IDs (comma-separated or multiple query params)
+    let showAuthors = (url.searchParams.get("sa") == "true")
 
-    let categories = url.searchParams.get("categories") || []
-    let showCategories = (url.searchParams.get("showCategories") == "true")
+    let categories = url.searchParams.get("c") || []
+    let showCategories = (url.searchParams.get("sc") == "true")
+
+    let sortDirection = url.searchParams.get("sd") || "desc"
+
+    const auth = req.auth
+
+
 
     try {
         // Dynamically build the query based on optional parameters
@@ -29,7 +38,7 @@ export default async function GET(req) {
             },
             where: {}, // Initialize an empty `where` object
             orderBy: {
-                createdAt: "desc"
+                createdAt: sortDirection
             }
         };
 
@@ -75,6 +84,18 @@ export default async function GET(req) {
         // Fetch data from the database with the constructed query
         const data = await db.article.findMany(query);
 
+        data.map((a, i) => {
+            const _ = a
+            const v = _.versions[0]
+            try {
+                v.image = JSON.parse(v.image)
+            } catch {
+                v.image = {src: v.image, credit: "", alt: "", type: "image"}
+            }
+            _.versions[0] = v
+            return a
+        })
+
         return NextResponse.json( data );
     } catch (err) {
         return NextResponse.json(
@@ -86,6 +107,7 @@ export default async function GET(req) {
         );
     }
 }
+)
 
 
 function ArgumentError (error, solution) {
@@ -94,5 +116,7 @@ function ArgumentError (error, solution) {
         error, solution
     },
     { status: 500 }
-    )
+    )   
 }
+
+export default GET

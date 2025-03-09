@@ -12,7 +12,7 @@ import NewsBanner from "@/components/frontPage/rows/banner";
     const per_page = 10
 
     const url = (page) =>
-    `/api/v1/articles?showAuthors=true&showCategories=true&per_page=${per_page}&page=${page}`;
+    `/api/v1/articles?sa=true&sc=true&per_page=${per_page}&page=${page}`;
 
 export default function News () {
 
@@ -60,7 +60,7 @@ export default function News () {
 
                         return (<Link href={`/n/${article.id}`} className={styles.article} key={article.id}>
                             {v?.image && <div className={styles.thumbnail}>
-                                <Image src={v.image} width={1280} height={720} alt={`${v.title} artikkel bilde`}/>
+                                <Image src={v.image.src} width={1280} height={720} alt={v.image.alt || `${v.title} artikkel bilde`}/>
                             </div> }
                             <div className={styles.body}>
                                 <h3>{v.title}</h3>

@@ -106,6 +106,7 @@ model Article {
   versions        ArticleVersion[]
   authors         User[] @relation("ArticleAuthors")
   createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
   categories      Category[]
   type            ArticleType @default(NEWS)
 }

@@ -7,5 +7,5 @@ export async function GET (req, {params}) {
 }
 
 export async function PUT (req, {params}) {
-    return await PutRequest(req, params)
+    return await PutRequest(req, await params)
 }

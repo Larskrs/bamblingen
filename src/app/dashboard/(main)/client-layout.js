@@ -78,7 +78,7 @@ function NavItem ({collapsed, l,i, pathname}) {
             if (noDashPrefix(pathname).startsWith(`${noDashPrefix(l.href)}`)) {
                 isActive = true
             }
-            if (l.href.endsWith("/dashboard/")) { isActive = false }
+            if (l.href.endsWith("/")) { isActive = false }
 
             return (
                 <Link className={`${styles.link} ${isActive ? styles.active : styles.inactive}`} href={l.href}>

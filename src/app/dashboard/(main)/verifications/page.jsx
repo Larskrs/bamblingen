@@ -5,9 +5,12 @@ import styles from "./page.module.css"
 import useInfiniteFetch from "@/hooks/useInfiniteFetch";
 import Expandable from "@/components/editor/input/Expandable";
 import { TimeAgo } from "@/lib/timeLib";
-import { useState } from "react";
+import React, { useState } from "react";
 import { GetType, GetVerificationStatus } from "@/lib/articleLib";
 import NewsArticlePage from "@/app/(main)/(default)/news/[id]/client";
+import Margin from "@/components/common/Margin";
+import classNames from "classnames";
+import Spinner from "@/components/details/spinner";
 
 const url = (page) =>
     `/api/v1/articles/verifications`;
@@ -29,7 +32,7 @@ export default function Verifications () {
 function VerificationList ({verifications}) {
 
     if (!verifications) {
-        return <p>...</p>
+        return <p style={{fontSize: "2rem"}}><Spinner /></p>
     }
 
     return (
@@ -40,6 +43,7 @@ function VerificationList ({verifications}) {
                 <thead className={styles.thead}>
                     <tr>
                         <td></td>
+                        <td className={styles.col}></td>
                         <td>Tittel</td>
                         <td>Status</td>
                         <td>Forfatter</td>
@@ -47,7 +51,12 @@ function VerificationList ({verifications}) {
                     </tr>
                 </thead>
                 <tbody>
-                {verifications.map((v) => <TableRow v={v} key={v.id+"1"} />)}
+                {verifications.map((v) => {
+                    return <React.Fragment key={v.id}>  
+                        <tr style={{visibility: "hidden", height: "0.5rem"}}></tr>
+                        <TableRow v={v} />
+                    </React.Fragment>
+                })}
                 </tbody>
             </table>
         </div>
@@ -63,16 +72,18 @@ function TableRow ({v}) {
         <>
             <tr className={`${styles.verification}`}>
                 <td className={styles.thumbnail}>
-                    <Image alt="artikkelVersionBilde" width={256} height={256} src={v.articleVersion.image} />
+                    <Image alt="artikkelVersionBilde" width={256} height={256} src={v.articleVersion.image.src} />
                 </td>
-                <td className={styles.col}>
+                <td className={styles.col}></td>
+                <td className={classNames(styles.col, styles.title)}>
                     <h4>{v.articleVersion.title}</h4>
                     <p>{v.articleVersion.subtitle}</p>
                 </td>
                 <td className={styles.col}>
                     <p className={styles.time}>{TimeAgo(new Date(v.articleVersion.createdAt))}</p>
-                    {/* <div className={styles.status}>{GetVerificationStatus(v.status).name}</div> */}
-                    <div className={styles.type} style={{backgroundColor: GetType(v.articleVersion.article.type).color}}>{GetType(v.articleVersion.article.type).name}</div>
+                    <div className={styles.status} style={{backgroundColor: GetVerificationStatus(v.status).color.background, color: GetVerificationStatus(v.status).color.text}}>{GetVerificationStatus(v.status).name}</div>
+                    <Margin.Block amount={0.25} />
+                    {/* <div className={styles.type} style={{backgroundColor: GetType(v.articleVersion..type).color}}>{GetType(v.articleVersion.article.type).name}</div> */}
                 </td>
                 <td className={styles.col}>
                     <div className={styles.userCol}>

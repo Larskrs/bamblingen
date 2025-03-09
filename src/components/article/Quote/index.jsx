@@ -23,9 +23,9 @@ export function QuoteComponent ({id, text, author, onChange=()=>{}}) {
     return (
         <div className={styles.c}>
             <p className={styles.quote}>
-                <span className={styles.TL} ><Image src={"/icons/quote_symbol.svg"} width={32} height={32} /></span>
+                <span className={styles.TL} ><Image alt="quotemark" src={"/icons/quote_symbol.svg"} width={32} height={32} /></span>
                 <span className={styles.text}>{text}</span>
-                <span className={styles.BR} ><Image src={"/icons/quote_symbol.svg"} width={32} height={32} /></span>
+                <span className={styles.BR} ><Image alt="quotemark" src={"/icons/quote_symbol.svg"} width={32} height={32} /></span>
             </p>
             {author && <p className={styles.author}>- {author}</p>}
         </div>

@@ -210,19 +210,19 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
                         </SaveButton>}
                     </div>
 
-                    <Margin.Block amount={1} />
+                    <Margin.Block amount={0.5} />
 
                     <DropDown items={articleTypes} defaultValue={type || article.type} description={"Artikkeltype"} onChange={(v) => {setType(v)}}></DropDown>
-                    <Margin.Block amount={1} />
+                    <Margin.Block amount={0.5} />
                     <TextArea placeholder={"Overskrift"} description={"Skriv inn overskriften på artikkelen."} onChange={(v) => setTitle(v)} defaultValue={v.title}></TextArea>
                     <TextArea placeholder={"Undertittel"} description={"Skiv inn undertittelen her"} onChange={setSubTitle} defaultValue={v.subtitle}></TextArea>
-                    <Margin.Block amount={1} />
+                    <Margin.Block amount={0.5} />
                     
                     <CategoryInput description="" onChange={(value) => setCategories(value)} defaultCategories={article.categories}/>
-                    <Margin.Block amount={1} />
-
+                    <Margin.Block amount={0} />
+  
                     <Expandable icon={"/icons/icon_file_image.svg"} title={"Bilde"}>
-                        <ImageEditor src={v.image} onChange={(value) => setImage(value.src)} />
+                        <ImageEditor {...image} onChange={(value) => setImage(value)} />
                         {/* return <Editor id={id} src={src} alt={alt} credit={credit} onChange={onChange}/> */}
                         {/* <TextArea placeholder={"Bildeaddresse"} description={"Skiv inn undertittelen her"} onEnter={(value) => setImage(value)} defaultValue={v.image}></TextArea> */}
                     </Expandable>
@@ -242,14 +242,6 @@ export default function NewsArticlePage ({ articleId, userId, defaultArticle }) 
                     <div className={styles.bottomSpace} />
                 </div>
                 <pre className={styles.error}>{errorMessage}</pre>
-                <div className={styles.navBar}>
-                    <SaveButton onClick={handleSubmit} background="var(--white-100)" error={error} errorMessage={{message: errorMessage}} disabled={loading} progress={loading ? 0 : 100}>
-                      {isCreating ? "Lag ny artikkel" : "Lagre utkast"}
-                    </SaveButton>
-                    {!isCreating && <SaveButton onClick={handleSubmitAndVerify} error={error} errorMessage={{message: errorMessage}} disabled={loading} progress={loading ? 0 : 100}>
-                      {"Send"}
-                    </SaveButton>}
-                </div>
             </nav>
             <div className={styles.main}>
                 <Visualizer {...visualizerQuery()} />

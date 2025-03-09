@@ -5,13 +5,22 @@ import { formatRelativeDate } from "@/lib/timeLib";
 import { ArticleRenderer } from "@/components/article/ArticleContent";
 import Link from "next/link";
 import { GetType } from "@/lib/articleLib";
+import Margin from "@/components/common/Margin";
 
 export default function NewsArticlePage ({ version, article, session, hideTools=true }) {
 
     let components = version.components
+    let image = version.image
 
     if (typeof components === 'string' || components instanceof String) {
         components = JSON.parse(components)
+    }
+    if (typeof image === 'string' || image instanceof String) {
+        try {
+            image = JSON.parse(image)
+        } catch (err) {
+            image = {src: image, credit: "", alt: ""}
+        }
     }
     console.log(components)
 
@@ -20,13 +29,7 @@ export default function NewsArticlePage ({ version, article, session, hideTools=
     return (
         <div className={styles.c}>
             <div className={styles.article}>
-            {(session?.user?.role || !hideTools) && <nav className={styles.nav}>
-                <>
-                    <Link href={`/dashboard/article/${article.id}`}>Rediger Artikkel</Link>
-                </>
-            </nav>}
-            <div className={styles.context} style={{borderImage: `linear-gradient(to right, ${type.color}, transparent 90%) 1`}}>
-                <p className={styles.type} style={{background: type.color}}>{type.name}</p>
+            <div className={styles.context}>
                 {article.categories.map((tag) => {
                     return (
                         <p key={tag.id}>{tag.name}</p>
@@ -39,7 +42,9 @@ export default function NewsArticlePage ({ version, article, session, hideTools=
                 </header>
                 <div className={styles["lead"]}>
                     <div className={styles["lead-media"]}>
-                        <Image alt="lead-media" src={version.image} width={1280} height={720} />
+                        <Image alt="lead-media" src={image?.src} width={1280} height={720} />
+                        <p className={styles.alt}>{image.alt}</p>
+                        <p className={styles.credit}>{image.credit}</p>
                     </div>
                     <div className={styles.sidebar}>
                         <div className={styles.authors}>
@@ -56,6 +61,8 @@ export default function NewsArticlePage ({ version, article, session, hideTools=
                             })}
                         </div>
                         <p className={styles.date}>Sist oppdatert {formatRelativeDate(new Date(version.createdAt))}</p>
+                        <p className={styles.type} style={{background: type.color}}>{type.name}</p>
+                        
                     </div>
                 </div>
                 <div className={styles.m}>
@@ -63,7 +70,17 @@ export default function NewsArticlePage ({ version, article, session, hideTools=
                     <div className={styles.body}>
                         <ArticleRenderer components={components} />
                     </div>
+                            
+                    <Margin.Block amount={2} />
+
+                    {(session?.user?.role || !hideTools) && <nav className={styles.nav}>
+                        <>
+                            <Link href={`/dashboard/article/${article.id}`}>Rediger Artikkel</Link>
+                        </>
+                    </nav>}
                 </div>
+
+                
             </div>
         </div>
     )

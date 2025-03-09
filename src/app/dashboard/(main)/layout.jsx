@@ -16,8 +16,8 @@ export default async function Layout({ children }) {
 
   let links = [
     {
-      href: "/dashboard/",
-      name: "Kontrollpanel",
+      href: "/",
+      name: "Forside",
       icon: "/logo/logo.svg",
     },
     {

@@ -1,11 +1,19 @@
+import { auth } from "@/auth";
 import { ConnectOrCreateCategoryTags, MAX_PER_PAGE } from "@/lib/articleLib";
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 
-export default async function PUT(req, params) {
+export const PUT = auth(async function PUT(req, params) {
 
-    const parm = await params
+    const parm = params
     const id = parm.id
+
+    if (!req.auth) return NextResponse.json({ message: "Not authenticated" }, { status: 401 })
+        const auth = req.auth
+
+    const allowedRoles = ["ADMIN", "DIRECTOR", "WRITER"]
+    if (!allowedRoles.includes(auth.user.role)) return NextResponse.json({ message: "You do not have the proficient role to access this route" }, { status: 401 })
+
 
     const body = await req.json()
 
@@ -20,9 +28,11 @@ export default async function PUT(req, params) {
     if (!body.image) {
         return ErrorMessage("Image argument is missing")
     }
+    if (body.image) {
+        body.image = JSON.stringify(body.image)
+    }
     if (body.components) {
         body.components = JSON.stringify(body.components)
-        console.log(body.components)
     } else {
         return ErrorMessage("Components argument is missing")
     }
@@ -84,7 +94,9 @@ export default async function PUT(req, params) {
             { status: 500 }
         );
     }
+
 }
+)
 
 function ErrorMessage (err) {
     return NextResponse.json(
@@ -94,3 +106,5 @@ function ErrorMessage (err) {
     { status: 400 }
     )
 }
+
+export default PUT
