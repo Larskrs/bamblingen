@@ -9,7 +9,7 @@ export default function NewsBanner ({
 
     return (
         <Link className={styles.c} href={`/n/${article}`} style={{fontSize: fontSize+"em"}}>
-            <Banner imageLayout={imageLayout} image={image} containerStyle={{background: background, color: color}}>
+            <Banner className={styles.c} imageLayout={imageLayout} image={image} containerStyle={{background: background, color: color}}>
                 <h1>
                                 {prefix && <span className={styles.priority}>
                                     {pulse && <Pulse color={prefixColor} />}

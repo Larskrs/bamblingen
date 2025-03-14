@@ -12,6 +12,10 @@ export default async function Layout({ children }) {
 
   if (!session) {
     return notFound();
+  } 
+
+  if (!["ADMIN", "DIRECTOR", "WRITER"].includes(session.user.role)) {
+    return notFound()
   }
 
   let links = [
