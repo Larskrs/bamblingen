@@ -54,7 +54,7 @@ export async function GenerateUniqueIdentifier(creationDate) {
     }
 
 
-    export const MAX_PER_PAGE = 20
+    export const MAX_PER_PAGE = 100
 
 
 

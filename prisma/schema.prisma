@@ -224,3 +224,9 @@ model VideoStream {
     file            File @relation(fields: [fileId], references: [id], onDelete: Cascade)
     fileId          String
 }
+model Notification {
+    id              String            @id @unique @default(cuid())
+    createdAt       DateTime          @default(now())
+    type            String
+    data            String            @db.LongText
+}
