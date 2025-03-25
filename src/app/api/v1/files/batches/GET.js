@@ -62,8 +62,10 @@ export const GET = auth(async function GET(req) {
         //     }
         // }
 
-        query.where.user = {
-            id: auth.user.id
+        if (auth?.user?.role !== "ADMIN") {
+            query.where.user = {
+                id: auth.user.id
+            }
         }
 
         if (categories && categories.length > 0) {
