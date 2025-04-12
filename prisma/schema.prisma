@@ -28,7 +28,7 @@ model User {
   Authenticator Authenticator[]
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
 
   role Role @default(USER)
 
@@ -57,7 +57,7 @@ model Account {
   user                     User?   @relation(fields: [userId], references: [id])
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@unique([provider, providerAccountId])
   @@index([userId])
@@ -72,7 +72,7 @@ model Session {
   user         User     @relation(fields: [userId], references: [id])
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@index([userId])
 }
@@ -106,7 +106,7 @@ model Article {
   versions        ArticleVersion[]
   authors         User[] @relation("ArticleAuthors")
   createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
+  updatedAt       DateTime          @default(now()) @updatedAt
   categories      Category[]
   type            ArticleType @default(NEWS)
 }
@@ -165,7 +165,7 @@ model ArticleVerification {
 model ComponentPage {
   id              String            @id @unique @default(cuid())
   createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
+  updatedAt       DateTime          @default(now()) @updatedAt
   versions        ComponentPageVersion[]
 }
 model ComponentPageVersion {
@@ -182,7 +182,7 @@ model Category {
   id              String            @id @unique @default(cuid())
   description     String?
   createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
+  updatedAt       DateTime          @default(now()) @updatedAt
   articles        Article[]
   batches         Batch[]
 }
@@ -196,7 +196,7 @@ model Batch {
   userId          String
 
   createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
+  updatedAt       DateTime          @default(now()) @updatedAt
 }
 model File {
   id              String            @id @unique @default(cuid())
